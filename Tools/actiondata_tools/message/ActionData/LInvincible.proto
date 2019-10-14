@@ -1,0 +1,10 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LInvincible{
+	optional float time = 1[default=0];
+	optional float R = 3[default=0];
+	optional float G = 4[default=0];
+	optional float B = 5[default=0.5];
+	optional bool remove = 6;
+	required LTimeEventProType eventType= 2;
+}

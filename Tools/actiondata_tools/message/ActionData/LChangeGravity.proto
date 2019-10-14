@@ -1,0 +1,12 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LChangeGravity{
+    optional float speedY = 1[default=0];
+    optional float gravity = 2[default=0]; 
+    required LTimeEventProType eventType= 3;
+}
+
+
+    
+
+    

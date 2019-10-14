@@ -1,0 +1,19 @@
+package ActionData;
+
+import "LVector3.proto";
+
+message LJumpToTarget{
+    optional bool onceEvent = 1;
+    optional float powerRate = 2[default=0];
+    optional string riseType = 3[default="Jump"];
+    optional string riseLoopType = 4[default="JumpRiseLoop"];
+    optional string fallType = 5[default="JumpFall"];
+    optional string fallLoopType = 6[default="JumpFallLoop"];
+    optional string toGroundType = 7[default="JumpLand"];
+    required LVector3 offset = 8;
+}
+
+
+    
+
+    

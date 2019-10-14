@@ -1,0 +1,34 @@
+package ActionData;
+import "LTimeEventProType.proto";
+
+message LSetValue
+{
+	repeated ValueData values = 1;
+	required LTimeEventProType eventType = 10;
+
+	message ValueData
+	{
+		required string name = 1;// 变量名
+		optional ValueOperate operate = 2;// 操作方式
+		optional int32 value = 3;// 值
+		repeated ModifyValueData modifySetValue = 4;// 关联修正
+	}
+	enum ValueOperate
+	{
+		SET = 0;// 赋值
+		ADD = 1;// 加法
+		MINUS = 2;// 减法
+	}
+
+	enum ModifyValueType
+	{
+		REPEAT_COUNT = 0;// 重复次数
+		SKILL_LEVEL = 1;// 技能等级
+	}
+
+	message ModifyValueData
+	{
+		optional ModifyValueType modifyValueBy = 1[default = REPEAT_COUNT];// 修改源值
+		optional float rate = 2[default = 1];// 取值倍率
+	}
+}

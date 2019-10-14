@@ -1,0 +1,8 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LStopAutoMove{
+    required LTimeEventProType eventType= 1;
+    optional bool stopMove = 20[default=true];
+    optional bool stopBodyMove = 21[default=true];
+    optional bool stopOtherMove = 22[default=true];
+}

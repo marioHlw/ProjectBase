@@ -1,0 +1,11 @@
+package ActionData;
+
+message LStopAutoMove{
+    optional bool onceEvent = 1;
+    optional int32 linkId = 2;
+}
+
+
+    
+
+    

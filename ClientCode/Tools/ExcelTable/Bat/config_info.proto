@@ -1,0 +1,20 @@
+/**
+* @file:   config_info.proto
+* @author: jameyli <jameyli AT tencent DOT com>
+* @brief:  这个文件是通过工具自动生成的，建议不要手动修改
+*/
+
+package TableProto;
+
+message config_info{
+    /** id */
+    required int32 ID = 1 [default = 0];
+    /** 参数1 */
+    optional string param1 = 2 [default = ""];
+    /** 参数2 */
+    optional int32 param2 = 3 [default = 0];
+}
+
+message config_info_ARRAY {
+    repeated config_info items = 1;
+}

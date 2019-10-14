@@ -1,0 +1,35 @@
+package ActionData;
+import "LTimeEventProType.proto";
+
+message LAutoMoveDuration{
+    optional float speedX = 1[default=0];
+    optional float speedY = 2[default=0];
+    optional float speedZ = 3[default=0];
+    optional float accelerationX = 4[default=0];
+    optional float accelerationY = 5[default=0];
+    optional float accelerationZ = 6[default=0];
+    optional float randomX = 51[default=0];
+    optional float randomY = 52[default=0];
+    optional float randomZ = 53[default=0];
+    optional float rate = 7[default=1];
+    optional bool useSpeedRate = 8;
+    optional bool isBodyMove = 21;
+
+    optional bool moveToTarget = 11;
+    optional float offsetDistance = 12;
+
+
+    optional MoveType moveType = 31[default=DEFAULT];
+    optional float trackingRate = 32[default=0];
+    optional bool fly = 33[default=false];
+    optional bool faceToTarget = 34;
+
+
+    required LTimeEventProType eventType= 9;
+
+    enum MoveType
+    {
+        DEFAULT = 0;
+        FOLLOW = 1;
+    }
+}

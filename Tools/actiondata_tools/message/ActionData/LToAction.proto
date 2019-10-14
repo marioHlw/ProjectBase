@@ -1,0 +1,19 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LToAction{
+	optional string actionName = 1;
+	optional bool reset = 2[default=true];
+	optional int32 startFrame = 3;
+	optional bool checkSkill = 4;
+	optional bool checkCancelPriority = 6;
+	optional float fadeTime = 8[default = -1];
+	repeated SwitchData switchDo = 7;
+	required LTimeEventProType eventType= 5;
+
+	message SwitchData
+	{
+		optional string targetActionName = 1;
+		repeated string successLinkList = 2;
+		repeated string failLinkList = 3;
+	}
+}

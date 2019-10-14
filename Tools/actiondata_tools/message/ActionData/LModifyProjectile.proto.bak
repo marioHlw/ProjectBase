@@ -1,0 +1,22 @@
+package ActionData;
+
+import "LVector3.proto";
+
+message LModifyProjectile{
+    optional bool onceEvent = 1;
+    optional int32 linkId = 2;
+    optional string typeName = 3;
+    required LVector3 angle = 4;
+    optional bool autoChangeAngle = 5;
+    required LVector3 randomAngleRange = 6;
+    optional float speed = 7[default=5];
+    optional float acceleration = 8[default=0];
+    required LVector3 fieldForce = 9;
+    optional float trackingRate = 10[default=0];
+    optional string camp = 11;
+}
+
+
+    
+
+    

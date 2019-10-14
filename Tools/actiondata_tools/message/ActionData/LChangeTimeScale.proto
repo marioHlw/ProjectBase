@@ -1,0 +1,8 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LChangeTimeScale
+{
+	optional float scale = 1[default=1];
+	optional float time = 2[default=0.2];
+	required LTimeEventProType eventType= 11;
+}

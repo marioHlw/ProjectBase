@@ -1,0 +1,7 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LTimeStop
+{
+	required float time = 1;
+	required LTimeEventProType eventType= 11;
+}

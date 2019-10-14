@@ -1,0 +1,7 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LTransfiguration{
+	optional string modelID = 1;
+	optional bool inheritanceHP = 2;
+	required LTimeEventProType eventType= 3;
+}

@@ -1,0 +1,12 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LChangeCamp{
+	optional Camp camp = 1[default=CURRENT_CAMP];
+	required LTimeEventProType eventType= 2;
+
+	enum Camp {
+		CURRENT_CAMP=0;
+		INVERSE_CAMP=1;
+		NEUTRAL_CAMP=2;
+	}
+}

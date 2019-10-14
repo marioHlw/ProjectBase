@@ -1,0 +1,30 @@
+package ActionData;
+import "LTimeEventProType.proto";
+import "LVector3.proto";
+
+message LAddCustomProjectile{
+    optional string prefabName = 1;
+    repeated string effectList = 2;
+    repeated string projectileList = 3;
+    optional string className = 4;
+    optional int32 skillId = 5;
+    optional float scale = 6[default=1];
+    optional LVector3 position = 7;
+    optional bool placeToFoothol = 8;
+    optional LVector3 startAngle = 9;
+    optional LVector3 randomAngleRange = 10;
+    optional float startSpeed = 11[default=5];
+    optional float acceleration = 12[default=0];
+    optional LVector3 fieldForce = 13;
+    optional Camp camp = 14[default=CURRENT_CAMP];
+    optional bool bindBone = 15;
+    optional string bindName = 16;
+
+    required LTimeEventProType eventType= 17;
+    enum Camp 
+    {
+        CURRENT_CAMP=0;
+        INVERSE_CAMP=1;
+        NEUTRAL_CAMP=2;
+    }
+}

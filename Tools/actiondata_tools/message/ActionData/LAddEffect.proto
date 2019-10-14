@@ -1,0 +1,39 @@
+package ActionData;
+import "LTimeEventProType.proto";
+import "LVector3.proto";
+
+message LAddEffect{
+	optional string effectName = 1; 
+	optional string extendEffect = 23; 
+	optional float speedOffset = 22[default=0];
+	optional string effectName_Blue = 15;
+	optional string effectName_Red = 16;
+	optional bool forceAdd = 17;
+	optional LVector3 position = 2;
+	optional bool placeToFoothol = 3;
+	optional ScaleMode scaleMode = 4[default=MODEL];
+	optional LVector3 scale = 5;
+	optional bool scaleWithSkill = 20;
+	optional LVector3 rotation = 6;
+	optional bool destroyWithDead = 24;
+	optional bool isBindPosition = 7;
+	optional bool isBindFrame = 8;
+	optional bool isBindAction = 9;
+	optional bool isBindDirection  = 18;
+	optional bool isBindFrameWithoutSpeed = 25;
+
+	optional bool startRotationByParent = 21;
+	optional bool untilHurt  = 19;
+	optional bool bindBone = 10;
+	optional string bindName = 11;
+	optional bool overrideLifeTime = 13 [default=false];
+	optional float LifeTime = 14;
+	required LTimeEventProType eventType= 12;
+
+	enum ScaleMode 
+	{
+		MODEL=0;
+		COLLIDER=1;
+		SELF=2;
+	}
+}

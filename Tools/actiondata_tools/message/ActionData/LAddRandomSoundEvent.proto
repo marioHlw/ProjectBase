@@ -1,0 +1,11 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LAddRandomSoundEvent{
+    repeated string soundUrlList = 1;
+    optional float vol = 2[default=1];
+    required LTimeEventProType eventType= 3;
+}
+
+
+    
+    

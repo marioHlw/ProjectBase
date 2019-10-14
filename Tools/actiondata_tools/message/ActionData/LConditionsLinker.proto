@@ -1,0 +1,62 @@
+package ActionData;
+import "LCheckValueData.proto";
+import "LTimeEventProType.proto";
+message LConditionsLinker{
+	optional bool checkSkillLevel = 1;
+	optional int32 skillID = 2;
+	optional int32 skillLevel = 3;
+	optional bool checkActionTime = 4;
+	optional CompareType compareType = 6[default=MORE_THAN_TIME];
+	optional float actionTime = 7[default=0];
+	optional SceneBlockHittest sceneBlockHittest = 8[default=NEVER];
+	optional int32 checkHittedID = 15;
+	optional HittedTargetType targetType =13;
+	optional CampType hittedCampType =14;
+	optional bool checkAccept = 17;
+	optional AcceptDirection acceptDirection = 23[default=ALL];
+	repeated LCheckValueData checkValue = 16;// 检测变量 
+	optional bool checkHasTarget = 19;
+	optional CampType targetCampType =20;
+	optional int32 targetCount =21[default=1];
+	optional float randomRate =22[default=0];
+	optional bool checkOnAIControl = 24; //是否处于AI控制状态
+	
+	repeated string successLinkList = 9;
+	repeated string failLinkList = 10;
+	required LTimeEventProType eventType= 11;
+
+	enum CompareType
+	{
+		MORE_THAN_TIME=0;
+		LESS_THAN_TIME=1;
+	}
+
+	enum HittedTargetType
+	{
+		ALL_TARGET=1;
+		CHARACTER=2;
+		PROJECTILE=3;
+	}
+
+	enum CampType
+	{
+		ALL_CAMP=1;
+		CURRENT=2;
+		ENEMY=3;
+	}
+
+	enum SceneBlockHittest
+	{
+		NEVER=0;
+		SCENE_COLLIDER=1;
+		SCENE_WALL_COLLIDER=2;
+		ALL_COLLIDER=3;
+	}
+
+	enum AcceptDirection
+	{
+		ALL=0;
+		FRONT=1;
+		BACK=2;
+	}
+}

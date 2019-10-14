@@ -1,0 +1,13 @@
+package ActionData;
+
+message LCameraMove{
+    optional bool onceEvent = 1;
+    optional int32 linkId = 2;
+    optional float time = 3[default=2];
+    optional float delay = 4[default=0];
+}
+
+
+    
+
+    

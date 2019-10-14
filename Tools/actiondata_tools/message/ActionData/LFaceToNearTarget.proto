@@ -1,0 +1,10 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LFaceToNearTarget{
+    required LTimeEventProType eventType= 1;
+}
+
+
+    
+
+    

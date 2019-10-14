@@ -1,0 +1,13 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LCameraBackToCharacter{
+    optional string targetId = 1;
+    optional int32 type = 2;
+    optional int32 time = 3[default=120];
+    required LTimeEventProType eventType= 4;
+}
+
+
+    
+
+    

@@ -1,0 +1,6 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LAddBuff{
+    required int32 buffId=1;
+    required LTimeEventProType eventType= 2;
+}

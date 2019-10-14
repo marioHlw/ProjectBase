@@ -1,0 +1,11 @@
+package ActionData;
+
+import "LTimeEventProType.proto";
+
+message LMoveToNearTarget{
+	optional float speed = 1[default=1];
+	optional float distance = 2[default=5];
+	optional float rate = 3[default=1];
+	optional bool useSpeedRate = 4;
+	required LTimeEventProType eventType= 5;
+}

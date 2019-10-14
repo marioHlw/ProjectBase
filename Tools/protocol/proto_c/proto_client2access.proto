@@ -1,0 +1,73 @@
+import "google/protobuf/descriptor.proto";
+
+package proto_client2access;
+
+// 命令字，客户端到服务器的命令字
+enum Proto_C2ACmd {
+    E_C2A_AUTH_SYN      = 0;        // 三次握手 1
+    E_A2C_AUTH_SYNACK   = 1;        // 三次握手 2
+    E_C2A_AUTH_ACK      = 2;        // 三次握手 3
+    E_C2A_TRANSFERDATA  = 3;        // 客户端到服务器数据发送
+    E_A2C_TRANSFERDATA  = 4;        // 服务器到客户端舒服发送
+    E_C2A_KEEPALIVED    = 5;        // 网络保活，如果业务层有心跳可以不发送
+    E_A2C_KEEPALIVED    = 6;        // 网络保活回应
+    E_A2C_STARTOK       = 7;	    // ACCESS收到ZONE的startres后，下发该命令，收到这个消息客户端可以发起业务数据
+}
+
+// 方法压缩选项
+enum Proto_C2ACompressType {
+    E_NO_COMPRESS    = 0;
+    E_GZIP          = 1;
+    E_SNAPPY        = 2;
+}
+
+// 加密算法
+enum Proto_C2AEncryptType {
+    E_NO_ENCRYPT    = 0;
+    E_AES           = 1;
+    E_3DES          = 2;
+}
+
+message C2A_AuthSyn {
+    required bytes  dhpubkey_client	= 1;				// 交换秘钥pubKeyA，客户端的公钥
+    required bytes  account_info	= 2;				// 玩家的fb账号或者游客的iemi码
+    optional string token           = 3;
+    optional uint64 enet_player_uin = 4 [default = 0];  // enet登录时候，客户端已经知道了uin，这里直接设置，设置后A2C_AuthSynAck会使用该uin，这样enet模块就不用计算了
+}
+
+// 在这里下发玩家的uin，根据算法计算的uin，保持唯一性
+message A2C_AuthSynAck {
+    required bytes dhpubkey_server               = 1;		// 交换秘钥PubKeyB，服务器端的公钥
+    required Proto_C2AEncryptType	encrypt      = 2 [default = E_AES];				// 加密方式
+    required Proto_C2ACompressType	compress     = 3 [default = E_SNAPPY];		// 压缩方式
+    required uint64	player_uin                   = 4 [default = 0];					// 由业务层计算得到的uin，enet不适用，enet中的这个客户端需要设置
+}
+
+message C2A_AuthAck {
+    required bytes cipher_text = 1;    // 测试，加密后的密文，服务端会对此进行解密，然后和明文进行校验
+    required bytes plain_text  = 2;    // 加密的明文，服务端进行对比
+}
+
+// 实际具体的数据，所有的前后交互的message对象都会填写这个结构
+message TransferData {
+    required uint32 app_msg_cmd  = 1;               // 具体的业务命令字
+    required bytes  app_msg_data = 2;               // 具体的业务命令message
+}
+
+message C2A_Keepalived {
+    required uint64 c2a_timestamp = 1;              // 时间戳
+}
+
+message A2C_Keepalived {
+    required uint64 a2c_timestamp = 2;              // 时间戳
+}
+
+message C2AMsgHead {
+    required uint32             msg_seq	     = 1;						// 消息序号
+    required int32              magic	     = 2 [default = 0x6666];	// 魔术字
+    required Proto_C2ACmd       cmd          = 4; // 命令字
+    required uint32             transferdata_len = 5; // 这是加密压缩(先加密再压缩)后的数据长度，这个数据必须加密                                                      
+}
+
+// 包头结构，这是个定长的缓冲区，因为pb解码需要长度
+// uint32(总长度) + (uint16)头的长度 + C2AMsgHead头序列化数据 + TransferData序列化数据

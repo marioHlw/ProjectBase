@@ -1,0 +1,10 @@
+package ActionData;
+
+message LHitShockData_Input{
+	optional float power = 1[default=0];
+	optional float angle = 2[default=0];
+	optional float time = 3[default=1];
+	optional float frequency = 4[default=1];
+	optional float decay = 5[default=0.98];
+	optional bool randomAngle = 6[default=true];
+}

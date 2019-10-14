@@ -1,0 +1,11 @@
+package ActionData;
+
+import "LTimeEventProType.proto";
+
+message LResetCamera{
+    optional bool position = 1[default=true];
+    optional float positionAniTime = 2[default=0.5];
+    optional bool cameraAttribute= 3[default=true];
+    optional float cameraAttributeAniTime = 4[default=0.5];
+    required LTimeEventProType eventType= 10;
+}

@@ -1,0 +1,21 @@
+package ActionData;
+
+message LConditionsLinker{
+    optional bool onceEvent = 1;
+    optional int32 linkId = 2;
+    optional bool checkSkillLevel = 3;
+    optional int32 skillID = 4;
+    optional int32 skillLevel = 5;
+    optional bool checkActionTime = 6;
+    optional string hittedToAction = 7;
+    optional string compareType = 8;
+    optional float actionTime = 9[default=0];
+    optional string sceneBlockHittest = 10;
+    repeated string successLinkList = 11;
+    repeated string failLinkList = 12;
+}
+
+
+    
+
+    

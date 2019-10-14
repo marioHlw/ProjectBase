@@ -1,0 +1,14 @@
+package ActionData;
+message LCheckValueData
+{
+	required string name = 1;// 变量名
+	required ValueCompareType compareType  = 2;// 比较方式
+	required int32 value = 3;// 值
+
+	enum ValueCompareType
+	{
+		BE_EQUAL = 0;
+		MORE_THAN = 1;
+		LESS_THAN = 2;
+	}
+}

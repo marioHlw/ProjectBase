@@ -1,0 +1,17 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LGenericSwitcher
+{
+	optional BoolValue passThroughAirWall = 1[default=NONE];
+	optional BoolValue switchBarrier = 2[default=NONE];
+	optional BoolValue switchShadow = 3[default=NONE];
+
+	required LTimeEventProType eventType = 100;
+
+	enum BoolValue
+	{
+		NONE = 0;
+		TRUE = 1;
+		FALSE = 2;
+	}
+}

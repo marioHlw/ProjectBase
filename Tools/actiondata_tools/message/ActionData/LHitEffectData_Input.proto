@@ -1,0 +1,95 @@
+package ActionData;
+
+message LHitEffectData_Input{
+	optional HitEffectType commonHitEffect = 11[default=None];
+	optional string url=1[default=""];
+	optional float size = 2[default=1];
+	optional float randomSize=6[default=0.2];
+	optional float lifeTime=3[default=0.5];
+	optional float angle=4[default=0];
+	optional float randomAngle=7[default=360];
+
+	optional bool radialBlur_enable = 20;
+	optional float radialBlur_startStrength = 21[default=3];// 开始强度
+	optional float radialBlur_endStrength = 22[default=0];// 结束强度
+	optional float radialBlur_startStepScale = 23[default=1];// 开始阶段间隔比例
+	optional float radialBlur_endStepScale = 24[default=1];// 结束阶段间隔比例
+	optional float radialBlur_startInward = 25[default=0.2];// 开始内向扩展
+	optional float radialBlur_endInward = 26[default=0];// 结束内向扩展
+	optional float radialBlur_startOutward = 27[default=0];// 开始外向扩展
+	optional float radialBlur_endOutward = 28[default=0.1];// 结束外向扩展
+	optional float radialBlur_time = 29[default=0.3];// 动画时间
+
+	optional bool colorSeparation_enable = 40;
+	optional float colorSeparation_startStrength = 41[default=3];// 开始强度
+	optional float colorSeparation_endStrength = 42[default=0];// 结束强度
+	optional float colorSeparation_startResolutionl = 43[default=0.005];// 开始分离度
+	optional float colorSeparation_endResolutionl = 44[default=0];// 结束分离度
+	optional float colorSeparation_startAngle = 45[default=0];// 开始角度
+	optional float colorSeparation_endAngle = 46[default=0];// 结束角度
+	optional float colorSeparation_time = 47[default=0.15];// 动画时间
+
+
+	enum HitEffectType{
+		None = 0; 
+		//------ 拳头 ------ 
+		DJS_Hit_Hands_001=52;
+		DJS_Hit_Hands_001_01=2000;
+		Hit_Hands_002=1200; 
+		DJS_Hit_Gun_001=50;
+		DJS_Hit_Gun_001_01=2003;
+		DJS_Hit_Gun_002=51;
+		DJS_Hit_Gun_002_01=2004;
+		
+		//------ 魔法 ------ 
+		DJS_Hit_Hands_002=53;
+		DJS_Hit_Hands_002_01=2001; 
+		DJS_Hit_Hands_003=54;
+		DJS_Hit_Hands_003_01=2002;
+		Hit_Hands_004=1400; 
+		Hit_Ice_001=800;
+		Hit_Ice_002=801;
+		Hit_Ice_003=802;
+		//------ 刀剑 ------ 
+		Hit_Sword_001=200;
+		DJS_Hit_Sword_001=57;
+		DJS_Hit_Sword_001_01=2010;
+		DJS_Hit_Knife_001=56;
+		DJS_Hit_Knife_001_01=2011;
+		Hit_Knife_001=300;
+
+		//------ 元素 ------ 
+		DJS_Hit_Ice_002=55; 
+		DJS_Hit_Ice_002_01=2021;
+		DJS_Hit_Poison_001=2022;
+		DJS_Hit_Poison_001_01=2023;
+		DJS_Hit_Thunder_001=2024;
+		DJS_Hit_Thunder_001_01=2025; 
+		Hit_Stone_001=700;
+		Hit_magic_001=850;
+		Hit_magic_002=851; 
+		
+		//------ 其他 ------ 
+		Heal=1600;
+		
+		Hit_Punch_001=100; 
+		Hit_Sword_002=201;
+		Hit_Sword_003=202; 
+		Hit_Knife_002=301;
+		Hit_Knife_003=302; 
+		Hit_Fire_001=400;
+		Hit_Flame_001=500;
+		Hit_Lightsaber_001=600; 
+		Hit_Gun_001=810;
+		Hit_Gun_002=811; 
+		Hit_LightningSword_001=900;
+		Hit_LightningBall_001=901;
+		Rls_explode_002=1000; 
+		Hit_Hands_001=1100;
+		Hit_Hands_001_02=1101;
+		Hit_Hands_001_03=1102; 
+		Hit_Hands_003=1300;
+		Hit_Hands_005=1401; 
+		P_XinChang_Attack_01=1500;
+	}
+}

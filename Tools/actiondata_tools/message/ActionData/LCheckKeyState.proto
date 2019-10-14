@@ -1,0 +1,9 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LCheckKeyState{
+    repeated string up = 1;
+    repeated string down = 2;
+    repeated string left = 3;
+    repeated string right = 4;
+    required LTimeEventProType eventType= 10;
+}

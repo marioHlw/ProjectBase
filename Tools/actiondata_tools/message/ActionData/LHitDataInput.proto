@@ -1,0 +1,30 @@
+package ActionData;
+import "LHitBehaviorData_Input.proto";
+import "LHitShockData_Input.proto";
+import "LHitEffectData_Input.proto";
+import "LHitSoundData_Input.proto";
+import "LHitBuff_Input.proto";
+import "LShakeCamera.proto";
+import "LDamageFormula.proto";
+
+message LHitDataInput{
+	optional string info = 1[default=""];
+	optional int32 hitId = 2[default=0];
+	optional bool enabled = 3[default=true];
+	optional bool hitPointByBearer = 4[default=false];
+	optional LHitBehaviorData_Input hitBehaviorData_Input= 5;// 碰撞行为
+	optional int32 defaultEffectType = 6[default=0]; // 默认特效
+	optional LHitShockData_Input shockData = 7;// 震动数据
+	optional LShakeCamera shakeCamera = 11;// LShakeCamera列表
+	repeated LHitEffectData_Input effectList = 8;// 特效列表
+	//repeated LHitSoundData_Input hitSoundDataList = 9;// 音效列表
+	optional LHitSoundData_Input hitSoundData = 12;//
+	repeated LHitBuff_Input hitBuffList = 10;// buff列表
+	repeated LDamageFormula damageFormula = 13;// 
+	optional bool ignoreDamageProtection = 14;// 忽略伤害保护累算
+	optional bool showDamage = 15[default=true];// 显示伤害
+	optional int32 buffId = 16[default=0];
+}
+
+
+		

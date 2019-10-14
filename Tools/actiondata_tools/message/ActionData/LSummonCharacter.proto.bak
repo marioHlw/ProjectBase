@@ -1,0 +1,22 @@
+package ActionData;
+
+import "LVector3.proto";
+
+message LSummonCharacter{
+    optional bool onceEvent = 1;
+    optional int32 linkId = 2;
+    optional string modelID = 3;
+    optional string modelDataID = 4;
+    optional bool dieWithSummoner = 5[default=true];
+    optional string bornMonsterType = 6;
+    optional string camp = 7;
+    optional string controllerType = 8;
+    required LVector3 positionOffset = 9;
+    required LVector3 scaleOffset = 10;
+    optional bool preLoad = 11;
+}
+
+
+    
+
+    

@@ -1,0 +1,30 @@
+package ActionData;
+
+import "LVector3.proto";
+
+message LAddProjectile{
+    optional bool onceEvent = 1;
+    optional int32 linkId = 2;
+    optional string typeName = 3;
+    optional string prefabName = 4;
+    optional int32 skillId = 5;
+    optional float scale = 6[default=1];
+    required LVector3 position = 7;
+    optional bool placeToFoothol = 8;
+    required LVector3 startAngle = 9;
+    optional bool autoChangeAngle = 10;
+    required LVector3 randomAngleRange = 11;
+    optional float startSpeed = 12[default=5];
+    optional float acceleration = 13[default=0];
+    required LVector3 fieldForce = 14;
+    optional float trackingRate = 15[default=0];
+    optional string camp = 16;
+    optional bool bindBone = 17;
+    optional string bindName = 18;
+	optional bool dontDestroyWithTarget = 19;// 不随目标销毁
+}
+
+
+    
+
+    

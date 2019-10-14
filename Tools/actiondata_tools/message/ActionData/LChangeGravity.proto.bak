@@ -1,0 +1,13 @@
+package ActionData;
+
+message LChangeGravity{
+    optional bool onceEvent = 1;
+    optional int32 linkId = 2;
+    optional float speedY = 3[default=0];
+    optional float gravity = 4[default=0]; 
+}
+
+
+    
+
+    

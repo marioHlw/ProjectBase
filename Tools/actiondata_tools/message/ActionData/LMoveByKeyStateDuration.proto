@@ -1,0 +1,18 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LMoveByKeyStateDuration{
+    optional float speedX = 1[default=0];
+    optional float speedY = 2[default=0];
+    optional float speedZ = 3[default=0];
+    optional float rate = 6[default=1];
+    optional bool useSpeedRate = 4;
+    required LTimeEventProType eventType= 5;
+
+    optional bool syn = 20;
+    optional bool isBodyMove = 21;
+}
+
+
+    
+
+    

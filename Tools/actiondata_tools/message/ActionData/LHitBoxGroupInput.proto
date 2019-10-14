@@ -1,0 +1,45 @@
+package ActionData;
+
+import "LVector3.proto";
+import "LHitBoxCellInput.proto";
+import "LCheckSkillSwitchData.proto";
+
+message LHitBoxGroupInput{
+	optional string hitBoxName = 1;
+	optional bool isAttackbox = 2; 
+	optional bool isHurtbox = 3;
+	optional bool isColliderbox = 14;
+
+	optional CampTestType campTestType = 13;
+	optional float minActionTime = 4[default=0];
+	optional float maxActionTime = 5[default=1];
+	optional int32 severId = 6;
+	optional int32 hitId = 7;
+	optional bool passSynHit = 15[default=false];
+	optional LVector3 localPosition = 8;
+	optional LVector3 localScale = 11;
+	optional LVector3 localRotation = 12;
+	repeated LHitBoxCellInput hitBoxCellInputList = 9;
+	optional int32 endureLevel = 10;
+	optional float forceResistance = 33;
+
+
+	optional bool high = 21;
+	optional bool middle = 22;
+	optional bool low = 23;
+
+	optional bool isAllRange =25; // 全范围
+
+	optional int32 bounceLevel = 31;
+	optional int32 destroyLevel= 32;
+
+	repeated LCheckSkillSwitchData checkSkillSwitchData = 101;
+
+	enum CampTestType 
+	{
+		ENEMY=0;
+		CURRENT=1;
+		BOTH=2;
+		SELF=3;
+	}
+}

@@ -1,0 +1,14 @@
+package ActionData;
+
+message LCameraBackToMyPlayer{
+    optional bool onceEvent = 1;
+    optional int32 linkId = 2;
+    optional bool isImm = 3;
+    optional int32 time = 4[default=120];
+    optional float delay = 5[default=0];
+}
+
+
+    
+
+    

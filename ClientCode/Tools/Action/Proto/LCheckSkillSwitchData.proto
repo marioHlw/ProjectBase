@@ -1,0 +1,24 @@
+package ActionData;
+
+message LCheckSkillSwitchData
+{
+	optional string needSwitchName = 4;// 需要开关
+	optional string excludeSwitchName = 5;// 排斥开关
+	required ValueType valueType = 1[default = NONE];// 变量名
+	required ValueCompareType compareType  = 2[default = MORE_THAN];// 比较方式
+	optional int32 value = 3;// 值
+
+	enum ValueType
+	{
+		NONE = 0;
+		SKILL_LEVEL = 1;
+		PROJECTILE_COUNT = 2;
+	}
+
+	enum ValueCompareType
+	{
+		BE_EQUAL = 0;
+		MORE_THAN = 1;
+		LESS_THAN = 2;
+	}
+}

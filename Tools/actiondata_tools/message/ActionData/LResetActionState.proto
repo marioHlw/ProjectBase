@@ -1,0 +1,13 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LResetActionState{
+	optional State state = 1[default=STAND];
+	optional bool resetAcceptProcess = 3;
+
+	required LTimeEventProType eventType= 2;
+
+	enum State
+	{
+		STAND=0;
+	}
+}	

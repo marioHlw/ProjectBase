@@ -1,0 +1,22 @@
+package ActionData;
+
+import "LVector3.proto";
+import "LTimeEventProType.proto";
+
+message LTeleport{
+    optional LVector3 distance = 1;
+    optional bool randomDistance = 2;
+    optional LVector3 offset = 3;
+    optional MoveType moveType = 4[default=TO_TARGET];
+    optional bool onFloor = 6;
+    optional bool updateWithScale = 7;
+    required LTimeEventProType eventType= 5;
+
+    enum MoveType
+    {
+        DISTANCE=2;
+        TO_TARGET=3;
+        CLOSER_TO_TARGET=4;
+        RANDOM=6;
+    }
+}

@@ -1,0 +1,12 @@
+package ActionData;
+import "LTimeEventProType.proto";
+
+message LRemovePhantom{
+    optional DisappearType type = 1[default = DISSOLVE];
+    optional float time = 2[default = -1];
+    required LTimeEventProType eventType = 100;
+    enum DisappearType
+    {
+        DISSOLVE = 0;
+    }
+}

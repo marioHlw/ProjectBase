@@ -1,0 +1,11 @@
+package ActionData;
+
+message LAddSkillCollider{
+    optional bool onceEvent = 1;
+    optional string actionName = 2;
+}
+
+
+     
+
+    

@@ -1,0 +1,17 @@
+package ActionData;
+
+import "LVector3.proto";
+
+message LTeleport{
+    optional bool onceEvent = 1;
+    optional int32 linkId = 2;
+    required LVector3 distance = 3;
+    optional bool randomDistance = 4;
+    required LVector3 offset = 5;
+    optional string moveType = 6;
+}
+
+
+    
+
+    

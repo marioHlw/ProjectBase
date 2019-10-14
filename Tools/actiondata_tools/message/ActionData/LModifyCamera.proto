@@ -1,0 +1,19 @@
+package ActionData;
+
+import "LTimeEventProType.proto";
+import "LVector3.proto";
+
+message LModifyCamera{
+    optional float time = 1[default=1];
+    optional LVector3 offset = 2;
+    optional LVector3 rotation = 3;
+    optional float fov = 4[default=13.8];
+
+
+    required LTimeEventProType eventType= 6;
+}
+
+
+    
+
+    

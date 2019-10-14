@@ -1,0 +1,11 @@
+package ActionData;
+
+
+message LMarkTarget{
+    optional bool onceEvent = 1;
+}
+
+
+    
+
+    

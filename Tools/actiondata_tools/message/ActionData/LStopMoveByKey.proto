@@ -1,0 +1,6 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LStopMoveByKey{
+    required LTimeEventProType eventType= 1;
+    optional bool isBodyMove = 21;
+}

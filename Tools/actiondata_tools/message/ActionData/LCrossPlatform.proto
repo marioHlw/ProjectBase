@@ -1,0 +1,10 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LCrossPlatform{
+    required LTimeEventProType eventType= 1;
+}
+
+
+    
+
+    

@@ -1,0 +1,10 @@
+package ActionData;
+
+message LClearComboCatch{
+    optional bool onceEvent = 1;
+}
+
+
+    
+
+    

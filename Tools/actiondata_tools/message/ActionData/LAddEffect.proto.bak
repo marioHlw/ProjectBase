@@ -1,0 +1,19 @@
+package ActionData;
+
+import "LVector3.proto";
+
+message LAddEffect{
+    optional bool onceEvent = 1;
+    optional int32 linkId = 2;
+    optional string effectName = 3;
+    required LVector3 position = 4;
+    optional bool placeToFoothol = 5;
+    optional string scaleMode = 6;
+    required LVector3 scale = 7;
+    required LVector3 rotation = 8;
+    optional bool isBindPosition = 9;
+    optional bool isBindFrame = 10;
+    optional bool isBindAction = 11;
+    optional bool bindBone = 12;
+    optional string bindName = 13;
+}

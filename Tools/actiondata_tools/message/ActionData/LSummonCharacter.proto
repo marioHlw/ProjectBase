@@ -1,0 +1,22 @@
+package ActionData;
+
+import "LVector3.proto";
+import "LTimeEventProType.proto";
+
+message LSummonCharacter{
+    optional string modelID = 1;
+    optional int32 id = 2;
+    optional bool dieWithSummoner = 3[default=true];
+    optional Camp camp = 5[default=CURRENT_CAMP];
+    optional LVector3 positionOffset = 7;
+    optional LVector3 scaleOffset = 8;
+    optional bool preLoad = 9;
+    required LTimeEventProType eventType= 10;
+
+
+    enum Camp {
+        CURRENT_CAMP=0;
+        INVERSE_CAMP=1;
+        NEUTRAL_CAMP=2;
+    }
+}

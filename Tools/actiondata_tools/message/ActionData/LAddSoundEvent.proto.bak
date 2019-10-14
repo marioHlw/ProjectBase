@@ -1,0 +1,18 @@
+package ActionData;
+
+
+message LAddSoundEvent{
+    optional bool onceEvent = 1;
+    optional int32 linkId = 2;
+    optional string soundUrl = 3;
+    optional float vol = 4[default=1];
+    repeated string UrlList = 5;
+    repeated string RateList = 6;
+    repeated string fileName = 7;
+    repeated string bankName = 8;
+}
+
+
+    
+
+    

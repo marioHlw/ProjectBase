@@ -1,0 +1,70 @@
+package ActionData;
+import "LHitEffectsData_Input.proto";
+import "LVector3.proto";
+
+message LHitBehaviorData_Input{
+        optional int32 id = 1[default=0]; // id
+        optional string name = 2[default=""]; // 名字，然而并没用到
+        optional int32 hitTimes = 3[default=1]; // 碰撞次数，在一个hit攻击判定框的有效帧范围内可触发hit的次数，间隔为[interval]
+        optional int32 life = 30[default=0]; // 碰撞生命，在一个hit攻击判定框一次生效周期里，达成碰撞次数后，不再产生碰撞
+        optional int32 interval =4[default=0]; // hit帧间隔，和hitTimes配合使用。比如一个hit攻击判定框长12帧，[hitTimes]为3，[interval]为4，那么会再第一帧，第五帧，第九帧各能产生一次有效的判定
+        optional float hitDepthIn = 5[default=35]; // 废弃
+        optional float hitDepthOut = 6[default=35];// 废弃
+        optional bool hitLieDown = 7[default=false];// 能否攻击倒地状态的对象
+        optional bool floorRebound = 81[default=false];// 地面反弹
+        optional bool wallRebound = 82[default=false];// 地面反弹
+
+        optional float powerX = 8[default=4];// 地上x轴方向击飞力
+        optional float powerY = 9[default=0];// 地上y轴方向击飞力
+        optional float powerZ = 10[default=0];// 地上z轴方向击飞力
+        optional float powerXAir = 11[default=0];// 空中x轴方向击飞力
+        optional float powerYAir = 12[default=1];// 空中y轴方向击飞力
+        optional float powerZAir = 13[default=0];// 空中z轴方向击飞力
+        
+        optional float powerX_Random = 70[default=0];
+        optional float powerY_Random = 71[default=0];
+        optional float powerZ_Random = 72[default=0];
+        optional float powerX_Air_Random = 73[default=0];
+        optional float powerY_Air_Random = 74[default=0];
+        optional float powerZ_Air_Random = 75[default=0];
+        
+        optional bool isCenterPower = 14[default=false];// 中心力，此项为true，三轴力的方向会以攻击方为中心，判断被击对象和攻击方的相对方向，改变力的方向。
+        optional int32 numbTime = 15[default=20]; // 硬直时间
+        optional int32 numbType = 16[default=0]; // 硬直表现类型
+        optional int32 airNumbType = 17[default=0];// 空中硬直表现类型
+        optional bool shake = 33[default=true];// 抖动
+        optional int32 hitStopFrame = 18[default=3];// 攻击方顿帧
+        optional int32 bearStopFrame = 19[default=3];// 被击方顿帧
+        optional bool holdBearStopFrame = 31[default=false];// 保持被击方顿帧不可重置
+        optional bool canGuard = 20[default=false];// 能否被防御
+        optional int32 knockDown = 21[default=0];// 击倒
+        optional int32 airDown = 22[default=0];// 空中击倒
+        optional int32 airKnockOut = 23[default=0];
+        optional bool enforceLanden = 24[default=false];// 命中后被击方强制转为落地状态
+        optional bool enforceFlyying = 25[default=false];// 命中后被击方强制转为浮空状态
+        optional bool enforceLocate = 26[default=false];// 命中后被击方强制定位
+        optional LVector3 locator = 27;// 强制定位的相对坐标偏移
+        optional int32 locatorFrame = 83[default=0];// 强定位帧数
+        optional bool enforceLocateIgnoreCollider = 84[default=false];// 强定位忽略碰撞(穿墙)
+
+        optional int32 breakLevel = 28[default=1];// 破霸体等级
+        optional bool gameObjectLinkHitStopFrame = 29[default=false];// 如果是飞行道具产生的攻击判定，其产生的顿帧是否影响发射源对象
+
+        optional bool high = 51;// 上段攻击判定，此项为true可以命中受击框high为true的对象
+        optional bool middle = 52;// 中段攻击判定，此项为true可以命中受击框middle为true的对象
+        optional bool low = 53;//下段攻击判定，此项为true可以命中受击框low为true的对象
+
+        optional HitTargetSwitch hitTargetSwitch = 60;// 碰撞对象筛选
+        optional int32 bounceLevel = 61;// 反弹飞行道具等级
+        optional int32 destroyLevel = 62;// 销毁飞行道具等级
+
+        enum HitTargetSwitch 
+      {
+                CHARACTER = 0;
+                PROJECTILE = 1;
+                ALL = 2;
+        }
+}
+
+
+    

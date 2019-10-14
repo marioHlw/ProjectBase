@@ -1,0 +1,72 @@
+package ActionData;
+import "LTimeEventProType.proto";
+
+message LFindTarget{
+	optional TargetType targetType = 1[default=ALL];// 对象类型
+	optional CampType campType = 2;// 阵营类型
+	optional NearOrFar nearOrFar = 3[default=NONE];// 远近
+	optional bool referenceSelfCharacter = 29;
+	optional bool referenceSourceObject = 30;
+
+	optional bool excludeLast = 18; // 排除上一个对象
+	optional bool excludeSelf = 25[default=true]; // 排除自己
+	optional float useLastTimeOut = 31[default=0];
+
+
+	optional bool inDistance =12; // 在指定距离内
+	optional float nearFrom = 28; // 近处距离
+	optional float distance = 13; // 指定距离
+
+	optional bool inAngleArea =22; // 在指定角度范围内
+	optional float directionAngle = 23; // 张角方向
+	optional float openAngle = 24; // 张角大小
+
+
+	optional bool findModelID =10; 
+	optional string modelID =11; 
+
+	optional bool checkHitted =14;
+	optional int32 hitID =15; 
+
+	optional bool checkBuff =16;
+	optional int32 buffID =17;
+
+	optional bool checkAction = 19;// 检测Action
+	repeated string actionList = 20;// 合法的ActionLabel列表
+
+	optional int32 countLimit =26[default=0]; // 个数限制
+
+	optional bool ignoreExclude = 27;// 忽略排除
+
+	required LTimeEventProType eventType= 21;
+
+	// 对象类型
+	enum TargetType
+	{
+		ALL = 0;
+		CHARACTER = 1;// 角色
+		PROJECTILE = 2;// 投射物
+		SELF_CHARACTER = 3;// 自身角色
+		SELF_PROJECTILE = 4;// 自身发射的投射物
+		SELF_PHANTOM = 5;// 自身产生的分身
+		SELF = 6;// 自身
+		LAST_TARGET = 7; // 上个对象
+		LAST_HIT_TARGET = 8;// 上个命中的对象
+	}
+
+	enum CampType
+	{
+		ALL_CAMP = 0;// 所有阵营
+		ENEMY = 1;// 敌方
+		CURRENT = 2;// 己方
+		HA_HA_HA =3;
+	}
+
+	enum NearOrFar
+	{
+		NONE = 0;// 无条件
+		NEAREST = 1;// 最近的
+		FARTHEST = 2;// 最远的
+		RANDOM = 3;// 随机
+	}
+}

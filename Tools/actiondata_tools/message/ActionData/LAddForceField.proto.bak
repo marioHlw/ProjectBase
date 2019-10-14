@@ -1,0 +1,19 @@
+package ActionData;
+
+import "LVector3.proto";
+
+message LAddForceField{
+    optional bool onceEvent = 1;
+    required LVector3 offset = 2;
+    optional bool isCenterPower = 3;
+    required LVector3 power = 4;
+    required LVector3 acceleration = 5;
+    optional bool lockDirection = 6;
+    optional float radius = 7[default=0];
+    optional string targetCamp = 8;
+}
+
+
+    
+
+    

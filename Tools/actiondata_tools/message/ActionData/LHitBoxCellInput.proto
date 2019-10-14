@@ -1,0 +1,17 @@
+package ActionData;
+
+import "LVector3.proto";
+
+message LHitBoxCellInput{
+    required LVector3 boxColliderCenter= 1;
+    required LVector3 boxColliderSize= 2; 
+    required LVector3 localPosition= 3;
+    optional LVector3 localRotation= 4;
+	optional Shape shape = 5[default=BOX];
+	enum Shape
+	{
+		BOX = 1;
+		SPHERE = 2;
+		SEMICIRCLE = 3;
+	}
+}

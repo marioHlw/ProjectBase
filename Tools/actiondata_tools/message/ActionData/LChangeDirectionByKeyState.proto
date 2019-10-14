@@ -1,0 +1,7 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LChangeDirectionByKeyState{
+    required LTimeEventProType eventType= 1;
+    optional bool syn = 20;
+    required bool reverse = 2[default=false];
+}

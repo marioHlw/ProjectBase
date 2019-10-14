@@ -1,0 +1,13 @@
+package ActionData;
+
+message LHitSoundData_Input{
+	//optional string url = 1[default=""];
+		optional float vol = 2[default=0.7];
+		//optional int32 startTime = 3[default=0];
+		//repeated string urlList = 4;
+		repeated string rateList = 5;
+		repeated string fileName = 6;
+		repeated string bankName = 7;
+}
+
+	

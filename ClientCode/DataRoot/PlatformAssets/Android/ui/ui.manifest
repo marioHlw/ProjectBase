@@ -1,0 +1,38 @@
+ManifestFileVersion: 0
+CRC: 2250030125
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: basebackground/ui_basebackground_01.unity3d
+      Dependencies:
+        Dependency_0: mstiffheiprc-ultrabold.unity3d
+        Dependency_1: common01_atlas.unity3d
+    Info_1:
+      Name: basebackground/ui_basebackground_02.unity3d
+      Dependencies:
+        Dependency_0: common01_atlas.unity3d
+    Info_2:
+      Name: loading/blk_loading.unity3d
+      Dependencies:
+        Dependency_0: aachenn.unity3d
+        Dependency_1: loading_atlas.unity3d
+        Dependency_2: fzy4jw.unity3d
+    Info_3:
+      Name: pull-down/pull-down.unity3d
+      Dependencies:
+        Dependency_0: common01_atlas.unity3d
+    Info_4:
+      Name: mstiffheiprc-ultrabold.unity3d
+      Dependencies: {}
+    Info_5:
+      Name: common01_atlas.unity3d
+      Dependencies: {}
+    Info_6:
+      Name: aachenn.unity3d
+      Dependencies: {}
+    Info_7:
+      Name: loading_atlas.unity3d
+      Dependencies: {}
+    Info_8:
+      Name: fzy4jw.unity3d
+      Dependencies: {}

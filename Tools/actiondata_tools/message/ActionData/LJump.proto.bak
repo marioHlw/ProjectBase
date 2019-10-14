@@ -1,0 +1,17 @@
+package ActionData;
+
+message LJump{
+    optional bool onceEvent = 1;
+    optional int32 linkId = 2;
+    optional float powerRate = 3[default=0];
+    optional string riseType = 4[default="Jump"];
+    optional string riseLoopType = 5[default="JumpRiseLoop"];
+    optional string fallType = 6[default="JumpFall"];
+    optional string fallLoopType = 7[default="JumpFallLoop"];
+    optional string toGroundType = 8[default="JumpLand"];
+}
+
+
+    
+
+    

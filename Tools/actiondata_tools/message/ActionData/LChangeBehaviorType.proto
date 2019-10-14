@@ -1,0 +1,12 @@
+package ActionData;
+import "LTimeEventProType.proto";
+
+message LChangeBehaviorType{
+	optional Type type = 1[default=FLY];
+	required LTimeEventProType eventType= 2;
+
+	enum Type{
+		FLY=0;
+		LAND=1;
+	}
+}

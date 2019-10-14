@@ -1,0 +1,21 @@
+import "LVector3.proto";
+package ActionData;
+
+message MoveTestData
+{
+	repeated ActionMoveData actionMoveDataList = 1;
+	message ActionMoveData
+	{
+		required string actionLabel = 1;
+		repeated MoveData moveDatas = 2;
+		optional bool isPassCheck = 3;
+	}
+	message MoveData
+	{
+		required int32 frameIndex = 1;
+		optional LVector3 absoluteSpeed = 2;
+		optional LVector3 rateSpeed = 3;
+		optional LVector3 absoluteSpeed_Key = 4;
+		optional LVector3 rateSpeed_Key = 5;
+	}
+}

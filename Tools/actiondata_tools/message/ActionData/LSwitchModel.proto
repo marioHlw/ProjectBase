@@ -1,0 +1,6 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LSwitchModel{
+    required LTimeEventProType eventType= 1;
+    required string modelName = 10;
+}

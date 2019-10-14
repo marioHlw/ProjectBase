@@ -1,0 +1,16 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LJump{
+    optional float powerRate = 1[default=0];
+    optional string riseType = 2[default="Jump"];
+    optional string riseLoopType = 3[default="JumpRiseLoop"];
+    optional string fallType = 4[default="JumpFall"];
+    optional string fallLoopType = 5[default="JumpFallLoop"];
+    optional string toGroundType = 6[default="JumpLand"];
+    required LTimeEventProType eventType= 7;
+}
+
+
+    
+
+    

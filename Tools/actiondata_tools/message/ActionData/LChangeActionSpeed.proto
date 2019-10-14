@@ -1,0 +1,15 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LChangeActionSpeed{
+    optional SpeedMode speedMode = 2[default=OFFSET];
+    optional float speed = 1[default=0];
+    optional bool setAbsoluteSpeed = 3[default=false];
+
+    required LTimeEventProType eventType= 11;
+
+	enum SpeedMode
+	{
+		OFFSET=0; // ËÙ¶ÈÆ«ÒÆ
+		RATIO=1; // ±¶ÂÊ 
+	}
+}

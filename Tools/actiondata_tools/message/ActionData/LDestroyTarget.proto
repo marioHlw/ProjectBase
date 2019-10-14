@@ -1,0 +1,6 @@
+package ActionData;
+
+import "LTimeEventProType.proto";
+message LDestroyTarget{
+    required LTimeEventProType eventType= 1;
+}

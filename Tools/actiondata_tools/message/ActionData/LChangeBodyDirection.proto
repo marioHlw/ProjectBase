@@ -1,0 +1,10 @@
+package ActionData;
+import "LTimeEventProType.proto";
+import "LVector3.proto";
+
+message LChangeBodyDirection
+{
+	optional LVector3 angle = 1;
+	optional int32 smoothFrame = 2[default = 8];
+	required LTimeEventProType eventType = 101;
+}

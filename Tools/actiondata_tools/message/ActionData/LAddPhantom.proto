@@ -1,0 +1,15 @@
+package ActionData;
+import "LTimeEventProType.proto";
+import "LVector3.proto";
+
+message LAddPhantom{
+    optional LVector3 position = 1;
+    optional bool placeToFoothol = 2;
+    required string actionName = 10;
+    optional bool reset = 11[default=true];
+    optional int32 startFrame = 12;
+    optional bool checkSkill = 13;
+    optional bool checkCancelPriority = 14;
+    optional bool destroyOnFall = 15[default=false];
+    required LTimeEventProType eventType = 100;
+}

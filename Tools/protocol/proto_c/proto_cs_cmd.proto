@@ -1,0 +1,3139 @@
+package proto_ff;
+
+// 命令字
+enum Proto_CS_CMD {
+	option allow_alias                                  = false;
+    E_CS_CMD_NONE		                                = 0;
+    E_CS_ERROR			                                = 1;            //统一错误包回包
+    E_CS_LOGIN_REQ                                      = 2;
+    E_CS_LOGIN_RES                                      = 3;
+    E_CS_GETROLE_REQ 	                                = 4;
+    E_CS_GETROLE_RSP	                                = 5;
+    E_CS_HEARTBEAT_REQ	                                = 6;
+    E_CS_HEARTBEAT_RSP	                                = 7;
+    E_CS_LOGOUT_REQ 	                                = 8;            // 登出请求
+    E_CS_LOGOUT_RSP 	                                = 9;            // 登出返回
+    E_CS_KICKOFF_NTF                                    = 11;
+    E_CS_GM_REQ 		                                = 12;
+    E_CS_GM_RSP			                                = 13;
+    E_CS_HERO_ATTR_NTF	                                = 14;
+    E_CS_ROLE_ATTR_NTF	                                = 15;
+    E_CS_HERO_NTF		                                = 16;
+    E_CS_CREATE_ROLE_REQ                                = 17;			//创建角色
+    E_CS_CREATE_ROLE_RSP                                = 18;           //
+    E_CS_BATTLESVR_LOGIN_REQ                            = 19;
+    E_CS_BATTLESVR_LOGIN_RSP                            = 20;
+    E_CS_START_BATTLE_NTF                               = 21;
+    E_CS_DELETE_ROLE_REQ                                = 22;           //删除角色
+    E_CS_DELETE_ROLE_RSP                                = 23;
+    E_CS_CHANGE_AVATAR_REQ                              = 24;
+    E_CS_CHANGE_AVATAR_RSP                              = 25;
+    E_CS_ROOM_CREATE_REQ                                = 26;
+    E_CS_ROOM_CREATE_RSP                                = 27;
+    E_CS_ROOM_ENTER_REQ                                 = 28;
+    E_CS_ROOM_ENTER_RSP                                 = 29;
+    E_CS_ROOM_ENTER_NTF                                 = 30;
+    E_CS_ROOM_LEAVE_REQ                                 = 31;
+    E_CS_ROOM_LEAVE_NTF                                 = 32;
+    E_CS_ROOM_QUERY_LIST_REQ                            = 33;
+    E_CS_ROOM_QUERY_LIST_RSP                            = 34;
+    E_CS_ROOM_START_BATTLE_REQ                          = 35;
+    E_CS_ROOM_CHANGE_CAMP_REQ                           = 36;
+    E_CS_ROOM_CHANGE_CAMP_NTF                           = 37;
+
+    E_CS_BATTLESVR_ATTR_CHANGE_NTF                      = 38;
+    E_CS_OBJ_BUFF_OP_NTF                                = 39;
+    E_CS_EFFECT_NTF                                     = 40;
+    E_CS_ENTER_VIEW_NTF                                 = 41;           //进入视野
+    E_CS_LEAVE_VIEW_NTF                                 = 42;           //离开视野
+	E_CS_LOADING_STATUS_REQ                             = 43;
+	E_CS_LOADING_STATUS_NTF                             = 44;
+	E_CS_ENTER_BATTLE_REQ                               = 45;           //进入战斗
+	E_CS_ENTER_BATTLE_RSP                               = 46;           //进入战斗
+	E_CS_BATTLE_INFO_NTF                                = 47;           //战斗状态改变通知
+	E_CS_FIGHT_PKG                                      = 48;           //战斗包
+	E_CS_ROOM_DESTROY_NTF                               = 49;	        //房间销毁通知
+	E_CS_STATE_NTF                                      = 50;           //状态同步
+	E_CS_BATTLE_SITUATION_REQ                           = 51;		    //客户端主动汇报当前的比赛状况
+	E_CS_BATTLE_SITUATION_NTF                           = 52;		    //战斗中当前赛况广播
+	E_CS_BATTLE_RESULT_REQ                              = 53;		    //战斗结果申请
+	E_CS_BATTLE_RESULT_NTF                              = 54;		    //战斗结果广播
+	E_CS_BATTLE_FINAL_REPORT_NTF                        = 55;           //最终战报
+	E_CS_BATTLE_ROUND_CHANGE                            = 56;		    //战斗中单局状态改变
+	E_CS_BATTLE_ROUND_RESULT_NTF                        = 57;		    //战斗都单局结果通知
+	E_CS_BATTLE_MAINID_NTF		                        = 58;		    //战斗对象处理主机切换
+	E_CS_BATTLE_DROP_REQ		                        = 59;
+	E_CS_BATTLE_STRONGHOLD_NTF                          = 60;           //据点信息同步
+	E_CS_BATTLE_Rotate_REQ			                    = 61;           //朝向
+	E_CS_BATTLE_Rotate_RSQ			                    = 62;
+	E_CS_BATTLE_STATISTICS_NTF		                    = 63;           //战场数据统计
+	E_CS_BATTLE_NPC_NTF				                    = 64;           //NPC信息同步
+	E_CS_BATTLE_MECH_REQ			                    = 65; 	        //机甲驾驶后的状态
+	E_CS_BATTLE_SWITCH_ACTIVE_NTF 	                    = 66;           //玩家切换控制对象，英雄，机甲，及其他
+	E_CS_BATTLE_DRIVEMECH_REQ		                    = 67;           //请求驾驶机甲
+	
+	E_CS_BATTLE_WEATHER_NTF			                    = 68;           //战场天气
+
+    E_CS_BATTLE_TRANSMAP_NTF							= 69;			//切换地图
+
+    E_CS_BATTLE_PROGRESS_NTF                            = 70; 
+    E_CS_BATTLE_PROGRESS_REQ                            = 71;
+
+	E_CS_MALL_LIST_REQ	                                = 72;		    //请求商城物品列表
+	E_CS_MALL_LIST_RSP 	                                = 73;		
+	E_CS_MALL_BUY_REQ		                            = 74;		    // 商城购买物品
+	E_CS_MALL_BUY_RSP		                            = 75;
+	E_CS_ROLE_SKIN_NTF			                        = 76;           //皮肤列表改变
+	E_CS_PACKDATA_LIST		                            = 77;           //礼包信息
+	E_CS_MALL_HOME_REQ		                            = 78;           //请求商城首页信息
+	E_CS_MALL_HOME_RSQ		                            = 79;           //反馈首页信息
+
+	E_CS_ROLE_NTF				                        = 80;
+    E_CS_RELAY_REQ									    = 81; 		    // 重连请求
+    E_CS_RELAY_RSP									    = 82; 		    // 重发缓存包结束
+
+    E_CS_COMBOS_TOTAL_HURT_NTF                          = 83;			//总伤害
+	                                                                    //战斗- 怪物
+	E_CS_ACTOR_PLATFORM_REQ                             = 84;           //actor移动平台更新
+	E_CS_NPC_ATTACK			                            = 85;	        //攻击	
+	E_CS_HERO_REVIVAL_CD_NTF	                        = 86;	        //英雄复活倒计时 英雄死亡时就发此消息
+	E_CS_SITUATION_ACCOUNT_NTF	                        = 87;	        //当前战场形势统计
+	E_CS_ACTOR_POS_REQ			                        = 88;		    //同步怪物的位置给后台
+	E_CS_Actor_MOVE_TARGETPOS	                        = 89;	        //请求前台移动actor到目的地
+	E_CS_PLATFORM_POS_RSQ			                    = 90;
+	E_CS_BROAD_MESSAGE_NTF		                        = 91;		    //向玩家广播消息
+	E_CS_ROOM_QUERY_REQ 		                        = 92;           //查询自己的房间信息
+	E_CS_ROOM_QUERY_RSP			                        = 93;           //查询自己的房间信息回包
+	E_CS_ROLE_ITEM_NTF	 		                        = 94;           //道具列表更新
+	E_CS_EQUIP_DRESS_REQ		                        = 95;	        //穿卸一件装备申请
+	E_CS_EQUIP_DRESS_RSP		                        = 96;	        //穿卸一件装备回应
+	E_CS_BUFF_OP_REQ 			                        = 97;           //BUFF OP 请求
+	E_CS_BATTLE_PLAYER_REMOVE_NTF						= 98;			//战斗里BattlePlayer移除
+	E_CS_MAP_STATE_INFO_NTF								= 99;			//地图状态同步	
+
+	E_CS_ACCOUNT_STORAGE_NTF	 		                = 200;          //仓库更新
+	                                                                    //100开始是pvp的		
+	//战斗相关
+	E_CS_PVP_FIGHT                                      = 101;          //因为pvp战斗都要带自己独特的包头，所以全部放在一个里面
+	E_CS_ACTOR_SETPOS_REQ 		                        = 102;          //直接将actor拉到某个位置
+	E_CS_ACTOR_SETPOS_RSQ 		                        = 103;          //
+	E_CS_MOVE_RESET 			                        = 104;          //移动重置
+	E_CS_CLIENT_SYSTEM_STATE 	                        = 105;          //客户端切换后台侦测
+	E_CS_SKILL_EXTRA_INFO_NTF                           = 106;          //技能额外信息通知
+	E_CS_SKILL_INFO_NTF 		                        = 107;          //冷却时间等刷新通知 
+	E_CS_SKILL_CHARGE_INFO_NTF                          = 108;          //技能充能信息
+	E_CS_SKILL_FEATURE_CHANGE_NTF						= 109;			//技能特性变化
+	E_CS_SKILL_REPLACEMENT_NTF							= 112;			//技能替换
+	
+	E_CS_MONEY_EXCHANGE_REQ				                = 110;	        //玩家金钱兑换
+	E_CS_MONEY_EXCHANGE_RSP                             = 111;
+	E_CS_GET_NEW_HERO			                        = 117;	        //获得一个新英雄
+	
+	E_CS_ITEM_USE_REQ	                                = 118;	        //道具的使用
+	E_CS_ITEM_USE_RSP	                                = 119;	        //道具的使用
+	E_CS_ITEM_USE_CONFIRM_NTF                           = 116;          //道具使用二次确认通知
+	
+	//- GameServer Set Debut Skill 
+    E_CS_SET_DEBUT_SKILL_REQ                            = 120;          //设置出场技能
+    E_CS_SET_DEBUT_SKILL_RSP                            = 121;          //设置出场技能回应
+
+	E_CS_HERO_ATTR_ONE_CHANGE	                        = 122;	        //英雄的单个属性改变通知
+    E_CS_HERO_SET_SKIN_REQ                              = 123;          // 设置皮肤
+    E_CS_HERO_SET_SKIN_RSP                              = 124;          // 设置皮肤
+    E_CS_HERO_BUY_SKIN_REQ                              = 125;          // 购买皮肤
+    E_CS_HERO_BUY_SKIN_RSP                              = 126;          // 购买皮肤
+
+	E_CS_ITEM_USE_SET	                                = 127;	        //道具的设置使用
+
+	E_CS_BATTLESVR_RTT_REQ                              = 128;          //对时请求
+	E_CS_BATTLESVR_RTT_RSP                              = 129;          //对时回包
+	E_CS_BATTLESVR_RTT_NTF                              = 130;          //对时调整
+	E_CS_BATTLESVR_QUIT_REQ                             = 131;          //退出战斗 
+	E_CS_BATTLESVR_QUIT_RSP                             = 135;          //退出战斗 
+	E_CS_BATTLESVR_RIFT_RESET_MAP_REQ                   = 142;          //大秘境重置地图请求
+
+	E_CS_ROOM_LOOK_REQ                                  = 132;		    //查看某房间请求
+	E_CS_ROOM_LOOK_RSP                                  = 133;		    //查看某房间回应
+	E_CS_ABSORB_DMG_NTF                                 = 134; 		    //护盾吸收通知
+	E_CS_BUFF_TRIGGER_PARA_NTF                          = 161; 		    //Buff参数变更通知
+	E_CS_ROOM_LOOKOUT_REQ                               = 136;		    //退出查看某房间请求
+	E_CS_ROOM_LOOKOUT_RSP                               = 137;		    //退出查看某房间回应
+	E_CS_ROOM_INFO_CHANGE_REQ                           = 138;          //改变房间设置请求
+	E_CS_ROOM_INFO_CHANGE_NTF                           = 139;          //改变房间设置回应 
+	E_CS_SCENE_TRIGGER_REQ                              = 140;          //场景触发器请求，一般用于区域触发
+	E_CS_BATTTLE_OBJ_CAMP_NTF                           = 141;          //战场单位阵营改变通知
+	E_CS_BATTLE_ACTOR_AI_NTF	                        = 160;          //对象AI信息变化(当前只更新英雄）
+    E_CS_SYSMSG_NTF                                     = 143;          //系统消息
+
+    E_CS_OB_LOG_NTF                                     = 144;          //观战日志
+    E_CS_WATCH_BATTLE_REQ                               = 145;          //请求观战
+    E_CS_WATCH_BATTLE_RSP                               = 146;          //请求观战回应
+
+    E_CS_BATTLE_WANT_FIGHT_REQ                          = 147;          //请战
+    E_CS_BATTLE_WANT_FIGHT_NTF                          = 148;          //请战
+    E_CS_BATTLE_WILL_FIGHT_NTF                          = 149;          //出战
+
+    E_CS_CHAT_REQ                                       = 150;          //聊天发送
+    E_CS_CHAT_NTF                                       = 151;          //聊天接收
+    
+    E_CS_SET_BATTLE_OBSERVER_REQ                        = 152;          // 设置房间内观战
+    E_CS_SET_BATTLE_OBSERVER_NTF                        = 153;
+    
+    E_CS_ROLE_RUNE_OP_REQ			                    = 154;	        //人物身上符文盘操作
+    E_CS_ROLE_RUNE_OP_RSP			                    = 155;
+    E_CS_RUNE_MAKE_REQ				                    = 156;	        //念纹的制造
+    E_CS_RUNE_MAKE_RSP				                    = 157;
+    E_CS_RUNE_PLATE_REQ				                    = 158;	        //念纹空间信息请求
+    E_CS_RUNE_PLATE_RSP				                    = 159;
+    E_CS_RUNE_MERGE_REQ				                    = 162;	        //念纹合成
+    E_CS_RUNE_MERGE_RSP				                    = 163;
+   
+    E_CS_SETUP_SKILL_TALENT_REQ		                    = 164;          //设置天赋技能
+    E_CS_SETUP_SKILL_TALENT_RSP		                    = 165;          //设置天赋技能返回
+
+    E_CS_CHANGE_HERO_JOB_REQ 		                    = 166;          //转职请求
+    E_CS_CHANGE_HERO_JOB_RSP		                    = 167;          //转职返回
+
+    E_CS_RESET_HERO_JOB_REQ			                    = 168;          //重置职业
+    E_CS_RESET_HERO_JOB_RSP			                    = 169;          //重置职业返回
+
+    E_CS_START_LEVEL_REQ			                    = 170;          //开始副本请求
+	E_CS_TREE_BOX_LIST_NTF			                    = 171;          //行为树信息通知
+    E_CS_TREE_BOX_EXEC_REQ			                    = 172;          //副本行为树Box执行请求
+    E_CS_TREE_BOX_EXEC_NTF			                    = 173;          //副本行为树Box执行通知
+	E_CS_TREE_BOX_EXEC_RSP                              = 180;          //副本行为树Box执行回包
+
+    E_CS_ITEM_DECOMPOS_REQ                              = 176;  //分解
+    E_CS_ITEM_DECOMPOS_RSP                              = 177;
+    E_CS_EQUIP_RESET_REQ                          = 181;  // 洗练 
+    E_CS_EQUIP_RESET_RSP                          = 182;
+
+    E_CS_EQUIP_INHERIT_REQ                              = 196; // 装备继承
+    E_CS_EQUIP_INHERIT_RSP                              = 197;
+
+    E_CS_STRENGTH_EQUIP_REQ                             = 178;
+    E_CS_STRENGTH_EQUIP_RSP                             = 179;
+	
+    E_CS_BATTLE_DISCARD_REQ                             = 185;          //放弃关卡请求
+    E_CS_BATTLE_REVIVAL_REQ                             = 186;          //复活请求
+    E_CS_BATTLE_DISCARD_NTF                             = 187;          //放弃关卡回包
+    E_CS_BATTLE_REVIVAL_RSP                             = 188;          //复活请求回包
+    
+    E_CS_PLAYER_STATISTIC_NTF			                = 189;          //指挥官统计信息
+    E_CS_LEVEL_COMPLETE_NTF				                = 190;          //完成关卡通知
+    E_CS_ACTION_STATE_SYNC_REQ			                = 191;          //动作状态同步
+
+
+    E_CS_COMFIN_BATTLE_END_AND_SELECT_AWARD_REQ         = 202;
+    E_CS_COMFIN_BATTLE_END_AND_SELECT_AWARD_RSP         = 203;
+    E_CS_ADD_AVATAR_NTF                                 = 204;
+    
+	E_CS_SIGN_IN_REQ                                    = 205;
+	E_CS_SIGN_DATA_NTF                                  = 206;
+	
+    E_CS_GET_LEVEL_BOUNS_REQ                            = 208; //请求获取等级礼包
+    E_CS_GET_LEVEL_BOUNS_RSP                            = 209; //获取等级礼包结果
+
+    E_CS_MALL_ITEM_REQ	                                = 210;		    //请求商城物品信息
+	E_CS_MALL_ITEM_RSP 	                                = 211;	
+
+	E_CS_SIGN_IN_MONTHLY_REQ                            = 212;
+	E_CS_SIGN_IN_MONTHLY_DATA_NTF                       = 213;	
+	E_CS_SIGN_IN_MONTHLY_RSP	                        = 214;	
+	
+	E_CS_PLAYER_ONOFF_NTF			                    = 221;          //玩家上下线通知 
+
+	E_CS_BATTLE_OBJ_SCENE_TRIGGER_OP_NTF                = 222;          //战斗对象SceneTrigger操作
+    E_CS_LEVEL_CONDITION_CHECK_REQ                      = 224;          //条件检查请求
+    E_CS_LEVEL_CONDITION_CHECK_RSP                      = 225;          //条件检查返回
+
+	E_CS_AI_EXEC_MACRO_NTF			                    = 226;          //to client 执行宏
+	E_CS_AI_TERMINAL_MACRO_NTF		                    = 227;          //to client 终止宏
+	E_CS_AI_END_MACRO_REQ			                    = 228;          //to server 宏执行结束
+
+    E_CS_SOULBOX_TEAM_DROP_REQUIRE_REQ                  = 230; //
+    E_CS_SOULBOX_TEAM_DROP_REQUIRE_NTF                  = 231;
+
+    E_CS_SOULBOX_TEAM_DROP_INFO                         = 238; // roll item 完整数据
+    E_CS_SOULBOX_TEAM_DROP_NTF                          = 239; // roll item 获得物品数据
+
+    E_CS_SOULBOX_DROP_NTF                               = 232;
+    E_CS_SOULBOX_PICK_REQ                               = 233;
+    E_CS_SOULBOX_PICK_RSP                               = 234;
+    E_CS_SOULBOX_LIST_NTF                               = 235;
+    
+	E_CS_ACTOR_MOVE_RANDOM				                = 236;
+	E_CS_ACTOR_MOVE_RESULT_REQ			                = 237;
+
+	E_CS_BATTLE_FINISH_LOADING_REQ		                = 240;
+	E_CS_BATTLE_FINISH_LOADING_NTF		                = 241;
+
+	E_CS_QUICK_MATCH_REQ					            = 242;
+	E_CS_BATTLE_PAUSE_REQ				                = 243;          //暂停游戏, 当前暂只支持单人PVE场景
+	E_CS_BATTLE_PAUSE_RSP				                = 244;          //
+	
+	E_CS_BATTLE_CONTINUE_REQ				            = 245;          //继续游戏, 当前暂只支持单人PVE场景
+	E_CS_BATTLE_CONTINUE_RSP				            = 246;          //	
+
+    E_CS_BUY_BAG_GRID_REQ                               = 247;
+    E_CS_BUY_BAG_GRID_RSP                               = 248;
+    E_CS_ARRANGE_BAG_REQ                                = 249;          // 
+    E_CS_ARRANGE_BAG_RSP                                = 250;
+    E_CS_BUY_STORAGE_PAGE_REQ                           = 590; // 仓库
+    E_CS_BUY_STORAGE_PAGE_RSP                           = 591;
+    //E_CS_ARRANGE_STORAGE_REQ                            = 592;          // 
+    //E_CS_ARRANGE_STORAGE_RSP                            = 593;
+    E_CS_STORAGE_SAVE_REQ                               = 594;
+    E_CS_STORAGE_SAVE_RSP                               = 595;
+    E_CS_STORAGE_PICK_REQ                               = 596;
+    E_CS_STORAGE_PICK_RSP                               = 597;
+    E_CS_STORAGE_THROWAWAY_REQ                          = 598;
+    E_CS_STORAGE_THROWAWAY_RSP                          = 599;
+    
+    E_CS_BATTLE_SETTING_REQ					            = 251;		    //修改战场设置
+    E_CS_BATTLE_SETTING_RSP					            = 252;
+
+    E_CS_SNS_START						                = 260;
+    E_CS_SNS_FRIEND_APPLY_REQ			                = 261;          //申请好友
+    E_CS_SNS_FRIEND_APPLY_RSP			                = 262;
+    E_CS_FRIEND_QUERY_ROLE_REQ		                    = 263;
+    E_CS_FRIEND_QUERY_ROLE_RSP		                    = 264;
+	E_CS_SNS_FRIEND_OPERATE_REQ			                = 265;	        //好友相关操作
+	E_CS_SNS_FRIEND_OPERATE_RSP			                = 266;	
+	E_CS_SNS_FRIEND_RECOMMEND_REQ	                    = 267;          //请求推荐好友
+	E_CS_SNS_FRIEND_RECOMMEND_RSP	                    = 268;          //
+	E_CS_SNS_QUERY_ROLE_REQ			                    = 269;
+	E_CS_SNS_QUERY_ROLE_RSP			                    = 270;
+	E_CS_SNS_FRIEND_QUERY_REQ			                = 271;
+	E_CS_SNS_FRIEND_QUERY_RSP			                = 272;
+	E_CS_SNS_FRIEND_RECOMMAND_NTF		                = 273;
+	E_CS_FRIEND_1V1_INVITE_REQ			                = 274;
+	E_CS_QUERY_ROLE_DETAIL_REQ	               		    = 275;
+	E_SC_QUERY_ROLE_DETAIL_RSP		                    = 276;
+	 
+	E_CS_SNS_MSG_SEND_REQ				                = 277;	        //私人msg -发送
+	E_CS_SNS_MSG_SEND_RSP				                = 278;	
+	E_CS_SNS_MSG_HEAD_REQ				                = 279;	        //私人msg - 申请所有msg头部信息
+	E_CS_SNS_MSG_HEAD_RSP				                = 280;	        //
+	E_CS_SNS_MSG_HEAD_NTF				                = 281;	
+	E_CS_SNS_MSG_QUERY_REQ				                = 282;
+	E_CS_SNS_MSG_QUERY_RSP				                = 283;
+	 
+	E_CS_SNS_MAIL_LIST_REQ				                = 284;
+	E_CS_SNS_MAIL_LIST_RSP				                = 285;
+	E_CS_SNS_MAIL_READ_REQ				                = 286;		    //
+	E_CS_SNS_MAIL_READ_RSP				                = 287;
+	E_CS_SNS_MAIL_DEL_REQ				                = 288;
+	E_CS_SNS_MAIL_DEL_RSP				                = 289;
+	E_CS_SNS_MAIL_NTF					                = 290;
+	 
+	E_CS_GET_EXP_RANK_REQ				                = 291;
+	E_CS_GET_EXP_RANK_RSP				                = 292;
+
+	E_CS_GET_WEAPON_RANK_REQ			                = 293;
+	E_CS_GET_WEAPON_RANK_RSP			                = 294;
+
+	E_CS_SNS_LOGIN_NTF 					                = 295; 
+	E_CS_SNS_LOGOUT_NTF 					            = 296;
+	
+	E_CS_SNS_SET_SIGNATURE_REQ			                = 297;
+	E_CS_SNS_SET_SIGNATURE_RSP			                = 298;
+
+	E_CS_GUILD_NTF							            = 299;		    //公会信息变更ntf
+	E_CS_GUILD_LIST_REQ					                = 300;	        //请求公会列表
+	E_CS_GUILD_LIST_RSP					                = 301;	
+	E_CS_GUILD_QUERY_REQ					            = 302;	        //查询某个公会详细信息, 可选部分信息
+	E_CS_GUILD_QUERY_RSP					            = 303;	
+	E_CS_GUILD_CREATE_REQ				                = 304;	        //公会 -- 创建
+	E_CS_GUILD_CREATE_RSP				                = 305;
+	E_CS_GUILD_SET_REQ					                = 306;	        //公会 -- 设置配置
+	E_CS_GUILD_SET_RSP					                = 307;	
+	E_CS_GUILD_APPLY_REQ					            = 308;	        //公会 -- 申请加入（预筹备的公会的响应也是申请加入的意思）
+	E_CS_GUILD_APPLY_RSP					            = 309;
+	E_CS_GUILD_INVITE_REQ				                = 310;	        //公会 -- 邀请加入
+	E_CS_GUILD_INVITE_RSP				                = 311;	
+	E_CS_GUILD_APPROVE_APPLY_REQ		                = 312;	        //公会 -- 批准申请加入
+	E_CS_GUILD_APPROVE_APPLY_RSP		                = 313;
+	E_CS_GUILD_ACCEPT_INVITE_REQ		                = 314;	        //公会 -- 同意邀请
+	E_CS_GUILD_ACCEPT_INVITE_RSP		                = 315;	
+	E_CS_GUILD_QUIT_REQ					                = 316;	        //公会 -- 退出（无人时则会解散公会）
+	E_CS_GUILD_QUIT_RSP					                = 317;
+	E_CS_GUILD_PROMOTE_REQ				                = 318;	        //公会 -- 提升成员 （ 升职或降职）
+	E_CS_GUILD_PROMOTE_RSP				                = 319;	
+	E_CS_GUILD_UPGRATE_REQ				                = 320;	        //公会 -- 升级公会
+	E_CS_GUILD_UPGRATE_RSP				                = 321;		
+	E_CS_GUILD_SHOP_LIST_REQ			                = 322;	        //公会 -- 公会商店物品列表
+	E_CS_GUILD_SHOP_LIST_RSP			                = 323;		
+	E_CS_GUILD_SHOP_BUY_REQ				                = 324;	        //公会 -- 公会商店购买
+	E_CS_GUILD_SHOP_BUY_RSP				                = 325;	
+	E_CS_GUILD_TECH_RESEARCH_REQ		                = 326;	        //公会 -- 公会科技研究
+	E_CS_GUILD_TECH_RESEARCH_RSP		                = 327;	
+	E_CS_GUILD_TECH_LEARN_REQ			                = 328;          //公会 -- 公会科技学习
+	E_CS_GUILD_TECH_LEARN_RSP			                = 329;
+			
+	E_CS_GUILD_SOULBOX_LIST_REQ		                    = 336;	        //公会 -- 魂匣子获取
+	E_CS_GUILD_SOULBOX_LIST_RSP		                    = 337;		
+	E_CS_GUILD_SOULBOX_CLICK_REQ		                = 338;	        //公会 -- 点击魂匣子
+	E_CS_GUILD_SOULBOX_CLICK_RSP		                = 339;
+	E_CS_SNS_LOGIN_DATA_NTF		                  		= 340;	        //通知玩家sns数据		
+			
+	E_CS_GUILDWAR_SCHEDULE_LIST_REQ	                    = 350;	        //公会战 -- 获取对阵表
+	E_CS_GUILDWAR_SCHEDULE_LIST_RSP	                    = 351;	
+	E_CS_GUILDWAR_RANK_LIST_REQ		                    = 352;	        //公会战 -- 获取本期积分排名
+	E_CS_GUILDWAR_RANK_LIST_RSP		                    = 353;			
+	E_CS_GUILDWAR_CHAMPION_LIST_REQ	                    = 354;	        //公会战 -- 获取历届冠军
+	E_CS_GUILDWAR_CHAMPION_LIST_RSP	                    = 355;				
+	E_CS_GUILDWAR_JOIN_REQ				                = 356;          //公会战 -- 报名
+	E_CS_GUILDWAR_JOIN_RSP				                = 357;
+	E_CS_GUILDWAR_SET_TEAM_REQ			                = 358;	        //公会战 -- 设置公会出战阵容
+	E_CS_GUILDWAR_SET_TEAM_RSP			                = 359;					
+	E_CS_GUILDWAR_SET_HERO_REQ			                = 360;	        //公会战 -- 设置个人出战阵容
+	E_CS_GUILDWAR_SET_HERO_RSP			                = 361;					
+	E_CS_GUILDWAR_CONFIRM_REQ			                = 362;	        //公会战 -- 确认出战
+	E_CS_GUILDWAR_CONFIRM_RSP			                = 363;
+	E_CS_GUILDWAR_ROOM_NTF				                = 364;          //公会战-- 房间开启， 请确认进入
+	E_CS_GUILDWAR_ROOM_ENTER_REQ		                = 365;
+	E_CS_GUILDWAR_QUERY_REQ				                = 366;          //公会战 --查询公会战信息 ，ntf反馈
+	E_CS_GUILDWAR_NTF					                = 367;          //公会战 -- 信息ntf
+
+	E_CS_BATTLE_SUBSTITUTION_REQ		                = 368;          //公会战-从阵容中切换上场英雄请求
+	E_CS_BATTLE_SUBSTITUTION_RSP		                = 369;          //公会战-从阵容中切换上场英雄回包
+	E_CS_BATTLE_SUBSTITUTION_CD_NTF		                = 370;          //Proto_CSSubstitutionCDInfoNtf
+	
+	E_CS_GUILDACTIVITY_DONATE_TICKET_REQ 		        = 371;          //公会活动--门票捐赠
+	E_CS_GUILDACTIVITY_DONATE_TICKET_RSP 		        = 372;          //
+	E_CS_GUILDACTIVITY_START_REQ 					    = 373;          //公会活动--开启活动
+	E_CS_GUILDACTIVITY_START_RSP 					    = 374;          //	
+	E_CS_GUILDACTIVITY_CHALLENGE_REQ 			        = 375;          //公会活动--挑战
+	E_CS_GUILDACTIVITY_CHALLENGE_NTF 			        = 376;          //	
+	E_CS_GUILD_GET_SYSTEM_RECOMMAND_REQ 			    = 378;          //公会-获取系统推荐的合并公会列表
+	E_CS_GUILD_GET_SYSTEM_RECOMMAND_RSP				    = 379;          //	
+	E_CS_GUILD_RESEARCH_REQ 			 			    = 380;          //公会-搜索某个公会
+	E_CS_GUILD_RESEARCH_RSP				  				= 381;          //	
+	E_CS_GUILD_MERGE_WITH_OTHER_REQ 			 		= 382;          //公会-请求跟其他公会合并 
+	E_CS_GUILD_MERGE_LIST_OPERATE_REQ 			 		= 384;          //公会-请求操作申请列表
+	E_CS_GUILD_MERGE_LIST_OPERATE_RSP 			 		= 385;
+	E_CS_GUILD_GET_MY_BONUS_REQ		 			 		= 386;          //公会-请求获取分红
+	E_CS_GUILD_GET_MY_BONUS_RSP		 			 		= 387;
+		
+	
+    E_CS_SNS_END							            = 400;	
+
+	E_CS_QUEST_NODE_NOTIFY 			 	                = 401;          // 任务系统
+	E_CS_ACCEPT_QUEST_REQ				                = 404;
+	E_CS_ACCEPT_QUEST_RSP				                = 405;
+	E_CS_COMPLETE_QUEST_REQ				                = 406;
+	E_CS_COMPLETE_QUEST_RSP				                = 407;
+	E_CS_ACCEPT_QUEST_LOOP_REQ			                = 408;
+	E_CS_ACCEPT_QUEST_LOOP_RSP			                = 409;
+	E_CS_QUEST_LOOP_NTF					                = 410;
+    E_CS_QUEST_LOOP_RESET_REQ                           = 390;
+    E_CS_QUEST_LOOP_RESET_RSP                           = 391;
+    E_CS_QUEST_DAILY_NTF                                = 392;          //daily quest reflash
+    E_CS_ACHIEVE_NTF                                 = 393;
+    E_CS_ACHIEVE_QUERY_REQ                           = 394;
+    E_CS_ACHIEVE_QUERY_RSP                           = 395;
+    E_CS_ACHIEVE_GET_REWARD_REQ                      = 254;
+    E_CS_ACHIEVE_GET_REWARD_RSP                      = 255;
+    E_CS_ACHIEVE_FINISH_REQ                      = 256;
+    E_CS_ACHIEVE_FINISH_RSP                      = 257;
+    E_CS_INTRUST_QUEST_REFLESH_NTF                      = 396;
+    E_CS_GIVE_UP_QUEST_REQ                              = 397;
+    E_CS_GIVE_UP_QUEST_RSP                              = 398;
+    E_CS_QUEST_ACCEPT_FAILED_NTF                        = 403;
+
+	E_CS_LEVEL_EVENT_NTF				                = 411;          //关卡事件刷新
+
+	E_CS_OPEN_BOX_REQ					                = 412;          //打开背包宝箱请求
+	E_CS_OPEN_BOX_RSP					                = 413;          // 
+	E_CS_GEMSTONE_DRESS_REQ				                = 414;          //宝石(念玉)穿戴操作
+	E_CS_GEMSTONE_COMPOSE_REQ		                    = 415;          //宝石(念玉)合成操作
+	E_CS_GEMSTONE_COMPOSE_RSP		                    = 416;          //宝石(念玉)合成操作返回
+	E_CS_GEMSTONE_EXCHANGE_REQ			                = 417;          //宝石(念玉)合成操作
+	E_CS_GEMSTONE_EXCHANGE_RSP			                = 418;          //宝石(念玉)合成操作返回
+	E_CS_GEMSTONE_DRESS_RSP				                = 419;          //宝石(念玉)穿戴操作
+	
+	E_CS_ROOM_INVITE_FRIEND_REQ		                    = 420;          //多人战斗，房间邀请好友
+	E_CS_ROOM_INVITE_FRIEND_RSP		                    = 421;          //多人战斗，房间邀请好友
+	
+	E_CS_ROOM_GUILD_INVITE_REQ			                = 422;          //多人战斗，房间公会招募-
+	E_CS_ROOM_GUILD_INVITE_NTF			                = 423;          //
+	E_CS_ROOM_GUILD_APPLY_REQ			                = 424;          //多人战斗，房间公会招募--申请加入
+	E_CS_ROOM_GUILD_APPLY_RSP			                = 425;          //
+	E_CS_ROOM_AGREE_REQ					                = 426;          //多人战斗，同意申请加入
+	E_CS_ROOM_1V1_INVITE_REQ			                = 427;	        //邀请1v1切磋
+	E_CS_ROOM_1V1_INVITE_NTF			                = 428;	
+	E_CS_ROOM_1V1_INVITE_OP_REQ		                    = 429;
+	E_CS_ROOM_1V1_INVITE_OP_NTF		                    = 430;
+	
+	E_CS_MARKET_RECORD_REQ				                = 431;          //市场交易记录查询
+	E_CS_MARKET_QUERY_REQ				                = 432;          //市场商品查询
+	E_CS_MARKET_QUERY_RSP				                = 433;          //
+	E_CS_MARKET_RESELL_REQ				                = 434;          //市场重新上架商品
+    E_CS_MARKET_RESELL_RSP  			  	            = 435;
+	E_CS_MARKET_FOCUS_CANCEL_REQ				        = 436;          //市场取消关注商品
+    E_CS_MARKET_FOCUS_CANCEL_RSP				        = 437;
+	E_CS_MARKET_FOCUS_REQ				                = 438;          //市场关注商品
+    E_CS_MARKET_FOCUS_RSP				                = 439;
+	E_CS_MARKET_LIST_REQ				                = 440;          //市场物品列表请求
+    E_CS_MARKET_LIST_RSP				                = 441;
+    E_CS_MARKET_BUY_REQ				                    = 442;          //市场购买
+    E_CS_MARKET_BUY_RSP				                    = 443;
+    E_CS_MARKET_SELL_REQ				                = 444;	        //市场上架
+    E_CS_MARKET_SELL_RSP				                = 445;
+    E_CS_MARKET_SELL_CANCEL_REQ	                        = 446;	        //市场下架
+    E_CS_MARKET_SELL_CANCEL_RSP	                        = 447;
+    E_CS_MARKET_SELL_LIST_REQ	                        = 448;	        //市场自己的摊位查询
+    E_CS_MARKET_SELL_LIST_RSP	                        = 449;    
+    E_CS_MARKET_PRICE_REQ                               = 450;          //市场出售价格查询
+    E_CS_MARKET_PRICE_RSP                               = 451;
+	E_CS_MARKET_RECORD_RSP				                = 468;          //市场交易记录查询
+	
+	E_CS_CHAMBER_SELL_LIST_REQ                          = 452;    //商会出售
+	E_CS_CHAMBER_SELL_LIST_RSP                          = 453;    //
+	E_CS_CHAMBER_LIST_REQ                               = 454;    //商会列表
+	E_CS_CHAMBER_LIST_RSP                               = 455;    //
+	E_CS_CHAMBER_BUY_REQ                                = 456;    //商会购买
+	E_CS_CHAMBER_BUY_RSP                                = 457;    //
+	E_CS_CHAMBER_SELL_REQ                               = 458;    //商会出售
+	E_CS_CHAMBER_SELL_RSP                               = 459;    //
+
+	E_CS_PHANTOM_TROUPE_DATA_NTF                        = 460;    //幻影旅团活动数据ntf
+	
+	E_CS_CHEAT_REPORT_REQ                               = 470;    //战斗作弊上报
+	E_CS_STATE_LEAVE_REQ                                = 471;    //暂时离开状态上报
+	E_CS_STATE_LEAVE_RSP                                = 472;    //暂时离开状态通知
+	
+    E_CS_SKYARENA_GET_AWARD_REQ                     = 480;
+    E_CS_SKYARENA_GET_AWARD_RSP                     = 481;
+    E_CS_GET_SKYAREMADATA_REQ                       = 482;
+    E_CS_GET_SKYAREMADATA_RSP                       = 483;
+    E_CS_SKYAREMADATA_NTF                           = 484;
+
+    E_CS_GET_ACHIEVE_RANK_REQ                      = 485;
+    E_CS_GET_ACHIEVE_RANK_RSP                      = 486;
+   
+	
+    E_CS_START_TEAM_MATCH_REQ                       = 488;
+    E_CS_START_TEAM_MATCH_RSP                       = 489;
+    E_CS_START_MATCH_REQ                            = 490;
+    E_CS_START_MATCH_RSP                            = 491;
+    E_CS_CANCLE_MATCH_REQ                           = 492;
+    E_CS_CANCLE_MATCH_RSP                           = 493;
+    E_CS_CONFIRM_MATCH_REQ                          = 494;
+    E_CS_CONFIRM_MATCH_RSP                          = 495;
+    E_CS_MATCH_NTF                                  = 496;
+
+	E_CS_LADDER_NTF                                 = 497;
+    E_CS_PVP_1V1_DATA_NTF                           = 498; // 1v1匹配玩家数据通知
+ 
+	E_CS_BATTLE_SCORE_NTF				            = 500;          // 战斗结算分数通知
+	
+	E_CS_PVP_1V1_TASK_AWARD_REQ                     = 501; // 1v1日常奖励领取请求
+    E_CS_PVP_1V1_TASK_AWARD_RSP                     = 502; // 1v1日常奖励领取	
+	
+	
+	E_CS_RED_ENVELOPES_SEND_REQ		                    = 514;	        //	发红包 
+	E_CS_RED_ENVELOPES_NTF			                    = 515;	        //	发红包 Ntf
+	E_CS_RED_ENVELOPES_OBTAIN_REQ	                    = 516; 	        //	领取红包
+	E_CS_RED_ENVELOPES_OBTAIN_RSP	                    = 517; 	        //	领取红包回应
+	E_CS_RED_ENVELOPES_OPEN_REQ		                    = 518;	        //	拆红包 or 查看
+	E_CS_RED_ENVELOPES_OPEN_RSP		                    = 519;	        //	拆红包 or 查看 回应
+	E_CS_RED_ENVELOPES_GUILD_ALL_REQ                    = 520;	        //	公会所有红包
+	E_CS_RED_ENVELOPES_GUILD_ALL_RSP                    = 521;	        //	公会所有红包 回应
+
+    E_CS_OB_MSG_REQ                                     = 530;
+    E_CS_OB_MSG_NTF                                     = 531;
+	
+    E_CS_CURRENCY_EXCHANGE_REQ                          = 540;
+    E_CS_CURRENCY_EXCHANGE_RSP                          = 541;
+
+	E_CS_BATTLE_CHALLENGE_INFO_NTF		                = 542;          //战斗中统计数据
+	E_CS_RIFTDATA_NTF                                   = 543;          //大秘境数据刷新
+	E_CS_BATTLE_PICK_DROP_OBJ_REQ		                = 544;	        //拾取场景掉落物件
+	E_CS_BATTLE_PICK_DROP_OBJ_RSP		                = 545;	        //拾取场景掉落物件
+    
+	E_CS_GET_RIFT_RANK_REQ				                = 546;
+	E_CS_GET_RIFT_RANK_RSP				                = 547;
+
+    E_CS_GET_TOWER_RANK_REQ				        = 548;
+	E_CS_GET_TOWER_RANK_RSP				        = 549;
+
+    E_CS_RIFTDATA_REQ                                   = 550;          //请求大秘境数据
+
+    E_CS_SEC_BATTLE_END_REPORT_REQ                      = 555; // 安全日志上报
+    E_CS_SEC_CHAT_VOICE_REQ                             = 556; // 安全
+
+    E_CS_START_TRAINING_GUIDE_BATTLE_REQ  = 560; // 开启战斗. 
+    E_CS_START_TRAINING_GUIDE_BATTLE_RSP  = 561;
+    E_CS_TRAINING_GUIDE_COMPLETE_REQ      = 562; // 完成一次挑战发送一次请求 空包
+    E_CS_TRAINING_GUIDE_NTF               = 563; // 引导id的变化通知
+    E_CS_TRAINING_GUIDE_COMPLETE_RSP      = 564; // 
+
+
+    E_CS_ACCEPT_QEC_REQ                 = 570; // 
+    E_CS_ACCEPT_QEC_RSP                 = 571;
+    E_CS_QEC_FINISH_NTF                 = 572;
+    E_CS_QEC_DAILOG_REQ                 = 573;
+    E_CS_QEC_HELP_REQ                   = 574;
+    E_CS_QEC_HELP_RSP                   = 575; // 
+    E_CS_QEC_FINISH_WITH_ITEM_REQ       = 576;
+    E_CS_QEC_QUICK_FIN_REQ              = 577;
+    E_CS_QEC_HELP_NTF                   = 578;
+    E_CS_QEC_GIVE_UP_REQ                = 579;
+    E_CS_QEC_GIVE_UP_RSP                = 580;
+
+	E_CS_NOVICE_GUIDE_GET_REQ			                = 601;	        //获取新手引导
+	E_CS_NOVICE_GUIDE_GET_RSP			                = 602;
+	E_CS_NOVICE_GUIDE_SET_REQ 			                = 603;          //设置新手引导
+	E_CS_NOVICE_GUIDE_SET_RSP			                = 604;
+
+    E_CS_HERO_COMMENT_DATA_REQ                          = 610;          //获取英雄评论数据
+    E_CS_HERO_COMMENT_DATA_NTF                          = 611;          //发送英雄评论数据
+    E_CS_HERO_BANG_COMMENT_REQ                          = 612;          //对评论点赞
+    E_CS_HERO_COMMENT_HERO_REQ                          = 613;          //发表评论
+    E_CS_HERO_BANG_COMMENT_RSP                          = 614;          //返回对评论点赞
+    
+    E_CS_BATTLE_ENERGY_NTF						        = 615;	        //大乱斗战斗中同步能量
+
+    E_CS_RIIT_FLOOR_BONUSES_REQ                         = 616; 
+    E_CS_RIIT_FLOOR_BONUSES_RSP                         = 617; 
+
+    E_CS_EXT_SHOP_ITEM_REQ                                  = 618; 
+    E_CS_EXT_SHOP_ITEM_RSP                                  = 619; 
+    E_CS_EXT_SHOP_BUY_ITEM_REQ                              = 620; 
+    E_CS_EXT_SHOP_BUY_ITEM_RSP                              = 621; 
+
+    E_CS_MPVE_BOUNS_REQ                                 = 631;
+    E_CS_MPVE_BOUNS_RSP                                 = 632;
+    E_CS_MPVE_CHARPTER_REQ                              = 633;
+    E_CS_MPVE_CHARPTER_RSP                              = 634;
+    
+    // 640: license
+    E_CS_HLICENSE_EXAM_NTF                              = 640; // 考试状态通知
+    E_CS_HLICENSE_EXAM_GET_AWARD_REQ                    = 641; // 获取考试奖励
+    E_CS_HLICENSE_EXAM_GET_AWARD_RSP                    = 642; //
+
+    E_CS_HLICENSE_ST_NTF                                = 643; // 特训通知 及等级通知
+    E_CS_HLICENSE_ST_GET_AWARD_REQ                      = 644; // 获取每周特训奖励
+    E_CS_HLICENSE_ST_GET_AWARD_RSP                      = 645; 
+
+    E_CS_HLICENSE_GET_AWARD_REQ                         = 646; // 获取等级奖励
+    E_CS_HLICENSE_GET_AWARD_RSP                         = 647; 
+
+
+	E_CS_CITYBUFF_OP_REQ                                = 651;
+	E_CS_CITYBUFF_OP_NTF                                = 652;
+	
+    // 穿戴走使用物品流程 ->E_CS_ITEM_USE_REQ
+    E_CS_TAKEOFF_TITLE_ITEM_REQ                         = 660; // 脱下称号物品 //无消息体
+    E_CS_TAKEOFF_TITLE_ITEM_RSP                         = 661;
+
+    E_CS_ROOM_READY_REQ						            = 672;
+    E_CS_ROOM_READY_NTF 					            = 673;
+
+    E_CS_ROLEMPVEDATANTF                                = 674;
+
+    E_CS_SELECT_HERO_REQ                                = 680;
+    E_CS_SELECT_HERO_RSP                                = 681;
+
+    E_CS_LINEUP_CANCEL_REQ                              = 690;
+    E_CS_LINEUP_CANCEL_RSP                              = 691;
+    E_CS_LINEUP_NTF                                     = 692;
+    E_CS_ACCOUNT_ERROR_RSP                              = 699;
+    
+    
+	E_CS_MSGID_TEAM_CREATE_TEAM_REQ                     = 700;          //请求创建
+	E_CS_MSGID_TEAM_CREATE_TEAM_RSP                     = 701;          //请求创建
+	E_CS_MSGID_TEAM_LEADER_INVITE_FRIEND_REQ            = 702;          //队长邀请入队
+	E_CS_MSGID_TEAM_INVITE_FRIEND_REQ                   = 703;          //队员邀请入队
+	E_CS_MSGID_TEAM_INVITE_FRIEND_LEADER_NTF			= 704;			//邀请入队，邀请人不是队长，通知队长
+	E_CS_MSGID_TEAM_INVITE_FRIEND_LEADER_REPLY_REQ		= 705;			//邀请入队，队长的是否同意
+	E_CS_MSGID_TEAM_INVITE_FRIEND_RSP                   = 707;          //邀请好友
+	E_CS_MSGID_TEAM_REPLY_INVITE_REQ                    = 708;          //应答邀请
+	E_CS_MSGID_TEAM_REPLY_INVITE_RSP                    = 709;          //应答邀请，通知邀请人
+	E_CS_MSGID_TEAM_QUIT_REQ                            = 710;          //退出队伍
+	E_CS_MSGID_TEAM_QUIT_NTF                            = 711;          //退出队伍，如果是自己，则删除整个队伍
+	E_CS_MSGID_TEAM_APPLY_REQ                           = 712;          //申请进队
+	E_CS_MSGID_TEAM_APPLY_RSP                           = 713;          //申请进队
+	E_CS_MSGID_TEAM_APPLY_REPLY_REQ                     = 714;          //申请进队，队长响应
+	E_CS_MSGID_TEAM_APPLY_REPLY_RSP                     = 715;          //申请进队，队长响应
+	E_CS_MSGID_TEAM_INFO_NOTIFY                         = 716;          //队伍信息通知
+	E_CS_MSGID_TEAM_INVITE_NOTIFY                       = 717;          //邀请通知
+	E_CS_MSGID_TEAM_APPLY_NOTIFY                        = 718;          //申请通知
+	E_CS_MSGID_TEAM_QUERY_LIST_REQ                      = 719;          //查询列表
+	E_CS_MSGID_TEAM_QUERY_LIST_RSP                      = 720;          //查询列表
+	E_CS_MSGID_TEAM_CHANGE_SETTINGS_REQ                 = 721;          //改变队伍设置
+	E_CS_MSGID_TEAM_CHANGE_SETTINGS_NTF                 = 722;          //改变队伍设置
+	E_CS_MSGID_TEAM_START_BATTLE_REQ                    = 723;          //队伍开始战斗
+	E_CS_MSGID_TEAM_START_BATTLE_NTF					= 724; 			//开始战斗通知
+	E_CS_MSGID_TEAM_START_BATTLE_CONFIRM_REQ			= 725;			//开始战斗确认
+	E_CS_MSGID_TEAM_START_BATTLE_CONFIRM_NTF			= 726;			//开始战斗确认广播，自己请求的也会通知
+	E_CS_MSGID_TEAM_SET_PLAYER_STATE_REQ				= 727; 			//设置队员状态
+	E_CS_MSGID_TEAM_SET_PLAYER_STATE_NTF				= 728;			//设置队员状态广播
+	E_CS_MSGID_TEAM_KICK_REQ							= 729; 			//踢人通知
+	E_CS_MSGID_TEAM_KICK_NTF							= 730;			//踢人广播
+	E_CS_MSGID_TEAM_APPOINT_LEADER_REQ					= 731; 			//转让队长请求
+	E_CS_MSGID_TEAM_LEADER_CHANGED_NTF					= 732; 			//队长改变通知
+	E_CS_MSGID_TEAM_APPLY_LEADER_REQ					= 733; 			//申请成为队长
+	E_CS_MSGID_TEAM_APPLY_LEADER_NTF					= 734;			//申请成为队长，自己也会受到通知
+	E_CS_MSGID_TEAM_APPLY_LEADER_REPLY_REQ              = 735;          //回复申请队长
+	E_CS_MSGID_TEAM_APPLY_LEADER_RESULT_NTF             = 736;          //申请队长结果通知
+	E_CS_MSGID_TEAM_INVITE_FRIEND_LEADER_REFUSE_NTF		= 737;			//队长拒绝邀请
+	E_CS_MSGID_TEAM_START_BATTLE_FAILED_NTF				= 738; 			//开启战斗失败通知
+	E_CS_MSGID_TEAM_RECALL_REQ							= 739;			//队长发起招回
+	E_CS_MSGID_TEAM_RECALL_NTF							= 740;			//招回发起通知
+	E_CS_MSGID_TEAM_REPLY_RECALL_REQ					= 741;			//回复发起招回
+	E_CS_MSGID_TEAM_REPLY_RECALL_NTF					= 742;			//回复发起招回通知
+	E_CS_MSGID_TEAM_RECALL_RSP							= 743;			//招回结果
+	E_CS_MSGID_TEAM_INVITE_FRIEND_RESULT_NTF            = 744;          //邀请好友结果
+	E_CS_MSGID_TEAM_AUTO_MATCH_REQ						= 745;			//请求个人匹配队伍
+	E_CS_MSGID_TEAM_AUTO_MATCH_RSP						= 746;			//请求个人匹配队伍，进入队列
+	E_CS_MSGID_TEAM_AUTO_MATCH_RESULT_NTF				= 769;			//请求个人匹配队伍，匹配成功
+	E_CS_MSGID_TEAM_DISMISS_NTF							= 770;			//队伍解散，因为队长离开
+	E_CS_MSGID_TEAM_HALFWAY_JOIN_INVITE_NTF				= 773;			//邀请进入队长当前关卡通知
+	E_CS_MSGID_TEAM_REPLY_HALFWAY_JOIN_INVITE_REQ		= 774;			//回复_邀请进入队长当前关卡通知
+	E_CS_MSGID_TEAM_REPLY_HALFWAY_JOIN_INVITE_RSP		= 775;			//回复_邀请进入队长当前关卡通知_返回
+
+	E_CS_BATTLE_INITIATE_SURRENDER_REQ                  = 747;          //发起投降
+	E_CS_BATTLE_SURRENDER_NTF                           = 748;          //投降信息通知
+	E_CS_BATTLE_SURRENDER_REQ                           = 749;          //投降应答
+	E_CS_BATTLE_SURRENDER_RESULT_NTF                    = 750;          //投降结果
+
+    E_CS_BATTLE_PLAYER_REVIVE_REQ                       = 751;
+    E_CS_BATTLE_PLAYER_REVIVE_RSP                       = 752;
+	
+	E_CS_MAIN_CITY_FRIEND_INFO_REQ 		                = 753;          // 请求主城好友信息 
+	E_CS_MAIN_CITY_FRIEND_INFO_RSP 		                = 754; 
+	
+	E_CS_MAIN_CITY_CHANGE_HERO_REQ		                = 755;		    // 主城请求切换英雄
+	E_CS_MAIN_CITY_CHANGE_HERO_RSP		                = 756;
+	
+	E_CS_MAIN_CITY_RECOMMAND_FRIEND_LOGOUT_NTF	        = 757; 	        // 主城推荐好友下线
+	E_CS_FRIEND_NOT_RECOMMAND_REQ						= 758;			// 设置时限不许推荐好友
+	E_CS_FRIEND_REPORT_TARGET_ADD_FRIEND_NTF			= 759;			// 通知对方我加了他的好友
+
+	E_CS_HERO_RANK_UP_REQ                               = 761;
+	E_CS_HERO_RANK_UP_RSP                               = 762;
+
+	E_CS_MSGID_SET_BATTLE_DRUG_REQ						= 763;			//设置战斗内自动使用药品请求
+	E_CS_MSGID_SET_BATTLE_DRUG_RSP						= 764;			//设置战斗内自动使用药品回包
+
+	E_CS_PLAYER_AUTO_FIGHT_REQ                          = 771;          //自动战斗切换请求
+	E_CS_PLAYER_AUTO_FIGHT_RSP                          = 772;          //自动战斗请求回包
+
+	E_CS_GET_PLAYER_CREDIT_DATA_REQ                     = 781;          //获取信誉积分请求
+	E_CS_GET_PLAYER_CREDIT_DATA_RSP                     = 782;          //获取信誉积分回包
+	E_CS_CREDIT_REPORT_PLAYER_REQ                       = 783;          //举报玩家请求
+	E_CS_CREDIT_REPORT_PLAYER_RSP                       = 784;          //举报玩家回包
+
+    E_CS_TITLE2_GET_DATA_REQ                            = 791;          // 拉取数据
+    E_CS_TITLE2_GET_DATA_RSP                            = 792;
+    E_CS_TITLE2_PROMOTION_REQ                           = 793;          // 晋升
+    E_CS_TITLE2_PROMOTION_RSP                           = 794;
+    E_CS_TITLE2_NTF                                     = 795;
+
+    E_CS_QUESTION_REQ                                   = 801;
+    E_CS_QUESTION_RSP                                   = 802;
+    E_CS_ANSWER_REQ                                     = 803;
+    E_CS_ANSWER_RSP                                     = 804;
+    E_CS_QUESTION_REWARD_NTF                            = 807;
+    E_CS_QUESTION_HELP_REQ                              = 808; //请求帮助 
+    //E_CS_QUESTION_HELP_NTF                            = 809; //公会广播请求帮助
+    E_CS_QUESTION_HELP_ANSWER_REQ                       = 810; //帮助答题
+    //E_CS_QUESTION_HELP_ANSWER_NTF                     = 811; //公会广播帮助答题
+    E_CS_AWARD_QUESTION_REWARD_REQ                      = 812; //请求领取答题奖励
+    E_CS_AWARD_QUESTION_REWARD_RSP                      = 813; //应答领取答题奖励
+    E_CS_QUESTION_START_NTF                             = 814; //问答任务开始
+    E_CS_QUESTION_STARTNTF_REQ                          = 815; //通知服务器收到问答任务开始消息
+    E_CS_QUESTION_START_REQ                             = 816; //请求问答任务开始通知
+	E_CS_HELP_QUESTION_RSP								= 817; //应答请求帮助
+
+    E_CS_WORLD_QUESTION_NTF                             = 818; //世界答题通知
+	
+    E_CS_GACHAPON_REQ           					    = 831;
+	E_CS_GACHAPON_RSP               				    = 832; 
+	E_CS_DRAW_REQ                   				    = 833;
+	E_CS_DRAW_RSP            						    = 834; 
+	E_CS_SYNTHESIS_REQ                   			    = 835;
+	E_CS_SYNTHESIS_RSP            					    = 836; 
+    E_CS_MISC_DATA_NTF                                  = 837;
+
+	E_CS_SOULBOX_JOIN_SLOT_REQ						    = 841;          // 将魂匣加入槽
+	E_CS_SOULBOX_JOIN_SLOT_RSP						    = 842;
+	E_CS_SOULBOX_REMOVE_SLOT_REQ					    = 843;          // 将魂匣移除槽
+	E_CS_SOULBOX_CLEAR_TIME_REQ						    = 844;          // 将魂匣时间清掉
+	E_CS_SOULBOX_CLEAR_TIME_RSP						    = 845;
+
+	E_CS_HERO_COMPOSE_REQ                               = 850;          // 英雄合成请求
+    E_CS_HERO_COMPOSE_RSP                               = 851;          // 英雄合成请求响应
+	E_CS_HERO_PIECE_EXCHANGE_REQ                        = 852;          // 英雄碎片兑换请求
+    E_CS_HERO_PIECE_EXCHANGE_RSP                        = 853;          // 英雄碎片兑换请求响应	
+
+	E_CS_NIAN_PRACTICE_DATA_NTF                         = 860;          // 念修行数据
+    E_CS_NIAN_PRACTICE_CHALLENGE_REQ                    = 861;          // 念修行挑战
+    E_CS_NIAN_PRACTICE_REQ                              = 862;          // 念修行
+    E_CS_NIAN_PRACTICE_RSP                              = 863;          // 念修行回包
+
+    E_CS_ROLE_CHAPTERSCORE_NTF                          = 870;          //推送ChapterScore数据
+
+	E_CS_CLIENT_BACKGROUND_REQ                          = 880;          //客户端切换到后台请求
+    E_CS_CLIENT_FOREGROUND_REQ                          = 882;          //客户端切换到前后请求
+
+    E_CS_LOG_CHECK_POINT_REQ                            = 888;
+    E_CS_LOG_CHECK_POINT_RSP                            = 889;
+
+	E_CS_QUERY_SUPPORT_LIST_REQ                         = 900;          //查询战斗内援助列表
+    E_CS_QUERY_SUPPORT_LIST_RSP                         = 901;          //查询战斗内援助列表
+    E_CS_CALL_SUPPORT_REQ                               = 902;          //召唤援助
+    E_CS_CALL_SUPPORT_NTF                               = 903;          //召唤援助成功通知
+
+    E_CS_MSGID_SUPPORT_INVITE_FRIEND_REQ                = 904;          //援助邀请好友
+	E_CS_MSGID_SUPPORT_INVITE_FRIEND_RSP                = 905;          //援助邀请好友
+	E_CS_MSGID_SUPPORT_REPLY_INVITE_REQ                 = 906;          //援助应答邀请
+	E_CS_MSGID_SUPPORT_REPLY_INVITE_RSP                 = 907;          //援助应答邀请
+	E_CS_MSGID_SUPPORT_INVITE_NOTIFY                    = 908;          //援助邀请通知
+
+	//伙伴系统协议
+	E_CS_PARTNER_ASSIST_OP_REQ                          = 910;          //伙伴助战操作请求
+	E_CS_PARTNER_ASSIST_OP_RSP                          = 911;        
+	E_CS_PARTNER_SKILL_ACTIVE_REQ                       = 912;          //伙伴技能激活请求
+	E_CS_PARTNER_SKILL_ACTIVE_RSP                       = 913;
+	E_CS_PARTNER_RENEW_REQ                              = 914;          //伙伴续期请求
+	E_CS_PARTNER_RENEW_RSP                              = 915;
+	E_CS_PARTNER_TRAINING_REQ                           = 916;          //伙伴训练请求
+	E_CS_PARTNER_TRAINING_RSP                           = 917;
+	E_CS_PARTNER_FEED_REQ                               = 918;          //伙伴喂养请求
+	E_CS_PARTNER_FEED_RSP                               = 919;       
+	E_CS_PARTNER_DATA_NTF                               = 920;          //伙伴数据更新
+	E_CS_PARTNER_SET_AUTO_FEED_REQ                      = 921;          //伙伴自动喂食设置
+	E_CS_PARTNER_SET_AUTO_FEED_RSP                      = 922;
+	E_CS_PARTNER_FOLLOW_REQ                             = 923;          //伙伴跟随设置请求
+	E_CS_PARTNER_FOLLOW_RSP                             = 924;   
+	E_CS_PARTNER_ONE_NTF                                = 925;          //单个伙伴变化通知	
+	E_CS_PARTNER_AI_SET_REQ                             = 926;          //出站伙伴AI设置   
+	E_CS_PARTNER_AI_SET_RSP                             = 927;   
+	E_CS_PARTNER_BREAK_THROUGH_REQ                      = 928;
+	E_CS_PARTNER_BREAK_THROUGH_RSP                      = 929;
+	E_CS_PARTNER_SET_GROUP_REQ                          = 930;
+	E_CS_PARTNER_SET_GROUP_RSP                          = 931;
+	E_CS_PARTNER_GROUP_NTF                              = 932;
+	
+    //请不要使用930-949 ID 伙伴系统还需要大量协议
+
+    E_CS_BATTLE_RELAY_REQ							    = 950;          // 战斗重连请求
+    E_CS_BATTLE_RELAY_RSP							    = 951;          // 战斗重发缓存包发送结束
+
+    E_CS_ITEM_EXCHANGE_REQ							    = 960;          // 物品兑换请求
+    E_CS_ITEM_EXCHANGE_RSP							    = 961;          // 物品兑换
+	
+	E_CS_SKILL_READ_REQ                                 = 978;          //技能阅读
+	E_CS_SKILL_AWAKE_REQ                                = 979;          //觉醒
+	E_CS_SKILL_AWAKE_RSP                                = 980;          //觉醒
+	E_CS_SKILL_LEVELUP_REQ                              = 981;          //技能升级
+	E_CS_SKILL_LEVELUP_RSP                              = 982;          //
+	E_CS_SKILL_AWAKE_RESET_REQ                          = 983;          //技能觉醒重置
+	E_CS_SKILL_AWAKE_RESET_RSP                          = 984;          //
+	E_CS_SKILL_SELECT_TALENT_REQ                        = 985;          //选择天赋
+	E_CS_SKILL_SELECT_TALENT_RSP                        = 986;          //
+	E_CS_SKILL_DATA_NTF                                 = 987;          //技能数据更新
+	E_CS_SKILL_ATTACH_REQ                               = 988;          //更新技能槽
+	E_CS_SKILL_ATTACH_RSP                               = 989;          //
+	
+	E_CS_MAP_COLLECT_REQ                                = 998;          //采集
+	E_CS_MAP_COLLECT_RSP                                = 999;          //
+	E_CS_MAP_REFRESH_VIEW_NTF                           = 1000; 		//刷新视野
+    E_CS_MAP_ENTER_REQ                                  = 1001; 		//进入地图 (登录服务器是，请求)
+    E_CS_MAP_ENTER_RSP                                  = 1002; 		//进入地图响应
+    E_CS_CHANGE_SVR_NTF                                 = 1003; 		//切换服务器通知
+    E_CS_MAP_POS_REQ                                    = 1004; 		//主城移到请求
+    E_CS_MAP_MOVE_RESET_NTF                             = 1005;         //主城内其它玩家移动同步
+    E_CS_MAP_ACTION_REQ                                 = 1006;         //主城内动作请求
+    E_CS_MAP_ACTION_RSP                                 = 1007;         //主城内动作请求响应
+    E_CS_MAP_ACTION_NTF                                 = 1008;         //主城内其它玩家动作同步
+    E_CS_MAP_LEAVE_REQ                                  = 1009;         //离开地图
+    E_CS_MAP_LEAVE_RSP                                  = 1010;         //离开地图
+    E_CS_MAP_TRANS_REQ                                  = 1011;         //地图传送（游戏中的地图传送）
+    E_CS_MAP_TRANS_RSP                                  = 1012;         //地图传送响应
+	E_CS_MAP_QUERY_REQ							        = 1013;         //地图服务器信息查询
+	E_CS_MAP_QUERY_RSP							        = 1014;         //地图服务器信息查询
+	E_CS_MAPSVR_LOGIN_REQ						        = 1015;         //登录地图服务器
+	E_CS_MAPSVR_LOGIN_RSP						        = 1016;         //登录地图服务器响应
+	E_CS_MAP_ENTERVIEW_NTF							    = 1017;         //地图服务器进入视野
+	E_CS_MAP_LEAVEVIEW_NTF							    = 1018;         //地图服务器退出视野
+	E_CS_MAP_TRANS_NTF                                  = 1019;         //服务器发起切换主城通知
+	
+    E_CS_SEALED_PLAYER_NTF                              = 1020;         //封停玩家 
+    
+    E_CS_ACTIVITY_DEGREE_GET_ALL_REQ                    = 1021;         //请求所有的活动信息
+    E_GC_ACTIVITY_DEGREE_GET_ALL_RSP                    = 1022;
+    E_CS_ACTIVITY_DEGREE_GET_REWARD_REQ                 = 1023;         //请求获取奖励
+    E_GC_ACTIVITY_DEGREE_GET_REWARD_RSP                 = 1024;
+    E_GC_ACTIVITY_DEGREE_DATA_CHANGE_NTF                = 1025;			//活动数据改变 
+	
+	E_CS_MAP_POS_RSP                                    = 1026;
+	
+    E_CS_ESCORT_ACCEPT_REQ                              = 1031;         //请求接受护送任务
+    E_CS_ESCORT_ACCEPT_RSP                              = 1032;         //应答接受护送任务
+    E_CS_ESCORT_FAILD_NTF                               = 1033;         //护送任务失败
+    E_CS_ESCORT_COMPLETE_REQ                            = 1034;         //请求完成护送任务
+    E_CS_ESCORT_COMPLETE_RSP                            = 1035;         //应答完成护送任务
+    E_CS_ESCORT_QUERY_REQ                               = 1036;         //查询护送任务
+    E_CS_ESCORT_QUERY_RSP                               = 1037;         //应答护送任务ID
+    E_CS_ESCORT_DATA_NTF                                = 1038;         //护送任务数据
+    E_CS_ESCORT_ERROR_RSP                               = 1039;         //护送任务错误返回
+
+    E_CS_USE_TREASUREMAP_REQ                            = 1040;         //请求使用藏宝图
+    E_CS_USE_TREASUREMAP_RSP                            = 1041;         //应答使用藏宝图
+	
+    E_CS_ROLE_INFO_MODIFY_REQ                           = 1046;         //请求修改玩家信息
+    E_CS_ROLE_INFO_MODIFY_RSP                           = 1047; 
+
+    E_CS_LIFE_SKILL_GET_DATA_REQ                        = 1050;         //生活技能获取数据请求
+    E_CS_LIFE_SKILL_GET_DATA_RSP                        = 1051;         //生活技能获取数据回包
+    E_CS_LIFE_SKILL_DATA_NTF                            = 1052;         //生活技能数据通知
+    E_CS_LIFE_SKILL_LEVEL_UP_REQ                        = 1053;         //生活技能升级请求
+    E_CS_LIFE_SKILL_LEVEL_UP_RSP                        = 1054;         //生活技能升级回复
+    E_CS_LIFE_SKILL_USE_REQ                             = 1055;         //生活技能使用请求
+    E_CS_LIFE_SKILL_USE_RSP                             = 1056;         //生活技能使用回复
+	
+    E_CS_REWARD_NTF                                     = 1059;         //获得奖励通知
+
+	E_CS_ROLE_ZONE_GET_ROLE_INFO_REQ					= 1070;			// 个人空间获取玩家基本信息
+	E_CS_ROLE_ZONE_GET_ROLE_INFO_RSP					= 1071;
+	E_CS_ROLE_ZONE_GET_FRIEND_STATUS_REQ				= 1072;			// 个人空间获取好友圈状态 
+	E_CS_ROLE_ZONE_GET_FRIEND_STATUS_RSP				= 1073;			 
+	E_CS_ROLE_ZONE_GET_ROLE_STATUS_REQ					= 1074;			// 个人空间获取玩家的状态 
+	E_CS_ROLE_ZONE_GET_ROLE_STATUS_RSP					= 1075;			 
+	E_CS_ROLE_ZONE_PUBLISH_STATUS_REQ					= 1076;			// 个人空间发布状态 
+	E_CS_ROLE_ZONE_PUBLISH_STATUS_RSP					= 1077;			 
+	E_CS_ROLE_ZONE_STATUS_DETAIL_REQ					= 1078;			// 个人空间请求状态的详细信息  
+	E_CS_ROLE_ZONE_STATUS_DETAIL_RSP					= 1079;			 
+	E_CS_ROLE_ZONE_STATUS_UP_INFO_REQ					= 1080;			// 个人空间请求状态的点赞信息 
+	E_CS_ROLE_ZONE_STATUS_UP_INFO_RSP					= 1081;			 
+	E_CS_ROLE_ZONE_STATUS_NOTES_INFO_REQ				= 1082;			// 个人空间请求状态的评论信息
+	E_CS_ROLE_ZONE_STATUS_NOTES_INFO_RSP				= 1083;			 
+	E_CS_ROLE_ZONE_NOTE_STATUS_REQ						= 1084;			// 个人空间请求对别人点赞或者评论
+	E_CS_ROLE_ZONE_NOTE_STATUS_RSP						= 1085;			 
+	E_CS_ROLE_ZONE_DELETE_NOTES_REQ						= 1086;			// 个人空间请求删除点赞和评论
+	E_CS_ROLE_ZONE_DELETE_STATUS_REQ					= 1087;			// 个人空间请求删除状态
+	E_CS_ROLE_ZONE_MESSAGE_BOARD_REQ					= 1088;			// 个人空间请求查看留言板
+	E_CS_ROLE_ZONE_MESSAGE_BOARD_RSP					= 1089;			 
+	E_CS_ROLE_ZONE_STEP_ON_REQ							= 1090;			// 个人空间请求踩空间
+	E_CS_ROLE_ZONE_STEP_ON_RSP							= 1091;			 
+	E_CS_ROLE_ZONE_SET_GIFT_REQ							= 1092;			// 个人空间请求放置礼物
+	E_CS_ROLE_ZONE_PUBLISH_MESSAGE_REQ					= 1093;			// 个人空间请求留言(送礼物)
+	E_CS_ROLE_ZONE_PUBLISH_MESSAGE_RSP					= 1094;			 
+	E_CS_ROLE_ZONE_DELETE_MESSAGE_REQ					= 1095;			// 个人空间请求删除留言（自己的或者对别人的）
+	E_CS_ROLE_ZONE_NOTE_YOU_NTF							= 1096;			// 个人空间通知评论了你的状态,或者点赞
+	E_CS_ROLE_ZONE_REPLY_YOU_NTF						= 1097;			// 个人空间通知回复了你的评论
+	E_CS_ROLE_ZONE_MESSAGE_YOU_NTF						= 1098;			// 个人空间通知有你的留言
+	E_CS_ROLE_ZONE_REPLY_MESSAGE_NTF					= 1099;			// 个人空间通知回复了你的留言
+
+    E_CS_RIFT_LEVEL_FAST_DATA_REQ                       = 1100;         // 获取rift关卡最快通关记录
+    E_CS_RIFT_LEVEL_FAST_DATA_RSP                       = 1101;         // 返回rift关卡最快通关记录
+    E_CS_RIFT_LEVEL_AWARD_REQ                           = 1102;         // 请求领取大关通关奖励
+    E_CS_RIFT_LEVEL_AWARD_RSP                           = 1103;         // 应答领取大关通关奖励
+
+    E_CS_GET_RIFT_PROFESSION_RANK_REQ                   = 1110;         // 请求职业的秘境排行榜
+	E_CS_GET_RIFT_PROFESSION_RANK_RSP                   = 1111;         // 返回职业的秘境排行榜
+
+	E_CS_ATTR_CHG_NTF                                   = 1112;         //角色属性修改通知
+	E_CS_ATTR_FP_OPERATE_REQ                            = 1113;         //FP操作请求（冻结、领取）
+
+    E_CS_RIFT_CHAPTERS_REQ                              = 1114;         //请求打开秘境关卡
+    E_CS_RIFT_CHAPTERS_RSP                              = 1115;         //应答打开秘境关卡
+	
+	E_CS_SHOP_ITEM_REQ                                  = 1116;         //商会部分数据查询
+    E_CS_SHOP_ITEM_RSP                                  = 1117;         //商会部分数据查询
+
+	E_CS_BATTLE_END_EXTRA_DATA_NTF						= 1118;			//结算额外数据
+
+	E_CS_ESCORT_COMPLETE_STATE_NTF						= 1119;			//护送完成状态
+	
+	E_CS_GET_TRAPTOWER_BUFF_REQ							= 1141;			//请求获取陷阱塔Buff
+	E_CS_GET_TRAPTOWER_BUFF_RSP							= 1142;			//响应获取陷阱塔Buff
+	E_CS_TRAPTOWER_SCORE_AWARD_REQ						= 1143;			//领取陷阱塔积分奖励
+	E_CS_TRAPTOWER_SCORE_AWARD_RSP						= 1144;			//响应领取陷阱塔积分奖励
+	E_CS_ROLE_TRAPTOWER_DATA_NTF						= 1145;			//陷阱塔数据推送
+	E_CS_RELEASE_TRAPTOWER_BUFF_REQ						= 1148;			//取消陷阱塔buff
+	E_CS_RELEASE_TRAPTOWER_BUFF_RSP						= 1149;			//响应取消陷阱塔Buff
+
+    E_CS_GET_ACTIVITY_RANK_LIST_REQ                     = 1150;         //拉取活动排行榜请求
+    E_CS_GET_ACTIVITY_RANK_LIST_RSP                     = 1151;         //拉取活动排行榜回包
+    E_CS_ACTIVITY_RANK_NTF                              = 1152;         //活动排行榜通知
+    E_CS_SIX_EXPERIMENT_SCORE_NTF                       = 1153;         //六系试炼积分通知
+    E_CS_GET_SIX_EXPERIMENT_SOCRE_REWARD_REQ            = 1154;         //获取六系试炼积分奖励请求
+    E_CS_GET_SIX_EXPERIMENT_SCORE_REWARD_RSP            = 1155;         //获取六系试炼积分奖励回包
+   
+	E_CS_ROLE_WELFARE_GET_EXP_REQ	          			= 1156;         //前端触发获取在线福利经验
+    E_CS_ROLE_WELFARE_GET_EXP_RSP		            	= 1157;
+	E_CS_ROLE_WELFARE_CUR_EXP_CHANGE_NTF  	          	= 1158;         //通知玩家，福利经验改变了 
+
+	E_CS_TRAPTOWER_BUFF_NTF								= 1159;			//通知玩家 buff数据
+	E_CS_TRAPTOWER_SCORE_NTF							= 1160;			//通知玩家 积分数据
+	E_CS_ROLE_TRAPTOWER_DATA_REQ						= 1161;			//请求陷阱塔数据
+	E_CS_TRAPTOWER_QUEST_AWARD_REQ						= 1162;			//请求陷阱塔奖励
+
+	E_CS_SEA_DISCOVERY_DATA_NTF							= 1165;			//通知关卡数据
+	E_CS_SEA_DISCOVERY_GET_REWARD_REQ	       			= 1166;         //获取遗迹淘金的奖励
+    E_CS_SEA_DISCOVERY_GET_REWARD_RSP	            	= 1167;
+	E_CS_SEA_DISCOVERY_END_NTF							= 1168;			//遗迹淘金活动结束
+	
+    E_CS_MILITANT_MATCH_SET_BATTLE_INFO_REQ             = 1170;         //设置战斗武斗大会数据请求
+    E_CS_MILITANT_MATCH_SET_BATTLE_INFO_RSP             = 1171;         //设置战斗武斗大会数据回包
+    E_CS_MILITANT_MATCH_BATTLE_INFO_NTF                 = 1172;         //战斗武斗大会数据通知
+    E_CS_MILITANT_MATCH_GET_PLAYER_DATA_REQ             = 1173;         //获取武斗大会玩家数据请求
+    E_CS_MILITANT_MATCH_GET_PLAYER_DATA_RSP             = 1174;         //获取武斗大会玩家数据回包
+    E_CS_MILITANT_MATCH_GET_GLOBAL_DATA_REQ             = 1175;         //获取武斗大会数据请求
+    E_CS_MILITANT_MATCH_GET_GLOBAL_DATA_RSP             = 1176;         //获取武斗大会数据回包
+    E_CS_MILITANT_MATCH_GET_REWARD_REQ                  = 1177;         //领取奖励请求
+    E_CS_MILITANT_MATCH_GET_REWARD_RSP                  = 1178;         //领取奖励回包
+    E_CS_MILITANT_MATCH_START_MATCH_NTF                 = 1179;         //开始匹配通知
+    E_CS_MILITANT_MATCH_GLOBAL_DATA_NTF                 = 1180;         //全局数据通知
+    E_CS_MILITANT_MATCH_DATA_NTF                        = 1181;         //匹配信息通知
+    E_CS_MILITANT_MATCH_ENTER_MAP_REQ                   = 1182;         //进入房间请求
+    E_CS_MILITANT_MATCH_ENTER_MAP_RSP                   = 1183;         //进入房间回包
+    E_CS_MILITANT_MATCH_PLAYER_DATA_NTF                 = 1184;         //玩家数据通知
+	E_CS_GET_MILITANT_RANK_REQ                          = 1185;         //获取武斗总积分排行请求
+	E_CS_GET_MILITANT_RANK_RSP                          = 1186;         //获取武斗总积分排行回包
+	E_CS_MILITANT_MATCH_KICK_NTF                        = 1187;         //踢出武斗房间通知
+
+	E_CS_ROLE_ZONE_DELETE_NOTES_RSP						= 1190;			// 个人空间请求删除点赞和评论回包
+	E_CS_ROLE_ZONE_DELETE_STATUS_RSP					= 1191;			// 个人空间请求删除状态回包
+	E_CS_ROLE_ZONE_SET_GIFT_RSP							= 1192;			// 请求放置礼物回包
+	E_CS_ROLE_ZONE_DELETE_MESSAGE_RSP					= 1193;			// 请求删除留言（自己的或者对别人的）回包
+	E_CS_ROLE_ZONE_GET_GIFT_RECORD_REQ					= 1194;			// 请求获得礼物记录 
+	E_CS_ROLE_ZONE_GET_GIFT_RECORD_RSP					= 1195;			 
+	E_CS_ROLE_ZONE_ADD_HOT_RECORD_REQ					= 1196;			// 请求获得人气记录 
+	E_CS_ROLE_ZONE_ADD_HOT_RECORD_RSP					= 1197;			 
+	E_CS_ROLE_ZONE_DELETE_GIFT_RECORD_REQ				= 1198;			// 个人空间请求删除礼物记录
+	E_CS_ROLE_ZONE_DELETE_GIFT_RECORD_RSP				= 1199;			// 个人空间请求删除礼物记录回包
+	E_CS_ROLE_ZONE_GET_NO_READ_RECORD_REQ				= 1200;			// 个人空间请求未查看的评论记录
+	E_CS_ROLE_ZONE_GET_NO_READ_RECORD_RSP				= 1201;			// 个人空间请求未查看的评论回包
+	
+	E_CS_ROLE_TITLE_GET_ALL_REQ							= 1202;			// 获取所有的称号
+	E_CS_ROLE_TITLE_GET_ALL_RSP							= 1203;			// 
+	E_CS_ROLE_TITLE_SET_VALUE_REQ						= 1204;			// 戴上某个称号
+	E_CS_ROLE_TITLE_SET_VALUE_RSP						= 1205;			// 
+	E_CS_ROLE_TITLE_SET_SHOW_REQ						= 1206;			// 隐藏/显示称号
+	E_CS_ROLE_TITLE_SET_SHOW_RSP						= 1207;			// 
+    E_CS_ROLE_TITLE_ADD_NTF                 			= 1208;         // 获得一个称号
+    E_CS_ROLE_TITLE_DELETE_NTF                 			= 1209;         // 删除称号
+	E_CS_MAIL_GET_ITEM_REQ								= 1210;			// 获取邮件物品
+	E_CS_MAIL_GET_ITEM_RSP								= 1211;			// 
+
+	E_CS_GET_OPEN_SERVER_DAYS_REQ                       = 1212;         //获取开服天数请求
+	E_CS_GET_OPEN_SERVER_DAYS_RSP                       = 1213;         //获取开服天数回包
+	
+	E_CS_FASHION_GET_DATA_REQ                           = 1214;         //获取时装数据请求
+	E_CS_FASHION_GET_DATA_RSP                           = 1215;         //获取时装数据回包
+	E_CS_FASHION_GET_BAG_REQ                            = 1216;         //获取时装背包请求
+	E_CS_FASHION_GET_BAG_RSP                            = 1217;         //获取时装背包回包
+	E_CS_FASHION_GET_SLOT_REQ                           = 1218;         //获取时装槽位请求
+	E_CS_FASHION_GET_SLOT_RSP                           = 1219;         //获取时装槽位回包
+	E_CS_FASHION_SAVE_SLOT_REQ                          = 1220;         //保存槽位请求
+	E_CS_FASHION_SAVE_SLOT_RSP                          = 1221;         //保存槽位回包
+	E_CS_FASHION_BUY_REQ                                = 1222;         //购买时装请求
+	E_CS_FASHION_BUY_RSP                                = 1223;         //购买时装回包
+	E_CS_FASHION_DATA_NTF                               = 1224;         //时装数据通知
+	E_CS_FASHION_SELECT_SLOT_REQ                        = 1225;         //选择时装槽位请求
+	E_CS_FASHION_SELECT_SLOT_RSP                        = 1226;         //选择时装槽位回包
+	E_CS_FASHION_DRESS_REQ								= 1227;			//时装穿戴
+	E_SC_FASHION_DRESS_RSP								= 1228;			//时装穿戴回包
+
+	E_CS_PACKET_PIECE_TO_SVR_REQ						= 1230;			//大包拆的小包片
+	E_SC_PACKET_PIECE_TO_CLIENT_NTF						= 1232;			//服务器推送给客户端的大包拆的小包片
+	E_CS_ZONE_STATUS_UPLOAD_PHOTOS_REQ                  = 1233;         //请求上传图片
+	E_CS_ZONE_STATUS_UPLOAD_PHOTOS_RSP                  = 1234;         //请求上传图片回包
+	E_CS_ZONE_STATUS_GET_PHOTOS_REQ          		    = 1237;         //请求单张原图
+	E_CS_ZONE_STATUS_GET_PHOTOS_RSP              		= 1238;         //请求单张原图回包
+	E_SC_ZONE_STATUS_SMALL_PHOTOS_NTF					= 1239;			//缩略图片主动推送给前端
+	
+	E_CS_FASHION_COMPOSE_REQ							= 1240;			//时装合成
+	E_SC_FASHION_COMPOSE_RSP							= 1241;			//时装合成回包
+	E_CS_FASHION_SELECT_ATTR_REQ						= 1242;			//时装选择属性
+	E_SC_FASHION_SELECT_ATTR_RSP						= 1243;			//时装选择属性回包
+
+	E_CS_SNS_GROUP_LIST_REQ                             = 1245;         //拉取群组列表请求
+	E_CS_SNS_GROUP_LIST_RSP                             = 1246;         //拉取群组列表响应
+	E_CS_SNS_GROUP_CREATE_REQ                           = 1247;         //创建群组请求
+	E_CS_SNS_GROUP_CREATE_RSP                           = 1248;         //创建群组响应
+	E_CS_SNS_GROUP_DISMISS_REQ                          = 1249;         //解散群组请求
+	E_CS_SNS_GROUP_DISMISS_RSP                          = 1250;         //解散群组响应
+	E_CS_SNS_GROUP_INVITE_REQ                           = 1251;         //邀请加入群组请求
+	E_CS_SNS_GROUP_INVITE_RSP                           = 1252;         //邀请加入群组响应
+	E_CS_SNS_GROUP_KICK_REQ                             = 1253;         //踢出群组请求
+	E_CS_SNS_GROUP_KICK_RSP                             = 1254;         //踢出群组响应
+	E_CS_SNS_GROUP_MOD_ANNOUNCE_REQ                     = 1255;         //修改群公告请求
+	E_CS_SNS_GROUP_MOD_ANNOUNCE_RSP                     = 1256;         //修改群公告响应
+	E_CS_SNS_GROUP_GET_MSG_REQ                          = 1257;         //拉取群消息请求
+	E_CS_SNS_GROUP_GET_MSG_RSP                          = 1258;         //拉取群消息响应
+	E_CS_SNS_GROUP_MOD_SETTING_REQ                      = 1259;         //设置群消息提醒请求
+	E_CS_SNS_GROUP_MOD_SETTING_RSP                      = 1260;         //设置群消息提醒响应
+	E_CS_SNS_GROUP_SEND_MSG_REQ                         = 1261;         //发送群消息请求
+	E_CS_SNS_GROUP_SEND_MSG_RSP                         = 1262;         //发送群消息响应
+	E_CS_SNS_GROUP_MEMBER_NTF                           = 1263;         //群组成员改变推送
+	E_CS_SNS_GROUP_LIST_NTF                             = 1264;         //群列表信息刷新
+	E_CS_SNS_GROUP_HINT_REQ                             = 1265;         //群组消息提示请求
+	E_CS_SNS_GROUP_HINT_NTF                             = 1266;         //群组消息提示
+	E_CS_SNS_GROUP_CHG_NAME_REQ                         = 1267;         //群组修改名字请求
+	E_CS_SNS_GROUP_CHG_NAME_RSP                         = 1268;         //群组修改名字
+	E_CS_SNS_GROUP_QUIT_REQ                             = 1269;         //群组退出请求
+	E_CS_SNS_GROUP_QUIT_RSP                             = 1270;         //群组退出
+	E_CS_SNS_GROUP_MESSAGE_NTF                          = 1271;         //群组消息推送
+	E_CS_SNS_GROUP_MEMBER_REQ                           = 1272;         //群组成员信息请求
+	E_CS_SNS_GROUP_CLEAR_MSG_REQ                        = 1273;         //群组清除信息请求
+	E_CS_SNS_GROUP_CLEAR_MSG_RSP                        = 1274;         //群组清除信息响应
+	
+	
+	E_CS_CAST_PARTNER_SUPPORT_SKILL_NTF                 = 1279;         //施放伙伴SP技能通知
+	E_CS_GUILD_COMPETITION_REGISTER_REQ                 = 1280;         //注册公会战请求
+	E_CS_GUILD_COMPETITION_REGISTER_RSP                 = 1281;         //注册公会战回包
+	E_CS_GUILD_COMPETITION_ENTER_MAP_REQ                = 1282;         //进入公会战场地请求
+	E_CS_GUILD_COMPETITION_ENTER_MAP_RSP                = 1283;         //进入公会战场地回包
+	E_CS_GUILD_COMPETITION_GET_PLAYER_DATA_REQ          = 1284;         //获取公会战个人数据请求
+	E_CS_GUILD_COMPETITION_GET_PLAYER_DATA_RSP          = 1285;         //获取公会战个人数据回包
+	E_CS_GUILD_COMPETITION_PLAYER_DATA_NTF              = 1286;         //公会战个人数据通知
+	E_CS_GUILD_COMPETITION_GET_ROUND_INFO_REQ           = 1287;         //获取轮次信息请求
+	E_CS_GUILD_COMPETITION_GET_ROUND_INFO_RSP           = 1288;         //获取轮次信息回包
+	E_CS_GUILD_COMPETITION_GET_GLOBAL_DATA_REQ          = 1289;         //获取全局数据请求
+	E_CS_GUILD_COMPETITION_GET_GLOBAL_DATA_RSP          = 1290;         //获取全局数据回包
+	E_CS_GUILD_COMPETITION_ROUND_INFO_NTF               = 1291;         //轮次信息通知
+	E_CS_GUILD_COMPETITION_GLOBAL_DATA_NTF              = 1292;         //全局数据通知
+	E_CS_GUILD_COMPETITION_ATTACK_REQ                   = 1293;         //攻击目标请求
+	E_CS_GUILD_COMPETITION_ATTACK_RSP                   = 1294;         //攻击目标回包
+	E_CS_GUILD_BATTLE_INFO_NTF                          = 1295;         //公会战场信息包
+	E_CS_GET_GUILD_COMPETITION_RANK_REQ                 = 1296;         //获取排行榜请求
+	E_CS_GET_GUILD_COMPETITION_RANK_RSP                 = 1297;         //获取排行榜回包
+	E_CS_GUILD_BATTLE_GET_VENSUS_INFO_REQ               = 1298;         //获取对战信息请求
+	E_CS_GUILD_BATTLE_GET_VENSUS_INFO_RSP               = 1299;         //获取对战信息回包
+
+	E_CS_MASTER_LOOP_QUEST_ACCEPT_REQ					= 1300;			//接师徒任务
+	E_CS_MASTER_QUEST_INFO_NTF							= 1301;			//师徒任务详细信息
+	E_CS_MASTER_QUEST_COMPLETE_NTF						= 1302;			//完成师徒任务
+	E_CS_MASTER_QUEST_GIVEUP_REQ						= 1303;			//请求放弃师徒任务
+	E_CS_MASTER_QUEST_GIVEUP_RSP						= 1304;			//应答放弃师徒任务
+	E_CS_MASTER_LOOP_QUEST_COMPLETE_NTF					= 1305;			//完成一轮师徒任务
+	E_CS_MASTER_QUEST_SUBMIT_ITEM_REQ					= 1306;			//提交物品
+	E_CS_MASTER_QUEST_QUESTION_REQ						= 1307;			//请求问题
+	E_CS_MASTER_QUEST_QUESTION_ANSWER_REQ				= 1308;			//回答问题	
+	E_CS_MASTER_QUEST_QUESTION_INFO_NTF					= 1309;			//问题信息
+	E_CS_MASTER_QUEST_QUESTION_ANSWER_RSP				= 1310;			//回答结果
+
+	E_CS_FIGHT_PARTNER_INFO_NTF                         = 1311;         //出战伙伴信息通知
+	E_CS_GET_FIGHT_PARTNER_INFO_REQ                     = 1312;         //获取出战伙伴信息请求
+	E_CS_GET_FIGHT_PARTNER_INFO_RSP                     = 1313;         //获取出战伙伴信息回包
+	E_CS_SWITCH_FIGHT_PARTNER_REQ                       = 1314;         //切换当前战斗伙伴请求
+	E_CS_SWITCH_FIGHT_PARTNER_RSP                       = 1315;         //切换当前战斗伙伴回包
+	E_CS_CONFIRM_FIGHT_PARTNER_REQ                      = 1316;         //确认出战伙伴请求
+	E_CS_CONFIRM_FIGHT_PARTNER_RSP                      = 1317;         //确认出战伙伴回包
+	E_CS_SET_FIGHT_PARTNER_REQ                          = 1318;         //设置出战伙伴请求
+	E_CS_SET_FIGHT_PARTNER_RSP                          = 1319;         //设置出战伙伴回包
+	E_CS_FIGHT_PARTNER_ROOM_INFO_NTF                    = 1320;         //战斗伙伴信息列表
+
+	E_CS_BATTLE_CORPS_CREATE_REQ                        = 1321;         //战队-创建战队
+	E_CS_BATTLE_CORPS_DISMISS_REQ                       = 1322;         //战队-解散战队
+	E_CS_BATTLE_CORPS_MOD_SETTING_REQ                   = 1323;          //战队-修改战队设置（公告、进入等级）
+	E_CS_BATTLE_CORPS_QUIT_REQ                          = 1324;         //战队-退出请求
+	E_CS_BATTLE_CORPS_KICK_REQ                          = 1325;         //战队-踢人请求
+	E_CS_BATTLE_CORPS_APPLY_AGREE_REQ                   = 1326;         //战队-同意加入申请
+	E_CS_BATTLE_CORPS_CHG_NTF                           = 1327;         //战队-战队改变ntf
+	E_CS_BATTLE_CORPS_INFO_REQ                          = 1328;         //战队-拉取战队信息
+	
+	E_CS_BATTLE_CORPS_APPLY_REQ                         = 1329;         //战队-申请加入战队
+	E_CS_BATTLE_CORPS_APPLY_RSP                         = 1330;         //
+	E_CS_BATTLE_CORPS_APPLY_LIST_REQ                    = 1331;         //战队-拉取申请列表
+	E_CS_BATTLE_CORPS_APPLY_LIST_NTF                    = 1332; 
+	E_CS_BATTLE_CORPS_APPLY_CLEAR_REQ                   = 1333;         //战队-清空申请列表
+	E_CS_BATTLE_CORPS_INVITE_REQ                        = 1334;         //战队-邀请加入
+	E_CS_BATTLE_CORPS_LEADER_CONFIRM_NTF                = 1335;         //战队-队长确认邀请通知
+	E_CS_BATTLE_CORPS_LEADER_CONFIRM_REQ                = 1336;         //战队-队长确认请求
+	E_CS_BATTLE_CORPS_INVITEE_CONFIRM_NTF               = 1337;         //战队-邀请者确认通知
+	E_CS_BATTLE_CORPS_INVITEE_CONFIRM_REQ               = 1338;         //战队-邀请者确认请求
+	E_CS_BATTLE_CORPS_INVITE_RSP                        = 1339;         //战队-邀请加入响应
+	
+
+	E_SC_MASTER_RESULT_NTF                 				= 1343; 		//发给双方拜师是否成功
+
+	E_SC_MASTER_RECOMMEND_NTF                  			= 1349; 		//同门推荐
+	E_CS_MASTER_GET_TEACH_TASK_REQ                      = 1350;         //获取教学任务
+	E_SC_MASTER_GET_TEACH_TASK_RSP                      = 1351;         //获取教学任务回包
+	E_CS_MASTER_SET_TEACH_TASK_REQ                      = 1352;         //布置任务
+	E_SC_MASTER_SET_TEACH_TASK_RSP                      = 1353;         //布置任务回包
+	E_CS_MASTER_UP_TEACH_TASK_REQ                       = 1354;         //上交任务
+	E_SC_MASTER_UP_TEACH_TASK_RSP                       = 1355;         //上交任务回包
+	E_SC_MASTER_TASK_UPDATE_NTF                  		= 1356; 		//更新任务进度
+	E_CS_MASTER_GET_TEACH_REWARD_REQ                    = 1357;         //领取最终奖励
+	E_SC_MASTER_GET_TEACH_REWARD_RSP                    = 1358;         //领取最终奖励回包
+	E_CS_MASTER_GET_TEACH_RESULT_REQ                    = 1359;         //获取教学成果
+	E_SC_MASTER_GET_TEACH_RESULT_RSP                    = 1360;         //获取教学成果回包
+	E_SC_MASTER_RESULT_UPDATE_NTF                  		= 1361; 		//更新成果进度
+	E_CS_MASTER_GET_RESULT_REWARD_REQ                   = 1362;         //领取成果奖励
+	E_SC_MASTER_GET_RESULT_REWARD_RSP                   = 1363;         //领取成果奖励回包
+	E_CS_MASTER_GET_TEACH_SCORE_REQ                   	= 1364;         //获取教学成绩
+	E_SC_MASTER_GET_TEACH_SCORE_RSP                   	= 1365;         //获取教学成绩回包
+	E_SC_MASTER_SHOULD_JUDGE_NTF                  		= 1366; 		//通知客户端弹评价框
+	E_CS_MASTER_JUDGE_REQ                   			= 1367;         //评价
+	E_CS_MASTER_FINISH_STUDY_REQ                   		= 1368;         //请求结业
+	E_SC_MASTER_FINISH_STUDY_NTF                  		= 1369; 		//通知师傅或者徒弟已经结业
+	E_CS_MASTER_LEAVE_REQ                      		 	= 1370;         //解散关系
+	E_SC_MASTER_LEAVE_RSP                       		= 1371;         //解散关系回包
+
+	
+	E_CS_LICENSE_BLOCK_OPEN_REQ                         = 1381;         //执照格子开启
+	E_CS_LICENSE_BLOCK_OPEN_RSP                         = 1382;         //
+	E_CS_LICENSE_SLOT_UNLOCK_REQ                        = 1383;         //执照槽位解锁
+	E_CS_LICENSE_SLOT_UNLOCK_RSP                        = 1384;         //
+	E_CS_LICENSE_SLOT_SET_REQ                           = 1385;         //执照槽设置
+	E_CS_LICENSE_SLOT_SET_RSP                           = 1386;         //
+	E_CS_LICENSE_LP_EXCHANGE_REQ                        = 1387;         //执照LP兑换
+	E_CS_LICENSE_LP_EXCHANGE_RSP                        = 1388;         //
+	E_CS_LICENSE_DATA_NTF                               = 1389;         //执照数据更新
+	
+	E_CS_ROLE_INFO_REQ									= 1390;			//请求玩家个人信息
+	E_CS_ROLE_INFO_RSP									= 1391;			//应答玩家个人信息
+	E_CS_ROLE_INFO_RIGHT_REQ							= 1392;			//请求修改玩家个人信息权限
+	E_CS_ROLE_INFO_RIGHT_RSP							= 1393;			//应答修改玩家个人信息权限
+	E_CS_ROLE_SNS_INFO_REQ								= 1394;			//请求修改玩家社交信息
+	E_CS_ROLE_SNS_INFO_RSP								= 1395;			//应答修改玩家社交信息
+	E_CS_ROLE_SCORE_REQ									= 1396;			//请求积分信息
+	E_CS_ROLE_SCORE_RSP									= 1397;			//应答积分信息
+	
+	E_CS_AUCTION_COMPETITION_SINGLE_MATCH_REQ           = 1400;         //单人匹配请求
+	E_CS_AUCTION_COMPETITION_SINGLE_MATCH_RSP           = 1401;         //单人匹配回包
+	E_CS_AUCTION_COMPETITION_TEAM_MATCH_REQ             = 1402;         //组队匹配请求
+	E_CS_AUCTION_COMPETITION_TEAM_MATCH_RSP             = 1403;         //组队匹配回包
+	E_CS_TEAM_MATCH_CONFIRM_REQ                         = 1404;         //组队确认请求
+	E_CS_TEAM_MATCH_CONFIRM_RSP                         = 1405;         //组队确认回包
+	E_CS_TEAM_MATCH_CONFIRM_NTF                         = 1406;         //组队确认通知
+	E_CS_AUCTION_COMPETITION_REPORT_REQ                 = 1407;         //举报请求
+    E_CS_AUCTION_COMPETITION_REPORT_RSP                 = 1408;         //举报回包
+	E_CS_AUCTION_COMPETITION_DATA_NTF                   = 1409;         //数据通知
+	E_CS_GET_AUCTION_RANK_REQ                           = 1410;         //排行请求
+	E_CS_GET_AUCTION_RANK_RSP                           = 1411;         //排行回包
+	E_CS_GET_AUCTION_HISTORY_RANK_REQ                   = 1412;         //上届排行请求
+	E_CS_GET_AUCTION_HISTORY_RANK_RSP                   = 1413;         //上届排行回包
+	E_CS_AUCTION_COMPETITION_GET_DATA_REQ               = 1414;         //数据请求
+	E_CS_AUCTION_COMPETITION_GET_DATA_RSP               = 1415;         //数据回包
+	E_CS_AUCTION_COMPETITION_GET_DAILY_REWARD_REQ       = 1416;         //领取日常奖励请求
+	E_CS_AUCTION_COMPETITION_GET_DAILY_REWARD_RSP       = 1417;         //领取日常奖励回包
+	E_CS_BATTLE_CHAT_INFO_REQ                           = 1418;         //战场聊天请求
+	E_CS_BATTLE_CHAT_INFO_RSP                           = 1419;         //战场聊天回包
+	E_CS_BATTLE_CHAT_INFO_NTF                           = 1420;         //战场聊天通知
+
+	E_CS_POINT_SHOP_LIST_REQ							= 1430;			//请求积分商城
+	E_CS_POINT_SHOP_LIST_RSP							= 1431;			//应答积分商城
+	E_CS_POINT_SHOP_BUY_REQ								= 1432;			//请求积分商城购买
+	E_CS_POINT_SHOP_BUY_RSP								= 1433;			//应答积分商城购买
+
+	E_CS_FIELDBOX_INFO_REQ								= 1440;			//请求宝箱详细信息
+	E_CS_OPEN_FIELDBOX_REQ								= 1441;			//请求打开宝箱
+	E_CS_FIELDBOX_INFO_RSP								= 1442;			//应答宝箱详细信息
+	E_CS_OPEN_FIELDBOX_RSP								= 1443;			//应答打开宝箱
+	E_CS_LUCKY_EXCHANGE_REQ								= 1444;			//请求兑换幸运值
+	E_CS_LUCKY_EXCHANGE_RSP								= 1445;			//应答兑换幸运值
+	
+	E_CS_FAMILY_CREATE_REQ								= 1446;			//创建家族
+	E_SC_FAMILY_CREATE_SUCCESS_NTF						= 1447;			//创建成功通知
+	E_CS_FAMILY_DETAIL_INFO_REQ							= 1448;			//获取家族空间信息
+	E_CS_FAMILY_DETAIL_INFO_RSP							= 1449;			//应答获取家族空间信息
+	E_CS_FAMILY_MODIFY_SIGN_REQ							= 1450;			//编辑家族宣言
+	E_CS_FAMILY_MODIFY_SIGN_RSP							= 1451;			//应答编辑家族宣言
+	E_CS_FAMILY_MODIFY_MEMO_NAME_REQ					= 1452;			//修改字号
+	E_CS_FAMILY_MODIFY_MEMO_NAME_RSP					= 1453;			//应答修改字号
+	E_CS_FAMILY_ADD_EVENT_REQ							= 1454;			//发起投票
+	E_CS_FAMILY_DEL_EVENT_REQ							= 1455;			//取消投票
+	E_CS_FAMILY_ACT_EVENT_REQ							= 1456;			//确认执行
+	E_CS_FAMILY_EVENT_ACCEPT_REQ						= 1457;			//投票是否接受
+	E_SC_FAMILY_EVENT_INFO_NTF							= 1458;			//同步事件投票信息
+	E_CS_FAMILY_INVITE_REQ								= 1459;			//邀请新人
+	E_SC_FAMILY_INVITE_RSP								= 1460;			//应答邀请新人
+	E_SC_FAMILY_INVITING_NTF							= 1461;			//通知其他人，邀请中状态
+	E_SC_FAMILY_INVITE_YOU_NTF							= 1462;			//通知有人邀请你加入家族
+	E_CS_FAMILY_ACCEPT_INVITE_REQ						= 1463;			//是否同意邀请
+	E_SC_FAMILY_ACCEPT_INVITE_RSP						= 1464;			//应答是否同意邀请
+	E_SC_FAMILY_ACCEPT_INVITE_NTF						= 1465;			//通知其他玩家被邀请者是否同意
+	E_CS_FAMILY_LEAVE_INVITE_REQ						= 1466;			//退出邀请列表
+	E_SC_FAMILY_LEAVE_INVITE_NTF						= 1467;			//通知其他人，已邀请的人退出
+	E_CS_FAMILY_FIRE_INVITE_REQ							= 1468;			//T出邀请列表
+
+	E_CS_ZONE_DESIGN_ADD_REQ							= 1475;			//请求空间装饰
+	E_GC_ZONE_DESIGN_ADD_RSP							= 1476;			//返回空间装饰
+
+	E_CS_CITY_STATE_NTF                                 = 1480;         //获取城中状态
+
+	E_CS_ARENA_GET_PLAYER_LIST_REQ                      = 1484;         //获取擂台信息请求
+	E_CS_ARENA_GET_PLAYER_LIST_RSP                      = 1485;         //获取擂台信息回包
+	E_CS_ARENA_FIGHT_REQ                                = 1486;         //开始切磋请求
+	E_CS_ARENA_FIGHT_RSP                                = 1487;         //开始切磋回包
+
+	E_CS_GUILD_GET_EVENT_REQ                            = 1490;         //获取行会事件
+	E_SC_GUILD_GET_EVENT_RSP                            = 1491;         //获取行会事件回包
+
+	
+	E_CS_CONTROL_ACTOR_NTF                              = 1492;         //控制角色通知
+	E_CS_FAMILY_CREATE_INVITE_LIST_REQ                  = 1493;         //创建邀请列表
+	E_SC_FAMILY_CREATE_INVITE_LIST_RSP                  = 1494;         //创建邀请列表回包
+	E_CS_FAMILY_CALL_ACTIVITY_REQ                  		= 1495;         //发起仪式
+	E_SC_FAMILY_CALL_ACTIVITY_RSP                  		= 1496;         //发起仪式回包
+	E_SC_FAMILY_GET_MESSAGE_NTF                         = 1497;         //参与者仪式内收到的通知
+	E_CS_FAMILY_START_ACTIVITY_REQ                  	= 1498;         //举行仪式
+	E_SC_FAMILY_START_ACTIVITY_RSP                  	= 1499;         //举行仪式回包
+	E_CS_FAMILY_HURRY_REQ                  				= 1500;         //催促
+	E_CS_FAMILY_VOTE_RANK_REQ                  			= 1501;         //请求排辈投票
+	E_CS_FAMILY_CHANGE_FOOD_REQ                  		= 1502;         //换菜
+	E_CS_FAMILY_SYN_TITLE_REQ                  			= 1503;         //请求同步称号
+	E_CS_FAMILY_OK_TITLE_REQ                  			= 1504;         //确定修改称号
+	E_CS_FAMILY_OK_MEMO_REQ                  			= 1505;         //确定修改字号
+	E_SC_FAMILY_OK_MEMO_RSP                  			= 1506;         //确定修改字号回包
+	E_CS_FAMILY_COMPACT_REQ                  			= 1507;         //同步契约画押
+	E_CS_FAMILY_PAY_MONEY_REQ                  			= 1508;         //请求支付
+	E_SC_FAMILY_PAY_MONEY_RSP                  			= 1509;         //请求支付回包
+	E_CS_FAMILY_CANCEL_ACTIVITY_REQ                  	= 1510;         //取消仪式
+	E_SC_FAMILY_LEAVE_MAP_NTF                           = 1511;         //通知离开家族地图
+
+	E_CS_FAMILY_VOTE_AGAIN_REQ                  		= 1513;         //请求再次确认投票
+	E_SC_LOGIN_FAST_NTF                            		= 1514;         //弹出快速重连
+	E_CS_LOGIN_FAST_ROLE_REQ                  			= 1515;         //请求快速重连
+	E_SC_LOGIN_FAST_ROLE_RSP                  			= 1516;         //请求快速重连回包
+
+	E_CS_DUNGEON_ENTER_REQ                              = 1520;         //进入副本请求
+	E_CS_DUNGEON_ENTER_RSP                              = 1521;         //进入副本回包
+	E_CS_DUNGEON_GET_AWARD_REQ                          = 1522;         //获取副本奖励请求
+	E_CS_DUNGEON_GET_AWARD_RSP                          = 1523;         //获取副本奖励回包
+	E_CS_DUNGEON_AWARD_NTF                              = 1524;         //副本奖励通知
+	E_CS_DUNGEON_TRIGGER_EVENT_NTF                      = 1525;         //通知触发事件
+	
+	E_SC_TSS_SDK_SEND_DATA_NTF		                    = 1526;         //tss sdk通知客户端数据
+	E_CS_TSS_SDK_SEND_DATA_REQ		                    = 1527;         //tss sdk通知服务端数据
+	E_CS_FAMILY_EAT_FOOD_REQ		                    = 1528;         //家族吃菜
+
+	E_CS_SYNC_RAND_SEED_NTF                             = 1529;
+	E_CS_MULTI_LEVEL_ENTER_REQ                          = 1530;
+	E_CS_MULTI_LEVEL_ENTER_RSP                          = 1531;
+	E_CS_QUESTIONNAIRE_DATA_NTF							= 1532;
+	E_CS_FRIEND_SET_SWITCH_REQ                          = 1533;
+	E_SC_FRIEND_SET_SWITCH_RSP                          = 1534;
+
+	E_CS_QUESTIONNAIRE_REQ								= 1535;
+	E_CS_QUESTIONNAIRE_RSP								= 1536;
+
+	E_CS_ROLE_SECRET_SET_REQ							= 1537;
+	E_SC_ROLE_SECRET_SET_RSP							= 1538;	
+	E_CS_JOIN_VOICE_ROOM_REQ                            = 1539;			//加入小队语音房间
+	E_CS_QUIT_VOICE_ROOM_REQ                            = 1540;          //退出小队语音房间
+	E_CS_LOGIN_NOTICE_NTF								= 1541;
+	E_CS_BIND_PHONE_STATUS_NTF							= 1542; 
+	
+	E_CS_BIND_PHONE_REQ									= 1543;
+	E_CS_BIND_PHONE_RSP									= 1544;
+
+	E_CS_JOIN_VOICE_ROOM_RSP                            = 1545;			//加入小队语音房间
+	E_CS_QUIT_VOICE_ROOM_RSP                            = 1546;  
+	
+	E_CS_WANTED_GET_DATA_REQ                            = 1547;         //捉拿悬赏数据请求
+	E_CS_WANTED_GET_DATA_RSP                            = 1548;         //捉拿悬赏数据回包
+	E_CS_WANTED_DATA_NTF                                = 1549;         //捉拿悬赏通知
+	E_CS_WANTED_CHALLENGE_NTF                           = 1550;         //捉拿悬赏挑战通知
+
+	E_CS_CHG_VOICE_STATE_REQ                            = 1551;         //修改实时语音的状态
+	E_CS_CHG_VOICE_STATE_RSP                            = 1552;
+	
+	E_CS_MULTI_LEVEL_NEXT_CONFIRM_REQ                   = 1553;         //确认进入下一副本请求
+	E_CS_MULTI_LEVEL_NEXT_CONFIRM_RSP                   = 1554;         //确认进入下一副本回包
+
+	E_CS_PARTNER_HAND_SKILL_LEVEL_UP_REQ                = 1555;         //伙伴手动(sp)技能升级
+	E_CS_PARTNER_HAND_SKILL_LEVEL_UP_RSP                = 1556;         //伙伴手动(sp)技能升级
+
+	E_CS_WANTED_WATCH_REWARD_REQ                        = 1557;         //查看捉拿悬赏奖励请求
+	E_CS_WANTED_WATCH_REWARD_RSP                        = 1558;         //查看捉拿悬赏奖励回包
+
+	E_CS_MSDK_REFRESH_REQ                               = 1559;			//MSDK信息刷新
+	E_CS_MSDK_REFRESH_RSP                               = 1560;
+	
+	E_CS_MIDAS_PAY_REQ                                  = 1561;         //米大师支付通知
+	E_CS_DIAMOND_SYN_NTF                                = 1562;         //钻石同步
+	
+	E_CS_GUILD_SOULBOX_CONTRIBUTE_REQ		            = 1563;	        //公会 -- 捐献宝匣
+	E_CS_GUILD_SOULBOX_CONTRIBUTE_RSP		            = 1564;
+	E_CS_GUILD_GET_FIGHT_VALUE_RANK_REQ		            = 1565;	        //获取行会排行榜信息
+	E_SC_GUILD_GET_FIGHT_VALUE_RANK_RSP		            = 1566;
+	
+	E_CS_MULTI_LEVEL_INFO_NTF                           = 1567;         //连战数据通知
+
+	E_CS_BIND_PHONE_AUTHEN_CODE_REQ						= 1568;			//请求发送短信验证码
+	E_CS_BIND_PHONE_AUTHEN_CODE_RSP						= 1569;         //通知客户端已发送
+
+
+	E_CS_CITY_ENTER_NTF							        = 1573;			//主城开启数据同步
+	E_CS_FAN_TYPE_REPORT_REQ                            = 1574;         //玩家类型上报
+	
+	E_CS_SET_TRAINING_CONFIG_REQ 						= 1580;			//设置训练配置
+	E_CS_SET_TRAINING_CONFIG_RSP						= 1581; 		//设置训练配置回包
+
+	E_CS_RESET_TRAINING_LEVEL_REQ						= 1582;			//重置训练关卡
+
+
+	E_CS_SKILL_POINT_ASSIGN_REQ                         = 1590;         //技能点分配
+	E_CS_SKILL_POINT_ASSIGN_RSP                         = 1591;         //技能点分配
+	E_CS_SKILL_POINT_RESET_REQ                          = 1592;         //技能点重置
+	E_CS_SKILL_POINT_RESET_RSP                          = 1593;         //技能点重置	
+	
+
+	E_CS_PLAY_TALK_NTF                                  = 1596;         //客户端气泡对话
+	E_CS_PRINT_UNITY_MSG_NTF                            = 1597;         //输出unity信息
+
+    E_CS_GET_GAMEBLOG_ADDR_REQ                          = 1600;         // 获取部落地址
+    E_CS_GET_GAMEBLOG_ADDR_RSP                          = 1601;         // 获取部落地址
+
+	E_CS_MULTI_LEVEL_SELECT_NEXT_LEVEL_REQ              = 1607;         //选择下个关卡请求
+	E_CS_MULTI_LEVEL_SELECT_NEXT_LEVEL_RSP              = 1608;         //选择下个关卡回包
+	E_CS_MULTI_LEVEL_SELECT_NTF                         = 1609;         //选取关卡通知
+
+	E_CS_GIFT_GET_LIST_REQ                              = 1610;         //拉取礼物列表请求
+	E_CS_GIFT_GET_LIST_RSP                              = 1611;         //拉取礼物列表回包
+	E_CS_GIFT_NTF                                       = 1612;         //通知客户端有新礼物通知
+	E_CS_GIFT_ADD_REQ                                   = 1613;         //添加礼物记录请求s
+	E_CS_GIFT_ADD_RSP                                   = 1614;         //添加礼物记录回包
+	E_CS_GIFT_OP_REQ                                    = 1615;         //礼物操作请求
+	E_CS_GIFT_OP_RSP                                    = 1616;         //礼物操作回包
+
+    E_CS_MALL_PRICE_REQ                                 = 1621;         //获得商品价格
+	E_CS_MALL_PRICE_RSP                                 = 1622;         //获得商品价格
+	E_CS_PARTNER_TREASURE_OP_REQ                        = 1623;         //秘宝操作请求
+	E_CS_PARTNER_TREASURE_OP_RSP                        = 1624;         //秘宝操作回包    
+	E_CS_ROLE_HUNTER_PROF_DATA_REQ                      = 1625;         //当前服务器职业选择的信息
+	E_SC_ROLE_HUNTER_PROF_DATA_RSP                      = 1626;         //当前服务器职业选择的信息
+    E_CS_ROLE_HUNTER_PROF_SELECT_REQ                    = 1627;         //选择职业（更换也是这个）
+	E_SC_ROLE_HUNTER_PROF_SELECT_RSP                    = 1628;         //选择职业（更换也是这个）
+    E_CS_GUILD_SKILL_RESEARCH_REQ                   	= 1629;         //行会技能研究
+	E_SC_GUILD_SKILL_RESEARCH_RSP	                    = 1630;         //行会技能研究
+    E_CS_GUILD_HOUSE_VALUE_EXCHANGE_REQ                	= 1631;         //建设基金转换
+	E_SC_GUILD_HOUSE_VALUE_EXCHANGE_RSP                 = 1632;         //建设基金转换
+
+	E_CS_BARRAGE_SEND_REQ                               = 1633;         //添加一条弹幕
+	E_CS_BARRAGE_GET_REQ                                = 1634;         //获取动画相关弹幕请求
+	E_CS_BARRAGE_GET_RSP                                = 1635;         //获取动画相关弹幕响应
+
+	E_CS_MARKET_LIST_NUM_REQ                            = 1636;         //市场列表数量查询
+    E_CS_MARKET_LIST_NUM_RSP                            = 1638;
+	
+	E_CS_LEVEL_TRANS_NTF                                = 1639;         //选关通知
+	E_CS_TEAM_SNS_INVITE_NTF                            = 1641;         //组队社交邀请通知
+	E_CS_TEAM_SNS_INVITE_REPLY_REQ                      = 1642;         //组队社交邀请回复
+	E_CS_ONLINE_REWARD_RAND_REQ                         = 1643;         //在线祈福
+	E_CS_ONLINE_REWARD_GET_REQ                          = 1644;         //在线祈福奖励领取
+	E_CS_ONLINE_REWARD_DATA_NTF                         = 1645;         //在线祈福信息ntf
+	
+	E_CS_HEALTH_GET_INFO_REQ							= 1650;			//开始计算时间
+	E_CS_HEALTH_DONE_REMIND_REQ							= 1651;			//客户端下线/提醒操作通知
+
+	E_SC_HEALTH_LOGIN_FORBID_NTF						= 1652;			//限制登录
+	E_SC_HEALTH_REMIND_INFO_NTF							= 1653;			//通知提醒时间和下线时间
+	E_SC_HEALTH_FORCE_REST_NTF							= 1654;			//服务端强制下线通知
+	
+	E_CS_ACTIVITY_EIGHT_GET_DATE_REQ                    = 1655;         //获取所有数据
+    E_SC_ACTIVITY_EIGHT_GET_DATE_RSP                    = 1656;
+	E_CS_ACTIVITY_EIGHT_GET_RWD_REQ                     = 1657;         //获得奖励
+    E_SC_ACTIVITY_EIGHT_GET_RWD_RSP                     = 1658;
+
+	E_CS_BOX_AWARD_NTF                                  = 1659;         //神秘宝箱通知
+	E_CS_BOX_AWARD_GET_REQ                              = 1660;         //神秘宝箱领取请求
+	E_CS_GUILD_DANCE_INFO_NTF                           = 1661;         //行会跳舞信息ntf
+	E_SC_ACTIVITY_EIGHT_CAN_GET_RWD_NTF                	= 1662;         //达成目标
+	
+	E_SC_GUILD_QUESTION_DATA_NTF						= 1663;			// 主动给玩家推送行会答题或者你被请出房间
+	E_CS_GUILD_QUESTION_JOIN_REQ						= 1664;			// 请求加入行会答题房间
+	E_CS_GUILD_QUESTION_SEND_MSG_REQ					= 1665;			// 发送聊天到行会答题聊天室
+	E_SC_GUILD_QUESTION_SEND_MSG_NTF					= 1666;			// 广播聊天
+	E_SC_GUILD_QUESTION_CHANGE_NTF						= 1667;			// 通知进度变化
+
+	E_CS_FIRST_PAY_AWARD_GET_REQ                        = 1668;         //首充奖励领取
+	E_CS_FIRST_PAY_AWARD_STATE_NTF                      = 1669;         //首充奖励状态同步
+	E_SC_GUILD_QUESTION_JOIN_RSP						= 1670;			// 请求加入行会答题房间回包
+	
+	E_CS_PARTNER_ASYNC_INFO_REQ                        = 1671;         //伙伴异步pvp信息请求
+	E_CS_PARTNER_ASYNC_INFO_NTF                        = 1672;         //伙伴异步pvp信息Ntf
+	
+	E_CS_PARTNER_ASYNC_ADJUST_TEAM_REQ                  = 1673;
+	E_CS_PARTNER_ASYNC_ADJUST_TEAM_RSP                  = 1674;
+	
+	E_CS_GET_PARTNER_ASYNC_RANK_REQ				        = 1675;
+	E_CS_GET_PARTNER_ASYNC_RANK_RSP				        = 1676;    
+	E_CS_GET_PARTNER_ASYNC_RECORD_REQ				    = 1677;
+	E_CS_GET_PARTNER_ASYNC_RECORD_RSP				    = 1678;
+    E_CS_QQ_VIP_INFO_CHANGED_NTF                        = 1679; // QQ VIP信息变更	
+	E_CS_PARTNER_ASYNC_START_BATTLE_REQ                 = 1680;
+	
+	E_CS_GET_PARTNER_ASYNC_REWARD_REQ                   = 1681;
+	E_CS_GET_PARTNER_ASYNC_REWARD_RSP                   = 1682;
+	
+	E_CS_MASTER_GET_NEEDED_PLAYER_REQ                   = 1683;
+	E_SC_MASTER_GET_NEEDED_PLAYER_RSP                   = 1684;
+	E_CS_MASTER_GET_APPLY_LIST_REQ                   	= 1685;
+	E_SC_MASTER_GET_APPLY_LIST_RSP                   	= 1686;
+	E_CS_MASTER_CLEAR_APPLY_LIST_REQ                   	= 1687;
+	E_SC_MASTER_CLEAR_APPLY_LIST_RSP                   	= 1688;
+	E_CS_MASTER_OPERATE_APPLY_REQ                   	= 1689;
+	E_SC_MASTER_OPERATE_APPLY_RSP                   	= 1690;
+	E_CS_MASTER_APPLY_REQ                   			= 1691;
+	E_SC_MASTER_APPLY_RSP                   			= 1692;
+    E_SC_MASTER_APPLY_NTF                        		= 1693;
+	E_CS_MASTER_MODIFY_REQ                   			= 1694;
+	E_SC_MASTER_MODIFY_RSP                   			= 1695;
+
+	E_CS_CHEAT_PUNISH_NTF                               = 1696;
+	E_CS_RUSH_GET_SCORE_REWARD_REQ                      = 1697;
+	E_CS_SKILL_SET_USE_REQ                              = 1698;
+	E_CS_SKILL_SET_USE_RSP                              = 1699;
+
+    E_CS_GET_1V1_RANK_REQ                               = 1700;
+    E_CS_GET_1V1_RANK_RSP                               = 1701;
+
+	E_CS_GIFT_PLAYER_DATA_NTF                           = 1703;
+
+	E_CS_INSTANCE_CHALLENGE_NTF                         = 1705;         //副本挑战通知
+	
+    E_CS_BATTLE_VOICE_STATE_SET_REQ                     = 1707;         //战斗中设置房间语音状态
+	E_CS_BATTLE_VOICE_STATE_SET_NTF                     = 1708;         //战斗中玩家房间语音状态改变ntf
+	E_CS_ROOM_MOVE_PLACE_REQ							= 1710;
+	E_CS_ROOM_MOVE_PLACE_NTF							= 1711;
+	E_CS_ROOM_CLOSE_PLACE_REQ							= 1712;
+	E_CS_ROOM_CLOSE_PLACE_NTF							= 1713;
+	E_CS_ROOM_INVITE_REQ								= 1714;
+	E_CS_ROOM_INVITE_NTF								= 1715;
+	E_CS_ROOM_INVITE_RESULT_REQ							= 1716;
+	E_CS_HALL_SET_INVITE_REQ							= 1717;
+	E_CS_HALL_SET_INVITE_RSP							= 1718;
+	E_CS_HALL_PLAYER_LIST_REQ							= 1719;
+	E_CS_HALL_PLAYER_LIST_RSP  							= 1720;
+	E_CS_ROOM_INFO_NTF									= 1721;
+	E_CS_ROOM_INFO_PLACE_NTF							= 1722;
+	E_CS_GUILD_GET_TRANSPORT_LIST_REQ					= 1723;
+	E_SC_GUILD_GET_TRANSPORT_LIST_RSP  					= 1724;
+	E_CS_GUILD_TRANSPORT_EXP_REQ						= 1725;
+	E_SC_GUILD_TRANSPORT_EXP_RSP  						= 1726;
+	E_SC_GUILD_TRANS_EXP_REQUEST_NTF					= 1727;
+	E_CS_GUILD_REPLY_TRANS_EXP_REQ						= 1728;
+	E_SC_GUILD_TRANS_EXP_PROCESS_NTF					= 1729;
+	E_CS_GUILD_TRANSPORT_EXP_RESUME_REQ					= 1730;
+	E_CS_GUILD_TRANSPORT_EXP_END_REQ					= 1731;
+
+	E_CS_QUICK_MATCH_RSP								= 1735;
+    E_CS_ROOM_QUERY_SINGLE_REQ                          = 1736;
+    E_CS_ROOM_QUERY_SINGEL_RSP                          = 1737;
+	E_CS_QUICK_MATCH_CANCEL_REQ							= 1738;
+	E_CS_QUICK_MATCH_CANCEL_RSP							= 1739;
+
+	E_CS_CE_GET_REWARD_REQ                              = 1740;
+	E_CS_CE_GET_REWARD_RSP                              = 1741;
+	E_CS_CE_PLAYER_DATA_NTF                             = 1742;
+	E_CS_GUILD_REBATE_GET_REWARD_REQ                    = 1743;
+	E_SC_GUILD_REBATE_GET_REWARD_RSP                    = 1744;
+
+	E_CS_ROOM_KICI_OFF_PLAYER_REQ       				= 1745;
+    E_CS_ROOM_TRANSFER_ROOM_OWNER_REQ			   		= 1746;
+
+    E_CS_GUILD_GROUP_REQ                                = 1747;
+    E_CS_GUILD_GROUP_NTF                                = 1748;
+	E_CS_ROOM_PLAYER_EMOJI_REQ   						= 1749;
+	E_CS_ROOM_PLAYER_EMOJI_NTF   						= 1750;
+	E_CS_GUILD_TRANS_EXP_BEGIN_REQ						= 1752;
+
+    E_CS_AUTO_RECOVER_NTF                               = 1753;
+    E_CS_RISING_PURCHASE_NTF                            = 1754;
+    E_CS_RISING_PURCHASE_BUY_REQ                        = 1755;
+    E_CS_RISING_PURCHASE_BUY_RSP                        = 1756;
+
+    E_SC_GUARDIAN_KICK_INFO_NTF                         = 1757;
+    E_SC_GUARDIAN_GUARDED_INFO_NTF                      = 1758;
+
+    E_CS_FLASH_UI_NTF                                   = 1759;
+    E_SC_SAFE_SCORE_ERR_NTF                             = 1760;
+
+	E_CS_PAY_AWARD_DATA_NTF                             = 1761;
+	E_CS_WEEK_CONSUME_AWARD_REQ                         = 1762;
+	E_CS_WEEK_CONSUME_LOTTERY_REQ                       = 1763;	
+	E_CS_WEEK_CONSUME_DATA_NTF                           = 1764;
+	E_CS_PAY_AWARD_GET_REQ                              = 1765;
+	E_CS_PAY_AWARD_INFO_REQ                             = 1766;
+	E_CS_WEEK_CONSUME_INFO_REQ                          = 1767;
+	E_CS_WEEK_CONSUME_LOTTERY_RSP                       = 1768;	
+	E_CS_PAY_AWARD_GET_RSP                              = 1769;
+	E_CS_WEEK_CONSUME_AWARD_RSP                         = 1770;
+	
+	E_CS_MIDAS_BUY_GOODS_REQ                            = 1771;
+	E_CS_MIDAS_BUY_GOODS_RSP                            = 1772;
+	E_CS_MIDAS_BUY_GOODS_NTF                            = 1773;
+	
+	E_CS_GROWUP_FUNDS_GET_AWARD_REQ                     = 1774;
+	E_CS_GROWUP_FUNDS_GET_AWARD_RSP                     = 1775;
+	
+	E_CS_LUCK_BAG_INFO_REQ                              = 1776;
+	E_CS_LUCK_BAG_INFO_NTF                              = 1777;
+	
+	E_SC_MSG_SEND_MSG_WINDOW_NTF						= 1778;
+	
+	E_CS_ROLE_SKILL_UPGRADE_REQ                         = 1779;
+	E_CS_ROLE_SKILL_UPGRADE_RSP                         = 1780;
+	E_CS_ROLE_SKILL_RECOMMOND_REQ                       = 1781;
+	E_CS_ROLE_SKILL_RECOMMOND_RSP                       = 1782;
+	E_CS_ROLE_SKILL_RESET_REQ                           = 1783;
+	E_CS_ROLE_SKILL_RESET_RSP                           = 1784;
+	E_CS_ROLE_SKILL_SET_REQ                             = 1785;
+	E_CS_ROLE_SKILL_SET_RSP                             = 1786;
+	E_CS_ROLE_SKILL_SWITCH_SET_REQ                      = 1787;
+	E_CS_ROLE_SKILL_SWITCH_SET_RSP                      = 1788;
+	E_CS_ROLE_SKILL_DATA_NTF                            = 1789;
+	E_CS_ROLE_SKILL_TRANSFER_REQ                        = 1790;
+	E_CS_ROLE_SKILL_TRANSFER_RSP                        = 1791;
+	E_CS_START_TRANSFER_BATTLE_REQ                      = 1792;
+	
+	E_SC_NOTIFY_DATA_TO_CLIENT_NTF						= 1799;	
+	
+    E_CS_LEVEL_BLESS_SELECT_REQ                         = 1801;
+    E_CS_LEVEL_BLESS_SELECT_RSP                         = 1802;
+    E_CS_LEVEL_BLESS_DATA_NTF                           = 1803;
+    E_CS_LEVEL_BLESS_ACTIVE_REQ                         = 1804;
+    E_CS_LEVEL_BLESS_ACTIVE_RSP                         = 1805;
+    E_CS_DOUBLE_REWARD_ACTIVE_REQ                       = 1806;        
+    E_CS_DOUBLE_REWARD_ACTIVE_RSP                       = 1807;
+    E_CS_ACTIVITY_QUEST_GET_RWD_REQ                     = 1808;        
+    E_SC_ACTIVITY_QUEST_CHANGE_NTF                      = 1809;
+
+    E_CS_END_MOVE_REQ                                   = 1810;
+    E_CS_EQUIP_MAGIC_CARD_REQ     	                    = 1811;        
+    E_SC_EQUIP_MAGIC_CARD_RSP                       	= 1812;
+    E_CS_EQUIP_MAGIC_CARD_COMPOSE_REQ     	            = 1813;        
+    E_SC_EQUIP_MAGIC_CARD_COMPOSE_RSP                   = 1814;
+
+    E_CS_ENTRANCE_ACTION_FINISH_REQ                     = 1815;
+
+	E_CS_BATTLE_DRUG_CD_NTF                             = 1816;
+	
+	E_CS_TORMENT_TOWER_AWARD_GET_REQ                    = 1817;     //试炼塔首通奖励领取
+	E_CS_TORMENT_TOWER_AWARD_GET_RSP                    = 1818;
+	E_CS_TORMENT_TOWER_RESET_REQ                        = 1819;     //试炼塔重置
+	E_CS_TORMENT_TOWER_RESET_RSP                        = 1820;
+	E_CS_TORMENT_TOWER_SWEEP_REQ                        = 1821;     //试炼塔扫荡
+	E_CS_TORMENT_TOWER_SWEEP_RSP                        = 1822;
+	E_CS_TORMENT_TOWER_SWEEP_AWARD_REQ                  = 1823;     //试炼塔扫荡奖励领取
+	E_CS_TORMENT_TOWER_SWEEP_AWARD_RSP                  = 1824;
+	E_CS_TORMENT_TOWER_BATTLE_REQ                       = 1825;     //试炼塔挑战
+	E_CS_TORMENT_TOWER_DATA_NTF                         = 1826;
+	E_CS_TORMENT_TOWER_SPEED_SWEEP_REQ                  = 1827;
+	E_CS_TORMENT_TOWER_SPEED_SWEEP_RSP                  = 1828;
+	E_CS_TORMENT_TOWER_INFO_REQ                         = 1829;
+	E_CS_TORMENT_TOWER_INFO_RSP                         = 1830;
+	
+	E_CS_LEGEND_ROAD_DATA_NTF                           = 1831;
+	E_CS_ACTIVITY_LUCK_DRAW_REQ                         = 1832;
+	E_SC_ACTIVITY_LUCK_DRAW_RSP                         = 1833;
+	
+	E_CS_EXP_RETRIVE_REQ                                = 1834;  //经验找回
+	E_CS_EXP_RETRIVE_RSP                                = 1835;
+	E_CS_AWARD_RETRIVE_REQ                              = 1836;  //奖励找回
+	E_CS_AWARD_RETRIVE_RSP                              = 1837;
+	E_CS_ROLE_RETRIVE_DATA_NTF                          = 1838;  //ntf
+	
+	E_CS_GACHA_BUY_REQ                                  = 1839;
+	E_CS_GACHA_BUY_RSP                                  = 1840;
+	E_CS_GACHA_RECORD_REQ                               = 1841;
+	E_CS_GACHA_RECORD_RSP                               = 1842;
+	
+	E_CS_MONTH_CARD_AWARD_REQ                           = 1843;
+	E_CS_MONTH_CARD_AWARD_RSP                           = 1845;
+	
+	E_CS_SUPPER_CARD_AWARD_REQ                          = 1846;
+	E_CS_SUPPER_CARD_AWARD_RSP                          = 1847;
+	E_CS_ROLE_INFO_FRIEND_SHARED						= 1848;	// 好友分享
+	
+	E_CS_MAX_CMD_ID_VALUE                               = 2000;         //最大cmd id
+
+	E_CS_MERGE_RSP                                      = 10001;	    //合包消息1
+};
+
+// 错误码
+enum Proto_CS_ErrorCode {
+	option allow_alias                                  = false;
+	ERR_CODE_SYSTEM_ERROR			                    = -1;
+    ERR_CODE_OK                		                    = 0;
+    
+    ERR_CODE_SERVER_IS_STOPPING                         = 10101;        //正在停服
+    ERR_CODE_NO_PRIVILEGES_OF_GM                        = 10102;        //没有gm权限
+    ERR_CODE_SYSTEM_TIMEOUT                             = 10103;        //内部超时
+    ERR_CODE_NEED_RELOGIN		                        = 10104;        //需要重新登录
+    ERR_CODE_BATTLE_NEED_RELOGIN	                    = 10105;        //需要重新登录
+	ERR_CODE_PLAYER_DONT_HAVE_ROLE                      = 10106;        //玩家没有该角色，角色id不对
+	ERR_CODE_ACCOUNT_ROLE_IS_FULL                       = 10107;        //账号角色已满
+    ERR_CODE_PLAYER_OFFLINE                             = 10108;        //玩家不在线
+	ERR_CODE_ACCOUNT_DEL_ROLE_TIME_LIMITE               = 10109;        //删除完一个角色后需要过24小时才可以删除其它角色
+	ERR_CODE_CANNOT_LOGIN_DIFF_ROLE_BY_SAME_SESSION		= 10110;		//不能复用老session登录不同的角色
+    ERR_CODE_SERVER_DONT_COMPLETE_START                 = 10111;        //服务器还没有完成启动
+    ERR_CODE_KICKOFF_OLD_CLIENT_VERSION					= 10112;		//客户端版本太老，不允许登录
+	
+	ERR_CODE_FORBID_REGIST_ACCOUNT                      = 10200;        //禁止注册新账号
+    RRR_CODE_LOGIN_PARAM_INVALID                        = 10201; 
+    ERR_CODE_LOGIN_STATE_ERR                            = 10202;
+    ERR_CODE_LOGIN_REACH_MAX_NUM                        = 10203;
+    ERR_CODE_SYSTEM_ALLOC_PLAYER                        = 10204;
+    ERR_CODE_SYSTEM_OBJSTATUS_INVALID                   = 10205;        //
+    ERR_CODE_SYSTEM_DATABASE_ERROR                      = 10206;        //
+    ERR_CODE_TARGET_HERO_IS_EXIST                       = 10207;        //
+    ERR_CODE_TARGET_HERO_NOT_EXIST                      = 10208;        //
+    ERR_CODE_ROLE_KICKOFF_HEARTBEAT_TIMEOUT             = 10209;        //heartbeat未收到
+    ERR_CODE_INVALID_REQ_PARAM                          = 10210;
+    ERR_CODE_EMPTY_ROLE                                 = 10211;        //角色为空需要注册
+    ERR_CODE_REGISTER_ROLE_EXISTS                       = 10212;        //角色已经存在
+    ERR_CODE_ALREADY_IN_ROOM                            = 10213;        //创建房间或进入房间时，已经在房间里
+    ERR_CODE_ROOM_STATUS                                = 10214;        //房间状态，与能进行的操作不符合
+    ERR_CODE_ROOM_FULL	                                = 10215;        //房间已满
+    ERR_CODE_ROOM_CAMP_FULL                             = 10216;        //房间的某一边已满
+    ERR_CODE_ROLE_KICKOFF_RELOGIN                       = 10217;        //重新登录踢掉老账号
+    ERR_CODE_BATTLE_CHECK_ACTOR_DIE                     = 10218;
+    ERR_CODE_BATTLE_CHECK_ACTOR_STATE_FAILD             = 10219;
+    ERR_CODE_ROOM_PLAYER_NO_FORMATION                   = 10220;        //没有上阵英雄
+
+    ERR_CODE_SPELL_INVALID_ID                           = 10221;        //技能ID非法 
+    ERR_CODE_SYSTEM_SERVER_OBJ_NULL                     = 10222;        //对象不存在
+    ERR_CODE_BATTLE_NOT_EXIST                           = 10223;        //battle不存在
+    ERR_CODE_BATTLE_CHECK_CD_FAILD                      = 10224;        //cd检查失败
+    ERR_CODE_BATTLE_CHECK_SPELLINST_FAILD               = 10225;        //检查SpellInst失败
+    ERR_CODE_SPELL_ACTION_USED_LIMIT                    = 10226;        //使用次数限制
+    ERR_CODE_SPELL_CONSUME                              = 10227;        //技能消耗的SP等不足
+    ERR_CODE_SPELL_ACTOR_LYING                          = 10228;        //释放技能者处于倒地状态
+    ERR_CODE_SUBSTITUTION_NOT_DEAD                      = 10229;        //替补上场选择时间过了，死亡的组已经复活
+    ERR_CODE_ACTION_POSITION_INVALID                    = 10230;        //Action的位置跟当前位置不连通
+    ERR_CODE_SPELL_PROHIBITED                           = 10290;        //技能被封禁
+    ERR_CODE_SPELL_ACTOR_NOT_ACTIVE                     = 10291;        //技能释放者不处于激活状态
+    ERR_CODE_SPELL_TARGET_CAMP_TEST_FAILD				= 10292;		//技能Hit目标阵营检查失败
+    ERR_CODE_SPELL_HITBOXGROUP_NULL						= 10293;		//找不到Hit对应的hitboxgroup
+    ERR_CODE_ITEM_IN_STORAGE                            = 10294;        // 物品在仓库中
+
+    ERR_CODE_MONEY_NOT_ENOUGH                           = 10231;  
+    ERR_CODE_DIAMOND_NOT_ENOUGH                         = 10232;
+    ERR_CODE_NO_SKIN                                    = 10233;        //英雄皮肤不存在 
+    ERR_CODE_SKIN_ALEADY_EXIST                          = 10234;        //英雄皮肤已购买 
+    ERR_CODE_MATERIAL_NOT_ENOUGH                        = 10235;        //材料不足
+    ERR_CODE_ITEM_NOT_ENOUGH                            = 10236;        //物品数量不足
+    ERR_CODE_ITEM_NOT_EXIST                             = 10237;        //物品不存在
+    ERR_CODE_ITEM_NOT_MATCH                             = 10238;        //物品类型不匹配
+
+	ERR_CODE_MALL_INVALID_PARAM                         = 10239;        //商城无效参数             
+    ERR_CODE_MALL_BUY_SCHEDULE		                    = 10240;        //商品已经下架
+    ERR_CODE_MALL_BUY_LIMITPRIVATE                      = 10241;        //个人每周购买限定
+    ERR_CODE_MALL_BUY_DAY_LIMITPRIVATE	                = 10242;        //个人每周购买限定
+    ERR_CODE_MALL_BUY_NO_MONEY  		                = 10243;        //金币不足
+    ERR_CODE_MALL_BUY_NO_DIAMOND  	                    = 10244;        //钻石不足
+    ERR_CODE_MALL_BUY_HAVE				                = 10246;        //已经拥有
+    ERR_CODE_MALL_BUY_ITEM_FULL		                    = 10247;        //物品包已满
+
+    ERR_CODE_NOT_ROOM_OBSERVER 		                    = 10248;        //不在此房间观战者列表，不能加入房间
+    ERR_CODE_ROOM_NOT_OWNER			                    = 10249;        //不是房主
+    ERR_CODE_RUNE_MAKE_ITEM_WRONG                       = 10250;        //符文make的材料错误
+    ERR_CODE_RUNE_MAKE_SKILLLEVEL_NOT_MATCH	            = 10251;        //绘念等级不足
+    ERR_CODE_RUNE_MAKE_MAKING			                = 10252;	    //该类make正在进行，不可再make
+    ERR_CODE_RUNE_MAKE_WRONG			                = 10253;        //不可抗力失败    
+    ERR_CODE_RUNE_NO_RUNE				                = 10254;        //符文操作没有对应的符文
+    ERR_CODE_RUNE_MAKE_DEST_ITEM 	                    = 10255;        //生成符文失败	
+    ERR_CODE_RUNE_MAKE_NO_DIAMOND	                    = 10256;        //砖石不够
+    ERR_CODE_RUNE_NO_POS				                = 10257;        //符文操作没有对应的位置了
+    ERR_CODE_RUNE_NO_UNLOCK			                    = 10258;        //没有解锁符文盘
+    ERR_CODE_RUNE_NO_LEVEL				                = 10259;        //符文操作的人物等级不够
+	ERR_CODE_HERO_INVALID_ID		                    = 10260;        //英雄不存在
+    ERR_CODE_TALENT_UNLOCK_LEVEL	                    = 10261;        //天赋技能设置未达到解锁等级
+    ERR_CODE_JOB_UNLOCK_LEVEL 		                    = 10262;        //职业未达到解锁等级
+    ERR_CODE_JOB_ITEM				                    = 10263;        //缺少转职道具
+    ERR_CODE_JOB_NOT_NEXT			                    = 10264;        //不是后续职业
+    ERR_CODE_RUNE_MAKE_NO_MONEY 	                    = 10265;        //金钱不够
+    
+    ERR_CODE_RUNE_NOT_DRESSED                           = 10266;        //念纹-该念纹没有穿戴
+    ERR_CODE_RUNE_ALREADY_DRESSED                       = 10267;        //念纹-该念纹已经穿戴
+    ERR_CODE_TRADE_BUY_NO_BAG		                    = 10268;        //背包空间不足
+    ERR_CODE_TRADE_BUY_NO_ITEM		                    = 10269;        //已经售出
+    ERR_CODE_TRADE_SELL_NO_ITEM	                        = 10272;        //出售时没有这个物品
+    ERR_CODE_TRADE_SELL_ITEM_NO_TRADE	                = 10273;        //不允许出售
+    ERR_CODE_RUNE_NO_PLATE			                    = 10274;		//非法符文盘
+    ERR_CODE_AVATAR_NOT_EXIST 				            = 10275;        //头像不存在
+    ERR_CODE_TRADE_BUY_LIMIT		                    = 10276;        //购买达上限
+    ERR_CODE_TRADE_BUY_NO_GOLD                          = 10277;        //金币不够
+    ERR_CODE_TRADE_SELL_LIMIT                           = 10278;        //上架限制
+	ERR_CODE_DRUG_NOT_ENOUGH							= 10279;		//药品不足
+
+	ERR_CODE_GOLD_EXCHANG_DAY_LIMIT                     = 10280;        //每日金币兑换已经到达上限
+	
+	ERR_CODE_BAG_OP_ITEM_HISTORY_FULL                   = 10299;        //背包物品操作已满
+    ERR_CODE_BAG_FULL                                   = 10300;        //
+    //ERR_CODE_EQUIP_INDEX_NOT_MATCH                      = 10301;        //
+    ERR_CODE_EQUIP_ALEADY_DRESS                         = 10302;        //
+    //ERR_CODE_EQUIP_BIND_OTHER_HERO                      = 10303;        //
+    //ERR_CODE_EQUIP_ALEADY_INDENT                        = 10306;        // 已鉴定
+    ERR_CODE_LEVEL_TO_MUCH                              = 10305;
+    //ERR_CODE_EQUIP_CANNOT_DECOMPOSE                     = 10308;        //
+    ERR_CODE_EQUIP_DRESS_LEVEL_NOT_ENOUGH               = 10309;        //
+    ERR_CODE_REVIVAL_NO_ITEM                            = 10310; //主动复活缺少道具
+    ERR_CODE_REVIVAL_NO_MONEY                           = 10311; //主动复活缺少金钱
+    ERR_CODE_REVIVAL_MAX_TIMES                          = 10312; //复活到达最大次数
+	ERR_CODE_EQUIP_ON_DRESS                             = 10313; // 
+	ERR_CODE_REVIVAL_TIMEOUT                            = 10314; //超时，不能用道具复活自己
+    ERR_CODE_LEVEL_NOT_ENOUGH                           = 10315; //
+    ERR_CODE_DROP_ID_INVALID                            = 10316; // 掉落id 不存在
+    ERR_CODE_DROP_RECURSION_ERROR                       = 10317; // 掉落库递归错误
+	ERR_CODE_EQUIP_CANNOT_REPAIR                        = 10318; //当前装备还很趁手，不需要修理
+	//ERR_CODE_EQUIP_IN_STORAGE             = 10319; //装备在仓库中
+	//ERR_CODE_EQUIP_CANNOT_NORMAL_REPAIR   = 10320; //修理失败次数过多，不能进行普通修理
+    //ERR_CODE_EQUIP_NOT_SMELT              = 10321; //装备不是制造的
+    ERR_CODE_LEVEL_BOUNS_NOT_EXIST                      = 10322;    // 等级礼包不存在
+    ERR_CODE_LEVEL_BOUNS_ALEADY_ACQUIRED                = 10323;    // 等级礼包已被领取
+	
+    ERR_CODE_PARAGON_POINT_NOT_ENOUGH                   = 10501; 
+    ERR_CODE_PARAGON_POINT_MAX                          = 10502;
+    ERR_CODE_TIMES_EXHAUSTED                            = 10503;        // 次数耗尽
+                                                                        //内部超时
+    ERR_CODE_NO_MATCH				                    = 10601;
+    ERR_CODE_MATCH_POOL_FULL                            = 10602;
+    
+    ERR_CODE_SNS_START							        = 10650;
+    ERR_CODE_FRIEND_INVALID_TARGET			            = 10651;
+    ERR_CODE_FRIEND_APPLY_FULL				            = 10652;
+    ERR_CODE_FRIEND_APPLY_EXIST				            = 10653; 
+    ERR_CODE_SNS_QUERY							        = 10654;        //查询失败，未找到
+    ERR_CODE_MAIL_BAG_FULL						        = 10655;
+    ERR_CODE_GUILD_SERVICE_FAILED			            = 10656;        //公会服务模块加载失败
+    ERR_CODE_GUILD_ROLE_LV						        = 10657;        //公会创建-等级不足
+    ERR_CODE_GUILD_CREATE_IN_GUILD			            = 10658;        //公会创建-已在公会
+    ERR_CODE_GUILD_CREATE_MONEY				            = 10659;        //公会创建-资金不足
+    ERR_CODE_GUILD_APPLY_IN_GUILD			            = 10660;        //公会申请-已在公会
+    ERR_CODE_GUILD_APPLY_FULL					        = 10661;        //公会申请-申请已满
+    ERR_CODE_GUILD_APPLY_EXIST				            = 10662;        //公会申请-申请已存在
+	ERR_CODE_GUILD_FULL							        = 10663;        //公会-空间已满
+	ERR_CODE_GUILD_POWER							    = 10664;        //公会-权限不足
+	ERR_CODE_GUILD_APPRENTICE_FULL			            = 10665;        //公会-学徒满
+	ERR_CODE_GUILD_NOT_COIN						        = 10666;        //公会-公会币不足
+    ERR_CODE_GUILD_INVALID						        = 10667;        //公会未找到	 
+    ERR_CODE_GUILD_SHOP_BUY_LIMIT			            = 10668;        //公会商店-购买达上限
+    ERR_CODE_GUILD_SHOP_NOT_ENOUGH			            = 10669;        //公会商店-金钱或者贡献不足
+    ERR_CODE_GUILD_TECH_NOT_ENOUGH			            = 10670;        //公会科技-金钱或者贡献不足
+    ERR_CODE_GUILD_DIFFERENT					        = 10671;        //公会不同
+    ERR_CODE_GUILD_SOULBOX_ERR				            = 10672;        //公会 -- 魂匣子未找到或者不合法
+    ERR_CODE_GUILD_SOULBOX_CLICK_FULL		            = 10673;        //公会 -- 魂匣子点击上限
+    ERR_CODE_GUILD_SOULBOX_BECLICK_FULL		            = 10674;        //公会 -- 魂匣子被点击上限
+    ERR_CODE_GUILD_SOULBOX_CLICK_REPEAT		            = 10675;        //公会 -- 魂匣子同天点击同一个人
+    ERR_CODE_GUILD_TAX_LIMIT					        = 10676;
+    ERR_CODE_GUILD_JOIN_TIME					        = 10677;        // 公会 -- 加入公会时间不足
+    ERR_CODE_GUILD_TECH_NOT_EXIST			            = 10678;        //公会  -- 未找到公会科技
+    ERR_CODE_GUILD_TECH_LV_LIMIT				        = 10679;        //公会  -- 科技等级达到上限限制
+    ERR_CODE_GUILD_NOT_TECH_VALUE			            = 10680;        //公会 -- 科技点不足
+    ERR_CODE_GUILD_NOT_LEVEL					        = 10681;        //公会 -- 公会等级不足
+    ERR_CODE_GUILD_BABY_FULL				            = 10682;        //公会-宝贝人数已满
+    ERR_CODE_GUILD_MEMBER_FULL				            = 10683;        //公会-人数已满
+    ERR_CODE_GUILD_INVITE_IN_GUILD			            = 10684;        //公会-邀请入公会，但是对方已在公会
+    ERR_CODE_GUILD_PRESIDENT_NOT_LEAVE		            = 10685;        //公会-会长无法直接退出公会
+    ERR_CODE_GUILD_HIGH_FULL				            = 10686;        //公会-精英人数已满
+    ERR_CODE_GUILD_MGR_FULL				            	= 10687;        //公会-理事人数已满
+    ERR_CODE_GUILD_ONLY_MEMBER_LEFT		            	= 10688;        //公会-只能是成员才能被请离
+	ERR_CODE_GUILD_ALREADY_HIGH_MEM						= 10689;		//公会-玩家已经是精英了 
+	ERR_CODE_GUILD_ALREADY_MEMBER						= 10690;		//公会-玩家已经是成员了 
+	ERR_CODE_GUILD_ALREADY_VICE							= 10691;		//公会-玩家已经是副会长了 
+	ERR_CODE_GUILD_ALREADY_MGR							= 10692;		//公会-玩家已经是理事 了 
+	ERR_CODE_GUILD_ARCHI_LV_LIMIT						= 10693;		//公会-建筑等级不足 
+	ERR_CODE_GUILD_PIECE_NOT_FIND						= 10694;		//公会-没有找到此符信息
+	ERR_CODE_GUILD_PIECE_HELPING						= 10695;		//公会-此符正在请求中
+	ERR_CODE_GUILD_PIECE_PLAYER_COUNT_LIMIT				= 10696;		//公会-成员单日请求已经达到上限
+	ERR_CODE_GUILD_PIECE_HELP_COUNT_LIMIT				= 10697;		//公会-请求已经达到上限
+	ERR_CODE_GUILD_NOT_INVITE_BATTLING					= 10698;		//公会-正在战斗中，无法要求入会
+	ERR_CODE_GUILD_INVITE_TIMEOUT						= 10699;		//公会-邀请列表已经超时
+    
+    ERR_CODE_GUILDWAR_ENTRY_END						    = 10700;        //公会战， 本届联赛已进入季后赛或者结束，无法报名
+    ERR_CODE_GUILDWAR_ENTRY_EXIST					    = 10701;        //公会战， 已报名
+    ERR_CODE_GUILDWAR_POWER							    = 10702;        //公会战， 权限不足
+    ERR_CODE_GUILDWAR_ENTRY_TIMEOUT					    = 10703;        //公会战， 报名--时间不对，也许已经进入了周五8点后
+    ERR_CODE_GUILDWAR_ENTRY_COIN						= 10704;        //公会战， 报名--资金不足
+    ERR_CODE_GUILDWAR_ENTRY_LV						    = 10705;        //公会战， 报名--等级不够
+    ERR_CODE_GUILDWAR_ENTRY_NUM						    = 10706;        //公会战， 报名--公会成员数量不足
+    ERR_CODE_GUILDWAR_CONFIRM_TIMEOUT				    = 10707;        //公会战， 确认--不在此时间段
+    ERR_CODE_GUILDWAR_CONFIRM_EMPTY					    = 10708;        //公会战， 确认--未参战
+    ERR_CODE_GUILDWAR_CONFIRM_TIME_LIMIT			    = 10709;        //公会战， 确认--加入公会时间不够
+    ERR_CODE_GUILDWAR_GUILD_FORMATION_TIMEOUT	        = 10710;        //公会战， 公会阵容，时间不对
+    ERR_CODE_GUILDWAR_GUILD_FORMATION_EMPTY		        = 10711;        //公会战， 公会阵容，不在参战阵容里
+    ERR_CODE_GUILDWAR_GUILD_FORMATION_TEAM_FULL         = 10712;        //公会战， 公会阵容，该组已满
+    ERR_CODE_GUILDWAR_FORMATION_USED 				    = 10713;        //公会战， 个人阵容 -- 英雄已被适用
+    ERR_CODE_GUILDWAR_FORMATION_NO_HERO 			    = 10714;        //公会战， 个人阵容 -- 没有该英雄
+    ERR_CODE_GUILDWAR_NOT_GUILD						    = 10715;        //公会战， 不在公会里
+    ERR_CODE_GUILDWAR_SERVICE_FAILED				    = 10716;        //公会战， 公会战服务还未准备好
+    ERR_CODE_GUILDWAR_CONFIRM_ALREADY				    = 10717;        //公会战， 已确认资格
+    ERR_CODE_GUILDWAR_CONFIRM_ROLE_LV				    = 10719;        //公会战， 个人等级不够
+    
+    ERR_CODE_GUILDACTIVITY_ID_INVALID				    = 10720;        //公会活动--活动ID不匹配
+    ERR_CODE_GUILDACTIVITY_STATUS_ERR				    = 10721;        //公会活动--活动状态不匹配
+    ERR_CODE_GUILDACTIVITY_TICKET_ERR				    = 10722;        //公会活动--捐赠门票错误
+    
+    ERR_CODE_GUILD_VICE_PRESIDENT_FULL				    = 10730;        //公会，副会长名额满
+    ERR_CODE_GUILD_NAME_REPEAT						    = 10731;        //公会，重名
+    ERR_CODE_GUILD_NAME_INVALID						    = 10732;        //公会，名字非法
+    
+    ERR_CODE_FRIEND_FULL								= 10940;        //好友： 好友满
+    ERR_CODE_FRIEND_TARGET_FULL						    = 10941;        //好友： 对方好友满
+    
+	ERR_CODE_RED_ENVELOPES_SEND_FAIL		            = 10750;        //公会红包 发送红包失败
+	ERR_CODE_RED_ENVELOPES_SEND_FAIL_NOGUILD            = 10751;        //公会红包 没有公会
+	ERR_CODE_GUILD_NAME_TOO_LONG			            = 10752;        //公会名字过长 
+	ERR_CODE_GUILD_SIGNATURE_TOO_LONG			        = 10753;        //公会宣言过长 
+	ERR_CODE_GUILD_SIGNATURE_NULL				        = 10754;        //公会宣言为空 
+	ERR_CODE_GUILD_NOT_MERGE_MYSELF				        = 10755;        //无法合并自己的公会 
+	ERR_CODE_GUILD_HOT_NOT_MERGE				        = 10756;        //公会很活跃，无需合并 
+	ERR_CODE_GUILD_TARGET_HOT_NOT_MERGE				    = 10757;        //目标公会很活跃，无需合并 
+    ERR_CODE_GUILD_TARGET_MEMBER_FULL				    = 10758;        //公会-合并人数超过对方公会最大人数
+    ERR_CODE_GUILD_TARGET_MERGE_LIST_FULL				= 10759;        //公会-对方合并列表已满
+    ERR_CODE_GUILD_BEYOND_MAX_MEMBER				    = 10760;        //公会-合并人数超过公会最大人数
+    ERR_CODE_GUILD_MEMBER_BONUS_NULL				    = 10761;        //公会-你的公会分红为空
+	ERR_CODE_RED_ENVELOPES_COIN_TOO_MUCH	            = 10762;        //公会红包 -- 金额超过上限
+	
+    ERR_CODE_SNS_END								    = 10800;
+
+    ERR_CODE_QUEST_TIME_NOT_MATCH                       = 10894; // 未处于任务规定时间内
+    ERR_CODE_JOB_NOT_MATCH                              = 10895;
+    ERR_CODE_DATE_NOT_MATH                              = 10896; // 日期不匹配
+    ERR_CODE_QUEST_IS_HIDE                              = 10897;
+    ERR_CODE_QUEST_TEAM_MEMBER_NOT_ENOUGH               = 10898;
+    ERR_CODE_ACHIEVE_POINT_NOT_ENOUGH                   = 10899;
+	ERR_CODE_QUEST_ALEADY_ACCEPT			            = 10900;
+	ERR_CODE_QUEST_ALEADY_FINISH			            = 10901;
+	ERR_CODE_QUEST_PREV_NOT_FIN				            = 10902;
+	ERR_CODE_QUEST_NOT_COMPLETE 			            = 10903;
+	ERR_CODE_QUEST_NOT_ACCEPT				            = 10904;
+
+	ERR_CODE_GEMSTONE_SYNTHESIZE_FAIL 		            = 10905;        //合成失败 消耗一个宝石
+
+	ERR_CODE_PRE_LEVEL_NOT_COMPLETE			            = 10906;        //前置关卡未完成
+	ERR_CODE_LEVEL_PLAYER_LEVEL				            = 10907;        //玩家不符合关卡等级要求
+	ERR_CODE_ROLE_NAME_REPEATED 			            = 10908;        //玩家角色名重复
+	ERR_CODE_ROOM_1V1_INVITE_OFFLINE		            = 10909;        //1V1邀请对方不在线
+	ERR_CODE_ROOM_1V1_INVITE_BATTLING	                = 10910;	    //1v1邀请对方在战斗中
+	ERR_CODE_ROOM_BATTLE_LIMIT				            = 10911;        //本方战斗受限状态， 不允许进入房间
+	ERR_CODE_ROOM_OTHER_BATTLE_LIMIT		            = 10912;        //对方战斗受限状态， 不允许进入房间
+    ERR_CODE_ROLE_NAME_LENGTH    			            = 10913;        //玩家角色名过长
+    ERR_CODE_TEAM_START_BATTLE_PLAYER_LEVEL_LOW         = 10914;        //玩家不符合关卡等级要求，过低
+    ERR_CODE_TEAM_START_BATTLE_PLAYER_LEVEL_HIGH        = 10915;        //玩家不符合关卡等级要求，过高
+    ERR_CODE_TEAM_START_BATTLE_PRE_LEVEL_NOT_COMPLETE   = 10916;		//前置关卡未完成
+    
+    ERR_CODE_SKYARENA_CANNOT_JOIN_FORM_OUTDOR           = 10919;  // 天空竞技场外玩家不允许加入场内队伍
+    ERR_CODE_SKYARENA_ALEADY_GET_AWARD                  = 10920;        //奖励已领取
+    ERR_CODE_SKYARENA_AWARD_CANNOT_GET                  = 10921;        //未达到领奖条件
+
+    ERR_CODE_STATE_IN_MATCH_OR_BATTLE                   = 10922; //在匹配或战斗中
+    ERR_CODE_MEMBER_STATE_IN_MATCH_OR_BATTLE            = 10923; //队员在匹配或战斗中
+
+    ERR_CODE_MATCH_1V1_NOT_OPEN                         = 10928; // 1v1-不在开启时间
+    ERR_CODE_MATCH_1V1_NOT_IN_MAP                       = 10929; // 1v1-不在匹配地图
+    ERR_CODE_MATCH_1V1_LEVEL_NOT_ENOUGH	                = 10930; // 1v1-等级不足
+    ERR_CODE_MATCH_1V1_IN_BATTLE                        = 10931; // 在战斗中
+    ERR_CODE_MATCH_1V1_IN_MATCH                         = 10932; // 已经在匹配了
+    ERR_CODE_MATCH_1V1_CANNOT_FIND_RIVAL                = 10933; // 无法匹配对手
+
+    ERR_CODE_RIFT_FLOOR                                 = 10934;        //秘境层数未到达
+    
+    ERR_CODE_RIFT_RESET_BOSS_MAP			            = 10950;        //大秘境重置地图--是boss地图，无法重置
+    ERR_CODE_RIFT_RESET_WRONG_CREATE_METHOD			    = 10951;        //大秘境重置地图--不是大秘境创建方式
+
+    ERR_CODE_RIFT_NOT_IN_Season                         = 10952;        //大秘境未开启 
+    ERR_CODE_RIFT_RESET_MAP_CD			                = 10953;        //大秘境重置地图--CD
+    ERR_CODE_RIFT_PLAYER_LV			                    = 10954;        //大秘境玩家等级不足
+    ERR_CODE_REPEATED_RIFT_FLOOR_BONUSES			    = 10955;        //已经领取楼层奖励
+    ERR_CODE_NOT_RIFT_CUSTOMS_FLOOR                     = 10956;        //未通关此楼层
+    ERR_CODE_RIFT_FLOOR_LESS_NPC                        = 10957;        //玩家还未达到此NPC
+    ERR_CODE_RIFT_FLOOR_GREATE_NPC                      = 10958;        //玩家已经通关此NPC
+    
+    ERR_CODE_PLAYER_COMMENT_HERO_COUNT			        = 10960;        //
+
+    ERR_CODE_BANG_COMMENT_REPEATED                      = 10961;
+    ERR_CODE_BANG_COMMENT_LIMIT			                = 10962; 
+    ERR_CODE_COMMENT_LENGHT			                    = 10963; 
+
+	ERR_CODE_WORLD_CHAT_NEED_LEVEL                      = 10969;
+    ERR_CODE_WORLD_CHAT_TOO_FAST                        = 10970;
+	ERR_CODE_CHAT_LINK_INVALID                          = 10971;       //聊天连接信息无效
+	
+    ERR_CODE_RIFT_SHOP_ITEM_INVAILD                     = 10981;
+    ERR_CODE_RIFT_SHOP_ITEM_STOCK                       = 10982;
+    
+    ERR_CODE_ROOM_PLAYER_NOT_READY                      = 10983;
+
+    ERR_CODE_MPVE_BOUNS_SCORE                           = 10984;
+    
+    ERR_CODE_ROOM_MAP_PLAY_COUNT                        = 10985;
+
+    ERR_CODE_MPVE_BOUNS_REPEAT                          = 10986;
+
+	ERR_CODE_FRIEND_SUPPORT_INVATE_FRIEND_REACH_MAX     = 11034;        //邀请好友援助_已达最大人数
+	ERR_CODE_FRIEND_SUPPORT_REPLY_REACH_MAX             = 11035;        //应答好友援助_已达最大人数
+	ERR_CODE_FRIEND_SUPPORT_INVITE_FRIEND_IN_MATCH      = 11036;        //邀请好友援助_好友在匹配中
+	ERR_CODE_FRIEND_SUPPORT_INVITE_FRIEND_IN_FIGHT      = 11037;        //邀请好友援助_好友在战斗中
+	ERR_CODE_FRIEND_SUPPORT_INVITE_FRIEND_IN_TEAM       = 11038;        //邀请好友援助_好友已在队伍中
+	ERR_CODE_FRIEND_SUPPORT_IN_TEAM                     = 11039;        //邀请好友援助_自己在队伍中
+	
+	ERR_CODE_ROLE_KICKOFF_SERVER_STOP                   = 11040;        //服务器停机踢人
+	ERR_CODE_ROLE_LOGIN_TIMEOUT                         = 11041;        //角色登陆超时
+	ERR_CODE_ROLE_KICKOFF_BY_GM							= 11042;		//运营踢人
+	ERR_CODE_ROLE_KICKOFF_PKG_OVERRATED					= 11043;		//客户发包频率过快
+	ERR_CODE_ROLE_KICKOFF_BY_DELETE_ROLE                = 11044;        //删除角色踢人
+	
+	ERR_CODE_SEND_PACKET_FREQUENCY_FAST	                = 11051;        //客户发包频率过快
+	ERR_CODE_SEND_PACKET_SAME_CMD_FAST	                = 11052;        //客户发包同一命令包间隔过短
+	ERR_CODE_KICKOFF_SEND_PACKET_FREQUENCY_FAST         = 11053;        //客户发包频率过快导致被KICK
+	
+    ERR_CODE_ACCOUNT_PWD_ERROR                          = 11054;        //密码错误
+    
+    ERR_CODE_HERO_HP_EMPTY                              = 11055;        //血量为0
+
+    ERR_CODE_SERVER_BUSY                                = 11061;        //
+    ERR_CODE_BATTLE_SERVER_BUSY                         = 11062;        //
+
+	ERR_CODE_SURRENDER_IN_CD                            = 11070;        //认输在CD中
+	ERR_CODE_SURRENDER_TOO_EARLY                        = 11071;        //认输太早了
+
+	ERR_CODE_HERO_RANK_UP_GET_MAX_RANK                  = 11081;        //英雄升rank, 已经到最大rank了
+	ERR_CODE_HERO_RANK_UP_DEL_ITEM                      = 11082;        //英雄升rank, 删除物品错误
+
+	ERR_CODE_PLAYER_AUTO_FIGHT_SWITCH_TOO_QUICK         = 11091;        //自动战斗, 按太快 
+	ERR_CODE_PLAYER_AUTO_FIGHT_NOT_ALLOWED              = 11092;        //自动战斗, 不允许
+
+    ERR_CODE_NO_ENOUGH_MONYE                            = 11101;
+
+	ERR_CODE_PLAYER_CREDIT_BAN_BATTLE                   = 11111;        //信誉系统禁战斗
+	ERR_CODE_PLAYER_CREDIT_BAN_MATCH                    = 11112;        //信誉系统禁匹配 
+	ERR_CODE_PLAYER_CREDIT_BAN                          = 11113;        //信誉系统积分禁止战斗
+
+	ERR_CODE_GUILD_PIECE_ID_NOT_MATCH				    = 11120;        //援助碎片id与玩家发布的碎片id不匹配
+	ERR_CODE_GUILD_PIECE_PLAYER_NOT_RECORD			    = 11121;        //援助的玩家记录不存在
+	ERR_CODE_GUILD_PIECE_PUBLIC_TIME_CD				    = 11122;        //发布援助的间隔时间太短
+	ERR_CODE_GUILD_PIECE_PUBLIC_COUNT   			    = 11123;        //发布援助的碎片数量错误
+	ERR_CODE_GUILD_PIECE_PUBLIC_MAX_COUNT  			    = 11124;        //发布援助的数量已经超过了最大值
+
+    ERR_CODE_SYNTHESIS_HAVE_HERO                        = 11125;        //已经拥有这个英雄
+
+    ERR_CODE_TRADE_BUY_OUT_LIMITED_NUM                  = 11126;        //达到限购数量
+
+    ERR_CODE_NIANPRACTICE_NO_HERO_DATA                  = 11127;        //没有这个英雄的念修行信息
+    ERR_CODE_NIANPRACTICE_LOCK                          = 11128;        //对应得念能力没有解锁
+    ERR_CODE_NIANPRACTICE_NOT_NEED_CHALLENGE            = 11129;        //对应得念能力已经开始修行
+    ERR_CODE_NIANPRACTICE_CHALLENGE_CONDITION           = 11130;        //对应得念能力挑战条件未达成
+    ERR_CODE_NIANPRACTICE_CHALLENGE                     = 11131;        //对应得念能力没有完成挑战
+    ERR_CODE_NIANPRACTICE_COMPLETE                      = 11132;        //对应得念能力完成修行
+    ERR_CODE_NIANPRACTICE_NO_ITEM                       = 11133;        //对应得念能力消耗物品不足
+
+    ERR_CODE_RIFT_SHOP_ITEM_CREDIT                      = 11134;        //大秘境币不足
+    ERR_CODE_SYS_FUNC_NOT_OPEN                          = 11135;        //系统未开启
+    ERR_CODE_MOVE_SEQ_INVALID                           = 11136;        //移动SEQ非法
+    ERR_CODE_MOVE_SEQ_IGNORE                            = 11137;        //移动SEQ需要忽略，因为MoveStop的原因 
+
+    ERR_CODE_MSG_UNMONITOR                              = 11138;        //系统未开启;
+
+    ERR_CODE_QUESTION_COMPLETE                          = 11139;        //答题 完成五次
+    
+	ERR_CODE_SOUL_BOX_ALREADY_OPEN					    = 11140;        //魂匣已经开启过了
+	ERR_CODE_SOUL_BOX_SLOT_EXISTED					    = 11141;        //无法多次往魂匣槽加入魂匣
+	ERR_CODE_SOUL_BOX_SLOT_NOTHING					    = 11142;        //魂匣槽没有魂匣，无法移除
+	ERR_CODE_SOUL_BOX_NOT_FRIEND_AND_GUILD			    = 11143;        //此玩家不是好友也不是公会成员
+    ERR_CODE_SOUL_BOX_ALREADY_TIME_NULL				    = 11144;        //魂匣的倒计时间已经完成
+	ERR_CODE_SOUL_BOX_TIME_NOT_NULL					    = 11145;        //魂匣的倒计时间还没有完成，无法开启
+
+	ERR_CODE_TRADE_SELL_PRICE_INVALID                   = 11146;        //珍宝阁价格不符合
+	ERR_CODE_TRADE_SHOW_TIME_NOT_BUY                    = 11147;        //还在公示时间，无法购买
+	ERR_CODE_TRADE_NOT_OVER_MAXLAP                      = 11148;        //不能超过最大叠加数
+	ERR_CODE_TRADE_BUY_COUNT_NOT_ENOUGH                 = 11149;        //购买的数量超过了上架数,数量不足
+
+    ERR_CODE_QUESTION_RIGHT_COUNT                       = 11151;        //问答任务未达到领取奖励条件
+    ERR_CODE_QUESTION_HELP_COUNT                        = 11152;        //问答任务求助次数已满
+    ERR_CODE_QUESTION_LV                                = 11153;        //问答任务等级不够
+    ERR_CODE_AWARD_QUESTION_REWARD                      = 11154;        //领取过奖励
+    ERR_CODE_QUESTION_HELP_GUILD                        = 11155;        //不在公会中
+
+	ERR_CODE_PARTNER_RANK_NOT_ENOUGH                    = 11156;        //星级不够
+    ERR_CODE_PARTNER_ALREADY_UNLOCK                     = 11157;        //伙伴已解锁
+    ERR_CODE_PARTNER_SKILL_LOCK                         = 11158;        //技能没解锁
+    ERR_CODE_PARTNER_SKILL_NOT_EXIST                    = 11159;        //技能不存在
+    ERR_CODE_PARTNER_PUNCHING_MAX_NUM                   = 11160;        //伙伴系统技能孔数已满
+    ERR_CODE_PARTNER_APTITUDE_NOT_FIND                  = 11161;        //伙伴系统资质不存在
+    ERR_CODE_PARTNER_INVALID_SKILL_SLOT                 = 11162;        //伙伴系统错误的技能槽位
+    ERR_CODE_PARTNER_NOT_EXIST                          = 11163;        //伙伴不存在
+    ERR_CODE_PARTNER_GET_MAX_NUM                        = 11164;        //伙伴达到最大值
+    ERR_CODE_PARTNER_INVALID_STATE                      = 11165;        //非法状态
+    ERR_CODE_PARTNER_OPEN_HOLE_FAILED                   = 11166;        //伙伴系统技能开孔失败(概率失败,非系统错误)
+    ERR_CODE_PARTNER_APTITUDE_UP_MAX_TIMES              = 11167;        //资质提升次数上限
+    ERR_CODE_PARTNER_GET_MAX_STAR                       = 11168;        //伙伴到达最大星级
+    ERR_CODE_PARTNER_UNCOMMON_PARTNER                   = 11169;        //伙伴升星,吃了不同id的伙伴
+    ERR_CODE_PARTNER_SKILL_MAX_LEVEL                    = 11170;        //伙伴技能最大等级
+    ERR_CODE_PARTNER_NO_PASSIVE_SKILL                   = 11171;        //没有可替换被动技能
+    ERR_CODE_PARTNER_MAX_LEVEL                          = 11172;        //伙伴最大等级
+    ERR_CODE_PARTNER_LEVEL_NOT_ENOUGH_LEARN_SKILL       = 11173;        //等级不够升级技能
+    ERR_CODE_PARTNER_APTITUDE_MAX                       = 11174;        //伙伴资助上限
+    ERR_CODE_PARTNER_PLAYER_NOT_EXIST                   = 11175;        //玩家不存在(已下线)
+	ERR_CODE_PARTNER_PLAYER_LEVEL_NOT_ENOUGH_FIGHT      = 11176;        //玩家等级不过
+	ERR_CODE_PARTNER_LEVEL_TOO_ENOUGH_FIGHT             = 11177;        //伙伴等级过高无法出战
+	ERR_CODE_PARTNER_LEVEL_TOO_ENOUGH_GET_EXP           = 11178;        //伙伴等级过高无法加经验
+	ERR_CODE_PARTNER_INVALID_UNLOCK_TYPE                = 11179;        //错误的解锁类型
+
+	ERR_CODE_PLAYER_NOT_IN_TEAM                         = 11183;        //玩家没有队伍
+	
+	ERR_CODE_PARTNER_SKIN_CHANGE_NOT_HAVE               = 11184;        //未拥有的皮肤
+	ERR_CODE_PARTNER_SKIN_CHANGE_ALREADY_EQUIP          = 11185;        //已经穿戴
+	ERR_CODE_PARTNER_SKIN_ADD_TIME_LIMIT                = 11186;        //不在购买时限
+	ERR_CODE_PARTNER_SKIN_ADD_CAN_BUY                   = 11187;        //无法购买
+	ERR_CODE_PARTNER_SKIN_ADD_ALREADY_HAVE              = 11188;        //已拥有
+	ERR_CODE_PARTNER_SKIN_ADD_NOT_EXIST                 = 11189;        //不存在的皮肤
+	ERR_CODE_PARTNER_SKIN_ADD_NOT_SELF                  = 11190;        //不能获得不是自己的皮肤
+	ERR_CODE_PARTNER_SKIN_BAG_IS_FULL                   = 11191;        //皮肤已满
+	ERR_CODE_PARTNER_SKIN_CHANGE_NOT_SELF               = 11192;        //不能穿不是自己的皮肤
+	ERR_CODE_PARTNER_SKIN_NOT_EQUIP                     = 11193;        //没有穿皮肤
+
+    /////////--队伍系统错误码预留11200-11300////////////////
+	ERR_CODE_TEAM_CREATE_IN_MULTI_LEVEL                 = 11198;        //创建队伍_在连战中
+    ERR_CODE_TEAM_OP_INVALID_PARA						= 11199;        //队伍操作，参数不合法，一般是前后端队伍信息不一致造成的(BUG)，提示可以写成'队伍数据异常'
+	ERR_CODE_TEAM_CREATE_IN_BATTLE						= 11200;        //创建队伍_在战斗中
+	ERR_CODE_TEAM_CREATE_IN_MATCH						= 11201;        //创建队伍_在匹配中
+	ERR_CODE_TEAM_CREATE_ALREADY_IN_TEAM				= 11202;        //创建队伍_已经在队伍里
+	ERR_CODE_TEAM_CREATE_PLATFORM						= 11203;        //创建队伍_不符合平台目标设置
+
+	ERR_CODE_TEAM_INVITE_NOT_SAME_SCENE					= 11204;        //邀请入队_不在同一特殊场景
+	ERR_CODE_TEAM_INVITE_FULL							= 11205;        //邀请入队_队伍满员
+	ERR_CODE_TEAM_INVITE_INVALID_TEAM					= 11206;        //邀请入队_邀请人不在队伍里
+	ERR_CODE_TEAM_INVITE_NOT_LEADER						= 11207;        //队长邀请入队_邀请人不是队长，一般发生在换队长的过程中
+	ERR_CODE_TEAM_INVITE_ALREADY_IN_TEAM				= 11208;        //邀请入队_对方已在队伍中
+	ERR_CODE_TEAM_INVITE_IN_BATTLE						= 11209;        //邀请入队_对方在战斗中
+	ERR_CODE_TEAM_INVITE_IN_MATCH						= 11210;        //邀请入队_对方在匹配中
+
+	ERR_CODE_TEAM_INVITE_LEADER_REPLY_INVALID_TEAM		= 11211;        //邀请入队_队长回复_不在队伍里
+	ERR_CODE_TEAM_INVITE_LEADER_REPLY_NOT_LEADER		= 11212;        //邀请入队_队长回复_不是队长
+	ERR_CODE_TEAM_INVITE_LEADER_REPLY_FULL				= 11213;        //邀请入队_队长回复_已经满员
+
+	ERR_CODE_TEAM_INVITE_REPLY_ALREADY_IN_TEAM			= 11214;        //邀请入队_被邀请人回复同意_已经在队伍中
+	ERR_CODE_TEAM_INVITE_REPLY_NOT_LEADER				= 11215;        //邀请入队_被邀请人回复同意_但队长已切换
+	ERR_CODE_TEAM_INVITE_REPLY_INVALID_TEAM				= 11216;        //邀请入队_被邀请人同意_但队伍已不存在
+	ERR_CODE_TEAM_INVITE_REPLY_IN_BATTLE				= 11217;        //邀请入队_被邀请人在战斗中
+	ERR_CODE_TEAM_INVITE_REPLY_IN_MATCH					= 11218;        //邀请入队_被邀请人在匹配中
+	ERR_CODE_TEAM_INVITE_REPLY_FULL						= 11219;        //邀请入队_被邀请人同意_但已经满员
+
+	ERR_CODE_TEAM_APPLY_INVALID_TEAM					= 11220;        //申请入队_队伍不存在
+	ERR_CODE_TEAM_APPLY_IN_BATTLE						= 11221;        //申请入队_自己在战斗中
+	ERR_CODE_TEAM_APPLY_IN_MATCH						= 11222;        //申请入队_自己在匹配中
+	ERR_CODE_TEAM_APPLY_ALREADY_IN_TEAM					= 11223;        //申请入队_已在队伍中
+	ERR_CODE_TEAM_APPLY_FULL							= 11224;        //申请入队_队伍已满员
+	ERR_CODE_TEAM_APPLY_NOT_LEADER						= 11225;        //申请入队_队长已切换
+	ERR_CODE_TEAM_APPLY_NOT_SAME_SCENE					= 11226;        //申请入队_不在同一特殊活动场景
+	ERR_CODE_TEAM_APPLY_ERROR_LEVEL						= 11227;        //申请入队_等级限制不符合
+
+	ERR_CODE_TEAM_APPLY_REPLY_INVALID_TEAM				= 11228;        //回复申请入队_队伍不存在
+	ERR_CODE_TEAM_APPLY_REPLY_FULL						= 11229;        //回复申请入队_队伍已满
+	ERR_CODE_TEAM_APPLY_REPLY_NOT_LEADER				= 11230;        //回复申请入队_队长已切换
+	ERR_CODE_TEAM_APPLY_REPLY_APPLICATION_IN_BATTLE		= 11231;        //回复申请入队_申请人在战斗里
+	ERR_CODE_TEAM_APPLY_REPLY_APPLICATION_IN_MATCH		= 11232;        //回复申请入队_申请人在匹配中
+	ERR_CODE_TEAM_APPLY_REPLY_APPLICATION_IN_TEAM		= 11233;        //回复申请入队_申请人在队伍里
+
+	ERR_CODE_TEAM_KICK_INVALID_TEAM						= 11234;        //队长踢人_队伍不存在
+	ERR_CODE_TEAM_KICK_NOT_LEADER						= 11235;        //队长踢人_不是队长
+	ERR_CODE_TEAM_KICK_NO_SELF							= 11236;        //队长踢人_不能踢自己
+	ERR_CODE_TEAM_KICK_TARGET_NOT_IN_TEAM				= 11237;        //队长踢人_目标不在队伍里
+	ERR_CODE_TEAM_KICK_TARGET_IN_SAME_BATTLE			= 11272;		//队长踢人_目标跟自己在同一场战斗
+
+	ERR_CODE_TEAM_APPOINT_LEADER_INVALID_TEAM			= 11238;        //队长转让_队伍不存在
+	ERR_CODE_TEAM_APPOINT_LEADER_NOT_LEADER				= 11239;        //队长转让_不是队长
+	ERR_CODE_TEAM_APPOINT_LEADER_TARGET_NOT_IN_TEAM		= 11240;        //队长转让_目标不在队伍里
+
+	ERR_CODE_TEAM_APPLY_LEADER_INVALID_TEAM				= 11241;        //申请带队_队伍不存在
+	ERR_CODE_TEAM_APPLY_LEADER_ALREADY_LEADER			= 11242;        //申请带队_已经是队长
+	ERR_CODE_TEAM_APPLY_LEADER_IN_BATTLE				= 11243;        //申请带队_在战斗里
+	ERR_CODE_TEAM_APPLY_LEADER_IN_MATCH					= 11244;        //申请带队_在匹配里
+	ERR_CODE_TEAM_APPLY_LEADER_OLD_EXISTS				= 11245;        //申请带队_上一次申请还在流程中
+	ERR_CODE_TEAM_APPLY_LEADER_NOT_FOLLOW				= 11246;        //申请带队_暂离
+
+	ERR_CODE_TEAM_REPLY_APPLY_LEADER_INVALID_TEAM		= 11247;        //回复申请带队_队伍不存在
+	ERR_CODE_TEAM_REPLY_APPLY_LEADER_TIMEOUT			= 11248;        //回复申请带队_超时
+	ERR_CODE_TEAM_REPLY_APPLY_LEADER_ALREADY_LEADER		= 11249;        //回复申请带队_候选人已是队长
+	ERR_CODE_TEAM_REPLY_APPLY_LEADER_IN_BATTLE			= 11270;        //回复申请带队_候选人在战斗里
+	ERR_CODE_TEAM_REPLY_APPLY_LEADER_IN_MATCH			= 11271;        //回复申请带队_候选人在匹配里
+
+	ERR_CODE_TEAM_START_BATTLE_NOT_LEADER				= 11250;        //开始战斗_请求者不是队长
+	ERR_CODE_TEAM_START_BATTLE_IN_BATTLE				= 11251;        //开始战斗_请求者在战斗中
+	ERR_CODE_TEAM_START_BATTLE_IN_MATCH					= 11252;        //开始战斗_请求者在匹配中
+	ERR_CODE_TEAM_START_BATTLE_MEMBER_CANNOT_ENTER_MAP  = 11253;        //开始战斗_成员不能进入副本
+	ERR_CODE_TEAM_START_BATTLE_ONLY_SOLO				= 11254;        //开始战斗_这个战斗只能单人参加
+	ERR_CODE_TEAM_START_BATTLE_NEED_MORE_PLAYER			= 11255;        //开始战斗_人数不够
+	ERR_CODE_TEAM_START_BATTLE_TOO_MANY_PLAYER			= 11256;        //开始战斗_人数太多
+	ERR_CODE_TEAM_START_BATTLE_REFUSED					= 11257;        //开始战斗_有人拒绝
+	ERR_CODE_TEAM_START_BATTLE_OLD_EXISTS				= 11258;        //开始战斗_上一次申请还在流程中
+
+	ERR_CODE_TEAM_START_BATTLE_REPLY_INVALID_TEAM		= 11259;        //开始战斗确认_队伍不存在
+	ERR_CODE_TEAM_START_BATTLE_REPLY_IN_BATTLE			= 11260;        //开始战斗确认_请求者在战斗中
+	ERR_CODE_TEAM_START_BATTLE_REPLY_IN_MATCH			= 11261;        //开始战斗确认_请求者在匹配中
+	ERR_CODE_TEAM_START_BATTLE_REPLY_TIMEOUT			= 11262;        //开始战斗确认__超时
+
+	ERR_CODE_TEAM_SOLO_PVP_PLAYER1_JOINED_TEAM			= 11263;        //切磋_发起者有队伍
+	ERR_CODE_TEAM_SOLO_PVP_PLAYER1_IN_BATTLE			= 11264;        //切磋_发起者在战斗中
+	ERR_CODE_TEAM_SOLO_PVP_PLAYER1_IN_MATCH				= 11265;        //切磋_发起者在匹配中
+	ERR_CODE_TEAM_SOLO_PVP_PLAYER1_CANNOT_ENTER_MAP     = 11266;        //切磋_发起者不能进地图
+	ERR_CODE_TEAM_SOLO_PVP_PLAYER2_JOINED_TEAM			= 11267;        //切磋_接受者有队伍
+	ERR_CODE_TEAM_SOLO_PVP_PLAYER2_IN_BATTLE			= 11268;        //切磋_接受者在战斗中
+	ERR_CODE_TEAM_SOLO_PVP_PLAYER2_IN_MATCH				= 11269;        //切磋_接受者在匹配中
+	ERR_CODE_TEAM_SOLO_PVP_PLAYER2_CANNOT_ENTER_MAP     = 11280;        //切磋_接受者不能进地图
+
+	ERR_CODE_TEAM_RECALL_IN_BATTLE						= 11273;		//召回，队长自己在战斗中
+	ERR_CODE_TEAM_RECALL_TARGET_IN_BATTLE				= 11274;		//召回目标在战斗中
+	ERR_CODE_TEAM_REPLY_RECALL_REFUSED					= 11275;		//召回回复, 目标拒绝
+	ERR_CODE_TEAM_REPLY_RECALL_IN_BATTLE				= 11276;		//召回回复，队长在战斗中
+	ERR_CODE_TEAM_REPLY_RECALL_TARGET_IN_BATTLE			= 11277;		//召回回复，目标在战斗中
+	ERR_CODE_TEAM_REPLY_RECALL_INVALID_SCENE			= 11278;		//召回回复，队长所在的地方你无法前往
+	ERR_CODE_TEAM_RECALL_INVALID_SCENE					= 11279;		//召回回复，你所在的场景无法召回队员
+
+    ERR_CODE_TEAM_CREATE_IN_ESCORT                      = 11281;        //创建队伍，护送要人
+    ERR_CODE_TEAM_APPLY_IN_ESCORT                       = 11282;        //申请加入队伍，护送要人
+    ERR_CODE_TEAM_REPLY_INVITE_IN_ESCORT                = 11283;        //应答邀请加入队伍，护送要人
+    
+    ERR_CODE_TEAM_ALREADY_DELAY_QUIT_TEAM				= 11284;		//已处于退出战斗退队状态
+    ERR_CODE_TEAM_ALREADY_DELAY_NOT_FOLLOW				= 11285;		//已处于退出战斗暂离状态
+
+    ERR_CODE_TEAM_APPOINT_LEADER_NOT_FOLLOW				= 11286;		//转让队长，目标处于暂离状态
+    ERR_CODE_TEAM_START_BATTLE_READY_TEAM_CHANGED		= 11287;		//开始战斗确认流程中队伍信息有变化
+
+    ERR_CODE_TEAM_FOLLOW_LEADER_IN_BATTLE				= 11288;		//回归,队长在战斗中
+    ERR_CODE_TEAM_INVITE_LEADER_IN_NOT_HALFWAY_BATTLE	= 11289;		//邀请_队长在不允许中途加入的战斗中
+    ERR_CODE_TEAM_INVITE_REPLY_LEADER_IN_NOT_HALFWAY_BATTLE = 11290;	//回复邀请_队长在不允许中途加入的战斗中
+    ERR_CODE_TEAM_APPLY_LEADER_IN_NOT_HALFWAY_BATTLE 	= 11291;		//申请进队_队长在不允许中途加入的战斗中
+	ERR_CODE_TEAM_REPLY_APPLY_LEADER_IN_NOT_HALFWAY_BATTLE 	= 11292;	//回复申请进队_队长在不允许中途加入的战斗中
+
+	ERR_CODE_TEAM_REPLY_HALFWAY_JOIN_TEAM_CHANGED		= 11293;		//队伍(队长)战斗发生改变，不能加入
+	ERR_CODE_TEAM_REPLY_HALFWAY_JOIN_SELF_CHANGED		= 11294;		//自己的队伍信息发生改变，例如已经退队
+	ERR_CODE_TEAM_REPLY_HALFWAY_JOIN_REACH_MAX			= 11295;		//中途加入超过最大人数
+
+	ERR_CODE_TEAM_AUTOMATCH_NOT_ALLOWED_IN_GUILD		= 11296;		//在公会驻地不能自动匹配
+	ERR_CODE_TEAM_FOLLOW_LEADER_IN_GUILD				= 11297;		//队长在公会驻地，且不属于一个公会，无法回归
+	ERR_CODE_TEAM_REPLY_RECALL_LEADER_IN_GUILD			= 11298;		//召回回复，队长在行会驻地，无法跟随进入行会驻地
+	ERR_CODE_TEAM_REPLY_RECALL_IN_GUILD					= 11299;		//召回回复，队员名字XXX不是你的行会成员，无法跟随进入行会驻地
+	
+	ERR_CODE_FRIEND_ALREADY_IN_FRIEND_LIST				= 11300;        // 已经在好友列表中了
+	ERR_CODE_FRIEND_ROLE_IN_BLACK_LIST_NOT_ADD			= 11301;        // 此玩家在黑名单中,无法加好友
+	ERR_CODE_FRIEND_ROLE_NOT_IN_FRIEND					= 11302;        // 此玩家不是我的好友
+	ERR_CODE_FRIEND_ROLE_NOT_IN_BLACK					= 11303;        // 此玩家不在黑名单中
+	ERR_CODE_FRIEND_ROLE_ALREADY_IN_BLACK_LIST			= 11304;        // 此玩家已经在黑名单中
+	ERR_CODE_FRIEND_BLACK_LIST_FULL						= 11305;        // 黑名单列表已满
+	ERR_CODE_CD_TIME_IS_NOT_END							= 11306;        // 还处于cd时间中 
+	ERR_CODE_FRIEND_IM_NOT_IN_TARGET_FRIEND				= 11307;        // 我不是对方的好友
+
+	ERR_CODE_TEAM_JOINED_NOT_FOLLOW_LEADER_IN_BATTLE	= 11308;		//加入队伍，队长在战斗里造成不能跟随
+	ERR_CODE_TEAM_JOINED_NOT_FOLLOW_LEADER_IN_GUILD		= 11309;		//加入队伍，队长在公会里造成不能跟随
+
+	ERR_CODE_SOLO_PVP_PLAYER2_SET_REJECTED				= 11310;        //切磋_该玩家禁止接受切磋申请
+	ERR_CODE_SOLO_PVP_PLAYER2_RECENTLY_REJECTED			= 11311;        //切磋_玩家A在30秒内不会接收到玩家B的切磋邀请
+
+	ERR_CODE_TEAM_CREATE_NOT_PLATFORM_OUTDOOR			= 11350;		//创建绑定地图的队伍，不在武斗大会野外场地
+	ERR_CODE_TEAM_CREATE_ONLY_PLATFORM_OUTDOOR			= 11351;		//在配置了绑定地图的场景中，只能创建指定玩法队伍
+	ERR_CODE_TEAM_CHANGESETTINGS_NOT_PLATFORM_OUTDOOR	= 11352;		//改变队伍设置，不在武斗大会野外场地, 不能设置武斗大会玩法
+	ERR_CODE_TEAM_CHANGESETTINGS_ONLY_PLATFORM_OUTDOOR	= 11353;		//改变队伍设置，在武斗大会野外场地, 只能设置武斗大会玩法
+	ERR_CODE_TEAM_APPLY_NOT_SAME_PLATFORM_OUTDOOR		= 11354;		//申请进队，不在同一个武斗大会野外场地
+	ERR_CODE_TEAM_APPLY_ONLY_SAME_PLATFORM_OUTDOOR		= 11355;		//申请进队，在同一个武斗大会野外场地，不能申请其他玩法队伍
+	ERR_CODE_TEAM_INVITE_NOT_SAME_PLATFORM_OUTDOOR		= 11356;        //邀请入队_不在同一武斗大会野外场地
+	ERR_CODE_TEAM_INVITE_ONLY_SAME_PLATFORM_OUTDOOR		= 11357;        //邀请入队_在武斗大会野外场地, 不能被其他玩法队伍邀请
+	ERR_CODE_TEAM_INVITE_REPLY_NOT_SAME_PLATFORM_OUTDOOR= 11358;        //邀请入队_被邀请人同意_但不在同一武斗大会野外场地
+	ERR_CODE_TEAM_INVITE_REPLY_ONLY_SAME_PLATFORM_OUTDOOR= 11359;       //邀请入队_被邀请人同意_但在武斗大会野外场地_不能进入其他玩法队伍
+	ERR_CODE_TEAM_APPLY_REPLY_NOT_SAME_PLATFORM_OUTDOOR = 11360;		//回复申请进队，不在同一个武斗大会野外场地
+	ERR_CODE_TEAM_APPLY_REPLY_ONLY_SAME_PLATFORM_OUTDOOR= 11361;		//回复申请进队，在武斗大会野外场地_不能进其他玩法队伍
+	ERR_CODE_TEAM_TRANS_PLATFORM_OUTDOOR				= 11362;		//传送，不允许组队传送特殊活动场景，目前只有武斗大会野外场地
+
+	ERR_CODE_TRANS_IN_BATTLE                            = 11392;        //传送时在战斗中
+    ERR_CODE_SEALED_PLAYER                              = 11370;        //玩家被封号
+
+    ERR_CODE_ESCORT_IN_QUEST                            = 11371;        //在任务中
+    ERR_CODE_ESCORT_COMPLETE                            = 11372;        //已经完成三次任务
+    ERR_CODE_ESCORT_LEVEL                               = 11373;        //等级不够
+    ERR_CODE_ESCORT_FIGHT_FAILED                        = 11374;        //任务战斗失败
+    ERR_CODE_ESCORT_TRANS                               = 11375;        //不可传送
+    ERR_CODE_ESCORT_COMPLETE_HEIGHT                     = 11376;        //高级护送已经完成三次任务
+    ERR_CODE_ESCORT_LEVEL_HEIGHT                        = 11377;        //高级护送等级不够
+    ERR_CODE_ESCORT_IN_TEAM                             = 11378;        //在队伍中
+	
+	ERR_CODE_ACTIVITY_NOT_EXISTED						= 11380;        // 活动不存在
+	ERR_CODE_ACTIVITY_LEVEL_NOT_ENOUGH					= 11381;        // 等级不够参与此活动
+	ERR_CODE_ACTIVITY_COUNT_FULL						= 11382;        // 活动参与次数已满
+	ERR_CODE_ACTIVITY_REWARD_COUNT_FULL					= 11383;        // 活动奖励次数已满
+	ERR_CODE_ACTIVITY_NOT_START							= 11384;        // 活动没有开始
+	ERR_CODE_ACTIVITY_REWARD_NOT_EXISTED				= 11385;        // 奖励不存在
+	ERR_CODE_ACTIVITY_DEGREE_NOT_ENOUGH					= 11386;        // 活跃度不够
+	ERR_CODE_ACTIVITY_REWARD_ALREADY_GET				= 11387;        // 奖励已经获取过了 
+
+	ERR_CODE_NPC_TRIGGER_LEVEL_NEED_QUEST               = 11400;        //Npc触发关卡需要人物
+	ERR_CODE_NPC_IS_IN_TRIGGER                          = 11401;        //Npc正在触发战斗
+	ERR_CODE_NPC_TRIGGER_CNT_EMPTY                      = 11402;        //Npc触发关卡次数用完
+	ERR_CODE_NPC_CANNOT_TRIGGER_LEVEL                   = 11403;        //Npc不能触发该关卡
+	
+	ERR_CODE_MODIFY_ROLE_INFO_TIME_INVALID				= 11404;        // 修改玩家个人信息，时间非法
+	ERR_CODE_MODIFY_ROLE_INFO_SEX_INVALID				= 11405;        // 修改玩家个人信息，性别 非法
+	ERR_CODE_MODIFY_ROLE_INFO_LOCATION_LEN				= 11406;        // 修改玩家个人信息，位置字符长度过长
+	ERR_CODE_MODIFY_ROLE_INFO_SIGN_LEN					= 11407;        // 修改玩家个人信息，签名字符长度过长
+	
+    ERR_CODE_TREASUREMAP_PLAYER_LEVEL                   = 11410;        //藏宝图等级不够
+    ERR_CODE_TREASUREMAP_ITEM_FULL                      = 11411;        //背包满
+    ERR_CODE_TREASUREMAP_IN_BATTLE                      = 11412;        //战斗中
+    ERR_CODE_TREASUREMAP_PUNISHMENT                     = 11413;        //惩罚
+    ERR_CODE_TREASUREMAP_IN_STORAGE                     = 11414;        //藏宝图在仓库中
+
+	ERR_CODE_EP_IS_FULL                                 = 11415;        //活力值已满，无法使用物品
+
+    ERR_CODE_WRONG_CHAR                                 = 11420;        //用户名中有非法字符
+
+    ERR_CODE_ZONE_GET_STATUS_INDEX_INVALID				= 11430;        // 获取状态的序号错误
+	ERR_CODE_ZONE_PUBLISH_STATUS_LIMIT_LEN				= 11431; // 发布状态，内容长度过长
+	ERR_CODE_ZONE_STATUS_UP_REPEATED					= 11432; // 无法多次点赞同一个状态
+	ERR_CODE_ZONE_STATUS_NOT_NOTE_YOURSELF				= 11433; // 评论无法回复自己 
+	ERR_CODE_ZONE_STATUS_NOT_DELETE_OTHER_UP			= 11434; // 不能删除别人的点赞信息  
+	ERR_CODE_ZONE_STATUS_NOT_EXISITED					= 11435; // 此状态不存在  
+	ERR_CODE_ZONE_STATUS_NOT_DELETE_OTHER_NOTES			= 11436; // 不能删除别人的评论信息  
+	ERR_CODE_ZONE_MESSAGE_BOARD_STEP_ON_YOURSELF		= 11437; // 不能踩自己的空间 
+	ERR_CODE_ZONE_MESSAGE_BOARD_STEP_ON_COUNT			= 11438; // 超过最大踩空间的次数  
+	ERR_CODE_ZONE_NOT_ENOUGH_MONEY_SET_GIFT				= 11439; // 银币不够设置礼物
+
+    ERR_CODE_LIFE_SKILL_ROLE_LEVEL_NOT_ENOUGH           = 11440;        //角色等级不够
+    ERR_CODE_LIFE_SKILL_DAILY_USE_COUNT_MAX             = 11441;        //当日使用次数已满
+    ERR_CODE_LIFE_SKILL_NO_PRODUCT                      = 11442;        //没有产品
+    ERR_CODE_LIFE_SKILL_MAKE_DRUG_FAILED                = 11443;        //制药失败（配置的概率失败）
+    ERR_CODE_LIFE_SKILL_DRUG_TYPE_INVALID               = 11444;        //错误的药材类型
+    ERR_CODE_LIFE_SKILL_STEP_ERROR                      = 11445;        //错误的使用阶段
+    ERR_CODE_LIFE_SKILL_STEP_RUNNING                    = 11446;        //阶段进行中
+    ERR_CODE_LIFE_SKILL_MAX_LEVEL                       = 11447;        //达到生活技能最大等级
+    ERR_CODE_LIFE_SKILL_MAKE_DRUG_ITEM_NOT_ENOUGH       = 11448;        //炼药选中药材不够
+    ERR_CODE_LIFE_SKILL_MAKE_DURG_ITEM_TOO_ENOUGH       = 11449;        //炼药选中药材太多
+
+	ERR_CODE_SKILL_NOT_HAVE                             = 11450;        //没有该技能
+	ERR_CODE_SKILL_SKILL_FULL                           = 11451;        //技能槽位已满
+	ERR_CODE_SKILL_PARAM_INVALID                        = 11452;        //技能参数无效
+	ERR_CODE_SKILL_LV_IS_FULL                           = 11453;        //技能等级已满
+	ERR_CODE_SKILL_AWAKE_QUEST_NOT_FINISH               = 11454;        //觉醒任务未完成
+	ERR_CODE_NPC_IS_NOT_EXIST                           = 11455;        //npc不存在
+	ERR_CODE_SKILL_PRE_NOT_MATCH                        = 11456;        //技能前置技能未满足
+	ERR_CODE_SKILL_AWAKE_LEVEL_NOT_MATCH                = 11482;        //觉醒等级不满足
+
+	ERR_CODE_ZONE_BAG_IS_FULL							= 11460;		//背包已满 
+	ERR_CODE_ZONE_PUBLISH_MESSAGE_LIMIT_LEN				= 11461; 		//发布留言 ，内容长度过长
+	ERR_CODE_ZONE_GIVE_GIFT_MYSELF						= 11462; 		//送礼物无法送给自己 
+
+    ERR_CODE_RIFT_RESET_COUNT                           = 11470;        //本周重置次数已满
+    ERR_CODE_RIFT_CHALLENGE_COUNT                       = 11471;        //今日挑战次数  
+
+    ERR_CODE_ITEM_DAY_USE_LIMITED                       = 11472;        //今天使用次数用完
+	ERR_CODE_ITEM_WEEK_USE_LIMITED                      = 11473;        //本周使用次数用完
+	ERR_CODE_ITEM_USE_LIMITE_FULL                       = 11474;        //物品使用限制已满
+	ERR_CODE_DRUG_USE_NO_NEEDED							= 11475;		//药品使用，生命或魔法储存已达上限，不能使用
+	ERR_CODE_DRUG_USE_CD								= 11476;		//药品使用，CD中
+	ERR_CODE_DRUG_USE_NOT_IN_BATTLE						= 11477;		//药品使用，不在战斗中
+	ERR_CODE_ITEM_USE_FAILED                            = 11478;        //物品使用失败
+	
+	ERR_CODE_ITEM_USE_BUFF_MUTEX                        = 11479;        //更强增益buff在生效，无法使用
+	ERR_CODE_ITEM_USE_BUFF_NO_POS                       = 11469;        //增益buff同类buff已经加满，无法使用
+	ERR_CODE_ITEM_USE_BUFF_LAYER_FULL                   = 11468;        //[增益名称]正在生效，无法使用
+    ERR_CODE_DRUG_USE_NO_TIMES                          = 11467;        // 药品次数限制满
+	
+    ERR_CODE_LIFE_SKILL_GUILD_LEVEL_NOT_ENOUGH          = 11480;        //工会等级不够
+    ERR_CODE_LIFE_SKILL_GUILD_MAX_TAX_NOT_ENOUGH        = 11481;        //工会最大贡献不够
+    ERR_CODE_LIFE_SKILL_PROFESSION_NOT_MATCH            = 11483;        //职业不符合
+	ERR_CODE_LIFE_SKILL_HUNTER_PROFESSION_NOT_MATCH     = 11484;        //猎人职业部符合
+
+	ERR_CODE_FP_OPERATE_PARAM_INVALID                   = 11490;        //FP转换参数无效    
+	ERR_CODE_PLAYER_EP_IS_FULL                          = 11491;        //玩家EP已满
+	ERR_CODE_PLAYER_FP_IS_FULL                          = 11492;        //玩家FP已满
+	ERR_CODE_PLAYER_EP_IS_FULL_NTF                      = 11493;        //活力值已满，请及时使用
+
+	ERR_CODE_CUR_LEVEL_CANNOT_USE_DRUG					= 11494;		//当前关卡不能使用药品
+	
+    ERR_CODE_RIFT_BAG_IS_FULL							= 11500;		//背包已满 
+	ERR_CODE_EP_IS_NOT_ENOUGH							= 11501;
+
+    ERR_CODE_GEMSTONE_NOT_ENOUGH                        = 11502;        //宝石不足
+	ERR_CODE_PLAYER_NOT_IN_GUILD                        = 11503;        //玩家没有公会
+	ERR_CODE_TEAMMATE_NOT_IN_SAME_GUILD                 = 11504;        //有玩家在不同公会
+	ERR_CODE_GEMSTONE_SLOT_NOT_OPEN                     = 11505;        //宝石孔未开
+	ERR_CODE_GEMSTORE_DRESS_LEVEL_NOT_ENOUGH            = 11506;        //宝石镶嵌等级不足
+	ERR_CODE_GEMSTORE_DRESS_WEAR_POS_NOT_MACTH          = 11507;        //宝石镶嵌部分不匹配
+	
+	ERR_CODE_ITEM_EXCHANGE_DAY_LIMITED                  = 11510;       //今天的兑换次数已用完
+	ERR_CODE_ITEM_EXCHANGE_WEEK_LIMITED                 = 11511;       //本周的兑换次数已用完
+
+	ERR_CODE_RIFT_ONLY_ONE_PLAYER						= 11512;        //秘境只能单人参加
+	
+	ERR_CODE_GUILD_ACTIVITY_GOODS_TYPE_ERR				= 11514;        //替代物品类型错误
+	ERR_CODE_GUILD_ACTIVITY_ALREADY_TRANSPORT			= 11515;        //已经出航过了
+	ERR_CODE_GUILD_ACTIVITY_GOODS_NOT_FIND				= 11516;        //货运数据不存在，请刷新
+	ERR_CODE_GUILD_ACTIVITY_ALREADY_ADD					= 11517;        //已经填充过了
+	ERR_CODE_GUILD_ACTIVITY_HELP_CD_TIME				= 11518;        //求助cd中
+	ERR_CODE_GUILD_ACTIVITY_HELP_CONDITION_NOT			= 11519;        //求助条件不满足
+	ERR_CODE_GUILD_ACTIVITY_ITEM_IS_ENOUGH				= 11520;        //身上的物品已经满足条件
+	ERR_CODE_GUILD_ACTIVITY_HELP_OTHER_COUNT_FULL		= 11521;        //帮助他人次数已满
+	ERR_CODE_GUILD_ACTIVITY_TRANSPORT_CONDITION_NOT		= 11522;        //出航条件不满足
+
+	ERR_CODE_BUY_ITEM_NUM								= 11523;		//购买量不能为0
+	ERR_CODE_GUILD_ACTIVITY_HELP_COUNT_FULL				= 11524;        //求助次数已满
+	
+	ERR_CODE_CHAMBER_INVALID_PARAM                      = 11601;        //商会请求参数无效
+	ERR_CODE_CHAMBER_PRICE_IS_CHANGE                    = 11602;        //商会物品价格已经改变
+	ERR_CODE_CHAMBER_BUY_LIMITED                        = 11603;        //商会物品购买次数用完
+
+    ERR_CODE_SIX_EXPERIMENT_LEVEL_NOT_ENOUGH            = 11609;        //等级不足
+    ERR_CODE_SIX_EXPERIMENT_NO_SCORE_REWARD             = 11610;        //没有可领取的积分奖励
+    ERR_CODE_SIX_EXPERIMENT_GET_ALL_SCORE_REWARD        = 11611;        //奖励已经领完
+
+	ERR_CODE_TRAPTOWER_NONE_SCORE_AWARD 				= 11612;		//没有可领取的奖励
+    ERR_CODE_LIFE_SKILL_CANT_MAKE_ITEM     				= 11613;        //无法制作此物品
+
+	ERR_CODE_TRAPTOWER_NOT_IN_TEAM						= 11614;		//陷阱塔需要组队进行
+	ERR_CODE_TRAPTOWER_REPEAT_BUFF						= 11615;		//陷阱塔 已经获取此buff
+	ERR_CODE_SEA_DISCOVERY_GET_ALL_REWARD				= 11616;		//遗迹淘金，已经领取完了，所有的奖励
+	ERR_CODE_SEA_DISCOVERY_SCORE_NOT_ENOUGH				= 11617;		//遗迹淘金，没有到此奖励所需要的积分
+
+    ERR_CODE_MILITANT_MATCH_ENTER_MAP_LEVEL_NOT_ENOUGH  = 11630;        //等级不足
+    ERR_CODE_MILITANT_MATCH_ENTER_MAP_LEVEL_TOO_ENOUGH  = 11631;        //等级过高
+    ERR_CODE_MILITANT_MATCH_ENTER_MAP_NOT_RUNNING       = 11632;        //不在进行中
+    ERR_CODE_MILITANT_MATCH_ENTER_MAP_TEAM_FORBID       = 11633;        //不允许组队
+    ERR_CODE_MILITANT_MATCH_ENTER_MAP_IS_START          = 11634;        //已经开始
+	ERR_CODE_MILITANT_MATCH_NOT_ALLOWED_REWARD_TYPE     = 11635;        //不允许的奖励类型
+	ERR_CODE_MILITANT_MATCH_REWARD_ALREADY_GET          = 11636;        //已领取了奖励
+	ERR_CODE_MILITANT_MATCH_WIN_COUNT_NOT_ENOUGH        = 11637;        //胜场不够
+	ERR_CODE_MILITANT_MATCH_FIGHT_COUNT_NOT_ENOUGH      = 11638;        //参战场次不够
+	ERR_CODE_MILITANT_MATCH_WIN_COMB_NOT_ENOUGH         = 11639;        //连胜场次不够
+	ERR_CODE_MILITANT_MATCH_FIGHT_HONOR_DAILY_MAX       = 11640;        //当日获得武勋上限
+
+    ERR_CODE_EQUIP_PART_LEVEL_ERROR                     = 11701;  // 装备位等级不匹配
+    ERR_CODE_EQUIP_PART_LEVEL_MAX                       = 11702;  // 装备位等级已满
+    ERR_CODE_EQUIP_PART_ERROR                           = 11703;  // 装备位错误
+    ERR_CODE_EQUIP_ATTR_MAX                             = 11704;  // 属性满
+    //ERR_CODE_EQUIP_RESET_MATRIA_ERROR                   = 11705;  // 重铸材料错误
+    //ERR_CODE_EQUIP_INHERIT_LEVEL_NOT_ENOUGH             = 11706;  // 装备继承等级不足
+    //ERR_CODE_EQUIP_NO_AFFIX                             = 11707;  // 装备没有词缀
+    //ERR_CODE_EQUIP_HAS_AFFIX                            = 11708;  // 装备有词缀
+    //ERR_CODE_EQUIP_NO_STRENGTH                          = 11709;  // 装备没有强化
+    //ERR_CODE_EQUIP_HAS_STRENGTH                         = 11710;  // 装备有强化
+    //ERR_CODE_EQUIP_NOT_INDENTATION                      = 11711;  // 装备没有鉴定
+    ERR_CODE_EQUIP_STRENGTH_MAX                         = 10304;
+    //ERR_CODE_EQUIP_NO_BUFF                              = 11712;  // 装备没有buff
+    //ERR_CODE_EQUIP_HAS_BUFF                             = 11713;  // 装备有buff
+    //ERR_CODE_EQUIP_BUFF_FULL                            = 11714;  // 装备buff max
+    ERR_CODE_EQUIP_RESET_FAILED                         = 11714;  // 洗练概率失败
+    ERR_CODE_EQUIP_STRENGTH_FAILED                      = 11715;  // 强化概率失败
+
+
+
+	ERR_CODE_MAP_ENTER_LEVEL_LIMIT                      = 11801;  //地图进入等级不匹配
+	ERR_CODE_MAP_ENTER_BATTLE_LIMIT                     = 11802;  //当前地图进入战斗类型不匹配
+	ERR_CODE_MAP_ENTER_NEED_PARTNER                     = 11803;  //必须携带伙伴
+
+	ERR_CODE_MARKET_GOODS_EQUIP_WHIT_STRENGTH           = 11892;  //市场-强化过的装备不能出售
+	ERR_CODE_MARKET_GOODS_EQUIP_WHIT_RANDOM_ATTR        = 11893;  //市场-带重铸属性的装备不能出售
+	ERR_CODE_MARKET_GOODS_CANNT_FOCUS_SELF              = 11894;  //市场-不能关注自己的商品
+	ERR_CODE_MARKET_GOODS_CANNT_BUY_SELF                = 11895;  //市场-不能购买自己的商品
+	ERR_CODE_MARKET_GOODS_RESELL_NUM_INVALID            = 11896;  //市场-商品重新上架数量出错
+	ERR_CODE_MARKET_GOODS_IS_SOLD                       = 11897;  //市场-商品已经出售
+	ERR_CODE_MARKET_GOODS_CANNT_FOCUS                   = 11898;  //市场-商品无法关注
+	ERR_CODE_MARKET_GOODS_IN_TRADE_CD                   = 11899;  //市场-物品处于交易冻结期，不能在市场出售
+	ERR_CODE_MARKET_SELL_LIST_FULL                      = 11900;  //市场-摊位已满
+	ERR_CODE_MARKET_GOODS_PRICE_INVALID                 = 11901;  //市场-商品价格不合法
+	ERR_CODE_MARKET_ITEMS_CANNOT_SELL                   = 11902;  //市场-此物品不能出售
+	ERR_CODE_MARKET_SYSTEM_BUSY                         = 11903;  //市场-系统繁忙，稍后再试
+	ERR_CODE_MARKET_GOODS_IS_EXIST                      = 11905;  //市场-商品已经不存在 (出售或下架)
+	ERR_CODE_MARKET_GOODS_IS_EXPIRE                     = 11906;  //市场-商品已过期
+	ERR_CODE_MARKET_TRANS_STATE_ERR                     = 11907;  //市场-事务状态错误
+	                
+	
+	ERR_CODE_TEAM_PLAYER_IN_ESCORT						= 11908;  //你正在护送要人，无法回归
+	ERR_CODE_TEAM_LEADER_IN_ESCORT						= 11909;  //队长正在护送要人，无法回归
+	ERR_CODE_TEAM_RECALL_IN_ESCORT						= 11910;  //你正在护送要人，无法召回队员
+	ERR_CODE_TEAM_RECALL_TARGET_IN_ESCORT				= 11911;  //队员正在护送要人，无法召回
+	ERR_CODE_TEAM_MEMBER_CANNOT_TRANS				    = 11912;  //队内(0)不满足目的地的等级
+	ERR_CODE_TEAM_LEADER_IN_UNREACH_MAP			        = 11913;  //队长所在地图无法到达，(0)不能回归
+	ERR_CODE_TEAM_RECALL_MEMBER_UNREACH_MAP             = 11914;  //(0)无法传送到当前地图，无法召回
+	ERR_CODE_TEAM_APPLY_ROLE_CANNT_REACH_MAP            = 11924;  //对方不满足队伍当前所在地图的等级，无法进队
+	ERR_CODE_TEAM_CANNT_REACH_MAP_JOIN_FAILED           = 11925;  //不满足队伍当前所在地图的等级，无法进队
+	
+	ERR_CODE_ZONE_NOTES_NOT_EXISITED					= 11915;  // 此评论不存在  
+	ERR_CODE_ZONE_MESSAGE_NOT_EXISITED					= 11916;  // 此留言不存在  
+	ERR_CODE_ZONE_GIFT_RECORD_NOT_EXISITED				= 11917;  // 此礼物记录不存在  
+	ERR_CODE_ZONE_MESSAGE_NOT_DELETE_OTHER				= 11918;  // 无法删其他人的留言
+	
+	ERR_CODE_ROLE_TITLE_NOT_EXISTED						= 11919;		// 这个称号不存在 
+	ERR_CODE_ROLE_TITLE_NOT_HAVE						= 11920;		// 没有拥有这个称号 
+	ERR_CODE_ROLE_MAIL_NOT_FIND							= 11921;		// 没有找到此封邮件 
+	ERR_CODE_MAIL_BAG_IS_FULL							= 11922;		// 背包已满
+
+	ERR_CODE_TRAPTOWER_LV								= 11923;		// 陷阱塔等级不够
+
+	ERR_CODE_FASHION_BUY_SAME_FASHION_LIMIT             = 11930;        //时装相同只能有一件
+	ERR_CODE_FASHION_SAVE_SLOT_NOT_BUY                  = 11931;        //有未购买时装
+	ERR_CODE_FASHION_SAVE_SLOT_INVALID                  = 11932;        //非法槽位
+	ERR_CODE_FASHION_SAVE_SLOT_NO_INFO                  = 11933;        //没有选择保存的时装
+	ERR_CODE_FASHION_SAVE_SLOT_PROFESSION_NOT_MATCH     = 11934;        //职业不匹配
+	ERR_CODE_FASHION_INVALID_ID                         = 11935;        //非法时装ID
+	ERR_CODE_FASHION_TYPE_INVALID                       = 11936;        //错误时装类型
+	ERR_CODE_FASHION_SELECE_SLOT_INVALID                = 11937;        //选择非法槽位
+	ERR_CODE_FASHION_INVALID_MALL_ID                    = 11938;        //非法市场ID
+    ERR_CODE_FASHION_BAG_IS_FULL                        = 11939;        //时装背包已满
+	ERR_CODE_FASHION_BUY_LIMIT_TIME                     = 11940;        //不在可购买时间
+	ERR_CODE_FASHION_BUY_PROFESSION_NOT_MATCH           = 11941;        //职业不匹配
+
+	ERR_CODE_ESCORT_ACTIVE								= 11950;		//活力值不够
+	
+	ERR_CODE_ZONE_STATUS_PHOTO_COUNT_TOO_MORE			= 11955;		//状态的图片数量过多
+	ERR_CODE_ZONE_STATUS_PHOTO_SIZE_TOO_MUCH			= 11956;		//状态的图片尺寸过大
+
+	ERR_CODE_ZONE_STATUS_PHOTO_COUNT_NOT_MATCH			= 11957;		//缩略图和原图个数不匹配
+	ERR_CODE_ZONE_STATUS_SMALL_PHOTO_SIZE_TOO_MUCH		= 11958;		//状态的缩略图片尺寸过大
+
+	ERR_CODE_FIGHT_PARTNER_OTHER_SET                    = 11959;        //其他人已设置过相同伙伴
+	ERR_CODE_FIGHT_PARTNER_SELECT_NOT_DIED              = 11960;        //出战伙伴没死
+	ERR_CODE_FIGHT_PARTNER_SELECT_LEVEL_NOT_ENOUGH      = 11961;        //选伙伴等级不够
+	ERR_CODE_FIGHT_PARTNER_SELECT_DIED                  = 11962;        //选伙伴已死
+	ERR_CODE_FIGHT_PARTNER_ALREADY_SELECT               = 11963;        //选伙伴已选
+	ERR_CODE_FIGHT_PARTNER_INVALID_ID                   = 11964;        //伙伴ID错误
+	ERR_CODE_FIGHT_PARTNER_SLOT_ERROR                   = 11965;        //不存在槽位
+	ERR_CODE_FIGHT_PARTNER_NOT_EXIST                    = 11966;        //不存在的伙伴
+	ERR_CODE_FIGHT_PARTNER_NUM_TOO_SMALL                = 11967;        //设置数量过少
+	ERR_CODE_FIGHT_PARTNER_NUM_TOO_ENOUGH               = 11968;        //设置数量过多
+	ERR_CODE_FIGHT_PARTNER_ALREADY_SET                  = 11969;        //已经设置过出战伙伴
+
+	ERR_CODE_GUILD_COMPETITION_NOT_IN_GUILD             = 11970;        //没有公会
+	ERR_CODE_GUILD_COMPETITION_ID_NOT_EXIST             = 11971;        //比赛ID错误
+	ERR_CODE_GUILD_COMPETITION_ALREADY_REGISTER         = 11972;        //已经注册过
+	ERR_CODE_GUILD_COMPETITION_MAX_REGISTER_NUM         = 11973;        //最大注册数目
+	ERR_CODE_GUILD_COMPETITION_REGISTER_LV_NOT_ENOUGH   = 11974;        //工会等级不够
+	ERR_CODE_GUILD_COMPETITION_REGISTER_HOT_NOT_ENOUGH  = 11975;        //工会人气不够
+	ERR_CODE_GUILD_COMPETITION_REGISTER_COIN_NOT_ENOUGH = 11976;        //工会资金不够
+	ERR_CODE_GUILD_COMPETITION_REGISTER_NOT_BOSS        = 11977;        //不是工会老大
+	ERR_CODE_GUILD_COMPETITION_REGISTER_DAY_ERROR       = 11978;        //注册公会战日错误
+	ERR_CODE_GUILD_COMPETITION_REGISTER_WEEK_ERROR      = 11979;        //这册公会战周错误
+
+	ERR_CODE_MASTER_QUEST_ACCEPT						= 11980;		//已经接取了师徒任务
+	ERR_CODE_MASTER_QUEST_COMPLETE						= 11981;		//已经完成了今天的师徒任务
+	ERR_CODE_MASTER_QUEST_TEAM_MASTER					= 11982;		//师傅和徒弟组队
+	ERR_CODE_MASTER_QUEST_TEAM_FOLLOW					= 11983;		//组队必须在follow状态
+	ERR_CODE_MASTER_QUEST_TEAM_LEADER_MASTER			= 11984;		//队长必须是师傅
+	ERR_CODE_MASTER_QUEST_DES_ITEM						= 11985;		//不是指定的物品
+	ERR_CODE_MASTER_QUEST_APPRENTICE					= 11986;		//不是和这个徒弟接的任务
+	ERR_CODE_MASTER_QUEST_NOT_ITEM						= 11987;		//当前师徒任务不是提交物品
+	ERR_CODE_MASTER_QUEST_NOT_BATTLE					= 11988;		//当前师徒任务不是战斗
+	ERR_CODE_MASTER_QUEST_NOT_DES_LEVEL					= 11989;		//挑战的不是指定关卡
+	ERR_CODE_MASTER_QUEST_NOT_APPRENTICE				= 11990;		//不是师徒关系
+	ERR_CODE_MASTER_QUEST_WAIT_ANSWER					= 11991;		//等待徒弟回答
+	ERR_CODE_MASTER_QUEST_TIME							= 11992;		//刚放弃过任务，还不能接
+
+	ERR_CODE_SNS_GROUP_MEMBER_IS_FULL                   = 12100;        //群组成员已满
+	ERR_CODE_SNS_GROUP_MEMBER_EXIST                     = 12101;        //群成员已经存在
+	ERR_CODE_SNS_GROUP_MEMBER_NOT_EXIST                 = 12102;        //群成员不存在
+	ERR_CODE_SNS_GROUP_SERVICE_IS_BUSY                  = 12103;        //群组服务繁忙，请稍后再试
+	ERR_CODE_SNS_GROUP_CREATE_GROUP_FULL                = 12104;        //群组-创建的群组已达上限
+	ERR_CODE_SNS_GROUP_IN_LIST                          = 12105;        //群组已经存在列表中
+	ERR_CODE_SNS_GROUP_NOT_IN_LIST                      = 12106;        //群组没在列表中
+	ERR_CODE_SNS_GROUP_JOIN_GROUP_FULL                  = 12107;        //群组-加入的群已达上限
+	ERR_CODE_SNS_GROUP_ONLY_DISMISS_BY_OWNER            = 12108;        //群组-只有群主才能解散
+	ERR_CODE_SNS_GROUP_ONLY_KICK_BY_OWNER               = 12109;        //群组-只有群主才能踢人
+	ERR_CODE_SNS_GROUP_INVITEE_OFFLINE                  = 12110;        //群组-被邀请的人不在线
+	ERR_CODE_SNS_GROUP_INVITEE_LEVEL_NOT_MATCH          = 12111;        //群组-被邀请的人等级不足
+	ERR_CODE_SNS_GROUP_LEVEL_NOT_MATCH                  = 12112;        //群组-操作者等级不足
+	ERR_CODE_SNS_GROUP_CREATOR_CANNOT_QUIT              = 12113;        //群组-群主不能退出群
+	ERR_CODE_SNS_GROUP_OPROLE_NOT_IN_GROUP              = 12114;        //群组-你已经被移除群
+	ERR_CODE_SNS_GROUP_INVITEE_NOT_FRIEND               = 12115;        //群组-非双向好友
+	
+    // 12150 - 12199
+    ERR_CODE_SA_TEAM_MEMBER_NOT_ENOUGH                  = 12150;        //队伍人数不足
+    ERR_CODE_SA_TEAM_MEMBER_TOO_MORE                    = 12151;        //队伍人数过多
+    ERR_CODE_SA_TIME_OUT                                = 12152;        //不在玩法时间内
+    ERR_CODE_SA_ONLY_MATCH_BY_TEAMLEADER                = 12153;        //只有队长可以匹配
+    ERR_CODE_SA_LEVEL_NOT_ENOUGH                        = 12154;        //等级不足
+    ERR_CODE_SA_NOT_IN_MAP                              = 12155;        //不在匹配地图中
+    ERR_CODE_SA_ONLY_CANCLE_BY_TEAMLEADER               = 12156;        //只有队长可以取消
+    ERR_CODE_SA_IN_CD                                   = 12157;        //申请CD
+    ERR_CODE_SA_IN_BAN                                  = 12158;        //惩罚期
+    ERR_CODE_SA_MATCH_OTHER_NOT_CONFIRM                 = 12278;        //天空竞技场-别人没确认 
+    ERR_CODE_SA_MATCH_NOT_CONFIRM                       = 12279;        //天空竞技场-自己方没确认
+	
+	ERR_CODE_BATTLE_CORPS_INVITEE_LEVEL_LIMITE          = 12195;        //战队-被邀请者加入等级不满足
+	ERR_CODE_BATTLE_CORPS_INVITE_LEADER_REFUSE          = 12196;        //战队-队长拒绝邀请
+	ERR_CODE_BATTLE_CORPS_INVITEE_OFFLINE               = 12197;        //战队-被邀请者不在线
+	ERR_CODE_BATTLE_CORPS_INVITEE_REFUSE                = 12198;        //战队-被邀请者拒绝加入
+	ERR_CODE_BATTLE_CORPS_INVITEE_RANK_LIMITE           = 12199;        //战队-被邀请者段位等级不满足
+	ERR_CODE_BATTLE_CORPS_INVITEE_IN_CORPS              = 12200;        //战队-被邀请者已经在战队中
+	
+	ERR_CODE_BATTLE_CORPS_MEMBER_EXIST                  = 12201;        //战队-队员已经存在
+	ERR_CODE_BATTLE_CORPS_MEMBER_NOT_EXIST              = 12202;        //战队-队员不存在
+	ERR_CODE_BATTLE_CORPS_MEMBER_FULLED                 = 12203;        //战队-队员已经满
+	ERR_CODE_BATTLE_CORPS_ROLE_APPLY_EXIST              = 12204;        //战队-角色的申请已经存在
+	ERR_CODE_BATTLE_CORPS_ROLE_APPLY_NOT_EXIST          = 12205;        //战队-角色的申请不存在
+	ERR_CODE_BATTLE_CORPS_ROLE_APPLY_FULLED             = 12206;        //战队-申请列表已经满
+	ERR_CODE_BATTLE_CORPS_SERVICE_BUSY                  = 12207;        //战队-服务繁忙，请稍后再试
+	ERR_CODE_BATTLE_CORPS_ROLE_IN_CORPS                 = 12208;        //战队-角色已经在战队中
+	ERR_CODE_BATTLE_CORPS_NOT_EXIST                     = 12209;        //战队-战队不存在
+	ERR_CODE_BATTLE_CORPS_ONLY_DISMISS_BY_LEADER        = 12210;        //战队-只有队长才可以解散战队
+	ERR_CODE_BATTLE_CORPS_ONLY_AGREE_BY_LEADER          = 12211;        //战队-只有队长才可以审核加入
+	ERR_CODE_BATTLE_CORPS_LEADER_CANNOT_QUIT            = 12212;        //战队-队长不能离开战队
+	ERR_CODE_BATTLE_CORPS_LEVEL_LIMITE                  = 12213;        //战队-进入等级限制
+	ERR_CODE_BATTLE_CORPS_APPLY_RANK_LIMIT              = 12214;        //战队-你的段位与队长段位差距超出允许范围，无法申请
+	ERR_CODE_BATTLE_CORPS_AGREE_RANK_LIMIT              = 12215;        //战队-该玩家段位与队长段位差距超出允许范围，无法通过申请
+	
+	ERR_CODE_MASTER_ALREADY_BECOME_APPRENTICE			= 12216;		//我还是徒弟，无法收徒
+	ERR_CODE_MASTER_TARGET_IS_APPRENTICE				= 12217;		//对方还是徒弟，你无法拜他为师
+	ERR_CODE_MASTER_ALREADY_BECOME_MASTER				= 12218;		//我已经是师傅了，无法再拜师
+	ERR_CODE_MASTER_TARGET_BECOME_MASTER				= 12219;		//对方已经是师傅了,不能收他为徒
+	ERR_CODE_MASTER_TEAM_LEADER_MASTER					= 12220;		//队长必须是师傅
+	ERR_CODE_MASTER_TEAM_PLAYER_NOT_ENOUGH				= 12221;		//拜师的时候队伍人数不足
+	ERR_CODE_MASTER_TEAM_PLAYER_TOO_MORE				= 12222;		//拜师的时候队伍人数过多
+	ERR_CODE_MASTER_APPRENTICE_LEVEL_IS_NOT_MATCH		= 12223;		//徒弟的等级不符合拜师等级
+	ERR_CODE_MASTER_LEVEL_IS_NOT_MATCH					= 12224;		//师傅的等级不符合收徒等级
+	ERR_CODE_MASTER_ALREADY_HAVE_MASTER					= 12225;		//已经有师傅了
+	ERR_CODE_MASTER_APPRENTICE_LEAVE_CD_TIME			= 12226;		//徒弟解除关系冷却时间内
+	ERR_CODE_MASTER_ALREADY_HAVE_MAX_APPRENTICE			= 12227;		//你已经达到最大同时收徒数了
+	ERR_CODE_MASTER_LEAVE_CD_TIME						= 12228;		//师傅解除关系冷却时间内
+	ERR_CODE_MASTER_ALREADY_DAY_MAX_APPRENTICE			= 12229;		//你已经达到最大每日收徒数了
+	ERR_CODE_MASTER_TEAM_APPRENTICE_FOLLOW				= 12230;		//徒弟必要是跟随状态
+	ERR_CODE_MASTER_TEAM_TIME_OUT						= 12231;		//组队拜师超过限定时间
+	ERR_CODE_MASTER_NEED_LEADER_TEAM					= 12232;		//需要先由队长组队拜师
+	ERR_CODE_MASTER_APPRENTICE_COUNT_MAX				= 12233;		//已经达到最大收徒数
+	ERR_CODE_MASTER_IM_IN_BLACK							= 12234;		//我在对方黑名单中，无法拜师
+	ERR_CODE_MASTER_HE_IS_IN_MY_BLACK					= 12235;		//他在我黑名单中，无法拜师
+	ERR_CODE_MASTER_MY_FRIEND_IS_FULL					= 12236;		//我的好友列表已经满了
+	ERR_CODE_MASTER_HER_FRIEND_IS_FULL					= 12237;		//他的好友列表已经满了
+	ERR_CODE_MASTER_MATCH_CONDITION_ERR					= 12238;		//匹配拜师的条件设置错误
+	ERR_CODE_MASTER_ALREADY_SIGNED						= 12239;		//你已经报名当师傅了
+	ERR_CODE_MASTER_SIGNED_SYSTEM_ERR					= 12240;		//报名发生未知错误
+	ERR_CODE_MASTER_NOT_SIGNED							= 12241;		//你没有报名
+	ERR_CODE_MASTER_NOT_DELETE_FRIEND					= 12242;		//师徒关系无法删除好友
+	ERR_CODE_MASTER_NOT_ADD_BLACK						= 12243;		//师徒关系无法拉黑名单
+	ERR_CODE_MASTER_NOT_YOUR_APPRENTICE					= 12244;		//他不是你的徒弟
+	ERR_CODE_MASTER_ALREADY_SET_TASK					= 12245;		//已经设置过任务了
+	ERR_CODE_MASTER_NOT_SET_TASK						= 12246;		//没有设置任务
+	ERR_CODE_MASTER_ALREADY_FINISH						= 12247;		//你已经出师了
+	ERR_CODE_MASTER_ALREADY_UP_TASK						= 12248;		//已经提交过任务了
+	ERR_CODE_MASTER_TASK_NOT_FINISH						= 12249;		//教学任务没有完成
+	ERR_CODE_MASTER_NOT_UP_TASK							= 12250;		//没有提交任务
+	ERR_CODE_MASTER_ALREADY_GET_FINAL_REWARD			= 12251;		//已经领取过教学任务最终奖励了
+	ERR_CODE_MASTER_ALREADY_GET_RESULT_REWARD			= 12252;		//已经领取过这个成果奖励了
+	ERR_CODE_MASTER_RESULT_NOT_EXISTED					= 12253;		//这个成果没有找到
+	ERR_CODE_MASTER_RESULT_NOT_FINISH					= 12254;		//这个成果没有完成
+	ERR_CODE_MASTER_NOT_HAVE_MASTER						= 12255;		//还没有师傅
+	ERR_CODE_MASTER_FINISH_TEAM_PLAYER_NOT_ENOUGH		= 12256;		//结业的时候队伍人数不足
+	ERR_CODE_MASTER_FINISH_TEAM_PLAYER_TOO_MORE			= 12257;		//结业的时候队伍人数过多
+	ERR_CODE_MASTER_FINISH_LEVEL_NOT_ENOUGH				= 12258;		//结业的时候等级不够
+	ERR_CODE_MASTER_TARGET_ALREADY_FINISH				= 12259;		//对方已经出师了
+
+	ERR_CODE_TEAM_MATCH_NO_TEAM                         = 12260;        //没有队伍
+	ERR_CODE_TEAM_MATCH_NOT_LEADER                      = 12261;        //不是队长
+	ERR_CODE_TEAM_MATCH_NO_PLAYER                       = 12262;        //玩家已下线
+	ERR_CODE_TEAM_MATCH_ALREADY_IN_READY                = 12263;        //已发起
+	ERR_CODE_AUCTION_MATCH_MEMBER_NOT_ENOUGH            = 12264;        //成员不足
+	ERR_CODE_AUCTION_MATCH_MEMBER_TOO_MANY              = 12265;        //成员太多
+	ERR_CODE_AUCTION_MATCH_LEVEL_NOT_ENOUGH             = 12266;        //等级不足
+	ERR_CODE_AUCTION_MATCH_MAP_NOT_ALLOW                = 12267;        //地图不允许
+	ERR_CODE_AUCTION_MATCH_IN_BAN                       = 12268;        //被ban
+	ERR_CODE_AUCTION_MATCH_IN_CD                        = 12269;        //CD中
+	ERR_CODE_AUCTION_MATCH_PARTNER_NOT_ENOUGH           = 12270;        //伙伴不足
+	ERR_CODE_AUCTION_MATCH_NEED_SINGLE                  = 12271;        //只能单人
+	ERR_CODE_AUCTION_ALREADY_GET_DAILY_REWARD           = 12272;        //已领取过
+	ERR_CODE_AUCTION_NO_FIRST_WIN                       = 12273;        //没有首胜
+	ERR_CODE_PT_MATCH_OTHER_NOT_CONFIRM                 = 12274;        //伙伴-别人没确认 
+	ERR_CODE_PT_MATCH_NOT_CONFIRM                       = 12275;        //伙伴-自己方没确认
+	ERR_CODE_MATCH_CANCEL                               = 12276;        //主动取消匹配
+	ERR_CODE_PT_MATCH_NOT_IN_DATE                       = 12277;        //伙伴-不在时间内
+
+	ERR_CODE_LICENSE_ACTIVE_SLOT_FULL                   = 12281;        //十二支执照-奥义槽已满
+	ERR_CODE_LICENSE_PASSIVE_SLOT_FULL                  = 12282;        //十二支执照-战略槽已满
+	ERR_CODE_LICENSE_BLOCK_IS_OPEN                      = 12283;        //十二支执照-格子已经开启
+	ERR_CODE_LICENSE_BLOCK_CAN_NOT_OPEN                 = 12284;        //十二支执照-格子开启条件不满足
+	ERR_CODE_LICENSE_REQ_PARAM_INVALID                  = 12285;        //十二支执照-请求参数错误
+	ERR_CODE_LICENSE_LP_NOT_ENOUGH                      = 12286;        //十二支执照-LP点不足
+	ERR_CODE_LICENSE_BLOCK_LV_NOT_MATCH                 = 12287;        //十二支执照-开启格子等级不足
+	ERR_CODE_LICENSE_SLOT_UNLOCK_POINT_NOT_ENOUGH       = 12288;        //十二支执照-开启槽位解锁格数量不足
+	ERR_CODE_LICENSE_LP_EXCHANGE_EXP_NOT_ENOUGH         = 12289;        //十二支执照-lp兑换经验不足
+	ERR_CODE_LICENSE_LP_EXCHANGE_LIMIT                  = 12290;        //十二支执照-lp兑换上限不满足
+
+	ERR_CODE_NO_ENOUGH_CREDIT							= 12291;		//没有足够的积分
+	ERR_CODE_NO_ENOUGH_MONEY							= 12292;		//没有足够银币
+	ERR_CODE_NO_ENOUGH_GOLD								= 12293;		//没有足够金币
+	ERR_CODE_NO_ENOUGH_GUILD_HISTORY_CREDIT				= 12294;		//没有足够行会贡献
+	ERR_CODE_NO_ENOUGH_ITEM								= 12295;		//没有足够商品
+	ERR_CODE_NO_ENOUGH_BUY_COUNT						= 12296;		//没有足够的日购买次数
+	ERR_CODE_NO_ENOUGH_GUILD_LV							= 12297;		//没有足够的行会等级
+	
+	ERR_CODE_GUILD_BATTLE_BACK_TEAM_OUT_MAP             = 12305;        //队长不在当前场景
+	ERR_CODE_GUILD_COMPETITION_ENTER_IN_BATTLE          = 12306;        //在真实的战斗中
+	ERR_CODE_GUILD_BATTLE_BE_TICK                       = 12307;        //行动力耗尽踢出战场
+	ERR_CODE_GUILD_BATTLE_BE_PROTECT                    = 12308;        //保护状态
+	ERR_CODE_GUILD_BATTLE_CAN_ATTACK                    = 12309;        //不能攻击
+	ERR_CODE_AUCTION_MATCH_IN_MATCH                     = 12310;        //拍卖争夺会-匹配中
+	ERR_CODE_GUILD_COMPETITION_REGISTER_GUILD_QUIT      = 12311;        //公会战注册已经退出公会
+	ERR_CODE_GUILD_COMPETITION_TODAY_NOT_BATTLE         = 12312;        //今天没有公会战
+	ERR_CODE_GUILD_COMPETITION_NOT_IN_BATTLE            = 12313;        //并不在战斗中
+	ERR_CODE_GUILD_COMPETITION_NOT_REGISTER             = 12314;        //没有注册公会战
+	ERR_CODE_GUILD_COMPETITION_PLAYER_LV_NOT_ENOUGH     = 12315;        //玩家等级不够
+	ERR_CODE_GUILD_COMPETITION_PLAYER_DAY_NOT_ENOUGH    = 12316;        //玩家加入天数不够
+	ERR_CODE_GUILD_COMPETITION_ENTER_FINISH             = 12317;        //进入时间截止
+	ERR_CODE_GUILD_COMPETITION_NOT_SAME_GUILD           = 12318;        //不在同一公会
+	ERR_CODE_GUILD_COMPETITION_PEACE_CAMP               = 12319;        //在中立阵营
+	ERR_CODE_GUILD_COMPETITION_TARGET_PEACE_CAMP        = 12320;        //不能攻击中立阵营
+	ERR_CODE_GUILD_COMPETITION_SAME_CAMP                = 12321;        //相同阵营
+	ERR_CODE_GUILD_COMPETITION_NOT_SAME_BATTLE          = 12322;        //不在相同战斗中            
+	ERR_CODE_GUILD_COMPETITION_NOT_ONLINE               = 12323;        //不在线
+	ERR_CODE_GUILD_COMPETITION_REGISTER_ALREADY_START   = 12324;        //已经开始
+	ERR_CODE_GUILD_BATTLE_ATTACK_NOT_IN_RANGE           = 12325;        //不在攻击范围
+	ERR_CODE_GUILD_COMPETITION_ENTER_NOT_LEADER         = 12326;        //进入战场不是队长
+	ERR_CODE_GUILD_COMPETITION_ENTER_BAN                = 12327;        //禁止进入(已经被T出来了)
+	ERR_CODE_GUILD_BATTLE_BACK_TEAM_NOT_IN_RANGE        = 12328;        //不在范围内无法归队
+	ERR_CODE_GUILD_BATTLE_BACK_TEAM_NOT_SAME_GUILD      = 12329;        //不是相同行会无法归队
+
+	ERR_CODE_FAMILY_TITLE_BE_TOO_LONG					= 12330;		//家族称号前缀太长
+	ERR_CODE_FAMILY_TITLE_EX_TOO_LONG					= 12331;		//家族称号后缀太长
+	ERR_CODE_FAMILY_ALREADY_JOIN						= 12332;		//你已经在家族里了
+	ERR_CODE_FAMILY_NAME_REPEATED						= 12333;		//家族名重名
+	ERR_CODE_FAMILY_CACHE_FULL							= 12334;		//家族缓存已满
+	ERR_CODE_FAMILY_NOT_BELONG							= 12335;		//你现在还没有家族
+	ERR_CODE_FAMILY_SIGN_TOO_LONG						= 12336;		//家族宣言太长
+	ERR_CODE_FAMILY_MEMO_TOO_LONG						= 12337;		//字号太长
+	ERR_CODE_FAMILY_MEMO_REPEATED						= 12338;		//家族字号重复
+	ERR_CODE_FAMILY_INVITED_ROLE_OFFLINE				= 12339;		//邀请加入家族的成员不在线
+
+	ERR_CODE_FIELDBOX_EMPTY								= 12340;		//宝箱已经被掏空
+	ERR_CODE_FIELDBOX_KEY								= 12341;		//没有打开宝箱的钥匙
+	
+	ERR_CODE_FAMILY_DEGREE_NOT_ENOUGH					= 12350;		//家族值不够
+	ERR_CODE_FAMILY_EVENT_ALREADY_HAVE					= 12351;		//家族已经有家族事件，无法在发起
+	ERR_CODE_FAMILY_EVENT_NOT_EXISTED					= 12352;		//家族没有事件
+	ERR_CODE_FAMILY_YOU_DONT_ADD_EVENT					= 12353;		//你没有发起过家族事件
+	ERR_CODE_FAMILY_CALLER_DONT_ACCEPT_EVENT			= 12354;		//发起者无法进行投票
+	ERR_CODE_FAMILY_YOU_ALREADY_ACCEPT					= 12355;		//你已经赞成了投票
+	ERR_CODE_FAMILY_YOU_ALREADY_REFUSE					= 12356;		//你已经否决了投票
+	ERR_CODE_FAMILY_YOU_ALREADY_INVITED					= 12357;		//你已经被邀请了
+	ERR_CODE_FAMILY_TARGET_ALREADY_INVITED				= 12358;		//对方已经被其他人邀请了
+	ERR_CODE_FAMILY_FRIEND_DEGREE_NOT_ENOUGH			= 12359;		//邀请时好友度不够
+	ERR_CODE_FAMILY_TARGET_ALREADY_JOIN					= 12360;		//对方已经在家族里了
+	ERR_CODE_FAMILY_TARGET_NOT_BELONG					= 12361;		//对方还没有家族
+	ERR_CODE_FAMILY_TARGET_NOT_INVITED					= 12362;		//对方没有邀请
+	ERR_CODE_FAMILY_INVITING_TIMEOUT					= 12363;		//邀请状态已经超时
+	ERR_CODE_FAMILY_ALREADY_INVITE_LIST					= 12364;		//你已经在邀请列表中了
+	ERR_CODE_FAMILY_CANT_LEAVE_OTHER					= 12365;		//邀请列表还有其他人，发起人无法删除列表
+	ERR_CODE_FAMILY_CANT_FIRE_YOURSELF					= 12366;		//你不能把自己从邀请列表t掉
+	ERR_CODE_FAMILY_NOT_INVITE_LIST						= 12367;		//你没有发起过邀请
+	ERR_CODE_FAMILY_NOT_INVITE_OTHER					= 12368;		//你没有邀请人进入
+	ERR_CODE_FAMILY_NOT_IN_INVITED						= 12369;		//有人没有在邀请列表
+	ERR_CODE_FAMILY_BEYOND_MAX_MEM_COUNT				= 12370;		//超过最大的家族人数
+	ERR_CODE_FAMILY_EVENT_IS_NULL						= 12371;		//家族事件为空
+	ERR_CODE_FAMILY_EVENT_NOT_YOU						= 12372;		//家族事件不是你发起的
+	ERR_CODE_FAMILY_EVENT_NOT_ALL_ACCEPT				= 12373;		//家族事件没有所有人同意
+	ERR_CODE_FAMILY_MEM_NOT_FIRE						= 12374;		//家族人数太少，无法发起请离
+	ERR_CODE_FAMILY_NOT_FIRE_YOURSELF					= 12375;		//不能对自己发起请离
+	ERR_CODE_FAMILY_NOT_MEMBER							= 12376;		//对方不是家族的成员
+	ERR_CODE_FAMILY_TITLE_ISNT_CHANGE					= 12377;		//家族称号不能无修改
+	ERR_CODE_FAMILY_FIRER_NOT_VOTE						= 12378;		//被请离的人无法投票
+	ERR_CODE_FAMILY_MAX_MEM_COUNT_NOT_ADD				= 12379;		//家族人数上限已经达到最大
+	
+	ERR_CODE_PHANTOM_TROUPE_MEMBER_CHASE_LIMITE         = 12380;        //幻影旅团追捕本周次数已用完
+	ERR_CODE_PHANTOM_TROUPE_CORE_CHASE_LIMITE           = 12381;        //幻影旅团核心追捕本周次数已用完
+	ERR_CODE_PHANTOM_TROUPE_LEADER_CHASE_LIMITE         = 12382;        //幻影旅团团长追捕本周次数已用完
+
+	ERR_CODE_START_GUILD_BOSS_RIGHT						= 12390;		//没有开启行会boss权限
+	ERR_CODE_START_GUILD_BOSS_GUILD_LV					= 12391;		//行会等级不够
+	ERR_CODE_START_GUILD_BOSS_FORWARD_BOSS_LV			= 12392;		//行会boss前置关卡
+	ERR_CODE_START_GUILD_BOSS_START						= 12393;		//行会boss已经开始
+	ERR_CODE_START_GUILD_BOSS_END						= 12394;		//行会boss已经结束
+
+	
+	ERR_CODE_FRIEND_NOT_DEL_FAMILY_MEM					= 12395;		//无法删除家族成员的好友
+	ERR_CODE_FRIEND_NOT_BLACK_FAMILY_MEM				= 12396;		//无法拉黑家族成员的好友			
+	
+	ERR_CODE_ZONE_DESIGN_NOT_SKIN						= 12397;		//没有拥有这个皮肤
+	ERR_CODE_ZONE_DESIGN_NOT_EMBLEM						= 12398;		//没有拥有这个徽章
+	ERR_CODE_ZONE_DESIGN_NOT_EFFECT						= 12399;		//没有拥有这个挂件
+	ERR_CODE_BAG_ITEM_IS_EXPIRE                    		= 12400;        //物品已过期
+
+	ERR_CODE_ARENA_CANT_FIGHT                           = 12401;        //请双方到天空竞技场擂台或互为好友后切磋
+	ERR_CODE_ARENA_TARGET_OFFLINE                       = 12402;        //挑战的玩家已离线
+	ERR_CODE_ARENA_TARGET_IN_BATTLE                     = 12403;        //挑战的玩家在战斗中
+	ERR_CODE_ARENA_GET_TOO_QUICK                        = 12404;        //刷新太快
+	ERR_CODE_ARENA_NEED_ATTACK_TEAM                     = 12405;        //需要攻击队伍
+	ERR_CODE_ARENA_NEED_ATTACK_SINGLE                   = 12406;        //需要攻击单人
+	ERR_CODE_ARENA_NEED_TEAM                            = 12407;        //需要队伍
+	ERR_CODE_ARENA_NEED_SINGLE                          = 12408;        //需要单人
+	ERR_CODE_ARENA_CANT_ATTACK_SELF                     = 12409;        //不能攻击自己
+	ERR_CODE_ARENA_NOT_IN_ARENA                         = 12410;        //你不在擂台
+	ERR_CODE_ARENA_TARGET_NOT_IN_ARENA                  = 12411;        //目标不在擂台
+	ERR_CODE_ARENA_NOT_TEAM_LEADER                      = 12412;        //不是队长无法开始切磋
+	ERR_CODE_ARENA_IN_BATTLE                            = 12413;        //挑战者在战斗中
+
+	ERR_CODE_GUILD_BOSS_BATTLE_TEAM_PLAYER_KILLED		= 12414;		//行会boss,组队成员已经击杀过
+	ERR_CODE_START_GUILD_BOSS_TIME						= 12415;		//行会boss战时间
+
+	ERR_CODE_GUILD_BOSS_SALE_GOLD_NOT_ENOUGH			= 12416;		//行会拍卖，金币不足
+	ERR_CODE_FAMILY_YOU_ALREADY_CREATED					= 12417;		//你已经创建了家族邀请列表
+	ERR_CODE_FAMILY_MEMBER_OFFLINE						= 12418;		//家族成员不在线
+	ERR_CODE_FAMILY_ADD_EVENT_NOT_INVITE				= 12419;		//发起事件了，就不能再邀请了
+	ERR_CODE_FAMILY_PROCESS_CD_TIME						= 12420;		//处于阶段cd，无法发起仪式
+	ERR_CODE_FAMILY_LOCK_VOTE							= 12421;		//投票锁定，无法再投票了
+	ERR_CODE_FAMILY_EVENT_CALL_NOT_LEAVE				= 12422;		//邀请新人事件已经发起，无法离开
+	ERR_CODE_FAMILY_EVENT_CALL_NOT_FIRE					= 12423;		//邀请新人事件已经发起，无法请离
+	ERR_CODE_FAMILY_HURRY_CD_TIME						= 12424;		//催促cd中
+	ERR_CODE_FAMILY_TEAM_NOT_ENTER_MAP					= 12425;		//组队状态不能进入家族场景
+	ERR_CODE_FAMILY_NOT_ALL_ENTER_MAP					= 12426;		//还有人没有进入家族场景
+	ERR_CODE_FAMILY_NOT_IN_MAP							= 12427;		//你没有在家族地图
+	ERR_CODE_FAMILY_ALREADY_PAY							= 12428;		//你已经支付过了
+
+	ERR_CODE_GUILD_BOSS_BATTLE_PLAYER_JOIN_GUILD_TIME	= 12429;		//玩家加入行会不足3天
+	ERR_CODE_FAMILY_CANT_CHANGE_FOOD					= 12430;		//一定时间内无法换菜
+	ERR_CODE_FAMILY_YOU_VOTE_ROLE_NOT_EXISTED			= 12431;		//你投票的人不存在
+	ERR_CODE_FAMILY_YOU_ALREADY_VOTE					= 12432;		//你已经投过票了
+	ERR_CODE_FAMILY_YOU_ALREADY_MEMO					= 12433;		//你已经设置过字号
+	ERR_CODE_FAMILY_CANT_LEAVE_GROUP					= 12434;		//无法退出家族群组
+	ERR_CODE_FAMILY_CANT_KICK_GROUP						= 12435;		//无法请离家族群组
+	ERR_CODE_FAMILY_CANT_DISMISS_GROUP					= 12436;		//无法解散家族群组
+	ERR_CODE_FAMILY_CANT_MOD_GROUP_NAME					= 12437;		//无法修改家族群组名
+	ERR_CODE_LOGIN_FAST_ROLE_RECONNECT_FAILED			= 12438;		//重连失败
+	ERR_CODE_FAMILY_EAT_FOOD_NOT_IN_PROCESS				= 12439;		//没有处于吃菜阶段
+
+	ERR_CODE_DUNGEON_NO_AWARD                           = 12440;        //没有奖励
+	ERR_CODE_DUNGEON_NOT_IN_AWARD_LIST                  = 12441;        //不在奖励玩家列表
+	ERR_CODE_DUNGEON_ALREADY_GET_AWARD                  = 12442;        //已经获得过奖励
+	ERR_CODE_DUNGEON_AWARD_NOT_EXIST                    = 12443;        //奖励不存在
+	ERR_CODE_DUNGEON_ALREADY_SEND_AWARD                 = 12444;        //奖励已被领取
+	ERR_CODE_DUNGEON_ENTER_NO_TEAM                      = 12445;        //没有队伍无法开启
+	ERR_CODE_DUNGEON_ENTER_NOT_LEADER                   = 12446;        //不是队长武器开启
+	ERR_CODE_DUNGEON_ENTER_NOT_OPEN                     = 12447;        //当前副本没有开启
+	ERR_CODE_DUNGEON_ENTER_PLAYER_NOT_ENOUGH            = 12448;        //玩家不足无法开启
+	ERR_CODE_DUNGEON_ENTER_PLAYER_REFUSE                = 12449;        //玩家拒绝
+	ERR_CODE_DUNGEON_ENTER_PLAYER_NOT_CONFIRM           = 12450;        //玩家没有确认
+	ERR_CODE_DUNGEON_NOT_EXIST                          = 12451;        //副本不存在
+	ERR_CODE_DUNGEON_ENTER_LEVEL_NOT_ENOUGH             = 12452;        //等级不足
+	ERR_CODE_DUNGEON_ENTER_LEVEL_TOO_HIGH               = 12453;        //等级过高
+	ERR_CODE_DUNGEON_TEAM_IN_DUNGEON_TO_JOIN            = 12454;        //队伍在副本中无法归队
+	ERR_CODE_DUNGEON_PLAYER_IN_DUNGEON                  = 12455;        //玩家在副本中无法归队
+	ERR_CODE_DUNGEON_TEAM_IN_DUNGEON_INVERT             = 12456;        //队伍在副本中无法邀请
+	ERR_CODE_STRING_HAVE_MASK_WORD			            = 12457;        //含有敏感字
+	ERR_CODE_MATCH_SWITCH_MAP_IN_CONFIRM                = 12458;        //匹配确认切非法地图  
+	ERR_CODE_DUNGEON_AWARD_MAX_TIMES                    = 12459;        //次数超过
+
+	ERR_CODE_FAMILY_ACTIVITY_BEGIN_NOT_LEAVE			= 12460;		//仪式开始，无法离开邀请列表
+	ERR_CODE_FAMILY_ACTIVITY_BEGIN_NOT_DELETE			= 12461;		//仪式开始，无法删除邀请列表
+	ERR_CODE_FAMILY_TYPE_NOT_CALL_ACTIVITY				= 12462;		//不是邀请新人事件，无法发起仪式
+	ERR_CODE_FAMILY_TITLE_NAME_REPEATED					= 12463;		//家族名字重复
+
+	ERR_CODE_MULTI_LEVEL_SELECT_NEXT_NOT_ALLOW          = 12467;        //不允许选关
+	ERR_CODE_MULTI_LEVEL_PRE_NOT_FINISH                 = 12468;        //前置连战没有完成
+	ERR_CODE_MULTI_LEVEL_HAVE_TEAM                      = 12470;        //有队伍(要求担任)
+	ERR_CODE_MULTI_LEVEL_NO_TEAM                        = 12471;        //没有队伍(要求队伍)
+	ERR_CODE_MULTI_LEVEL_NOT_LEADER                     = 12472;        //不是队长
+	ERR_CODE_MULTI_LEVEL_INVALID_TYPE                   = 12473;        //非法关卡类型
+	ERR_CODE_MULTI_LEVEL_ENTER_LEVEL_NOT_ENOUGH         = 12474;        //进入关卡等级不够
+	ERR_CODE_MULTI_LEVEL_ENTER_LEVEL_TOO_ENOUGH         = 12475;        //进入关卡等级过高
+	ERR_CODE_MULTI_LEVEL_ENTER_PLAYER_NUM_NOT_ENOUGH    = 12476;        //进入关卡人数不够
+	ERR_CODE_MULTI_LEVEL_ENTER_PLAYER_NUM_TOO_ENOUGH    = 12477;        //进入关卡人数过多
+    ERR_CODE_MULTI_LEVEL_ENTER_IN_MULTI                 = 12478;        //已在连战中
+	ERR_CODE_MULTI_LEVEL_HALF_JOIN_NOT_ALLOW            = 12479;        //不允许中途加入
+
+	ERR_CODE_MAIL_CANT_DEL_NO_READ					    = 12480;        //无法删除未读邮件
+	ERR_CODE_FRIEND_SWITCH_CANT_ADD_FRIEND				= 12481;		//设置了无法加好友开关
+	ERR_CODE_GUILD_HARBOR_UPGRAD_NOT_ENOUGH				= 12485;		//行会港口升级但是建设度不够
+	ERR_CODE_GUILD_GOLDEN_UPGRAD_NOT_ENOUGH				= 12486;		//行会金库升级但是建设度不够
+	ERR_CODE_GUILD_HOUSE_UPGRAD_NOT_ENOUGH				= 12487;		//行会民居升级但是建设度不够
+	ERR_CODE_GUILD_CLUB_UPGRAD_NOT_ENOUGH				= 12488;		//行会武馆升级但是建设度不够
+	ERR_CODE_GUILD_RESEARCH_UPGRAD_NOT_ENOUGH			= 12489;		//行会科研升级但是建设度不够
+	
+	ERR_CODE_MIDAS_TRANS_BUSY                           = 12501;        //有一个米大师请求正在队列中
+
+	ERR_CODE_MAGIC_IN_TEAM								= 12502;		//玩家在队伍中 
+	ERR_CODE_MAGIC_NEED_CHALLENGE_ITEM					= 12503;		//玩家没有挑战道具
+	ERR_CODE_MAGIC_FLOOR_WRONG							= 12504;		//魔境楼层异常
+
+	ERR_CODE_SKILL_TALENT_POINT_NOT_ENOUGH              = 12521;        //技能点不足
+	ERR_CODE_SKILL_TALENT_PROF_NOT_MATCH                = 12522;        //职业不匹配
+	ERR_CODE_SKILL_TALENT_ASSIGN_FULLED                 = 12523;        //该天赋技能点已满
+	ERR_CODE_SKILL_TALENT_LAYER_CANT_UNLOCK             = 12524;        //该天赋层还不能解锁
+	ERR_CODE_SKILL_TALENT_PRE_UNLOCK                    = 12525;        //该天赋前置天赋未解锁
+	ERR_CODE_SKILL_TALENT_IS_FULLED                     = 12526;        //该分析天赋已满
+    ERR_CODE_ROLE_NAME_NULL	    			            = 12527;        //玩家角色名为空
+	ERR_CODE_FRIEND_DEGREE_IS_MAX                       = 12530;        //好友度已满
+	ERR_CODE_ITEM_USING                                 = 12531;        //物品使用中(异步)
+
+	ERR_CODE_BIND_PHONE_NOT_TURN_ON						= 12532;		//绑定手机活动未开启
+	ERR_CODE_BIND_PHONE_ALREADY							= 12533;		//已经绑定手机号码
+	ERR_CODE_BIND_PHONE_AUTH_WRONG						= 12534;		//验证码错误
+	ERR_CODE_BIND_PHONE_AUTH_TIME_OUT					= 12535;		//验证码超时
+	ERR_CODE_QUESTIONNAIRE_LEVEL_NOT_ENOUGH				= 12536;		//游戏问卷-等级不够
+	ERR_CODE_BIND_PHONE_PARSE_ERR						= 12537;		//解码错误
+	ERR_CODE_BIND_PHONE_INVALID_NUM						= 12538;		//非法手机号
+	ERR_CODE_BIND_PHONE_INVALID_EXTEND_NUM				= 12539;		//非法扩展号
+	ERR_CODE_BIND_PHONE_INVALID_PARA					= 12540;		//请求参数非法
+	ERR_CODE_BIND_PHONE_IP_POWER						= 12541;		//ip无权限
+	ERR_CODE_BIND_PHONE_SEND_FAST						= 12542;		//发送超速
+	ERR_CODE_BIND_PHONE_T_UER							= 12543;		//回复T用户
+
+    ERR_CODE_GIFT_ALREADY_RECV                          = 12544;        //礼物已领取
+    ERR_CODE_GIFT_NOT_EXIST                             = 12545;        //礼物不存在
+	ERR_CODE_GIFT_DAILY_BEG_LIMIT                       = 12546;        //乞求礼物限制
+	ERR_CODE_GIFT_DAILY_SEND_LIMIT                      = 12547;        //赠送礼物限制
+	ERR_CODE_GIFT_ALREADY_READ                          = 12548;        //已读
+	ERR_CODE_GIFT_INVALID_OP                            = 12549;        //非法礼物操作
+	ERR_CODE_GIFT_INVALID_GIFT_LIST_TYPE                = 12550;        //非法的礼物列表类型
+	ERR_CODE_GIFT_IS_BUSY                               = 12551;        //繁忙中
+	ERR_CODE_GIFT_TOO_QUICK                             = 12552;        //拉取太快了,喝杯茶休息一下
+	ERR_CODE_GIFT_NOT_ANY                               = 12553;        //没有任何礼物
+	ERR_CODE_GIFT_TOO_MUCH                              = 12554;        //礼物太多
+	ERR_CODE_GIFT_CAN_NOT_SELF                          = 12555;        //不能给自己送礼或乞求礼物
+	ERR_CODE_GIFT_INVALID_STATUS                        = 12556;        //礼物事务状态不匹配
+	ERR_CODE_GIFT_INVALID_OP_ROLE                       = 12557;        //玩家不匹配
+	ERR_CODE_PARTNER_TREASURE_INVALID_OP                = 12558;        //操作不对
+	ERR_CODE_PARTNER_TREASURE_NOT_DRESS                 = 12559;        //没有装备
+
+	ERR_CODE_HUNTER_PROF_CHANGE_CD_TIME					= 12560;		//更换猎人职业cd时间中
+	ERR_CODE_HUNTER_PROF_SAME_TYPE						= 12561;		//已经是这个职业的猎人了
+
+	ERR_CODE_PARTNER_TREASURE_ALREADY_DRESS             = 12562;        //已经装备
+	ERR_CODE_HUNTER_PROF_CHANGE_TASK_CD					= 12563;		//更换猎人职业,专属任务cd
+	ERR_CODE_HUNTER_PROF_NULL_NOT_TRANS					= 12564;		//没有猎人职业无法货运
+	ERR_CODE_GUILD_BOSS_START_ARCHI_NOT_ENOUGH			= 12565;		//开启行会boss，建筑度不够
+	ERR_CODE_GUILD_SKILL_IS_MAX_LEVEL					= 12566;		//行会技能已经最大等级
+	ERR_CODE_GUILD_SKILL_ID_INVLID						= 12567;		//行会技能id非法
+	ERR_CODE_GUILD_RESEARCH_LV_NOT_ENOUGH				= 12568;		//研究技能，行会等级不够
+	ERR_CODE_GUILD_RESEARCH_COIN_NOT_ENOUGH				= 12569;		//研究技能，行会资金不够
+	ERR_CODE_GUILD_RESEARCH_ARC_NOT_ENOUGH				= 12570;		//研究技能，研究所建设度不够
+	ERR_CODE_GUILD_RESOURCE_EXG_NOT_MAX					= 12571;		//资源转换不能超过当前拥有的资源量
+	ERR_CODE_GUILD_RESOURCE_EXG_TOO_SMALL				= 12572;		//资源转换不能太小
+	ERR_CODE_PARTNER_TREASURE_MAX_LEVEL                 = 12573;        //最大等级
+	ERR_CODE_PARTNER_TREASURE_PLAYER_MAX_LEVEL          = 12574;        //玩家等级不够
+	ERR_CODE_PARTNER_TREASURE_ONLY_PURPLE               = 12575;        //紫色可操作
+	ERR_CODE_PARTNER_TREASURE_ONLY_ORANGE               = 12576;        //橙色可操作
+	ERR_CODE_PARTNER_TREASURE_NO_NEED_SAVE              = 12577;        //不能保存
+	ERR_CODE_GUILD_HISTORY_TAX_NOT_ENOUGH				= 12578;		//购买行会商店物品总贡献不够
+	ERR_CODE_GUILD_SHOP_PERSON_BUY_LIMIT				= 12579;		//个人购买限制
+
+    ERR_CODE_HL_LEVEL_NOT_EXAM                          = 12590;        //不在考试阶段
+    ERR_CODE_HL_EXAM_NOT_FIN                            = 12591;        //考试没有完成
+    ERR_CODE_HL_EXAM_REWARD_ALEADY_ACQUIRED             = 12592;        //考试奖励已领取
+    ERR_CODE_HL_LEVEL_ERROR                             = 12593;        //执照等级错误
+    ERR_CODE_HL_LEVEL_REWARD_ALEADY_ACQUIRED            = 12594;        //等级奖励已领取
+    ERR_CODE_HL_SPECIAL_TRAINING_NOT_FIN                = 12595;        //特训没有完成
+    ERR_CODE_HL_ST_REWARD_ALEADY_ACQUIRED               = 12596;        //特训奖励已领取
+
+	ERR_CODE_LEVEL_TRANS_NOT_START                      = 12600;        //还没开始关卡传送
+	ERR_CODE_FIGHT_PARTNER_SWITCH_NOT_TIME              = 12601;        //选择伙伴未到时间
+
+	ERR_CODE_NO_ONLINE_REWARD_COUNT                     = 12611;        //没有在线祈福次数
+	ERR_CODE_ONLINE_REWARD_NOT_GET                      = 12612;        //在线祈福奖励未领取
+	ERR_CODE_ONLINE_REWARD_NOT_RAND                     = 12613;        //还未祈福
+	
+	ERR_CODE_TIME_LIMITE_BOX_TIMEOUT                    = 12614;        //限时宝箱超时
+	ERR_CODE_TIME_LIMITE_BOX_NOT_EXIST                  = 12615;        //限时宝箱不存在
+	
+	ERR_CODE_ACTIVITY_EIGHT_ID_INVALID					= 12616;		//奖励id不存在
+	ERR_CODE_ACTIVITY_EIGHT_ALREADY_GET_RWD				= 12617;		//已经获取过此奖励
+	ERR_CODE_ACTIVITY_EIGHT_SCORE_NOT_ENOUGH			= 12618;		//积分不足够
+	ERR_CODE_ACTIVITY_EIGHT_CONDITION_UNFINISHED		= 12619;		//条件未达成
+	
+	ERR_CODE_GUILD_QUESTION_ALREADY_JOIN				= 12620;		// 你已经加入过房间了
+	ERR_CODE_GUILD_QUESTION_NOT_IN_GUILD				= 12621;		// 你没有加入行会
+	ERR_CODE_GUILD_QUESTION_NOT_START					= 12622;		// 行会答题没有开始
+	ERR_CODE_GUILD_QUESTION_CD_TIME						= 12623;		// 行会答题发送聊天cd
+	ERR_CODE_GUILD_QUESTION_NOT_JOIN					= 12624;		// 你没有加入过房间了
+	ERR_CODE_GUILD_SHOP_CANT_BUY						= 12625;		// 没有权限购买
+	ERR_CODE_GUILD_SHOP_ALREADY_BUY						= 12626;		// 已经购买而且没有过期
+	ERR_CODE_GUILD_SHOP_COIN_NOT_ENOUGH					= 12627;		// 行会资金不够
+	ERR_CODE_GUILD_HOT_IS_NOT_ENOUGH					= 12628;		// 行会人气值不足以领取分红
+
+	ERR_CODE_PLAYER_AUTO_FIGHT_SWITCH_NOT_ALLOWED       = 12630;        //不允许切换自动战斗状态
+
+
+	ERR_CODE_PA_PARTNER_NUMBER_NOT_ENOUGH               = 12641;        //伙伴异步pvp-伙伴数量不足
+    ERR_CODE_PA_FUNCTION_NOT_OPEN                       = 12642;        //伙伴异步pvp-功能还未开启
+	ERR_CODE_PA_INVALID_PARAM                           = 12643;        //伙伴异步pvp-请求参数非法
+	ERR_CODE_PA_AWARD_IS_ALREADY_GET                    = 12644;        //伙伴异步pvp-今日积分奖励已领取
+	ERR_CODE_PA_ACTIVITY_VAL_NOT_AWARD                  = 12645;        //伙伴异步pvp-今日积分未满，无法领取奖励
+	ERR_CODE_PA_CHALLENG_CNT_IS_EMPTY                   = 12646;        //伙伴异步pvp-今日挑战次数已经用完
+	ERR_CODE_PA_PLAYER_DONT_HAVE_PARTNER                = 12647;        //伙伴异步pvp-未拥有该伙伴
+	ERR_CODE_PA_PLAYER_IN_TEAM                          = 12648;        //伙伴异步pvp-组队中不能进行挑战
+	ERR_CODE_PA_PLAYER_IN_BATTLE                        = 12649;        //伙伴异步pvp-在战斗中无法发起挑战
+	
+	
+	ERR_CODE_MASTER_REFRESH_PLAYER_CD_TIME				= 12650;		//师徒换一批cd时间
+	ERR_CODE_MASTER_APPLYED_TARGET_NOT_ONLINE			= 12651;		//申请的时候，对方已经不在线
+	ERR_CODE_MASTER_TARGET_APPLY_LIST_FULL				= 12652;		//对方的申请列表已满(收徒和拜师都是这个错误码)
+	ERR_CODE_MASTER_APPLY_MASTER_COUNT_FULL				= 12653;		//申请拜师次数已满
+	ERR_CODE_MASTER_APPLY_APP_COUNT_FULL				= 12654;		//申请收徒次数已满
+	ERR_CODE_MASTER_TARGET_NOT_WANT_MASTER				= 12655;		//对方不想要成为师傅
+	ERR_CODE_MASTER_APPLY_IS_TIMEOUT					= 12656;		//申请已过期
+	ERR_CODE_MASTER_TITLE_TOO_LONG						= 12657;		//收徒公告过长
+	ERR_CODE_MASTER_IDO_NOT_WANT_MASTER					= 12658;		//我不想要成为师傅
+
+	ERR_CODE_RUSH_AUTO_FIGHT_NOT_ALLOWED                = 12659;        //不允许自动战斗(没有通关过)
+	ERR_CODE_RUSH_SCORE_REWARD_ALREADY_GET              = 12660;        //已领取过奖励
+	ERR_CODE_RUSH_SCORE_REWARD_INVALID                  = 12661;        //不存在的奖励(非法)
+	ERR_CODE_RUSH_ENTER_DAILY_COUNT_MAX                 = 12662;        //已达每日进入最大次数
+	ERR_CODE_RUSH_ENTER_CHAPTER_LOCKED                  = 12663;        //章节未开放
+	ERR_CODE_RUSH_ENTER_STAGE_LOCKED                    = 12664;        //关卡未开放
+	ERR_CODE_RUSH_ENTER_LEVEL_NOT_ENOUGH                = 12665;        //等级不够
+	ERR_CODE_RUSH_ENTER_PRE_LEVEL_NOT_FINISH            = 12666;        //前置关卡未完成
+	ERR_CODE_RUSH_ENTER_PRE_QUEST_NOT_FINISH            = 12667;        //前置任务未完成
+	ERR_CODE_RUSH_ENTER_CHAPTER_NOT_OPEN                = 12668;        //章节未开放
+	ERR_CODE_RUSH_ENTER_TEAM_FOLLOW                     = 12669;        //队伍跟随中
+	ERR_CODE_RUSH_ENTER_ONLY_SINGLE                     = 12670;        //只允许单人
+	ERR_CDOE_RUSH_SCORE_REWARD_NOT_ENOUGH               = 12671;        //评分不够
+	ERR_CODE_GUILD_REBATE_ALREADY_GET_RWD               = 12672;        //行会返利，已经获取了活跃奖励
+	ERR_CODE_GUILD_REBATE_LEVEL_NOT_ENOUGH	            = 12673;        //行会返利，行会等级不够领取活跃奖励
+	ERR_CODE_GUILD_REBATE_SCORE_NOT_ENOUGH	            = 12674;        //行会返利，行会活跃积分不够领取活跃奖励
+    ERR_CODE_RUSH_ENTER_PRE_CHAPTER_NOT_FINISH          = 12675;        //前置章节没通关
+    ERR_CODE_RUSH_ENTER_PRE_DIFF_NOT_ENOUGH             = 12676;        //前置难度评分不够
+    ERR_CODE_RUSH_CHAPTER_REWARD_ALREADY_GET            = 12677;        //章节奖励已领取
+    ERR_CODE_RUSH_CHAPTER_REWARD_INVALID                = 12678;        //无效的奖励
+
+	ERR_CODE_ROOM_CREATE_ROOM_BUT_NOT_IN_HALL			= 12680;		//不在大厅却试图创建房间
+	ERR_CODE_ROOM_NAME_NULL								= 12681;		//创建房间名为空
+	ERR_CODE_ROOM_ADD_PLAYER_NOT_IN_HALL				= 12682;		//玩家不在hall地图内
+	ERR_CODE_ROOM_ADD_PLAYER_BUT_ALREADY_IN_ROOM		= 12683;		//玩家已经在某个房间里面了
+	ERR_CODE_ROOM_PASSWORD_TOO_LEN_OR_HAS_INVALID_CHAR	= 12684;		//密码过长
+	ERR_CODE_ROOM_PLAYER_TOO_MUCH						= 12685;		//房间人数已经满了
+	ERR_CODE_ROOM_LEAVE_HALL_BUT_IS_IN_ROOM				= 12686;		//在房间内无法离开地图
+	ERR_CODE_ROOM_NEED_ANOTHER_CAMP_PLAYER				= 12687;		//缺少一方玩家
+	ERR_CODE_ROOM_PLAYER_IS_NOT_PREPARED				= 12688;		//玩家未准备
+	
+	ERR_CODE_CE_REWARD_ALREADY_GET                      = 12690;        //已经领取了战力奖励
+	ERR_CODE_CE_REWARD_CE_NOT_ENOUGH                    = 12691;        //领取战力奖励战力不足
+
+	ERR_CODE_ROOM_PLAYER_IS_NOT_ROOM_OWNER				= 12700;		//当前玩家不是房主
+	ERR_CODE_ROOM_MOVE_PLACE_IS_BE_CLOSED				= 12701;		//换位已关闭
+	ERR_CODE_ROOM_INVITE_TOO_MUCH_PLAYER				= 12702;		//邀请玩家过多，请稍候再试
+	ERR_CODE_ROOM_PLAYER_HAS_BEEN_INVITED				= 12703;		//玩家已经被邀请
+	ERR_CODE_ROOM_NOT_IN_INVITE_LIST					= 12704;		//玩家不在邀请名单中
+	ERR_CODE_ROOM_IS_IN_BATTLE							= 12705;		//房间已经开始战斗了
+	ERR_CODE_ROOM_TYPE_IS_CANNOT_BE_CLOSED				= 12706;		//无法打开关闭1v1房间信息
+	ERR_CODE_ROOM_START_BATTLE_MUST_TWO_PLAYER_OR_MORE	= 12707;		//最少两人才能开启战斗
+	ERR_CODE_ROOM_CANNOT_LEAVE_ROOM_IN_PREPARED			= 12708;		//准备状态下无法退出房间
+	ERR_CODE_ROOM_PLAYER_CANNOT_BE_INVITED				= 12709;		//玩家无法被邀请
+	ERR_CODE_ROOM_CANNOT_CREATE_TEAM					= 12710;		//当前场景无法创建或加入队伍
+	ERR_CODE_ROOM_CANNOT_ENTER_WITH_TEAM				= 12711;		//目标场景无法组队进人
+	ERR_CODE_ROOM_PASSWORD_ERROR						= 12712;		//密码错误
+	ERR_CODE_ROOM_CANNOT_APPLY_BATTLE					= 12713;		//无法在房间内请求切磋
+    ERR_CODE_ITEM_MAX_NUM                               = 12714;        //物品最大数目
+	
+	ERR_CODE_GUILD_TRANS_EXP_NOT_GUILD_MAP				= 12715;		//不在行会场景无法发起传功
+	ERR_CODE_GUILD_TRANS_EXP_TEAM						= 12716;		//处于组队状态无法发起传功
+	ERR_CODE_GUILD_TRANS_EXP_ING						= 12717;		//正在传功中
+	ERR_CODE_GUILD_TRANSEXP_TARGET_ING					= 12718;		//对方正在传功中
+	ERR_CODE_GUILD_TRANSEXP_TARGET_TEAM					= 12719;		//对方正在队伍中
+	ERR_CODE_GUILD_TRANSEXP_TARGET_FIGHT				= 12720;		//对方正在战斗中
+	ERR_CODE_GUILD_TRANS_EXP_ALREADY_CANCEL				= 12721;		//发起者已经取消传功
+	ERR_CODE_GUILD_TRANS_EXP_COUNT_NOT_ENOUGH			= 12722;		//传功次数不够
+	ERR_CODE_GUILD_TRANS_TARGET_CNT_NOT_ENOUGH			= 12723;		//对方被传次数不够
+	ERR_CODE_GUILD_TRANS_LEVEL_NOT						= 12724;		//行会传功等级不匹配
+	ERR_CODE_GUILD_TRANS_EXP_TARGET_OFFLINE				= 12725;		//行会传功对方一下线
+	ERR_CODE_GUILD_TRANS_EXP_ALREADY_INVITE				= 12726;		//已经发起了邀请
+	ERR_CODE_GUILD_TRANS_EXP_REPLY_TEAM					= 12727;		//处于组队状态，无法接受传功
+	ERR_CODE_GUILD_TRANS_EXP_REPLY_FIGHT				= 12728;		//处于战斗状态，无法接受传功
+	ERR_CODE_GUILD_TRANS_EXP_REPLY_ING					= 12729;		//处于传功状态，无法接受传功
+	ERR_CODE_GUILD_TRANS_EXP_REPLY_TIMEOUT				= 12730;		//传功请求已超时，无法接受传功
+	ERR_CODE_GUILD_TRANS_EXP_BEGIN_NOT_IN				= 12731;		//没有在准备状态，无法开启传功
+	ERR_CODE_GUILD_TRANS_EXP_MATCHING					= 12732;		//已经在匹配中，无法传功
+	ERR_CODE_GUILD_TRANS_EXP_TARGET_MATCHING			= 12733;		//对方在匹配中，无法传功
+	ERR_CODE_GUILD_TRANS_EXP_TEAM_AUTOMATCH				= 12734;		//正在队伍匹配中，无法传功
+	ERR_CODE_GUILD_TRANS_EXP_TARGET_TEAM_AUTO			= 12735;		//对方正在队伍匹配中，无法传功
+
+    ERR_CODE_RISING_PURCHASE_BUY_TIMES_MAX              = 12740;        //跳跃购买,此数已满
+
+    ERR_CODE_ENTER_BATTLE_MAP_DESC_ID_NOT_MATCH         = 12741;        //进入地图,地图ID不匹配
+	
+	ERR_CODE_MIDAS_BUY_GOODS_COUNT_LIMIT                = 12742;        //购买礼包-购买次数限制
+	ERR_CODE_MIDAS_BUY_GOODS_FUNDS_ID_INVALID           = 12743;        //购买礼包-成长基本id不匹配
+	ERR_CODE_MIDAS_BUY_GOODS_NOT_IN_PERIOD              = 12744;        //购买礼包-商品不在出售周期中 
+	ERR_CODE_MIDAS_BUY_GOODS_INVALID_PARAM              = 12745;        //购买礼包-无效参数
+	ERR_CODE_ROLE_KICKOFF_BY_IDIP						= 12746;		//idip踢人
+	ERR_CODE_ROLE_FORBIDDEN_BY_IDIP						= 12747;		//idip封号
+	
+	ERR_CODE_PAY_AWARD_ALREADY_GET                      = 12748;        //累计付费奖励-已经领取
+	ERR_CODE_PAY_AWARD_PAY_NOT_ENOUGH                   = 12749;        //累计付费奖励-付费不足
+	
+	ERR_CODE_WEEK_CONSUME_NOT_ENOUGH                    = 12750;        //周累计消耗-消耗不足
+	ERR_CODE_WEEK_CONSUME_AWARD_AREADY_GET              = 12751;        //周累计消耗-奖励已领取
+	ERR_CODE_WEEK_CONSUME_LOTTERY_CNT_ENOUGH            = 12752;        //周累计消耗-抽奖次数不足
+	ERR_CODE_IDIP_FORBIDDEN_CHAT						= 12753;		//被禁言
+	ERR_CODE_IDIP_FORBIDDEN_RANK						= 12754;		//被禁止查看排行榜
+	ERR_CODE_IDIP_FORBIDDEN_ACT							= 12755;		//被禁止玩此玩法----用于组合提示
+	ERR_CODE_IDIP_FORBIDDEN_ACT_EX						= 12756;		//被禁止玩此玩法
+	ERR_CODE_IDIP_FORBIDDEN_TRADE						= 12757;		//被禁止交易
+	ERR_CODE_IDIP_FORBIDDEN_FRIEND						= 12758;		//被禁止添加好友
+
+	ERR_CODE_LEVEL_BLESS_INVALID                        = 12760;        //非法的祝福
+    ERR_CODE_INSTANCE_ENTER_PRE_DIFF_NOT_ENOUGH         = 12761;        //前置多人副本没有完成
+
+	ERR_CODE_ROLE_SKILL_PLAYER_LEVEL_NOT_ENOUGH         = 12781;        //技能-升级需求等级不足
+	ERR_CODE_ROLE_SKILL_LEVEL_MAX                       = 12782;        //技能-技能已经满级
+	ERR_CODE_ROLE_SKILL_NOT_LEARN                       = 12783;        //技能-技能未升级
+	ERR_CODE_ROLE_SKILL_NOT_RESET                       = 12784;        //技能-技能未重置，不能使用推荐
+	ERR_CODE_ROLE_SKILL_INVALID_PARAM                   = 12785;        //技能-参数错误
+	ERR_CODE_ROLE_SKILL_SLOT_NOT_MATCH                  = 12786;        //技能-技能与技能槽不匹配
+	ERR_CODE_ROLE_SKILL_CANNT_TRANSFER                  = 12787;        //技能-未完成转职任务，不能转职
+	ERR_CODE_ROLE_SKILL_NOT_AWAKE                       = 12788;        //技能-未觉醒解锁，不能升级
+	ERR_CODE_ROLE_SKILL_CANNT_SWITCH_TRANSFER           = 12789;        //技能-觉醒后不能切换转职
+	
+	ERR_CODE_ACTIVITY_QUEST_ALREADY_GET					= 12790;		//活动任务-你已经领取过奖励
+	ERR_CODE_ACTIVITY_QUEST_NOT_REACH					= 12791;		//活动任务-你你还没有达到条件
+	
+	ERR_CODE_AMS_CREATE_BOX_PARAM_ERR					= 12792;		//创建宝箱参数错误
+	ERR_CODE_AMS_CREATE_BOX_SIGN_ERR					= 12793;		//创建宝箱签名错误
+	ERR_CODE_AMS_CREATE_BOX_FAILED						= 12794;		//创建宝箱失败
+	ERR_CODE_AMS_CREATE_BOX_FULL						= 12795;		//单q总量限制
+	ERR_CODE_AMS_CREATE_BOX_WEEK_LIMIT					= 12796;		//单q周期限制
+	ERR_CODE_AMS_CREATE_BOX_RWD_FULL					= 12797;		//礼包总量限制
+	ERR_CODE_AMS_CREATE_BOX_RWD_WEEK_LIMIT				= 12798;		//礼包周期限制
+
+    ERR_CODE_LEVEL_COST_ITEM_NOT_ENOUGH                 = 12799;
+	
+	ERR_CODE_GEMSTONE_COMPOSE_INVALID_PARAM             = 12800;        //宝石合成参数无效
+	ERR_CODE_GEMSTONE_COMPOSE_QULITY_LIMIT              = 12801;        //宝石已是最高级无法合成
+	
+	ERR_CODE_GEMSTONE_EXCHANGE_INVALID_PARAM            = 12802;        //宝石合成参数无效
+    ERR_CODE_EQUIP_MAGIC_CARD_POS_ERR                   = 12803;		//附魔的部位不匹配
+    ERR_CODE_EQUIP_MAGIC_CARD_ATTR_DOWN                 = 12804;		//附魔的属性有降低
+	
+	ERR_CODE_PARTNER_IS_EXPIRE                          = 12805;        //伙伴已过期
+	ERR_CODE_PARTNER_INVALID_SKILL_INDEX                = 12810;        //伙伴技能索引错误
+	ERR_CODE_PARTNER_LIFE_PERMANENT                     = 12811;        //伙伴永久存在，不能续期
+	ERR_CODE_PARTNER_EXP_IS_FULL                        = 12812;        //伙伴经验值已满
+	ERR_CODE_PARTNER_TRANING_BY_GOLD_CNT_EMPTY          = 12813;        //伙伴今日金币训练次数已用完
+	ERR_CODE_PARTNER_TRANING_BY_JIENI_CNT_EMPTY         = 12814;        //伙伴今日粉钻训练次数已用完
+	ERR_CODE_PARTNER_POWER_IS_FULL                      = 12815;        //伙伴体力已满
+	
+	ERR_CODE_FASHION_JOB_NOT_MATCH						= 12816;		//时装职业不匹配
+	ERR_CODE_FASHION_INVALID_TIME						= 12817;		//时装过了有效期
+	ERR_CODE_FASHION_NOT_BE_MATERAIL					= 12818;		//此时装不能作为合成材料
+	ERR_CODE_FASHION_NOT_BE_NEW	    					= 12819;		//此时装不能作为合成的目标时装
+	ERR_CODE_FASHION_PART_NOT_MATCH						= 12820;		//时装部位不匹配
+	ERR_CODE_FASHION_COMPOSE_TIME_LIMIT					= 12821;		//时装合成材料和目标时装，必须是永久时装
+	ERR_CODE_FASHION_ATTR_NO_CHANGE						= 12822;		//属性选择没有变化
+
+    ERR_CODE_TORMENT_TOWER_PRE_NOT_FINISH               = 12823;        //试炼塔当前塔未通关
+	ERR_CODE_TORMENT_TOWER_NOT_SWEEPING                 = 12824;        //没有在扫荡中
+	ERR_CODE_TORMENT_TOWER_LEVEL_NOT_ENOUGH             = 12825;        //试炼塔等级不足
+	ERR_CODE_TORMENT_TOWER_AWARD_ALREADY_GET            = 12826;        //试炼塔奖励已领取
+	ERR_CODE_TORMENT_TOWER_NOT_RESET_IN_SWEEPING        = 12827;        //试炼塔扫荡中无法重置
+	ERR_CODE_TORMENT_TOWER_RESER_CNT_NOT_ENOUGH         = 12828;        //试炼塔重置次数不足
+	
+	ERR_CODE_PLAYER_IS_IN_MATCHING                      = 12831;        //玩家在匹配中
+	ERR_CODE_PLAYER_IS_IN_PVP_ROOM                      = 12832;        //玩家在pvp房间中，无法进行1v1匹配
+	ERR_CODE_PLAYER_IS_IN_PVP_ROOM_MATCH                = 12833;        //玩家在pvp房间匹配中，无法进行1v1匹配
+	
+	ERR_CODE_GUILD_ATTR_STUDY_BEYOND_MAX				= 12835;		//行会属性已经修炼到最大个数
+	ERR_CODE_GUILD_ATTR_RESEARCH_NOT_MONEY				= 12836;		//行会属性升级没有足够的资金
+	ERR_CODE_GUILD_ATTR_RESEARCH_LV_MAX					= 12837;		//行会属性升级到最高级了
+	ERR_CODE_GUILD_ATTR_LV_BEYOND_ARCHI					= 12838;		//行会属性等级超过了建筑等级
+	ERR_CODE_GUILD_ATTR_NOT_LEVEL_UP					= 12839;		//行会属性没有升级
+	ERR_CODE_GUILD_ATTR_ALREADY_STUDY					= 12840;		//行会属性已经学习过了
+	ERR_CODE_GUILD_ATTR_STUDY_NOT_ENOUGH_CON			= 12841;		//学习行会属性，贡献不够
+	
+	ERR_CODE_GUILD_BOSS_ALREADY_FIGHT					= 12842;		//今日已经打过行会boss了
+	ERR_CODE_GUILD_BOSS_GUILD_ID_NOT_MATCH				= 12843;		//行会不一样，不能打行会boss
+	ERR_CODE_GUILD_BOSS_ARCHI_LV_NOT_MATCH				= 12844;		//行会boss关卡跟建筑等级不匹配
+	ERR_CODE_GUILD_BOSS_NOT_IN_GUILD					= 12845;		//没有在行会中，无法打行会boss
+}
+	
+enum enProtoCSEnumDefine
+{
+	CS_MAX_EFFECT = 32; //最大效果数量
+}
+

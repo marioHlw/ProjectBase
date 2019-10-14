@@ -1,0 +1,28 @@
+package ActionData;
+import "LTimeEventProType.proto";
+import "LVector3.proto";
+
+message LAddRadialblur
+{
+	optional LVector3 offset = 10;
+	// 开始强度
+	optional float startStrength = 1;
+	// 结束强度
+	optional float endStrength = 2;
+	// 开始阶段间隔比例
+	optional float startStepScale = 3;
+	// 结束阶段间隔比例
+	optional float endStepScale = 4;
+	// 开始内向扩展
+	optional float startInward = 5;
+	// 结束内向扩展
+	optional float endInward = 6;
+	// 开始外向扩展
+	optional float startOutward = 7;
+	// 结束外向扩展
+	optional float endOutward = 8;
+	// 动画时间
+	optional float time = 9;
+
+	required LTimeEventProType eventType = 101;
+}

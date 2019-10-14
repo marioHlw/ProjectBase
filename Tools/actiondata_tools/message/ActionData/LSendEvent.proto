@@ -1,0 +1,9 @@
+package ActionData;
+import "LTimeEventProType.proto";
+
+message LSendEvent
+{
+    required string event = 1;
+    repeated string parameter = 2;
+    required LTimeEventProType eventType = 100;
+}

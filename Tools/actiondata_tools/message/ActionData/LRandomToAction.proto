@@ -1,0 +1,20 @@
+package ActionData;
+import "LTimeEventProType.proto";
+import "LToAction.proto";
+message LRandomToAction
+{
+	repeated RandomAction randomAction = 1;
+	required LTimeEventProType eventType = 2;
+
+	message RandomAction
+	{
+		required string actionName = 1;
+		optional int32 weight = 2[default=100];
+		optional bool reset = 3[default=true];
+		optional int32 startFrame = 4;
+		optional bool checkSkill = 5;
+		optional bool checkCancelPriority = 6;
+		optional float fadeTime = 8;
+		repeated LToAction.SwitchData switchDo = 7;
+	}
+}

@@ -1,0 +1,15 @@
+package ActionData;
+
+message LToAction{
+    optional bool onceEvent = 1;
+    optional int32 linkId = 2;
+    optional string actionName = 3;
+    optional bool reset = 4[default=true];
+    optional int32 startFrame = 5;
+    optional bool checkSkill = 6;
+}
+
+
+    
+
+    

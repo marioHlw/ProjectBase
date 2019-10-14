@@ -1,0 +1,64 @@
+package ActionData;
+import "LCheckValueData.proto";
+message LActionBaseInfo{
+	optional string actionLabel=1[default=""];
+	optional string animationName = 2[default=""];
+	optional ActionFunctionType actionFunctionType = 30[default = NO_TYPE];
+	optional int32 id = 3[default=0];
+	optional int32 bandSkillId=4[default=0];
+	optional ActionSectionSign actionSectionSign=20; // 段落标识(开始，中段，结束)
+	optional int32 usedLimit=24[default=1];
+	optional UseType useType=5[default=LAND];
+	optional string actionName=6[default=""];
+	optional float speed=7[default=1];
+	optional bool lockSpeed = 33[default=false];
+	optional bool loop=8[default=false];
+	optional bool reverseAnimation=29[default=false];
+	optional float fadeInLength=9[default=0.2];
+	optional float fadeOutLength=28[default=0];
+	optional int32 cancelPriority=10[default=0];
+	optional int32 cancelPriorityLimit=11[default=-1];
+	optional int32 linkSkillId=12[default=0];
+	optional bool linkUpFrame=13[default=false];
+	optional bool synLand=14[default=true];
+	optional bool synAir=19[default=true];
+	optional bool bothDirection=15[default=false];
+	optional int32 useCountInAir=16[default=-1];
+	optional int32 maxSummonCount=17[default=-1];
+	optional bool entranceBreak=23[default=true];
+	repeated string animationNames = 18;
+	optional bool isTargetMode=21[default=false]; // 对象模式
+	optional bool isParallelAction=22[default=false]; // 并行Action
+	optional bool parallelInNumbing = 27[default=false]; // 并行在硬直中可用
+	repeated StanceData stanceData = 25;
+	repeated LCheckValueData checkValue = 26;// 检测变量
+
+	enum UseType 
+	{
+		LAND=0;
+		AIR=1;
+		BOTH=2;
+	}
+
+	enum ActionSectionSign 
+	{
+		START=0;
+		MIDDLE=1;
+		OVER=2;
+	}
+
+	enum ActionFunctionType
+	{
+		NO_TYPE = 0;
+		MOVE = 1;
+		ATTACK = 2;
+		SKILL =3;
+	}
+
+	message StanceData
+	{
+		required string stanceName = 1; // 姿态名
+		optional string linkAction = 2; // 链接的Action名
+		optional bool clearLabel = 3;// 清理label
+	}
+}

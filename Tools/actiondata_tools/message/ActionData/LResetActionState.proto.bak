@@ -1,0 +1,11 @@
+package ActionData;
+
+message LResetActionState{
+    optional bool onceEvent = 1;
+    optional string state = 2;
+}
+
+
+    
+
+    

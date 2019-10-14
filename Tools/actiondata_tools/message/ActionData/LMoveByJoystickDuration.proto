@@ -1,0 +1,8 @@
+package ActionData;
+import "LTimeEventProType.proto";
+
+message LMoveByJoystickDuration{
+    optional float speed = 1[default=0];
+    optional bool useSpeedRate = 4;
+    required LTimeEventProType eventType= 101;
+}

@@ -1,0 +1,38 @@
+ManifestFileVersion: 0
+CRC: 1193068020
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2868a118b0e74a7f5ede62b081308ff5
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: dc54941a689de502222f2a94bcab61fc
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: d07994918ad52fd4eb6205042ffc9d1a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 858a20c1b21a3f94bb5b2d3b901c9aaf, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4d0c51bb0b6e93049af5e88f93826e3b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1b3dc54f924693f41b5cbecb267e647a, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+Assets:
+- Assets/Project/UI/Prefabs/NGUI/Resources/BaseBackground/UI_BaseBackground_01.prefab
+Dependencies:
+- G:/whknmyhe/Unity566/ZB/ClientCode/DataRoot/PlatformAssets/Android/ui/mstiffheiprc-ultrabold.unity3d
+- G:/whknmyhe/Unity566/ZB/ClientCode/DataRoot/PlatformAssets/Android/ui/common01_atlas.unity3d

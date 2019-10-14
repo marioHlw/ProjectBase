@@ -1,0 +1,11 @@
+package ActionData;
+
+import "LTimeEventProType.proto";
+message LMarkTarget{
+    required LTimeEventProType eventType= 1;
+}
+
+
+    
+
+    

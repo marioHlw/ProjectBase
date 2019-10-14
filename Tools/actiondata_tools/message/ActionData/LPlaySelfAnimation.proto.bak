@@ -1,0 +1,14 @@
+package ActionData;
+
+message LPlaySelfAnimation{
+    optional bool onceEvent = 1;
+    optional int32 linkId = 2;
+    optional string clipName = 3;
+    optional float crossFadeTime = 4[default=0];
+    optional float playSpeed = 5[default=1];
+}
+
+
+    
+
+    

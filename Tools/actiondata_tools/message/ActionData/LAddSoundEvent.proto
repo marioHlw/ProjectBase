@@ -1,0 +1,13 @@
+package ActionData;
+import "LTimeEventProType.proto";
+
+message LAddSoundEvent{
+    optional string soundUrl = 1;
+    optional float vol = 2[default=0.7];
+    repeated string RateList = 4;
+    repeated string fileName = 5;
+    repeated string bankName = 6;
+	optional bool isEmotionSound = 8;
+	optional bool mainTrack = 9;
+    required LTimeEventProType eventType= 7;
+}

@@ -1,0 +1,64 @@
+package ActionData;
+import "LTimeEventProType.proto";
+import "LVector3.proto";
+
+message LModifyProjectile{
+	optional TypeName typeName = 1[default=DEFAULT];
+	optional bool keepSpeed = 23;
+	optional bool keepAngle = 22;
+	optional int32 mergeFrame = 25;
+
+	optional LVector3 position2 = 36;
+	optional bool autoHalfHeight = 63[default=true];
+
+	optional LVector3 angle = 2;
+	optional bool autoChangeAngle = 3;
+	optional bool placeToFoothol = 11;
+	optional LVector3 randomAngleRange = 4;
+	optional float speed = 5[default=5];
+	optional float acceleration = 6[default=0];
+	optional float randomSpeed = 56[default=0];
+	optional bool randomSpeedDirection = 55;
+	optional LVector3 fieldForce = 7;
+	optional bool lockDirection = 21;
+	optional LVector3 sizeBySpeed = 35;
+	optional float trackingRate = 8[default=0];
+	optional Camp camp = 9[default=CURRENT_CAMP];
+
+	optional bool bindBone = 15;
+	optional string bindName = 16;
+	optional LVector3 boneOffset = 17;
+
+	optional SurroundType surroundType = 26[default=SURROUND_LOCATE];// 坏绕模式
+	optional LVector3 surroundOffset = 20;
+	optional LVector3 surroundOffsetRandom = 50;
+	optional float surroundRadius = 27[default=1];// 环绕半径
+	optional float surroundRadiusChangeSpeed = 58[default=0];// 环绕半径变化速度
+	optional float surroundRadiusRandom = 51[default=0];
+	optional LVector3 surroundScale = 28;
+	optional LVector3 surroundRotation = 29;
+	optional bool dontDestroyWithTarget = 60;// 不随目标销毁
+
+	required LTimeEventProType eventType= 10;
+
+	enum TypeName 
+	{
+		DEFAULT=0;
+		FOLLOW=1;
+		SURROUND = 2;// 环绕
+		PARABOLA = 3;
+	}
+	enum Camp 
+	{
+		CURRENT_CAMP=0;
+		INVERSE_CAMP=1;
+		NEUTRAL_CAMP=2;
+	}
+	enum SurroundType
+	{
+		SURROUND_LOCATE = 0;// 定位
+		SURROUND_RING = 1;// 环形
+		SURROUND_SPHERE = 2;// 圆形
+		SURROUND_RANDOM = 3;// 随机
+	}
+}

@@ -1,0 +1,14 @@
+package ActionData;
+
+message LCameraBackToCharacter{
+    optional bool onceEvent = 1;
+    optional int32 linkId = 2;
+    optional string targetId = 3;
+    optional int32 type = 4;
+    optional int32 time = 5[default=120];
+}
+
+
+    
+
+    

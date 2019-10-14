@@ -1,0 +1,80 @@
+package ActionData;
+import "LVector3.proto";
+message LCharacterModelData
+{
+		required float gravityRate = 1[default=1]; // 重力比例
+		required float lieTime = 2[default=1]; // 倒地时间(单位秒)
+		required float lieTimeRate = 3[default=1]; // 倒地时间比例
+		required int32 movePoint = 4[default=1000]; // 移动点数
+		required float moveSpeedRate = 5[default=1]; // 移动速度倍率
+		required float attackSpeedRate = 6[default=1]; // 攻击速度倍率
+		required float spellSpeedRate = 7[default=1]; // 施法速度倍率
+		required int32 height = 8[default=1]; // 角色身高(像素)
+		required float weight = 9[default=1]; // 重量
+		required float jumpPower = 10[default=28]; // 跳跃力
+		required float jumpPowerRate = 11[default=1]; // 跳跃力倍率
+		required float scale = 12[default=1]; // 外观比例
+		required float flyingHeight = 13[default=1]; // 飞行高度
+		required bool modifyAvaterRotation = 14;// 修正旋转
+		optional bool reverseBody = 15;// 翻转身体
+		optional bool immunityKnock = 16;// 免疫击飞
+
+		optional LVector3 colliderCenter = 20;
+		optional LVector3 colliderSize = 21;
+
+		repeated LVector3 barrierBoxCenters = 22;
+		repeated LVector3 barrierBoxSize = 23;
+
+		optional LVector3 rotation = 29;
+
+		required bool isFlying = 51[default=false]; // 飞行怪
+		required bool isVoidBody = 52[default=false]; // 虚无身体
+		required bool isBuilding = 53[default=false]; // 建筑物
+		required bool isBarrier = 54[default=false]; // 障碍物
+		optional bool isSingleSidedBarrier = 58[default=false]; // 单向障碍物
+
+		required bool isSetVolumeByDistance = 57[default=true];// 依距离调整音量
+		required bool excludingTarget = 56[default=false];// 剔除出对象搜索
+		optional string layer = 55; // 层
+
+		repeated LSubCharacterData subCharacterList = 61;// 子对象数据
+		repeated LStanceData stanceDataList = 62;// 姿态数据
+
+		repeated LComboLinkData comboLinkDatas = 63;
+
+		message LSubCharacterData
+		{
+			required string modelName = 1;
+			repeated LSubCharacterLinkerData links = 2;
+		}
+
+		message LSubCharacterLinkerData
+		{
+			required CharacterGroupLinkerType linkType = 1;
+			optional LVector3 offset = 10;
+		}
+
+		enum CharacterGroupLinkerType
+		{
+			NONE = 0;
+			POSITION = 1; // 位置
+			ACTION = 2; // 行为
+			FOLLOW = 3; // 跟随
+			SKILL_NODE = 4; // 技能节点
+			ALL = 9999; // 全部
+		}
+
+		message LStanceData
+		{
+			required string stanceName=1;
+		}
+
+		message LComboLinkData
+		{
+			optional string combo = 1;
+			optional string groundAction = 2;
+			optional string airAction = 3;
+			optional int32 priority = 4;
+			optional int32 extendFrame = 5;
+		}
+}

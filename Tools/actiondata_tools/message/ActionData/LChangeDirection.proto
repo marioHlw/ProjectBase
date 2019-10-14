@@ -1,0 +1,10 @@
+package ActionData;
+
+import "LTimeEventProType.proto";
+
+message LChangeDirection
+{
+	optional int32 direction = 1;
+	optional bool faceToTarget = 3;
+	required LTimeEventProType eventType= 2;
+}

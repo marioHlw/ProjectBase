@@ -1,0 +1,16 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LChangeAutoMoveSpeed{
+    optional float speedX = 1[default=0];
+    optional float speedY = 2[default=0];
+    optional float speedZ = 3[default=0];
+    optional float accelerationX = 4[default=0];
+    optional float accelerationY = 5[default=0];
+    optional float accelerationZ = 6[default=0];
+    required LTimeEventProType eventType= 7;
+}
+
+
+    
+
+    

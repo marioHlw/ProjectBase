@@ -1,0 +1,24 @@
+package ActionData;
+import "LTimeEventProType.proto";
+
+message LActionData{
+    required bool onceEvent=1;
+    required int32 linkId=2;
+    optional string actionLabel=3[default=""];
+    optional string animationName = 4[default=""];
+    optional int32 id = 5[default=0];
+    optional int32 bandSkillId=6[default=0];
+    optional string useType=7[default=""];
+    optional string actionName=8[default=""];
+    optional float speed=9[default=1];
+    optional bool loop=10[default=false];
+    optional float fadeLength=11[default=0.3];
+    optional int32 cancelPriority=12[default=0];
+    optional int32 cancelPriorityLimit=13[default=-1];
+    optional int32 linkSkillId=14[default=0];
+    optional bool linkUpFrame=15[default=false];
+    optional bool syn=16[default=true];
+    optional bool bothDirection=17[default=false];
+    optional int32 useCountInAir=18[default=-1];
+    optional int32 maxSummonCount=19[default=-1];
+}

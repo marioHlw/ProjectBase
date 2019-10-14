@@ -1,0 +1,12 @@
+package ActionData;
+
+message LAddRandomSoundEvent{
+    optional bool onceEvent = 1;
+    optional int32 linkId = 2;
+    repeated string soundUrlList = 3;
+    optional float vol = 4[default=1];
+}
+
+
+    
+    

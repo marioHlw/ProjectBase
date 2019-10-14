@@ -1,0 +1,11 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LAddSkillCollider{
+    optional string actionName = 1;
+    required LTimeEventProType eventType= 2;
+}
+
+
+     
+
+    

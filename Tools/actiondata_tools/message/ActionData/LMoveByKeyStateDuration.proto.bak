@@ -1,0 +1,15 @@
+package ActionData;
+
+message LMoveByKeyStateDuration{
+    optional bool onceEvent = 1;
+    optional int32 linkId = 2;
+    optional float speedX = 3[default=0];
+    optional float speedY = 4[default=0];
+    optional float speedZ = 5[default=0];
+    optional bool useSpeedRate = 6;
+}
+
+
+    
+
+    

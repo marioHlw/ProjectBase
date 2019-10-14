@@ -1,0 +1,33 @@
+package ActionData;
+import "LTimeEventProType.proto";
+import "LVector3.proto";
+
+message LAddForceField{
+	optional ForceType forceType = 9[default=SPHERE];
+	optional LVector3 offset = 1;
+	optional LVector3 forceCenterOffset = 13;
+	optional bool isCenterPower = 2;
+	optional LVector3 power = 3;
+	optional LVector3 acceleration = 4;
+	optional bool lockDirection = 5;
+	optional float radius = 6[default=0];
+	optional float innerRadius = 12[default=0];
+	optional float height = 11[default=0];
+	optional LVector3 boxScale = 14;
+	optional TargetCamp targetCamp = 7[default=CURRENT];
+	optional bool onlyTarget = 10[default=false];
+	optional bool ignoreImmunity = 15[default=false];
+	required LTimeEventProType eventType= 8;
+
+	enum TargetCamp
+	{
+		CURRENT=0;
+		ENEMY=1;
+	}
+	enum ForceType
+	{
+		SPHERE=0;// Çò
+		CYLINDER=1;// Ô²Öù
+		BOX=2;//  ºÐ×Ó
+	}
+}

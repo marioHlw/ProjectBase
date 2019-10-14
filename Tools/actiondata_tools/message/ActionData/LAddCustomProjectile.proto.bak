@@ -1,0 +1,28 @@
+package ActionData;
+
+import "LVector3.proto";
+
+message LAddCustomProjectile{
+    optional bool onceEvent = 1;
+    optional string prefabName = 2;
+    repeated string effectList = 3;
+    repeated string projectileList = 4;
+    optional string className = 5;
+    optional int32 skillId = 6;
+    optional float scale = 7[default=1];
+    required LVector3 position = 8;
+    optional bool placeToFoothol = 9;
+    required LVector3 startAngle = 10;
+    required LVector3 randomAngleRange = 11;
+    optional float startSpeed = 12[default=5];
+    optional float acceleration = 13[default=0];
+    required LVector3 fieldForce = 14;
+    optional string camp = 15;
+    optional bool bindBone = 16;
+    optional string bindName = 17;
+}
+
+
+    
+
+    

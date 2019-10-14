@@ -1,0 +1,14 @@
+package ActionData;
+
+message LAutoMove{
+    optional bool onceEvent = 1;
+    optional int32 linkId = 2;
+    optional float speedX = 3[default=0];
+    optional float speedY = 4[default=0];
+    optional float speedZ = 5[default=0];
+    optional float accelerationX = 6[default=0];
+    optional float accelerationY = 7[default=0];
+    optional float accelerationZ = 8[default=0];
+    optional float rate = 9[default=1];
+    optional bool useSpeedRate = 10;
+}

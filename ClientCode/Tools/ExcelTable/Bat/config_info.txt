@@ -1,0 +1,15 @@
+items {
+  ID: 100001
+  param1: "100001"
+  param2: 1
+}
+items {
+  ID: 100002
+  param1: "100001"
+  param2: 1
+}
+items {
+  ID: 100003
+  param1: "100001"
+  param2: 1
+}

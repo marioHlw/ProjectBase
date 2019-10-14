@@ -1,0 +1,8 @@
+package ActionData;
+
+import "LTimeEventProType.proto";
+
+message LChangeStance{
+    optional string stanceName =1;
+    required LTimeEventProType eventType= 10;
+}

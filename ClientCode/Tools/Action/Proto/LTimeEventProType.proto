@@ -1,0 +1,22 @@
+package ActionData;
+
+import "LCheckSkillSwitchData.proto";
+		
+message LTimeEventProType
+{
+	optional string ItemType = 1;
+	optional float StartTime = 2[default=0];
+	optional bool isDuration = 3;
+	optional float EndTime = 4[default=0];
+	//optional bool OnceActive = 5;
+	optional bool enable = 6;
+	optional bool isFold = 7;
+	optional string linkId = 8;
+	optional float startPosition = 10[default=0];
+	optional float length = 11[default=0];
+	optional bool executed = 12;
+	optional bool once = 13;
+	optional int32 index = 14;
+	optional bool copyMark = 15;
+	repeated LCheckSkillSwitchData checkSkillSwitchData = 101;
+}

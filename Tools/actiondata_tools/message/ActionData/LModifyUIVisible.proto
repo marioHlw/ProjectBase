@@ -1,0 +1,6 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LModifyUIVisible{
+	optional bool hpBar = 1[default = false];
+	required LTimeEventProType eventType= 100;
+}

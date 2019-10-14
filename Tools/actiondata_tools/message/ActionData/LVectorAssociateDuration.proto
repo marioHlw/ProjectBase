@@ -1,0 +1,10 @@
+package ActionData;
+import "LVector3.proto";
+import "LTimeEventProType.proto";
+message LVectorAssociateDuration
+{
+	optional LVector3 angleOffset = 1;
+	optional float rate = 2[default=1];
+	optional bool bindAction = 3[default=false];
+	required LTimeEventProType eventType= 101;
+}

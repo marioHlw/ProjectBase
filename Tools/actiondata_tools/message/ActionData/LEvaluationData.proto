@@ -1,0 +1,43 @@
+package ActionData;
+import "LVector3.proto";
+message LEvaluationData
+{
+		// required repeated optional
+		repeated LActionEvaluation actions = 1;// Action评估列表
+		optional LPerformanceRating unitPerformanceRating = 2;// 总性能评级
+
+
+
+		// Action 评估数据
+		message LActionEvaluation
+		{
+			optional LPerformanceRating actionPerformanceRating = 1; // 此Action性能评级
+			required float displacement = 2; // 总位移(米)
+			repeated LMoveNode moves = 3;
+			repeated LMoveNode frontMoves = 4;
+			repeated LMoveNode upMoves = 5;
+			repeated LMoveNode downMoves = 6;
+			optional bool isTeleport = 7;
+			optional bool isTracking = 8;// 追踪性
+			optional LVector3 rangeBoxCenter = 21; // 技能整体攻击范围中心
+			optional LVector3 rangeBoxSize = 22; // 技能整体攻击范围大小
+		}
+
+		message LPerformanceRating // 性能评级
+		{
+			required int32 agileLevel = 1;// 灵活性(位移性能)(0-100)
+			required int32 breakLevel = 2;// 硬直能力(0-100)
+			required int32 superArmorLevel = 3;// 霸体能力(0-100)
+			required int32 skillRangeLevel = 4;// 技能范围(0-100)
+			required int32 skillDistanceLevel = 5;// 技能距离(0-100)
+			required int32 pre_emptLevel = 6;// 先制性能(0-100)
+			required int32 dogfightLevel = 7;// 空战性能(0-100)
+		}
+
+		// 移动节点数据
+		message LMoveNode
+		{
+			required int32 frame = 1;
+			required float movement = 2;
+		}
+}

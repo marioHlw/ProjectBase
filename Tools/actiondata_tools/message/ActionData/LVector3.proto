@@ -1,0 +1,7 @@
+package ActionData;
+
+message LVector3{
+    optional float x = 1[default=0];
+    optional float y = 2[default=0];
+    optional float z = 3[default=0];
+}

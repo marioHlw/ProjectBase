@@ -1,0 +1,11 @@
+package ActionData;
+
+message LChangeAnimationSpeed{
+    optional bool onceEvent = 1;
+    optional float speed = 2[default=1];
+}
+
+
+    
+
+    

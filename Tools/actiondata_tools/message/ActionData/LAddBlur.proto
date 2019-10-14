@@ -1,0 +1,27 @@
+package ActionData;
+import "LTimeEventProType.proto";
+import "LVector3.proto";
+
+message LAddBlur
+{
+    required float interval = 1[default=0.5];
+    required float life = 2[default=0.3];
+    optional LVector3 mainColor = 3;
+    optional LVector3 blendColor = 4;
+    optional LVector3 addColor = 5;
+    optional float startAlpha = 6[default=0.7];
+
+
+    required LTimeEventProType eventType = 100;
+
+    enum BlendMode
+    {
+        ADD = 0;
+    }
+
+    enum Shader
+    {
+        CURRENT=0;
+        ENEMY=1;
+    }
+}

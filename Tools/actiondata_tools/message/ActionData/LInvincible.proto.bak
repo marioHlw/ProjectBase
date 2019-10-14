@@ -1,0 +1,11 @@
+package ActionData;
+
+message LInvincible{
+    optional bool onceEvent = 1;
+    optional float time = 2[default=0];
+}
+
+
+    
+
+    

@@ -1,0 +1,19 @@
+package ActionData;
+
+import "LVector3.proto";
+import "LTimeEventProType.proto";
+
+message LAddComboRespond{
+    optional string combo = 1;
+	optional int32 extendFrame = 12;
+    optional int32 times = 10;
+    repeated string successActionCommandId = 2;// combo达成
+    repeated string failActionCommandId= 3;// combo失败
+    repeated string untriggeredActionCommandId= 11;// combo未触发
+    required ActionData.LVector3 condition_frameInterval = 4;
+    repeated string condition_keyIsUp = 5;
+    repeated string condition_keyIsDown = 6;
+    optional bool condition_directionForward = 7;
+    optional bool condition_directionNegative = 8;
+    required LTimeEventProType eventType = 9;
+}

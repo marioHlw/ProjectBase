@@ -1,0 +1,11 @@
+package ActionData;
+
+message LChangeCamp{
+    optional bool onceEvent = 1;
+    optional string camp = 2;
+}
+
+
+    
+
+    

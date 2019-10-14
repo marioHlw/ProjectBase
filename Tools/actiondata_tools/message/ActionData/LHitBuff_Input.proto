@@ -1,0 +1,5 @@
+package ActionData;
+
+message LHitBuff_Input{
+   	optional int32 buffId = 1[default=0];
+}

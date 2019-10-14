@@ -1,0 +1,21 @@
+package ActionData;
+
+import "LVector3.proto";
+import "LAddProjectile.proto";
+
+
+message LProjectileModelData
+{
+	required string effectId = 1;
+	required string prototypeID = 7;
+	optional string projectileId = 2;
+	required float lifeTime = 3;
+	required int32 hitTimes = 4;
+	optional bool isBlock = 5;
+	optional string layer = 6;
+
+	optional LVector3 colliderCenter = 10;
+	optional LVector3 colliderSize = 11;
+
+	optional bool synAction = 13;
+}

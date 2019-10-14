@@ -1,0 +1,24 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LShakeCamera{
+	optional float shakeRange = 1[default=0.1];
+	optional float shakeInterval = 2[default=0.015];
+	optional float shakeRangeAccSpeed = 3[default=-1];
+	optional float firstMinAngle = 4[default=0];
+	optional float firstMaxAngle = 5[default=360];
+	optional float scale = 6[default=1];
+	optional bool isDoubleSidedAngle = 7[default=true];	
+	optional float minAngle = 8[default=0];
+	optional float maxAngle = 9[default=360];
+	optional bool shakeUI = 12[default=false];
+	optional float cScaleRange = 13[default=0];
+	optional float scaleInterval = 14[default=0];
+	optional float scaleAccSpeed = 15[default=0];
+	optional bool isFirstMaxRange = 16[default=true];
+	optional LTimeEventProType eventType= 17;
+	optional float shakeAccInterval = 19[default=0];
+	optional float shakeOffsetMax = 20[default=1.1];
+	optional float shakeOffsetMin = 21[default=0.9];
+}
+
+	

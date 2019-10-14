@@ -1,0 +1,17 @@
+package ActionData;
+
+import "LTimeEventProType.proto";
+
+message LModifyCharacterView{
+	optional bool hideModel= 1;
+	optional bool hideGUI= 2;
+	//是否隐藏buff和特效
+	optional bool hideBuffAndEffect=7;
+	//是否在隐藏时，自己方可以看到透明效果
+	optional bool showModelForSelfCamp=8;
+	optional float R = 4[default=0];
+	optional float G = 5[default=0];
+	optional float B = 6[default=0];
+	optional float A = 9[default=0];
+	required LTimeEventProType eventType= 3;
+}

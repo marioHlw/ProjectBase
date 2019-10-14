@@ -1,0 +1,18 @@
+package ActionData;
+
+import "LHitShockData_Input.proto";
+import "LHitEffectData_Input.proto";
+import "LHitSoundData_Input.proto";
+import "LHitBuff_Input.proto";
+
+message LHitEffectsData_Input{
+		optional int32 defaultEffectType = 1[default=0];
+		optional LHitShockData_Input shockData = 2;
+		repeated LHitEffectData_Input effectList = 3;
+		repeated LHitSoundData_Input hitSoundDataList = 4;
+		repeated LHitBuff_Input hitBuffList = 5;
+}
+
+
+
+	

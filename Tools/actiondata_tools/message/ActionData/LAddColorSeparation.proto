@@ -1,0 +1,23 @@
+package ActionData;
+import "LTimeEventProType.proto";
+import "LVector3.proto";
+
+message LAddColorSeparation
+{
+	// 开始强度
+	optional float startStrength = 1[default=2];
+	// 结束强度
+	optional float endStrength = 2[default=0];
+	// 开始分离度
+	optional float startResolutionl = 3[default=0.01];
+	// 结束分离度
+	optional float endResolutionl = 4[default=0];
+	// 开始角度
+	optional float startAngle = 5[default=0];
+	// 结束角度
+	optional float endAngle = 6[default=0];
+	// 动画时间
+	optional float time = 7[default=0.2];
+
+	required LTimeEventProType eventType= 101;
+}

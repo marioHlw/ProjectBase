@@ -1,0 +1,7 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LAddCancelPoint{
+    required int32 cancelLevel=1;
+    required LTimeEventProType eventType= 2;
+    repeated string cancelList = 11; // 取消列表
+}

@@ -1,0 +1,13 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LCameraBackToMyPlayer{
+    optional bool isImm = 1;
+    optional int32 time = 2[default=120];
+    optional float delay = 3[default=0];
+    required LTimeEventProType eventType= 4;
+}
+
+
+    
+
+    

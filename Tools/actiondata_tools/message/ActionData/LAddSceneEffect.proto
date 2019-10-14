@@ -1,0 +1,28 @@
+package ActionData;
+import "LTimeEventProType.proto";
+import "LVector3.proto";
+
+message LAddSceneEffect{
+	optional float lifeTime = 1 [default=0];
+	optional EffectType effectName = 11 [default=None];
+	optional LVector3 position = 3;
+	optional LVector3 rotation = 4;
+	optional LVector3 scale = 5;
+	optional bool fixGround = 6;
+	optional bool isBindAction = 9[default = true];
+	//场景变色
+	optional bool modifyMapColor = 12[default = false];
+	optional float brightness = 13[default = 0.84];
+	optional float contrast = 14[default = 2.03];
+	optional float saturation = 15[default = 1.51];
+	optional LVector3 addColor = 16;
+	
+	required LTimeEventProType eventType= 7;
+
+	enum EffectType 
+	{
+		None = 1;
+		UI_Radiate_001 = 2;
+		UI_Radiate_002 = 3;
+	}
+}

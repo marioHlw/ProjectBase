@@ -1,0 +1,10 @@
+package ActionData;
+message LDamageFormula{
+    optional string actionName = 1[default=""];
+    optional int32 formulaType = 2[default=0];
+    optional int32 paraA = 3[default=0];
+    optional int32 paraB = 4[default=0];
+    optional float constPara = 5[default=0];
+    optional float factorA = 6[default=0];
+    optional float factorB = 7[default=0];
+}

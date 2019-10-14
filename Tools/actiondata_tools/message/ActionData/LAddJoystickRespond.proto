@@ -1,0 +1,12 @@
+package ActionData;
+import "LVector3.proto";
+import "LTimeEventProType.proto";
+
+message LAddJoystickRespond{
+    optional string combo = 1;
+    optional int32 times = 10;
+    repeated string successCommandId = 2;// 达成
+    repeated string failCommandId= 3;// 失败
+    repeated string untriggeredCommandId= 4;// 未触发
+    required LTimeEventProType eventType = 101;
+}

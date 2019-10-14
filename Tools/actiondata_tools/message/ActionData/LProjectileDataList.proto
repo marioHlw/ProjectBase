@@ -1,0 +1,7 @@
+package ActionData;
+
+import "LActionDataRoot.proto";
+
+message LProjectileDataList{
+    repeated ActionData.LActionDataRoot actionDataRootList = 1;
+}

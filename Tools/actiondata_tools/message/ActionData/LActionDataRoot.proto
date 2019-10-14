@@ -1,0 +1,24 @@
+package ActionData;
+
+import "OneActionData.proto";
+import "LTimeEventProType.proto"; 
+import "LHitDataInput.proto";
+import "LCharacterModelData.proto";
+import "LProjectileModelData.proto";
+import "LEvaluationData.proto";
+import "MoveTestData.proto";
+
+
+message LActionDataRoot{
+	repeated ActionData.OneActionData oneActionDataList = 1;
+	optional string NowTestActionName = 2;
+	repeated string fmodBankList = 3;
+	optional bool debugMode = 4;
+	//required LTimeEventProType eventType= 5;
+	repeated LHitDataInput hitDataList=6;
+
+	optional LCharacterModelData characterModelData = 7;
+	optional LProjectileModelData projectileModelData = 9;
+	optional LEvaluationData evaluationData = 10;
+	optional MoveTestData moveTestData = 11;
+}

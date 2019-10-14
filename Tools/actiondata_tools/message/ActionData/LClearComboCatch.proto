@@ -1,0 +1,10 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LClearComboCatch{
+    required LTimeEventProType eventType= 1;
+}
+
+
+    
+
+    

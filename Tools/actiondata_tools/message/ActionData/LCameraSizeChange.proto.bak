@@ -1,0 +1,13 @@
+package ActionData;
+
+message LCameraSizeChange{
+    optional bool onceEvent = 1;
+    optional float cameraSize = 2[default=0];
+    optional bool backToDefault = 3;
+    optional int32 duration = 4;
+}
+
+
+    
+
+    

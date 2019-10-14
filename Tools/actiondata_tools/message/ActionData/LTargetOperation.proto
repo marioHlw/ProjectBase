@@ -1,0 +1,17 @@
+package ActionData;
+import "LTimeEventProType.proto";
+
+message LTargetOperation{
+    optional TargetType targetType = 1;
+    optional int32 number = 2[default=1];
+
+    repeated string linkID = 10;
+
+    required LTimeEventProType eventType = 99;
+
+    enum TargetType
+    {
+        POSITIVE=0;
+        RANDOM=1;
+    }
+}

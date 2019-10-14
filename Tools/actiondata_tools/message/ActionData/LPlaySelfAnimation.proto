@@ -1,0 +1,8 @@
+package ActionData;
+import "LTimeEventProType.proto";
+message LPlaySelfAnimation{
+    optional string clipName = 1;
+    optional float crossFadeTime = 2[default=0];
+    optional float playSpeed = 3[default=1];
+    required LTimeEventProType eventType= 4;
+}   

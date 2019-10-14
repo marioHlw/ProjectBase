@@ -1,0 +1,110 @@
+package ActionData;
+import "LTimeEventProType.proto";
+import "LVector3.proto";
+
+message LAddProjectile{
+	optional TypeName typeName = 1[default=DEFAULT];
+	optional string prefabName = 2;
+	optional FunctionType functionType = 38;
+	optional string startAction = 37;
+	optional int32 recursionTimes = 34[default=1];
+	optional int32 count = 24[default=1];
+	optional bool blocked = 59[default=false];
+	optional bool emitByTargetCount = 22;
+	optional bool destroyWithDead = 30;
+	optional bool destroyWithChangeAction = 40;
+	optional bool isSelfDisciplineMode = 57[default=false];
+	optional int32 skillId = 3;
+	optional float scale = 4[default=1];
+	optional LVector3 scale3Axis = 39;
+	optional float randomScale = 25[default=0];
+	optional bool emitByTarget = 23;
+	optional LVector3 position = 5;
+	optional LVector3 position2 = 36;
+	optional bool autoHalfHeight = 63[default=true];
+
+
+	optional LVector3 startAngle = 7;
+	optional LVector3 randomStartAngleRange = 9;
+	optional LVector3 startSelfAngle = 18;
+	optional LVector3 randomStartSelfAngleRange = 19;
+
+	optional bool effectNotRotating = 44;
+	optional bool autoChangeAngle = 8;
+
+	optional bool placeToFoothol = 6;
+
+	optional float startSpeed = 10[default=5];
+	optional float acceleration = 11[default=0];
+	optional float randomSpeed = 56[default=0];
+	optional bool randomSpeedDirection = 55;
+	optional LVector3 fieldForce = 12;
+	optional bool lockDirection = 21;
+	optional LVector3 sizeBySpeed = 35;
+	optional float trackingRate = 13[default=0];
+	optional Camp camp = 14[default=CURRENT_CAMP];
+	optional bool bindBone = 15;
+	optional string bindName = 16;
+
+	optional EmitterAreaShape emitterAreaShape = 31[default=CLOSE];// 发射区域形状
+	optional LVector3 emitterAreaScale = 32;// 发射区域比例
+	optional LVector3 emitterAreaRotation = 33;// 发射区域旋转
+	optional bool surfaceDistribution = 62;//表面分布
+
+
+	optional SurroundType surroundType = 26[default=SURROUND_LOCATE];// 坏绕模式
+	optional LVector3 surroundOffset = 20;
+	optional LVector3 surroundOffsetRandom = 50;
+	optional float surroundRadius = 27[default=1];// 环绕半径
+	optional float surroundRadiusChangeSpeed = 58[default=0];// 环绕半径变化速度
+	optional float surroundRadiusRandom = 51[default=0];
+	optional LVector3 surroundScale = 28;
+	optional LVector3 surroundRotation = 29;
+
+	optional bool lockLinkRotationX = 60;
+	optional bool dontDestroyWithTarget = 61;// 不随目标销毁
+
+	optional bool withMoveControl = 41;// 可控制移动
+	optional LVector3 moveSpeed = 43;// 移动速度
+
+	required LTimeEventProType eventType= 17;
+
+	enum TypeName 
+	{
+		DEFAULT=0;// 默认直线
+		FOLLOW=1;// 诱导
+		SURROUND = 2;// 环绕
+		LINK = 3;// 连结
+		CHAIN = 4;// 链式
+		PARABOLA = 5;// 抛物线
+	}
+
+	enum Camp 
+	{
+		CURRENT_CAMP=0;
+		INVERSE_CAMP=1;
+		NEUTRAL_CAMP=2;
+	}
+
+	// 发射器区域形状
+	enum EmitterAreaShape
+	{
+		CLOSE =0;
+		EMITTER_BOX = 1;
+		EMITTER_SPHERE = 2;
+	}
+
+	enum SurroundType
+	{
+		SURROUND_LOCATE = 0;// 定位
+		SURROUND_RING = 1;// 环形
+		SURROUND_SPHERE = 2;// 圆形
+		SURROUND_RANDOM = 3;// 随机
+	}
+
+	enum FunctionType
+	{
+		NORMAL = 0;//一般
+		IMPORTENT = 1;//重要的
+	}
+}
