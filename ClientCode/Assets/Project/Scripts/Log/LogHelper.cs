@@ -34,7 +34,7 @@ public class LogHelper
         }
         catch
         {
-            Debug.LogError("检查打印类型枚举(enLogType.cs)!");
+            Debug.LogError(DateTime.Now.ToString("dd:HH:mm:ss:fff") + " --> " + "检查打印类型枚举(enLogType.cs)!");
         }
     }
 
@@ -45,22 +45,22 @@ public class LogHelper
             switch (level)
             {
                 case enLogType.Debug:
-                    Debug.Log(GetFormat(m_logColorMap[level], message.ToString()));
+                    Debug.Log(DateTime.Now.ToString("dd:HH:mm:ss:fff") + " --> " + GetFormat(m_logColorMap[level], message.ToString()));
                     break;
                 case enLogType.Info:
-                    Debug.Log(message.ToString());
+                    Debug.Log(DateTime.Now.ToString("dd:HH:mm:ss:fff") + " --> " + message.ToString());
                     break;
                 case enLogType.Warning:
-                    Debug.LogWarning(message.ToString());
+                    Debug.LogWarning(DateTime.Now.ToString("dd:HH:mm:ss:fff") + " --> " + message.ToString());
                     break;
                 case enLogType.Error:
-                    Debug.LogError(message.ToString());
+                    Debug.LogError(DateTime.Now.ToString("dd:HH:mm:ss:fff") + " --> " + message.ToString());
                     break;
             }
         }
         catch
         {
-            Debug.LogError("检查打印类型颜色字典(LogHelper.cs -> m_logColorMap)!");
+            Debug.LogError(DateTime.Now.ToString("dd:HH:mm:ss:fff") + " --> " + "检查打印类型颜色字典(LogHelper.cs -> m_logColorMap)!");
         }
     }
 
@@ -72,12 +72,12 @@ public class LogHelper
     {
         if (format == null)
         {
-            throw new Exception("Format is invalid.");
+            throw new Exception(DateTime.Now.ToString("dd:HH:mm:ss:fff") + " --> " + "Format is invalid.");
         }
 
         if (args == null)
         {
-            throw new Exception("Args is invalid.");
+            throw new Exception(DateTime.Now.ToString("dd:HH:mm:ss:fff") + " --> " + "Args is invalid.");
         }
 
         s_cachedStringBuilder.Length = 0;
