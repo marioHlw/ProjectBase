@@ -230,6 +230,9 @@
     <Compile Include="Assets\Project\Scripts\UI\Common\RedTip\Editor\UIRedTipComponentInspector.cs" />
     <Compile Include="Assets\Project\Scripts\UI\NGUI\Component\LoopGrid\Editor\UILoopGridInspector.cs" />
     <Compile Include="Assets\Project\Scripts\UI\NGUI\Component\Pull-down\Editor\UIDropDownMenuComponentInspector.cs" />
+    <Compile Include="Assets\Project\Scripts\UI\NGUI\Editor\UIResToolsWin_Atlas.cs" />
+    <Compile Include="Assets\Project\Scripts\UI\NGUI\Editor\UIResToolsWin_Base.cs" />
+    <Compile Include="Assets\Project\Scripts\UI\NGUI\Editor\UIResToolsWindow.cs" />
     <Compile Include="Assets\Project\Scripts\UI\NGUI\GameSystem\Editor\UISystemEditor.cs" />
     <Compile Include="Assets\Tools\NGUI\Atlas\Editor\AtlasEditor.cs" />
   </ItemGroup>
