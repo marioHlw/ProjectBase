@@ -128,7 +128,6 @@ G:\GitHub\ProjectBase\ClientCode\Temp\bin\Debug\Unity.TextMeshPro.dll
 G:\GitHub\ProjectBase\ClientCode\Temp\bin\Debug\Unity.TextMeshPro.Editor.dll
 G:\GitHub\ProjectBase\ClientCode\Temp\bin\Debug\UnityEditor.dll
 G:\GitHub\ProjectBase\ClientCode\Temp\bin\Debug\UnityEngine.AccessibilityModule.dll
-G:\GitHub\ProjectBase\ClientCode\Temp\bin\Debug\UnityEngine.Advertisements.dll
 G:\GitHub\ProjectBase\ClientCode\Temp\bin\Debug\UnityEngine.AIModule.dll
 G:\GitHub\ProjectBase\ClientCode\Temp\bin\Debug\UnityEngine.AnimationModule.dll
 G:\GitHub\ProjectBase\ClientCode\Temp\bin\Debug\UnityEngine.ARModule.dll
@@ -158,7 +157,6 @@ G:\GitHub\ProjectBase\ClientCode\Temp\bin\Debug\UnityEngine.PerformanceReporting
 G:\GitHub\ProjectBase\ClientCode\Temp\bin\Debug\UnityEngine.Physics2DModule.dll
 G:\GitHub\ProjectBase\ClientCode\Temp\bin\Debug\UnityEngine.PhysicsModule.dll
 G:\GitHub\ProjectBase\ClientCode\Temp\bin\Debug\UnityEngine.ProfilerModule.dll
-G:\GitHub\ProjectBase\ClientCode\Temp\bin\Debug\UnityEngine.Purchasing.dll
 G:\GitHub\ProjectBase\ClientCode\Temp\bin\Debug\UnityEngine.ScreenCaptureModule.dll
 G:\GitHub\ProjectBase\ClientCode\Temp\bin\Debug\UnityEngine.SharedInternalsModule.dll
 G:\GitHub\ProjectBase\ClientCode\Temp\bin\Debug\UnityEngine.SpatialTracking.dll
@@ -284,3 +282,5 @@ G:\GitHub\ProjectBase\ClientCode\obj\Debug\Assembly-CSharp-firstpass.csproj.Core
 G:\GitHub\ProjectBase\ClientCode\obj\Debug\Assembly-CSharp-firstpass.csproj.CopyComplete
 G:\GitHub\ProjectBase\ClientCode\obj\Debug\Assembly-CSharp-firstpass.dll
 G:\GitHub\ProjectBase\ClientCode\obj\Debug\Assembly-CSharp-firstpass.pdb
+G:\GitHub\ProjectBase\ClientCode\Temp\bin\Debug\UnityEngine.SpatialTrackingModule.dll
+G:\GitHub\ProjectBase\ClientCode\Temp\bin\Debug\UnityEngine.SpatialTrackingModule.xml

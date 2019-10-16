@@ -29,6 +29,7 @@ public class UIResToolsWin_Atlas : UIResToolsWin_Base
     private string m_searchInfo = "";                       // 搜索过滤信息
     private Vector2 m_viewPosition = Vector2.zero;          // 显示所有UI预设的ScrollView位置
     private List<bool> m_selectStates = new List<bool>();   // UI预设选中状态
+    private string m_UIPrefabUseInfo = "";
 
     public override void OnGUI()
     {
@@ -96,7 +97,7 @@ public class UIResToolsWin_Atlas : UIResToolsWin_Base
             {
                 _str += (m_unUseIcons[i] + ";");
             }
-            EditorGUILayout.LabelField("没有使用的图片资源:", GUILayout.Width(150));
+            EditorGUILayout.LabelField("没有使用的图片资源:", GUILayout.Width(145));
             GUI.color = Color.red;
             EditorGUILayout.TextField("", _str);
             GUI.color = Color.white;
@@ -113,6 +114,7 @@ public class UIResToolsWin_Atlas : UIResToolsWin_Base
         EditorGUILayout.BeginHorizontal();
         {
             EditorGUILayout.LabelField("纹理被引用情况:");
+            EditorGUILayout.LabelField("筛选:", GUILayout.Width(30));
             string _search = EditorGUILayout.TextField(m_searchInfo);
             if (_search != m_searchInfo)
             {
@@ -135,9 +137,26 @@ public class UIResToolsWin_Atlas : UIResToolsWin_Base
                         Selection.activeObject = AssetDatabase.LoadAssetAtPath(m_showInfos[i], typeof(UnityEngine.Object));
                     }
 
+                    if (GUILayout.Button("显示详情", GUILayout.Width(80)))
+                    {
+                        if (m_UIPrefabUseInfo == m_showInfos[i])
+                        {
+                            m_UIPrefabUseInfo = "";
+                        }
+                        else
+                        {
+                            m_UIPrefabUseInfo = m_showInfos[i];
+                        }
+                    }
+
                     GUILayout.TextField(m_showInfos[i]);
                 }
                 EditorGUILayout.EndHorizontal();
+
+                if (m_UIPrefabUseInfo == m_showInfos[i])
+                {
+                    OnGUI_UIPrefabUseInfo();
+                }
             }
         }
         GUILayout.EndScrollView();
@@ -154,6 +173,58 @@ public class UIResToolsWin_Atlas : UIResToolsWin_Base
         base.OnSelectionChange();
 
 
+    }
+
+    /// <summary>
+    /// 绘制UI的Prefab使用选中了图集中图片的物体名称
+    /// </summary>
+
+    private void OnGUI_UIPrefabUseInfo()
+    {
+        if (string.IsNullOrEmpty(m_UIPrefabUseInfo))
+        {
+            return;
+        }
+
+        GameObject _obj = AssetDatabase.LoadAssetAtPath(m_UIPrefabUseInfo, typeof(GameObject)) as GameObject;
+
+        List<UISprite> _uisprites = new List<UISprite>();
+
+        UISprite _uisprite = _obj.GetComponent<UISprite>();
+        if (_uisprite != null)
+        {
+            _uisprites.Add(_uisprite);
+        }
+
+        UISprite[] _uispriteArray = _obj.GetComponentsInChildren<UISprite>(true);
+        if (_uispriteArray != null)
+        {
+            _uisprites.AddRange(_uispriteArray);
+        }
+
+        EditorGUILayout.BeginHorizontal();
+        {
+            GUILayout.Space(10);
+            EditorGUILayout.BeginVertical("Box");
+            {
+                for (int i = 0, max = _uisprites.Count; i < max; i++)
+                {
+                    if (_uisprites[i].atlas == m_selectObj.GetComponent<UIAtlas>())
+                    {
+                        string _str = _uisprites[i].name;
+                        Transform _tran = _uisprites[i].transform.parent;
+                        while (_tran != _obj.transform)
+                        {
+                            _str = _tran.name + "/" + _str;
+                            _tran = _tran.parent;
+                        }
+                        GUILayout.TextField(_str);
+                    }
+                }
+            }
+            EditorGUILayout.EndVertical();
+        }
+        EditorGUILayout.EndHorizontal();
     }
 
     /// <summary>
@@ -294,54 +365,66 @@ public class UIResToolsWin_Atlas : UIResToolsWin_Base
         }
     }
 
+    /// <summary>
+    /// 替换图集
+    /// </summary>
+
     private void ReplaceAtlas()
     {
-        UIAtlas _targetAtlas = m_selectObj.GetComponent<UIAtlas>();
-        UIAtlas _replaceTargetAtlas = m_replaceObj.GetComponent<UIAtlas>();
+        UIAtlas _selectAtlas = m_selectObj.GetComponent<UIAtlas>();         // 选中的图集
+        UIAtlas _replaceAtlas = m_replaceObj.GetComponent<UIAtlas>();       // 替换成的图集
 
-        if (m_selectObj == null || m_replaceObj == null || _targetAtlas == null || _replaceTargetAtlas == null)
+        if (m_selectObj == null || m_replaceObj == null || _selectAtlas == null || _replaceAtlas == null)
         {
             return;
         }
 
-        //GameObject obj;
-        //bool isSetDirtyAll = false;
-        //List<UISprite> allSprites = new List<UISprite>();
-        //for (int i = 0; i < showList.Count; i++)
-        //{
-        //    if (!showToggleList[i]) continue;
-        //    obj = AssetDatabase.LoadAssetAtPath(showList[i], typeof(GameObject)) as GameObject;
-        //    UISprite sp = obj.GetComponent<UISprite>();
-        //    if (sp != null)
-        //    {
-        //        allSprites.Add(sp);
-        //    }
-        //    UISprite[] sps = obj.GetComponentsInChildren<UISprite>(true);
-        //    if (sps != null && sps.Length > 0)
-        //    {
-        //        allSprites.AddRange(sps);
-        //    }
-        //    bool isSetDirty = false;
-        //    for (int j = 0; j < allSprites.Count; j++)
-        //    {
-        //        if (allSprites[j].atlas != null && allSprites[j].atlas.name == _targetAtlas.name)
-        //        {
-        //            isSetDirty = true;
-        //            allSprites[j].atlas = _replaceTargetAtlas;
-        //        }
-        //    }
-        //    if (isSetDirty)
-        //    {
-        //        isSetDirtyAll = true;
-        //        EditorUtility.SetDirty(obj);
-        //    }
-        //}
+        bool _isSetDirtyAll = false;
+        List<UISprite> _sprites = new List<UISprite>();
 
-        //if (isSetDirtyAll)
-        //{
-        //    AssetDatabase.SaveAssets();
-        //    AssetDatabase.Refresh();
-        //    //CheckSelectAtlasUse();
-        //}
+        for (int i = 0, count = m_showInfos.Count; i < count; i++)
+        {
+            if (!m_selectStates[i])
+            {
+                continue;
+            }
+
+            GameObject _obj = AssetDatabase.LoadAssetAtPath(m_showInfos[i], typeof(GameObject)) as GameObject;
+
+            UISprite _sprite = _obj.GetComponent<UISprite>();
+            if (_sprite != null)
+            {
+                _sprites.Add(_sprite);
+            }
+            UISprite[] _spriteArray = _obj.GetComponentsInChildren<UISprite>(true);
+            if (_spriteArray != null && _spriteArray.Length > 0)
+            {
+                _sprites.AddRange(_spriteArray);
+            }
+
+            bool _isSetDirty = false;
+            for (int j = 0, max = _sprites.Count; j < max; j++)
+            {
+                if (_sprites[j].atlas != null && _sprites[j].atlas.name == _selectAtlas.name)
+                {
+                    _isSetDirty = true;
+                    _sprites[j].atlas = _replaceAtlas;
+                }
+            }
+            if (_isSetDirty)
+            {
+                _isSetDirtyAll = true;
+                // 标记目标物体已改变，标记之后unity会自动保存。
+                EditorUtility.SetDirty(_obj);
+            }
+        }
+
+        if (_isSetDirtyAll)
+        {
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+
+            CheckSlelectAtlas();
+        }
     }
 }
