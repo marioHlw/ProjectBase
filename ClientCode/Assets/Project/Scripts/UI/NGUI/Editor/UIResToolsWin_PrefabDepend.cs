@@ -18,13 +18,14 @@ public class UIResToolsWin_PrefabDepend : UIResToolsWin_Base
 {
     private GameObject m_selectObj = null;
 
-    private List<string> m_nameTypes = new List<string>() { "脚本", "图集", "图片", "Shader" };
-    private List<bool> m_stateTypes = new List<bool>(2) { false, false, false, false };
+    private List<string> m_nameTypes = new List<string>() { "脚本", "图集", "图片", "Shader", "字体" };
+    private List<bool> m_stateTypes = new List<bool>(2) { false, false, false, false, false };
 
     private List<string> m_scriptPaths = new List<string>();
     private List<string> m_atlasPaths = new List<string>();
     private List<string> m_texturePaths = new List<string>();
     private List<string> m_shaderPaths = new List<string>();
+    private List<string> m_fontPaths = new List<string>();
 
     private Vector2 m_viewPosition = Vector2.zero;
 
@@ -135,6 +136,26 @@ public class UIResToolsWin_PrefabDepend : UIResToolsWin_Base
                 }
             }
             EditorGUILayout.EndVertical();
+
+            // 字体
+            EditorGUILayout.BeginVertical("box");
+            {
+                m_stateTypes[4] = NGUIEditorTools.DrawHeader(m_nameTypes[4]);
+                if (m_stateTypes[4])
+                {
+                    for (int i = 0; i < m_fontPaths.Count; i++)
+                    {
+                        EditorGUILayout.BeginHorizontal("box");
+                        EditorGUILayout.LabelField(m_fontPaths[i]);
+                        if (GUILayout.Button("跳转"))
+                        {
+                            Selection.activeObject = AssetDatabase.LoadAssetAtPath(m_fontPaths[i], typeof(Object));
+                        }
+                        EditorGUILayout.EndHorizontal();
+                    }
+                }
+            }
+            EditorGUILayout.EndVertical();
         }
         EditorGUILayout.EndScrollView();
     }
@@ -202,7 +223,8 @@ public class UIResToolsWin_PrefabDepend : UIResToolsWin_Base
         m_shaderPaths.Clear();
         for (int i = 0; i < _dependencies.Length; i++)
         {
-            if (_dependencies[i].EndsWith(".shader"))
+            Shader _shader = AssetDatabase.LoadAssetAtPath(_dependencies[i], typeof(Shader)) as Shader;
+            if (_shader != null)
             {
                 if (!m_shaderPaths.Contains(_dependencies[i]))
                 {
@@ -211,9 +233,24 @@ public class UIResToolsWin_PrefabDepend : UIResToolsWin_Base
             }
         }
 
+        // 字体
+        m_fontPaths.Clear();
+        for (int i = 0; i < _dependencies.Length; i++)
+        {
+            Font _font = AssetDatabase.LoadAssetAtPath(_dependencies[i], typeof(Font)) as Font;
+            if (_font != null)
+            {
+                if (!m_fontPaths.Contains(_dependencies[i]))
+                {
+                    m_fontPaths.Add(_dependencies[i]);
+                }
+            }
+        }
+
         m_scriptPaths.Sort();
         m_atlasPaths.Sort();
         m_texturePaths.Sort();
         m_shaderPaths.Sort();
+        m_fontPaths.Sort();
     }
 }
