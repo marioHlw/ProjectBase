@@ -41,6 +41,7 @@ public class UIResToolsWindow : EditorWindow
     private List<UIResToolsWin_Base> m_resToolsWins = new List<UIResToolsWin_Base>()
     {
         new UIResToolsWin_Atlas(),
+        new UIResToolsWin_PrefabDepend(),
     };
 
     private void OnSelectionChange()

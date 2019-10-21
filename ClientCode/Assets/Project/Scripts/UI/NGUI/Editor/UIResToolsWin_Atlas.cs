@@ -42,10 +42,10 @@ public class UIResToolsWin_Atlas : UIResToolsWin_Base
             m_selectObj = EditorGUILayout.ObjectField(new GUIContent("原始纹理集："), m_selectObj, typeof(GameObject), true) as GameObject;
             if (GUILayout.Button("选择"))
             {
-                string url = EditorUtility.OpenFilePanel("请选中要检查的纹理集", Application.dataPath + "/Project/UI", "prefab");
-                if (!string.IsNullOrEmpty(url))
+                string _url = EditorUtility.OpenFilePanel("请选中要检查的纹理集", Application.dataPath + "/Project/UI", "prefab");
+                if (!string.IsNullOrEmpty(_url))
                 {
-                    m_selectObj = AssetDatabase.LoadAssetAtPath(url.Replace(Application.dataPath, "Assets"), typeof(GameObject)) as GameObject;
+                    m_selectObj = AssetDatabase.LoadAssetAtPath(_url.Replace(Application.dataPath, "Assets"), typeof(GameObject)) as GameObject;
                     m_viewPosition = Vector2.zero;
                 }
             }
