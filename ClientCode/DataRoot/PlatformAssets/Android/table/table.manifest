@@ -1,0 +1,13 @@
+ManifestFileVersion: 0
+CRC: 3633313047
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: config_info.unity3d
+      Dependencies: {}
+    Info_1:
+      Name: goods_info.unity3d
+      Dependencies: {}
+    Info_2:
+      Name: systemaddress.unity3d
+      Dependencies: {}

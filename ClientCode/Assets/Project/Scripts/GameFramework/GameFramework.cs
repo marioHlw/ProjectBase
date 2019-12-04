@@ -38,9 +38,6 @@ public class GameFramework : MonoSingleton<GameFramework>
         // 初始化打印类
         Log.Init();
 
-        Singleton<TimerManager>.CreateInstance();
-        Singleton<GameStateCtrl>.CreateInstance();
-
         Ctrl.Init();
 
         /* 
@@ -77,12 +74,7 @@ public class GameFramework : MonoSingleton<GameFramework>
 
         GameFrameworkEntry.Shutdown();
 
-        Singleton<UIRedTipManager>.DestroyInstance();
-        Singleton<UIManager>.DestroyInstance();
-        Singleton<UIResManager>.DestroyInstance();
-
-        Singleton<TimerManager>.DestroyInstance();
-        Singleton<GameStateCtrl>.DestroyInstance();
+        Ctrl.UnInit();
 
         Log.UnInit();
     }
@@ -91,7 +83,8 @@ public class GameFramework : MonoSingleton<GameFramework>
     {
         UpdateFPS();
 
-        Singleton<TimerManager>.Instance.CustomUpdate(Time.deltaTime, Time.unscaledDeltaTime);
+        Ctrl.timerManager.CustomUpdate(Time.deltaTime, Time.unscaledDeltaTime);
+
         GameFrameworkEntry.Update(Time.deltaTime, Time.unscaledDeltaTime);
     }
 
@@ -309,196 +302,6 @@ public class GameFramework : MonoSingleton<GameFramework>
         public void Reset()
         {
             throw new NotImplementedException();
-        }
-    }
-
-    #endregion
-
-    #region 基础系统初始化
-
-    public void StartPrepareBaseSystem(DelegateOnBaseSystemPrepareComplete delegateOnBaseSystemPrepareComplete)
-    {
-        StartCoroutine(PrepareBaseSystem(delegateOnBaseSystemPrepareComplete));
-    }
-
-    private IEnumerator PrepareBaseSystem(DelegateOnBaseSystemPrepareComplete delegateOnBaseSystemPrepareComplete)
-    {
-        yield return new PrepareBaseSystemIterator
-        {
-            delegateOnBaseSystemPrepareComplete = delegateOnBaseSystemPrepareComplete,
-
-            _this = this
-        };
-    }
-
-	private sealed class PrepareBaseSystemIterator : IDisposable, IEnumerator, IEnumerator<object>
-    {
-        internal object current;
-
-        internal int pc;
-
-        internal GameFramework _this;
-
-        internal DelegateOnBaseSystemPrepareComplete delegateOnBaseSystemPrepareComplete;
-
-        object IEnumerator.Current
-        {
-            get
-            {
-                return current;
-            }
-        }
-
-        object IEnumerator<object>.Current
-        {
-            get
-            {
-                return current;
-            }
-        }
-
-        public void Dispose()
-        {
-            pc = -1;
-        }
-
-        public bool MoveNext()
-        {
-            uint _num = (uint)pc;
-
-            pc = -1;
-
-            switch (_num)
-            {
-                case 0:
-
-                    Singleton<UIResManager>.CreateInstance();
-                    Singleton<UIManager>.CreateInstance();
-                    Singleton<UIRedTipManager>.CreateInstance();
-                    Singleton<DatabinTableManager>.CreateInstance();
-                    Ctrl.eventRouter.BroadCastEvent<float, string>(LoadingModule.MS_UPDATE_PROGRESSVALUE, 5, "加载中...");
-                    current = null;
-                    pc = 1;
-                    return true;
-
-                case 1:
-
-                    Ctrl.uiResManager.SetUseAssetBundle(Ctrl.resourceComponent.nguiUseAssetBundle);
-                    current = _this.StartCoroutine(Singleton<DatabinTableManager>.Instance.LoadDatabinTable());
-                    pc = 2;
-                    return true;
-
-                case 2:
-
-                    current = null;
-                    pc = 3;
-                    return true;
-
-                case 3:
-                    if (delegateOnBaseSystemPrepareComplete != null)
-                    {
-                        delegateOnBaseSystemPrepareComplete.Invoke();
-                    }
-                    pc = -1;
-                    break;
-            }
-
-            return false;
-        }
-
-        public void Reset()
-        {
-
-        }
-    }
-
-    #endregion
-
-    #region 游戏系统初始化
-
-    public void StartPrepareGameSystem()
-    {
-        StartCoroutine(PrepareGameSystem());
-    }
-
-    private IEnumerator PrepareGameSystem()
-    {
-        yield return new PrepareGameSystemIterator
-        {
-            _this = this
-        };
-    }
-
-    private sealed class PrepareGameSystemIterator : IDisposable, IEnumerator, IEnumerator<object>
-    {
-        internal object current;
-
-        internal int pc;
-
-        internal GameFramework _this;
-
-        object IEnumerator.Current
-        {
-            get
-            {
-                return current;
-            }
-        }
-
-        object IEnumerator<object>.Current
-        {
-            get
-            {
-                return current;
-            }
-        }
-
-        public void Dispose()
-        {
-            pc = -1;
-        }
-
-        public bool MoveNext()
-        {
-            uint _num = (uint)pc;
-
-            pc = -1;
-
-            switch (_num)
-            {
-                case 0:
-
-                    current = null;
-                    pc = 1;
-                    return true;
-
-                case 1:
-
-                    current = null;
-                    pc = 2;
-                    return true;
-
-                case 2:
-
-                    current = null;
-                    pc = 3;
-                    return true;
-
-                case 3:
-
-                    current = null;
-                    pc = -1;
-                    return true;
-            }
-
-            current = null;
-            pc = 4;
-            return false;
-        }
-
-        public void Reset()
-        {
-
         }
     }
 

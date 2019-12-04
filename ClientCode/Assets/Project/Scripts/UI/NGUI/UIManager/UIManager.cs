@@ -35,16 +35,13 @@ namespace zb.NGUILibrary
         {
             base.Init();
 
-            m_uigoupMap.Add(enUIFormType.UIFormLoading, typeof(BLK_UIGroupLoading));
-            m_uigoupMap.Add(enUIFormType.UIFormLogin, typeof(BLK_UIGroupLogin));
-
             GameObject _go = GameObject.Find("GameFramework");
 
             RootUI = _go.GetComponentInChildren<UIRoot>();
             RootTransform = RootUI.transform;
             RootGameObject = RootUI.gameObject;
 
-            Log.Info(Ctrl.LogInfos[0] + " - NGUI窗口管理器");
+            Log.Info(Ctrl.LogInfos[0] + " - UI窗口管理器");
         }
 
         public override void UnInit()
@@ -59,7 +56,7 @@ namespace zb.NGUILibrary
             cacheUIFormMap.Clear();
             m_previousGroups.Clear();
 
-            Log.Info(Ctrl.LogInfos[1] + " - NGUI窗口管理器");
+            Log.Info(Ctrl.LogInfos[1] + " - UI窗口管理器");
         }
 
         /// <summary>

@@ -14,14 +14,7 @@ public class Test : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //loopGrid.SetAmount(amount);
-        //loopGrid.OnMove(x, y);
 
-        Type[] types = Utility.ZAssembly.GetTypesSubclass(typeof(UIAnimationEntryBase));
-        foreach (Type type in types)
-        {
-            Debug.Log(type.ToString());
-        }
     }
 
     // Update is called once per frame

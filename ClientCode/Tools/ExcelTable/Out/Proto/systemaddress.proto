@@ -1,0 +1,30 @@
+/**
+* @file:   systemaddress.proto
+* @author: jameyli <jameyli AT tencent DOT com>
+* @brief:  这个文件是通过工具自动生成的，建议不要手动修改
+*/
+
+package TableProto;
+
+message systemaddress{
+    /** 序号 */
+    required int32 ID = 1 [default = 0];
+    /** 显示名称 */
+    optional string showName = 2 [default = ""];
+    /** 前端枚举名 */
+    optional string clientEnum = 3 [default = ""];
+    /** 系统图标 */
+    optional string sysIcon = 4 [default = ""];
+    /** 关联活动ID */
+    optional int32 bindActivityId = 5 [default = 0];
+    /** 是否开启时提示 */
+    optional bool isShow = 6;
+    /** 等级需求 */
+    optional int32 require_lvl = 7 [default = 0];
+    /** 任务需求 */
+    optional int32 require_quest = 8 [default = 0];
+}
+
+message systemaddress_ARRAY {
+    repeated systemaddress items = 1;
+}

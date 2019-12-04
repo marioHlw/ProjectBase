@@ -7,6 +7,7 @@
 
 
 
+using Res;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,8 +16,6 @@ using UnityEngine;
 
 public class DatabinTableBase
 {
-    public static readonly string DatabinTablePath = "Databin/TableRes/";       // 表格数据路径
-
     protected string dataName;
     protected string keyName;
     protected bool loaded;                      // 已经加载
@@ -90,59 +89,73 @@ public class DatabinTableBase
 
     protected void LoadResource()
     {
-        if (Ctrl.resourceComponent.dataTableResourceLoadType == enResourceLoadType.LoadFromResources)
+        if (Ctrl.resourceComponent.dataTableResourceLoadType == enResLoaderType.LoadFromResources)
         {
-            // 使用异步
-            if (Ctrl.resourceComponent.dataTableUseAsync)
+            if (ResUtility.ResSourcePathTable.IndexOf("/Resources") == -1)
             {
-                dataName = dataName.Substring(0, dataName.IndexOf('.'));
-                string _fullPath = DatabinTableBase.DatabinTablePath + dataName;
-                Ctrl.resourceLoader.OnLoadAssetAsync(_fullPath, typeof(TextAsset), false, enResourceLoadType.LoadFromResources, Ctrl.resourceComponent.dataTableResourceLoadPathType, ReadBytesCompleteCallback);
+                Ctrl.resourceComponent.dataTableResourceLoadType = enResLoaderType.LoadFromBytes;
+                Log.Warning("表格数据不存在Resources目录下，不能从Resources加载，将采用字节流方式加载，此方式在移动平台无效");
             }
             else
             {
-                dataName = dataName.Substring(0, dataName.IndexOf('.'));
-                string _fullPath = DatabinTableBase.DatabinTablePath + dataName;
-                UnityEngine.Object _textAsset = Ctrl.resourceLoader.OnLoadAsset(_fullPath, typeof(TextAsset), false, enResourceLoadType.LoadFromResources);
-                if (_textAsset != null)
+                string _resourcesPath = ResUtility.ResSourcePathTable.Replace(Application.dataPath + "/Resources/", "") + "/";
+
+                // 使用异步
+                if (Ctrl.resourceComponent.dataTableUseAsync)
                 {
-                    ReadBytesCompleteCallback((_textAsset as TextAsset).bytes);
+                    dataName = dataName.Substring(0, dataName.IndexOf('.'));
+                    string _fullPath = _resourcesPath + dataName;
+                    Ctrl.resManager.LoaderResources.OnLoadAsync(_fullPath, typeof(TextAsset), ReadBytesCompleteCallback);
+                }
+                else
+                {
+                    dataName = dataName.Substring(0, dataName.IndexOf('.'));
+                    string _fullPath = _resourcesPath + dataName;
+                    UnityEngine.Object _textAsset = Ctrl.resManager.LoaderResources.OnLoad(_fullPath, typeof(TextAsset));
+                    if (_textAsset != null)
+                    {
+                        ReadBytesCompleteCallback((_textAsset as TextAsset).bytes);
+                    }
                 }
             }
         }
 
-        if (Ctrl.resourceComponent.dataTableResourceLoadType == enResourceLoadType.LoadFromAssetBundle)
+        if (Ctrl.resourceComponent.dataTableResourceLoadType == enResLoaderType.LoadFromAssetBundle)
         {
             // 使用异步
             if (Ctrl.resourceComponent.dataTableUseAsync)
             {
-                string _fullPath = "/" + DatabinTableBase.DatabinTablePath + dataName;
-                Ctrl.resourceLoader.OnLoadAssetAsync(_fullPath, typeof(TextAsset), false, Ctrl.resourceComponent.dataTableResourceLoadType, Ctrl.resourceComponent.dataTableResourceLoadPathType, ReadBytesCompleteCallback, ReadBytesUpdateCallback, ReadBytesErrorCallback);
+                string _name = dataName.Substring(0, dataName.IndexOf('.'));
+                string _assetPath = ResUtility.AssetBundleOutPathTable + _name + ".unity3d";
+                string _assetName = ResUtility.ResSourcePathTable.Replace(Application.dataPath, "Assets");
+                _assetName = _assetName + "/" + dataName;
+                Ctrl.resManager.LoaderAssetBundle.OnLoadAsync(_assetPath, _assetName, typeof(TextAsset), false, ReadBytesCompleteCallback, ReadBytesUpdateCallback, ReadBytesErrorCallback);
             }
             else
             {
-                string _fullPath = DatabinTableBase.DatabinTablePath + dataName;
-                UnityEngine.Object _textAsset = Ctrl.resourceLoader.OnLoadAsset(_fullPath, typeof(TextAsset), false, Ctrl.resourceComponent.dataTableResourceLoadType, Ctrl.resourceComponent.dataTableResourceLoadPathType);
-                if (_textAsset != null)
-                {
-                    ReadBytesCompleteCallback((_textAsset as TextAsset).bytes);
-                }
+                //string _fullPath = DatabinTableBase.DatabinTablePath + dataName;
+                //UnityEngine.Object _textAsset = Ctrl.resourceLoader.OnLoadAsset(_fullPath, typeof(TextAsset), false, Ctrl.resourceComponent.dataTableResourceLoadType,
+                //    Ctrl.resourceComponent.dataTableResourceLoadPathType);
+                //if (_textAsset != null)
+                //{
+                //    ReadBytesCompleteCallback((_textAsset as TextAsset).bytes);
+                //}
             }
         }
 
-        if (Ctrl.resourceComponent.dataTableResourceLoadType == enResourceLoadType.LoadFromBytes)
+        if (Ctrl.resourceComponent.dataTableResourceLoadType == enResLoaderType.LoadFromBytes)
         {
             // 使用异步
             if (Ctrl.resourceComponent.dataTableUseAsync)
             {
-                string _fullPath = "/" + DatabinTableBase.DatabinTablePath + dataName;
-                Ctrl.resourceLoader.OnReadBytesAsync(_fullPath, Ctrl.resourceComponent.dataTableResourceLoadPathType, ReadBytesCompleteCallback, ReadBytesUpdateCallback, ReadBytesErrorCallback);
+                string _fullPath = ResUtility.ResSourcePathTable + "/" + dataName;
+                Ctrl.resManager.LoaderByte.OnLoadAsync(_fullPath, ReadBytesCompleteCallback, ReadBytesUpdateCallback, ReadBytesErrorCallback);
             }
             else
             {
-                string _fullPath = DatabinTableBase.DatabinTablePath + dataName;
-                byte[] _bytes = Ctrl.resourceLoader.OnReadBytes(_fullPath, Ctrl.resourceComponent.dataTableResourceLoadPathType);
-                ReadBytesCompleteCallback(_bytes);
+                //string _fullPath = DatabinTableBase.DatabinTablePath + dataName;
+                //byte[] _bytes = Ctrl.resourceLoader.OnReadBytes(_fullPath, Ctrl.resourceComponent.dataTableResourceLoadPathType);
+                //ReadBytesCompleteCallback(_bytes);
             }
         }
     }
@@ -163,7 +176,7 @@ public class DatabinTableBase
         Log.Info(string.Format("表格读取{0}进度：{1}", dataName, progress));
     }
 
-    private void ReadBytesErrorCallback(enLoadResourceStatus status)
+    private void ReadBytesErrorCallback(enLoadResStatus status)
     {
         Log.Error(string.Format("表格读取{0}读取错误：{1}", dataName, Language.GetLanguageLoadResourceStatus(status)));
     }

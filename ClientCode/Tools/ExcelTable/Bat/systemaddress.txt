@@ -1,0 +1,34 @@
+items {
+  ID: 1
+  showName: "\350\241\214\344\274\232"
+  clientEnum: "Guild"
+  sysIcon: "main_icon_hh"
+  require_lvl: 12
+}
+items {
+  ID: 2
+  showName: "\344\273\273\345\212\241"
+  clientEnum: "Task"
+  require_lvl: 0
+}
+items {
+  ID: 3
+  showName: "\350\243\205\345\244\207\302\267\345\274\272\345\214\226"
+  clientEnum: "EquipMake_Strengthen"
+  sysIcon: "main_icon_zb"
+  require_lvl: 9
+}
+items {
+  ID: 4
+  showName: "\350\243\205\345\244\207"
+  clientEnum: "Strenthen"
+  sysIcon: "main_icon_zb"
+  require_lvl: 9
+}
+items {
+  ID: 5
+  showName: "\350\257\225\347\202\274\347\247\230\345\242\203"
+  clientEnum: "SingleDungeons"
+  sysIcon: "main_icon_fb"
+  require_lvl: 4
+}

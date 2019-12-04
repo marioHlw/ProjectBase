@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1193068020
+CRC: 3353279782
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2868a118b0e74a7f5ede62b081308ff5
+    Hash: ea2d8619d7a9bb53a31f75928fdb9546
   TypeTreeHash:
     serializedVersion: 2
-    Hash: dc54941a689de502222f2a94bcab61fc
+    Hash: 58be6da314486cdbbc6a2d875d7fdc9f
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -34,5 +34,5 @@ ClassTypes:
 Assets:
 - Assets/Project/UI/Prefabs/NGUI/Resources/BaseBackground/UI_BaseBackground_01.prefab
 Dependencies:
-- G:/whknmyhe/Unity566/ZB/ClientCode/DataRoot/PlatformAssets/Android/ui/mstiffheiprc-ultrabold.unity3d
-- G:/whknmyhe/Unity566/ZB/ClientCode/DataRoot/PlatformAssets/Android/ui/common01_atlas.unity3d
+- G:/GitHub/ProjectBase/ClientCode/DataRoot/PlatformAssets/Android/ui/mstiffheiprc-ultrabold.unity3d
+- G:/GitHub/ProjectBase/ClientCode/DataRoot/PlatformAssets/Android/ui/common01_atlas.unity3d

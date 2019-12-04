@@ -19,9 +19,9 @@ public class DeviceWindows : DeviceBase
     {
         base.Init();
 
-        DataRoot = Application.streamingAssetsPath + "/";
-        PlatformFolder = "PlatformAssets/Window/";
-        PlatformDataRoot = DataRoot + PlatformFolder;
+        PathResRead = Application.streamingAssetsPath + "/";
+        FolderPlatform = "PlatformAssets/Window/";
+        PathRoot = PathResRead + FolderPlatform;
 
         SetSDKPlatform(enSDKPlatform.Develop_Windows);
     }

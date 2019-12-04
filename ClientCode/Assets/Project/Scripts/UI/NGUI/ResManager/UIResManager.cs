@@ -14,6 +14,8 @@ namespace zb.NGUILibrary
 {
     public class UIResManager : Singleton<UIResManager>
     {
+        private bool m_logState = true;            // log状态
+
         public delegate void LoadCompleteCallBack(GameObject obj, string path);                 // 异步加载加调委托
 
         public const string DirPath = "ui/";
@@ -23,7 +25,7 @@ namespace zb.NGUILibrary
                                                                             // 所以要在第一次载入这个UI的时候把所依赖的资源也加入到公共列表中,以名被清理）  
 
 
-        private Dictionary<string, AssetBundle> m_mapAssetBundle;            // 所有资源AssetBundle文件，此文件将在无引用的时候卸载
+        private Dictionary<string, UnityEngine.AssetBundle> m_mapAssetBundle;            // 所有资源AssetBundle文件，此文件将在无引用的时候卸载
         private Dictionary<string, Object[]> m_mapCommonResObject;           // 公共资源列表，此列表不会被清理                                                                         
         private Dictionary<string, Object[]> m_mapAssetsObject;              // 所有资源文件，此文件将在无引用的时候卸载                                                                          
         private Dictionary<string, int> m_mapRefCount;                       // 资源引用计数
@@ -36,7 +38,7 @@ namespace zb.NGUILibrary
         {
             base.Init();
 
-            m_mapAssetBundle = new Dictionary<string, AssetBundle>();
+            m_mapAssetBundle = new Dictionary<string, UnityEngine.AssetBundle>();
             m_mapCommonResObject = new Dictionary<string, Object[]>();
             m_mapAssetsObject = new Dictionary<string, Object[]>();
             m_mapRefCount = new Dictionary<string, int>();
@@ -81,26 +83,21 @@ namespace zb.NGUILibrary
             {               
                 if (m_manifest == null)
                 {
-                    string _path = Ctrl.device.PlatformDataRoot + "ui/ui";
-                    string _n = Ctrl.device.GetResPathKey("ui/ui", Ctrl.device.PlatformDataRoot);
-                    m_manifest = AssetBundle.LoadFromFile(_path).LoadAllAssets<AssetBundleManifest>()[0];
+                    string _path = Ctrl.device.PathRoot + "ui/ui";
+                    string _n = Ctrl.device.GetResPathKey("ui/ui", Ctrl.device.PathRoot);
+                    m_manifest = UnityEngine.AssetBundle.LoadFromFile(_path).LoadAllAssets<AssetBundleManifest>()[0];
                 }
             }
 
             string[] _dependencies = m_manifest.GetAllDependencies(_loadPath);
-
             return Load(_loadPath, _dependencies);
         }
-
-        /// <summary>
-        /// 同步加载
-        /// </summary>
 
         private GameObject Load(string path, string[] dependencies)
         {
             string _refPath = "";
             string _abPath = "";
-            AssetBundle _assetBundle = null;
+            UnityEngine.AssetBundle _assetBundle = null;
             Object[] objArray;
 
             // 加载依赖资源
@@ -113,8 +110,8 @@ namespace zb.NGUILibrary
                     if (!CheackObjectCache(_refPath))
                     {
                         _abPath = DirPath + _refPath;
-                        _abPath = Ctrl.device.SetRootPathAndVersion(_abPath, _abPath, true, Ctrl.device.PlatformDataRoot);
-                        _assetBundle = AssetBundle.LoadFromFile(_abPath);
+                        _abPath = Ctrl.device.SetRootPathAndVersion(_abPath, _abPath, true, Ctrl.device.PathRoot);
+                        _assetBundle = UnityEngine.AssetBundle.LoadFromFile(_abPath);
                         objArray = _assetBundle.LoadAllAssets();
                         AddToCache(_refPath, objArray, _assetBundle);
                     }
@@ -126,8 +123,8 @@ namespace zb.NGUILibrary
             if (!CheackObjectCache(_refPath))
             {
                 _abPath = DirPath + _refPath;
-                _abPath = Ctrl.device.SetRootPathAndVersion(_abPath, _abPath, true, Ctrl.device.PlatformDataRoot);
-                _assetBundle = AssetBundle.LoadFromFile(_abPath);
+                _abPath = Ctrl.device.SetRootPathAndVersion(_abPath, _abPath, true, Ctrl.device.PathRoot);
+                _assetBundle = UnityEngine.AssetBundle.LoadFromFile(_abPath);
                 objArray = _assetBundle.LoadAllAssets();
                 AddToCache(_refPath, objArray, _assetBundle);
             }
@@ -155,12 +152,12 @@ namespace zb.NGUILibrary
             return null;
         }
 
-        private void AddToCache(string path, AssetBundle assetBundle)
+        private void AddToCache(string path, UnityEngine.AssetBundle assetBundle)
         {
             m_mapAssetBundle.Add(path, assetBundle);
         }
 
-        private void AddToCache(string path, Object[] objs, AssetBundle assetBundle = null)
+        private void AddToCache(string path, Object[] objs, UnityEngine.AssetBundle assetBundle = null)
         {
             if (m_commonResources.IndexOf(path) == -1)
             {
@@ -189,7 +186,7 @@ namespace zb.NGUILibrary
             {
                 m_mapAssetsObject.Remove(path);
 
-                AssetBundle _assetBundle;
+                UnityEngine.AssetBundle _assetBundle;
 
                 if (m_mapAssetBundle.TryGetValue(path, out _assetBundle))
                 {

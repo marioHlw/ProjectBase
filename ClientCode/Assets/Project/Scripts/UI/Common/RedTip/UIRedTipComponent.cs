@@ -15,11 +15,11 @@ namespace UI.Common
 {
     public class UIRedTipComponent : MonoBehaviour
     {
-        [HideInInspector] public UIRedTipType redTipType = UIRedTipType.None;                       // 红点类型
+        [HideInInspector] public enRedTipType redTipType = enRedTipType.None;                       // 红点类型
         [HideInInspector] public bool autoInitialize = true;                                        // 自动初始化，自动加入红点提示管理器。
         [HideInInspector] public int soleID = 0;                                                    // 唯一ID，用来做多个同类型时的一对一处理。
 
-        public UIRedTipType RedTipType { get { return redTipType; } }
+        public enRedTipType RedTipType { get { return redTipType; } }
 
         private void Start()
         {
@@ -36,7 +36,7 @@ namespace UI.Common
 
         private void Reset()
         {
-            if (redTipType == UIRedTipType.None) return;
+            if (redTipType == enRedTipType.None) return;
 
             UIRedTipManager.Instance.RemoveRedTip(this);
             SetActive(false);

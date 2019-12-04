@@ -1,0 +1,39 @@
+ManifestFileVersion: 0
+CRC: 1063855385
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 93cdca9ca95f7a9e267c076819d6a395
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 40a96ff33c4a85bee38629e8aa0f1f3b
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: ae942c9068183dc40a9d01f648273726, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 858a20c1b21a3f94bb5b2d3b901c9aaf, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0e629c42bce3b9d41a572b0dce1f014b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7f4823b7e3a31ba4c863341bd976293f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7d44bc69c2ca5f943b845318866dc1bd, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4d0c51bb0b6e93049af5e88f93826e3b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1b3dc54f924693f41b5cbecb267e647a, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Project/UI/Login/Resources/BLK_Login.prefab
+Dependencies:
+- G:/GitHub/ProjectBase/ClientCode/DataRoot/PlatformAssets/Android/ui/login_atlas.unity3d

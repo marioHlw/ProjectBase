@@ -24,31 +24,23 @@ public class DeviceEditor : DeviceBase
 
         SetSDKPlatform(enSDKPlatform.Develop_Editor);
 
-        DataRoot = GetProjectRoot() + "DataRoot/";
-        PersistentDataPathWWW = PersistentDataPath;
+        PathResRead = Application.dataPath.Replace("Assets", "");
+        PathPrefixWWW = PathResReadWirte;
 
 #if UNITY_ANDROID
 
-        PlatformFolder = "PlatformAssets/Android/";
-        PlatformDataRoot = DataRoot + PlatformFolder;
-
-        #region 开启可模拟访问StreamingAssets目录
-
-        //PersistentDataPathWWW = "file:///" + PersistentDataPath;
-        //DataRoot = Application.streamingAssetsPath + "/";
-        //PlatformDataRoot = DataRoot + PlatformFolder;
-
-        #endregion
+        FolderPlatform = "DataRoot/PlatformAssets/Android/";
+        PathRoot = PathResRead + FolderPlatform;
 
 #elif UNITY_IOS
 
-        PlatformFolder = "PlatformAssets/IOS/";
-        PlatformDataRoot = DataRoot + PlatformFolder;
+        FolderPlatform = "DataRoot/PlatformAssets/IOS/";
+        PathRoot = PathResRead + FolderPlatform;
 
 #elif UNITY_EDITOR
 
-        PlatformFolder = "PlatformAssets/Android/";
-        PlatformDataRoot = DataRoot + PlatformFolder;
+        FolderPlatform = "DataRoot/PlatformAssets/Android/";
+        PathRoot = PathResRead + FolderPlatform;
 
 #endif
 
@@ -70,16 +62,5 @@ public class DeviceEditor : DeviceBase
         {
             return GetMD5Path(relaPath);
         }
-    }
-
-    /// <summary>
-    /// 获取 - 项目根目录
-    /// </summary>
-
-    private string GetProjectRoot()
-    {
-        string _path = Application.dataPath;
-
-        return _path.Replace("Assets", "");
     }
 }

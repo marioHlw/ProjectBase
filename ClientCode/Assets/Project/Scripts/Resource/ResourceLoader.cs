@@ -9,6 +9,7 @@
 
 
 
+using Res;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,8 +23,8 @@ public class ResourceLoader : MonoSingleton<ResourceLoader>
         public string assetName;
         public Type assetType;
         public bool isScene;
-        public enResourceLoadType loadType;
-        public enResourceLoadPathType loadPathType;
+        public enResLoaderType loadType;
+        public enResPathType loadPathType;
         public ResourceLoadHelper.LoadAssetCompleteCallback completeCallback = null;
         public ResourceLoadHelper.LoadAssetUpdateCallback updateCallback = null;
         public ResourceLoadHelper.LoadAssetErrorCallback errorCallback = null;
@@ -32,7 +33,7 @@ public class ResourceLoader : MonoSingleton<ResourceLoader>
     public class ReadBytesInfo
     {
         public string assetName;
-        public enResourceLoadPathType loadType;
+        public enResPathType loadType;
         public ResourceLoadHelper.ReadBytesCompleteCallback completeCallback = null;
         public ResourceLoadHelper.ReadBytesUpdateCallback updateCallback = null;
         public ResourceLoadHelper.ReadBytesErrorCallback errorCallback = null;
@@ -90,7 +91,7 @@ public class ResourceLoader : MonoSingleton<ResourceLoader>
 
                 m_useResourceLoadHelpers.Add(m_resourceLoadHelpers[m_resourceLoadHelpers.Count - 1]);
 
-                m_resourceLoadHelpers[m_resourceLoadHelpers.Count - 1].OnLoadAssetAsync(_info.assetName, _info.assetType, _info.isScene, _info.loadType == enResourceLoadType.LoadFromResources,
+                m_resourceLoadHelpers[m_resourceLoadHelpers.Count - 1].OnLoadAssetAsync(_info.assetName, _info.assetType, _info.isScene, _info.loadType == enResLoaderType.LoadFromResources,
                     _info.loadPathType, _info.completeCallback, _info.updateCallback, _info.errorCallback, DefaultDecryptResourceCallback);
                 m_resourceLoadHelpers.RemoveAt(m_resourceLoadHelpers.Count - 1);
 
@@ -108,7 +109,7 @@ public class ResourceLoader : MonoSingleton<ResourceLoader>
         m_resourceLoadHelpers.Add(helper);
     }
 
-    public void OnReadBytesAsync(string assetName, enResourceLoadPathType loadPathType, ResourceLoadHelper.ReadBytesCompleteCallback completeCallback = null,
+    public void OnReadBytesAsync(string assetName, enResPathType loadPathType, ResourceLoadHelper.ReadBytesCompleteCallback completeCallback = null,
         ResourceLoadHelper.ReadBytesUpdateCallback updateCallback = null, ResourceLoadHelper.ReadBytesErrorCallback errorCallback = null)
     {
         // 加载辅助器足够
@@ -133,7 +134,7 @@ public class ResourceLoader : MonoSingleton<ResourceLoader>
         }
     }
 
-    public void OnLoadAssetAsync(string assetName, Type assetType, bool isScene, enResourceLoadType loadType, enResourceLoadPathType loadPathType = enResourceLoadPathType.LoadPathFromReadWrite,
+    public void OnLoadAssetAsync(string assetName, Type assetType, bool isScene, enResLoaderType loadType, enResPathType loadPathType = enResPathType.LoadPathFromReadWrite,
         ResourceLoadHelper.LoadAssetCompleteCallback completeCallback = null, ResourceLoadHelper.LoadAssetUpdateCallback updateCallback = null,
         ResourceLoadHelper.LoadAssetErrorCallback errorCallback = null)
     {
@@ -142,7 +143,7 @@ public class ResourceLoader : MonoSingleton<ResourceLoader>
         {
             m_useResourceLoadHelpers.Add(m_resourceLoadHelpers[m_resourceLoadHelpers.Count - 1]);
 
-            m_resourceLoadHelpers[m_resourceLoadHelpers.Count - 1].OnLoadAssetAsync(assetName, assetType, isScene, loadType == enResourceLoadType.LoadFromResources, loadPathType,
+            m_resourceLoadHelpers[m_resourceLoadHelpers.Count - 1].OnLoadAssetAsync(assetName, assetType, isScene, loadType == enResLoaderType.LoadFromResources, loadPathType,
                 completeCallback, updateCallback, errorCallback, DefaultDecryptResourceCallback);
             m_resourceLoadHelpers.RemoveAt(m_resourceLoadHelpers.Count - 1);
         }
@@ -163,19 +164,19 @@ public class ResourceLoader : MonoSingleton<ResourceLoader>
         }
     }
 
-    public byte[] OnReadBytes(string assetName, enResourceLoadPathType loadPathType)
+    public byte[] OnReadBytes(string assetName, enResPathType loadPathType)
     {
         string _fullPath = "";
         switch (loadPathType)
         {
-            case enResourceLoadPathType.LoadPathFromOnlyRead:
+            case enResPathType.LoadPathFromOnlyRead:
                 _fullPath = Application.streamingAssetsPath;
                 break;
-            case enResourceLoadPathType.LoadPathFromReadWrite:
+            case enResPathType.LoadPathFromReadWrite:
                 _fullPath = Application.persistentDataPath;
                 break;
-            case enResourceLoadPathType.LoadPathFromDirctory:
-                _fullPath = Ctrl.device.PlatformDataRoot;
+            case enResPathType.LoadPathFromDirctory:
+                _fullPath = Ctrl.device.PathRoot;
                 break;
         }
         _fullPath = _fullPath + assetName;
@@ -184,9 +185,9 @@ public class ResourceLoader : MonoSingleton<ResourceLoader>
         return null;
     }
 
-    public UnityEngine.Object OnLoadAsset(string assetName, Type assetType, bool isScene, enResourceLoadType loadType, enResourceLoadPathType loadPathType = enResourceLoadPathType.LoadPathFromReadWrite)
+    public UnityEngine.Object OnLoadAsset(string assetName, Type assetType, bool isScene, enResLoaderType loadType, enResPathType loadPathType = enResPathType.LoadPathFromReadWrite)
     {
-        if (loadType == enResourceLoadType.LoadFromResources)
+        if (loadType == enResLoaderType.LoadFromResources)
         {
             if (assetType != null)
             {
@@ -202,23 +203,23 @@ public class ResourceLoader : MonoSingleton<ResourceLoader>
             string _fullPath = "";
             switch (loadPathType)
             {
-                case enResourceLoadPathType.LoadPathFromOnlyRead:
+                case enResPathType.LoadPathFromOnlyRead:
                     _fullPath = Application.streamingAssetsPath;
                     break;
-                case enResourceLoadPathType.LoadPathFromReadWrite:
+                case enResPathType.LoadPathFromReadWrite:
                     _fullPath = Application.persistentDataPath;
                     break;
-                case enResourceLoadPathType.LoadPathFromDirctory:
-                    _fullPath = Ctrl.device.PlatformDataRoot;
+                case enResPathType.LoadPathFromDirctory:
+                    _fullPath = Ctrl.device.PathRoot;
                     break;
             }
             _fullPath = _fullPath + assetName;
 
-            return LoadAsset(AssetBundle.LoadFromFile(_fullPath), assetName, assetType, isScene);
+            return LoadAsset(UnityEngine.AssetBundle.LoadFromFile(_fullPath), assetName, assetType, isScene);
         }
     }
 
-    private UnityEngine.Object LoadAsset(AssetBundle assetBundle, string assetName, Type assetType, bool isScene)
+    private UnityEngine.Object LoadAsset(UnityEngine.AssetBundle assetBundle, string assetName, Type assetType, bool isScene)
     {
         if (assetBundle == null)
         {

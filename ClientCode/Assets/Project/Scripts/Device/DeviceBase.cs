@@ -21,7 +21,7 @@ public abstract class DeviceBase
 
     public static Dictionary<string, Hash128> localAssetHash = new Dictionary<string, Hash128>();
 
-    private bool logState = false;                      // Log开关
+    private bool m_logState = false;                      // Log开关
 
     private int m_defaultWidth;
     private int m_defaultHeight;
@@ -32,58 +32,58 @@ public abstract class DeviceBase
     public enSDKPlatform SDKPlatform { get { return m_sdkPlatform; } }
 
     /// <summary>
-    /// 用于存储更新下来的资源文件的目录
-    /// </summary>
-
-    public string PersistentDataPath
-    {
-        get { return Application.persistentDataPath + "/DataRoot/"; }
-    }
-
-    /// <summary>
-    /// 用www读取PersistentDataPath目录时可能要加前缀
-    /// </summary>
-
-    public string PersistentDataPathWWW
-    {
-        get;
-        protected set;
-    }
-
-    /// <summary>
     /// 照片分享目录
     /// </summary>
 
-    public string PersistentDataPathSharePhoto
+    public string PathSharePhoto
     {
         get { return Application.persistentDataPath + "/sharephoto/"; }
     }
 
     /// <summary>
-    /// 平台原始资源数据路径（其实就是streamingAssetsPath）
+    /// 读写资源路径，下载下来的资源都存储于这个目录
     /// </summary>
 
-    public string DataRoot
+    public string PathResReadWirte
+    {
+        get { return Application.persistentDataPath + "/DataRoot/"; }
+    }
+
+    /// <summary>
+    /// 只读资源路径
+    /// </summary>
+
+    public string PathResRead
     {
         get;
         protected set;
     }
 
     /// <summary>
-    /// 平台资源文件夹名
+    /// 资源最终路径
     /// </summary>
 
-    public string PlatformFolder
+    public string PathRoot
     {
         get;
         protected set;
     }
 
     /// <summary>
-    /// 平台最终资源路径
+    /// 资源文件夹名
     /// </summary>
 
-    public string PlatformDataRoot
+    public string FolderPlatform
+    {
+        get;
+        protected set;
+    }
+
+    /// <summary>
+    /// 用www读取目录时可能要加前缀
+    /// </summary>
+
+    public string PathPrefixWWW
     {
         get;
         protected set;
@@ -251,16 +251,16 @@ public abstract class DeviceBase
         {
             if (!isABFile)
             {
-                path = PersistentDataPathWWW + _key;
+                path = PathPrefixWWW + _key;
             }
             else
             {
-                path = PersistentDataPath + _key;
+                path = PathResReadWirte + _key;
             }
         }
         else
         {
-            path = DataRoot + _key;
+            path = PathResRead + _key;
 
             // 非AB文件得加上 file://  jar等开头，才能用www读取 
             if (!isABFile)
@@ -285,7 +285,7 @@ public abstract class DeviceBase
     {
         int width = 0;
 
-        if (logState)
+        if (m_logState)
         {
             Log.Info("原始分辨率：{0}X{1}", m_defaultWidth, m_defaultHeight);
             Log.Info("当前分辨率：{0}X{1}", Screen.width, Screen.height);
@@ -301,7 +301,7 @@ public abstract class DeviceBase
             height = m_defaultHeight;
             Screen.SetResolution(m_defaultWidth, m_defaultHeight, true);
 
-            if (logState)
+            if (m_logState)
             {
                 Log.Info("因默认分辨率小于限制值{0}p ，修正为默认分辨率。", height);
             }
@@ -315,7 +315,7 @@ public abstract class DeviceBase
 
         m_lastHeight = height;
 
-        if (logState)
+        if (m_logState)
         {
             Log.Info("分辨率调整为: {0}×{1}", width, height);
         }

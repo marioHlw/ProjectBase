@@ -44,7 +44,7 @@ public class DatabinTable<T, K> : DatabinTableBase
         Log.Info(string.Format("表格读取{0}进度：{1}", typeof(K).ToString(), progress));
     }
 
-    private void ReadBytesErrorCallback(enLoadResourceStatus status)
+    private void ReadBytesErrorCallback(enLoadResStatus status)
     {
         Log.Error(string.Format("表格读取{0}读取错误：{1}", typeof(K).ToString(), Language.GetLanguageLoadResourceStatus(status)));
     }
@@ -83,6 +83,8 @@ public class DatabinTable<T, K> : DatabinTableBase
                     }
                 }
             }
+
+            Ctrl.databinTableManager.LoadFinish();
         }
         catch (Exception ex)
         {

@@ -10,11 +10,12 @@
  * namespace zb.NGUILibrary(NGUI)
  */
 
+using Res;
 using System.Collections;
 using System.Collections.Generic;
 using UI.Common;
 using UnityEngine;
-using zb.NGUILibrary;
+using zb.UGUILibrary;
 
 public static class Ctrl
 {
@@ -23,6 +24,7 @@ public static class Ctrl
         "<color=#0099bc><b>初始化(开启) ► </b></color>",
         "<color=#FF0000><b>初始化(关闭) ► </b></color>",
         "<color=#00FF8B><b>开始读取表格{0}数据 ► </b></color>",
+        "<color=#00FF80><b>{0} ► </b></color>",
     };
 
     public static readonly string Language = "Chinese";                 // 语言
@@ -45,13 +47,12 @@ public static class Ctrl
     public static EventRouter eventRouter = null;                       // 事件
     public static TweenerManager tweenerManager = null;                 // DOTween扩展管理器
 
+    //public static UIResManager uiResManager = null;                     // UI资源管理器
+    public static UIManager uiManager = null;                           // UI管理器
     public static UIRedTipManager uiRedTipManager = null;               // UI红点提示管理器
 
-    public static UIResManager uiResManager = null;                     // NGUI资源管理器
-    public static UIManager uiManager = null;                           // NGUI管理器
-
     public static ResourceComponent resourceComponent = null;           // 资源管理组件
-    public static ResourceLoader resourceLoader = null;                 // 资源加载器
+    public static ResManager resManager = null;                         // 资源管理器
 
     public static DatabinTableManager databinTableManager = null;       // 配置表格数据管理器
 
@@ -59,20 +60,39 @@ public static class Ctrl
     {
         gameStateCtrl = Singleton<GameStateCtrl>.Instance;
         timerManager = Singleton<TimerManager>.Instance;
+        objectPoolManager = GameFrameworkEntry.GetModule<ObjectPoolManager>();
+        databinTableManager = Singleton<DatabinTableManager>.Instance;
         eventRouter = Singleton<EventRouter>.Instance;
         tweenerManager = Singleton<TweenerManager>.Instance;
-        uiResManager = Singleton<UIResManager>.Instance;
+        resManager = Singleton<ResManager>.Instance;
+
+        //uiResManager = Singleton<UIResManager>.Instance;
         uiManager = Singleton<UIManager>.Instance;
         uiRedTipManager = Singleton<UIRedTipManager>.Instance;
-        databinTableManager = Singleton<DatabinTableManager>.Instance;
+    }
 
-        resourceLoader = MonoSingleton<ResourceLoader>.GetInstance();
+    public static void UnInit()
+    {
 
-        objectPoolManager = GameFrameworkEntry.GetModule<ObjectPoolManager>();
     }
 
     public static void SetResourceComponent(ResourceComponent component)
     {
         resourceComponent = component;
+    }
+
+    /// <summary>
+    /// 清理 - 控制台打印信息
+    /// </summary>
+
+    public static void OnClearConsole()
+    {
+        //获取UnityEditor程序集里面的UnityEditorInternal.LogEntries类型，也就是把关于Console的类提出来
+        var logEntries = System.Type.GetType("UnityEditorInternal.LogEntries,UnityEditor.dll");
+
+        //在logEntries类里面找到名为Clear的方法，且其属性必须是public static的，等同于得到了Console控制台左上角的clear，然后通过Invoke进行点击实现
+        var clearMethod = logEntries.GetMethod("Clear", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public);
+
+        clearMethod.Invoke(null, null);
     }
 }

@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum enUIFormType
+namespace zb.NGUILibrary
 {
-    None,
-    UIFormMain,
-    UIFormLoading,
-    UIFormLogin,
+    public enum enUIFormType
+    {
+        None,
+        UIFormMain,
+        UIFormLoading,
+        UIFormLogin,
+    }
 }

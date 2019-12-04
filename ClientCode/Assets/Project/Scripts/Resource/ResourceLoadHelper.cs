@@ -6,6 +6,7 @@
  ***************************/
 
 
+using Res;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,15 +19,15 @@ public class ResourceLoadHelper : MonoBehaviour
 {
     public delegate void ReadBytesCompleteCallback(byte[] bytes);
     public delegate void ReadBytesUpdateCallback(float progress);
-    public delegate void ReadBytesErrorCallback(enLoadResourceStatus status);
+    public delegate void ReadBytesErrorCallback(enLoadResStatus status);
 
-    public delegate void LoadAssetBundleCompleteCallback(AssetBundle asset);
+    public delegate void LoadAssetBundleCompleteCallback(UnityEngine.AssetBundle asset);
     public delegate void LoadAssetBundleUpdateCallback(float progress);
-    public delegate void LoadAssetBundleErrorCallback(enLoadResourceStatus status);
+    public delegate void LoadAssetBundleErrorCallback(enLoadResStatus status);
 
     public delegate void LoadAssetCompleteCallback(UnityEngine.Object asset);
     public delegate void LoadAssetUpdateCallback(float progress);
-    public delegate void LoadAssetErrorCallback(enLoadResourceStatus status);
+    public delegate void LoadAssetErrorCallback(enLoadResStatus status);
 
     public delegate byte[] DecryptResourceCallback(string name, string variant, int loadType, int length, int hashCode, bool storageInReadOnly, byte[] bytes);
 
@@ -173,7 +174,7 @@ public class ResourceLoadHelper : MonoBehaviour
         m_Disposed = true;
     }
 
-    public void OnReadBytesAsync(string assetName, enResourceLoadPathType loadType, ReadBytesCompleteCallback completeCallback, ReadBytesUpdateCallback updateCallback = null, ReadBytesErrorCallback errorCallback = null,
+    public void OnReadBytesAsync(string assetName, enResPathType loadType, ReadBytesCompleteCallback completeCallback, ReadBytesUpdateCallback updateCallback = null, ReadBytesErrorCallback errorCallback = null,
         DecryptResourceCallback decryptResourceCallback = null)
     {
         m_readBytesCompleteCallback = completeCallback;
@@ -182,14 +183,14 @@ public class ResourceLoadHelper : MonoBehaviour
 
         switch (loadType)
         {
-            case enResourceLoadPathType.LoadPathFromOnlyRead:
+            case enResPathType.LoadPathFromOnlyRead:
                 m_BytesFullPath = Application.streamingAssetsPath;
                 break;
-            case enResourceLoadPathType.LoadPathFromReadWrite:
+            case enResPathType.LoadPathFromReadWrite:
                 m_BytesFullPath = Application.persistentDataPath;
                 break;
-            case enResourceLoadPathType.LoadPathFromDirctory:
-                m_BytesFullPath = Ctrl.device.PlatformDataRoot;
+            case enResPathType.LoadPathFromDirctory:
+                m_BytesFullPath = Ctrl.device.PathRoot;
                 break;
         }
         m_BytesFullPath = m_BytesFullPath + assetName;
@@ -206,7 +207,7 @@ public class ResourceLoadHelper : MonoBehaviour
 #endif
     }
 
-    public void OnLoadAssetAsync(string assetName, Type assetType, bool isScene, bool isResource, enResourceLoadPathType loadType, LoadAssetCompleteCallback completeCallback, LoadAssetUpdateCallback updateCallback = null,
+    public void OnLoadAssetAsync(string assetName, Type assetType, bool isScene, bool isResource, enResPathType loadType, LoadAssetCompleteCallback completeCallback, LoadAssetUpdateCallback updateCallback = null,
         LoadAssetErrorCallback errorCallback = null, DecryptResourceCallback decryptResourceCallback = null)
     {
         m_AssetName = assetName;
@@ -225,21 +226,21 @@ public class ResourceLoadHelper : MonoBehaviour
         {
             switch (loadType)
             {
-                case enResourceLoadPathType.LoadPathFromOnlyRead:
+                case enResPathType.LoadPathFromOnlyRead:
                     m_FileFullPath = Application.streamingAssetsPath;
                     break;
-                case enResourceLoadPathType.LoadPathFromReadWrite:
+                case enResPathType.LoadPathFromReadWrite:
                     m_FileFullPath = Application.persistentDataPath;
                     break;
-                case enResourceLoadPathType.LoadPathFromDirctory:
-                    m_FileFullPath = Ctrl.device.PlatformDataRoot;
+                case enResPathType.LoadPathFromDirctory:
+                    m_FileFullPath = Ctrl.device.PathRoot;
                     break;
             }
             m_FileFullPath = m_FileFullPath + assetName;
 
             if (decryptResourceCallback == null)
             {
-                m_FileAssetBundleCreateRequest = AssetBundle.LoadFromFileAsync(m_FileFullPath);
+                m_FileAssetBundleCreateRequest = UnityEngine.AssetBundle.LoadFromFileAsync(m_FileFullPath);
             }
             else
             {
@@ -256,7 +257,7 @@ public class ResourceLoadHelper : MonoBehaviour
             Log.Error("Can not load asset bundle from loaded resource which is not an asset bundle.");
             if (m_loadAssetErrorCallback != null)
             {
-                m_loadAssetErrorCallback(enLoadResourceStatus.TypeError);
+                m_loadAssetErrorCallback(enLoadResStatus.TypeError);
             }
             return;
         }
@@ -266,7 +267,7 @@ public class ResourceLoadHelper : MonoBehaviour
             Log.Error("Can not load asset from asset bundle which child name is invalid.");
             if (m_loadAssetErrorCallback != null)
             {
-                m_loadAssetErrorCallback(enLoadResourceStatus.AssetError);
+                m_loadAssetErrorCallback(enLoadResStatus.AssetError);
             }
             return;
         }
@@ -279,7 +280,7 @@ public class ResourceLoadHelper : MonoBehaviour
             {
                 if (m_loadAssetErrorCallback != null)
                 {
-                    m_loadAssetErrorCallback(enLoadResourceStatus.AssetError);
+                    m_loadAssetErrorCallback(enLoadResStatus.AssetError);
                 }
                 return;
             }
@@ -302,7 +303,7 @@ public class ResourceLoadHelper : MonoBehaviour
 
     private void ReadBytesComplete(byte[] bytes)
     {
-        m_BytesAssetBundleCreateRequest = AssetBundle.LoadFromMemoryAsync(bytes);
+        m_BytesAssetBundleCreateRequest = UnityEngine.AssetBundle.LoadFromMemoryAsync(bytes);
     }
 
     private void ReadBytesUpdate(float progress)
@@ -310,7 +311,7 @@ public class ResourceLoadHelper : MonoBehaviour
 
     }
 
-    private void ReadBytesError(enLoadResourceStatus status)
+    private void ReadBytesError(enLoadResStatus status)
     {
 
     }
@@ -337,10 +338,7 @@ public class ResourceLoadHelper : MonoBehaviour
             {
                 if (string.IsNullOrEmpty(m_UnityWebRequest.error))
                 {
-                    if (m_readBytesCompleteCallback != null)
-                    {
-                        m_readBytesCompleteCallback(m_UnityWebRequest.downloadHandler.data);
-                    }
+                    m_readBytesCompleteCallback?.Invoke(m_UnityWebRequest.downloadHandler.data);
 
                     m_UnityWebRequest.Dispose();
                     m_UnityWebRequest = null;
@@ -358,7 +356,7 @@ public class ResourceLoadHelper : MonoBehaviour
                     Log.Error(Utility.ZText.Format("Can not load asset bundle '{0}' with error message '{1}'.", m_BytesFullPath, isError ? m_UnityWebRequest.error : null));
                     if (m_readBytesErrorCallback != null)
                     {
-                        m_readBytesErrorCallback(enLoadResourceStatus.NotExist);
+                        m_readBytesErrorCallback(enLoadResStatus.NotExist);
                     }
                 }
             }
@@ -392,7 +390,7 @@ public class ResourceLoadHelper : MonoBehaviour
 
                     if (m_readBytesErrorCallback != null)
                     {
-                        m_readBytesErrorCallback(enLoadResourceStatus.NotExist);
+                        m_readBytesErrorCallback(enLoadResStatus.NotExist);
                     }
                 }
 
@@ -422,10 +420,7 @@ public class ResourceLoadHelper : MonoBehaviour
                 AssetBundle assetBundle = m_FileAssetBundleCreateRequest.assetBundle;
                 if (assetBundle != null)
                 {
-                    if (m_loadAssetBundleCompleteCallback != null)
-                    {
-                        m_loadAssetBundleCompleteCallback(assetBundle);
-                    }
+                    m_loadAssetBundleCompleteCallback?.Invoke(assetBundle);
                     LoadAssetAsync(assetBundle, m_AssetName, m_AssetType, m_IsScene);
                     m_FileAssetBundleCreateRequest = null;
                     m_LastProgress = 0f;
@@ -433,19 +428,13 @@ public class ResourceLoadHelper : MonoBehaviour
                 else
                 {
                     Log.Error(Utility.ZText.Format("Can not load asset bundle from file '{0}' which is not a valid asset bundle.", m_FileFullPath));
-                    if (m_loadAssetBundleErrorCallback != null)
-                    {
-                        m_loadAssetBundleErrorCallback(enLoadResourceStatus.NotExist);
-                    }
+                    m_loadAssetBundleErrorCallback?.Invoke(enLoadResStatus.NotExist);
                 }
             }
             else if (m_FileAssetBundleCreateRequest.progress != m_LastProgress)
             {
                 m_LastProgress = m_FileAssetBundleCreateRequest.progress;
-                if (m_loadAssetBundleUpdateCallback != null)
-                {
-                    m_loadAssetBundleUpdateCallback(m_LastProgress);
-                }
+                m_loadAssetBundleUpdateCallback?.Invoke(m_LastProgress);
             }
         }
     }
@@ -456,7 +445,7 @@ public class ResourceLoadHelper : MonoBehaviour
         {
             if (m_BytesAssetBundleCreateRequest.isDone)
             {
-                AssetBundle assetBundle = m_BytesAssetBundleCreateRequest.assetBundle;
+                UnityEngine.AssetBundle assetBundle = m_BytesAssetBundleCreateRequest.assetBundle;
                 if (assetBundle != null)
                 {
                     if (m_loadAssetBundleCompleteCallback != null)
@@ -472,7 +461,7 @@ public class ResourceLoadHelper : MonoBehaviour
                     Log.Error(Utility.ZText.Format("Can not load asset bundle from file '{0}' which is not a valid asset bundle.", m_FileFullPath));
                     if (m_loadAssetBundleErrorCallback != null)
                     {
-                        m_loadAssetBundleErrorCallback(enLoadResourceStatus.NotExist);
+                        m_loadAssetBundleErrorCallback(enLoadResStatus.NotExist);
                     }
                 }
             }
@@ -508,7 +497,7 @@ public class ResourceLoadHelper : MonoBehaviour
                     Log.Error(Utility.ZText.Format("Can not load resource '{0}'.", m_AssetName));
                     if (m_loadAssetErrorCallback != null)
                     {
-                        m_loadAssetErrorCallback(enLoadResourceStatus.AssetError);
+                        m_loadAssetErrorCallback(enLoadResStatus.AssetError);
                     }
                 }
             }
@@ -544,7 +533,7 @@ public class ResourceLoadHelper : MonoBehaviour
                     Log.Error(Utility.ZText.Format("Can not load asset '{0}' from asset bundle which is not exist.", m_AssetName));
                     if (m_loadAssetErrorCallback != null)
                     {
-                        m_loadAssetErrorCallback(enLoadResourceStatus.AssetError);
+                        m_loadAssetErrorCallback(enLoadResStatus.AssetError);
                     }
                 }
             }
@@ -580,7 +569,7 @@ public class ResourceLoadHelper : MonoBehaviour
                     Log.Error(Utility.ZText.Format("Can not load scene asset '{0}' from asset bundle.", m_AssetName));
                     if (m_loadAssetErrorCallback != null)
                     {
-                        m_loadAssetErrorCallback(enLoadResourceStatus.AssetError);
+                        m_loadAssetErrorCallback(enLoadResStatus.AssetError);
                     }
                 }
             }

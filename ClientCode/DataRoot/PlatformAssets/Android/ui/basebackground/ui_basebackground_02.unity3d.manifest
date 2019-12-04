@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 310946612
+CRC: 2816626205
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f12cc47fa6d9f180e01ab7a34629054e
+    Hash: 701d751dcc1fc897ababc759142dd69f
   TypeTreeHash:
     serializedVersion: 2
-    Hash: dbdf67ea28b7cdece8cb5c63c2afe0df
+    Hash: 77e0a1934ff6e56f4f9cf28d30e3fc6f
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -30,4 +30,4 @@ ClassTypes:
 Assets:
 - Assets/Project/UI/Prefabs/NGUI/Resources/BaseBackground/UI_BaseBackground_02.prefab
 Dependencies:
-- G:/whknmyhe/Unity566/ZB/ClientCode/DataRoot/PlatformAssets/Android/ui/common01_atlas.unity3d
+- G:/GitHub/ProjectBase/ClientCode/DataRoot/PlatformAssets/Android/ui/common01_atlas.unity3d

@@ -17,6 +17,10 @@ using UnityEngine;
 public class DatabinTableManager : Singleton<DatabinTableManager>
 {
     public static DatabinTable<config_info_ARRAY, config_info> TableConfigInfo = null;
+    public static DatabinTable<goods_info_ARRAY, goods_info> TableGoodsInfo = null;
+    public static DatabinTable<systemaddress_ARRAY, systemaddress> TableSystemAddress = null;
+
+    private int m_tableCount = 3;
 
     public override void Init()
     {
@@ -26,6 +30,17 @@ public class DatabinTableManager : Singleton<DatabinTableManager>
     public override void UnInit()
     {
         base.UnInit();
+    }
+
+    public void LoadFinish()
+    {
+        m_tableCount--;
+
+        // 所有表格数据加载完成
+        if (m_tableCount == 0)
+        {
+            Ctrl.eventRouter.BroadCastEvent(EventID.MS_TABLE_LOADFINISH);
+        }
     }
 
     public IEnumerator LoadDatabinTable()
@@ -60,7 +75,11 @@ public class DatabinTableManager : Singleton<DatabinTableManager>
             {
                 case 0:
                     TableConfigInfo = new DatabinTable<config_info_ARRAY, config_info>("config_info.bytes", "ID");
-                    Ctrl.eventRouter.BroadCastEvent<float, string>(LoadingModule.MS_UPDATE_PROGRESSVALUE, 10, "加载中...");
+
+                    TableGoodsInfo = new DatabinTable<goods_info_ARRAY, goods_info>("goods_info.bytes", "ID");
+
+                    TableSystemAddress = new DatabinTable<systemaddress_ARRAY, systemaddress>("systemaddress.bytes", "ID");
+
                     current = null;
                     PC = 1;
                     return true;

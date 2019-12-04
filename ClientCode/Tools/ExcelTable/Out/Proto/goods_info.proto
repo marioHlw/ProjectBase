@@ -8,7 +8,7 @@ package TableProto;
 
 message goods_info{
     /** 商品ID */
-    required uint32 goods_id = 1 [default = 0];
+    required uint32 ID = 1 [default = 0];
     /** 商品名 */
     optional bytes name = 2 [default = ""];
     /** 性别

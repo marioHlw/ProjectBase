@@ -1,0 +1,24 @@
+ManifestFileVersion: 0
+CRC: 545494921
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 6be76cf6332d0e218b5c297d456fd4ff
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ed537c73b210bedf5c8ce7552bc68d33
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: ae942c9068183dc40a9d01f648273726, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f35a5cd5849dda148ac3e9853ce33853, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Project/UI/Main/Resources/BLK_Main.prefab
+Dependencies: []

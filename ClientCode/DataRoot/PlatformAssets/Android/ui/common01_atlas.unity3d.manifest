@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3920590163
+CRC: 3583076019
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ce2d712aacd7c46113ade359dc6a5549
+    Hash: c4b5ced3c7d11a121c078e8fe9b6582b
   TypeTreeHash:
     serializedVersion: 2
-    Hash: ab8f72dc9e0b0fead577f2fe68cdef32
+    Hash: f043297add8fe1dcd919d71b50ca561e
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -24,5 +24,5 @@ ClassTypes:
 - Class: 115
   Script: {instanceID: 0}
 Assets:
-- Assets/Project/UI/Atlas/Common/Common01_Atlas.prefab
+- Assets/Project/UI/Common1/Atlas/Common01_Atlas.prefab
 Dependencies: []

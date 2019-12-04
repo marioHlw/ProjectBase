@@ -15,12 +15,12 @@ namespace TableProto
   {
     public goods_info() {}
     
-    private uint _goods_id;
-    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"goods_id", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    public uint goods_id
+    private uint _ID;
+    [global::ProtoBuf.ProtoMember(1, IsRequired = true, Name=@"ID", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public uint ID
     {
-      get { return _goods_id; }
-      set { _goods_id = value; }
+      get { return _ID; }
+      set { _ID = value; }
     }
     private byte[] _name = null;
     [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"name", DataFormat = global::ProtoBuf.DataFormat.Default)]

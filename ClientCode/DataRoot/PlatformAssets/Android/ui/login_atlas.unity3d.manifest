@@ -1,0 +1,28 @@
+ManifestFileVersion: 0
+CRC: 1704873358
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d5c50128cce72d6a762b018f0280add6
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f043297add8fe1dcd919d71b50ca561e
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4d0c51bb0b6e93049af5e88f93826e3b, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Project/UI/Login/Atlas/Login_Atlas.prefab
+Dependencies: []

@@ -10,13 +10,11 @@
 using System;
 using TableProto;
 using UnityEngine;
+using zb.UGUILibrary;
 
 [GameState]
 public class LaunchState : BaseState
 {
-	private bool m_isBaseSystemPrepareComplete;
-	private bool m_isSplashPlayComplete;
-
     /// <summary>
     /// 进入状态
     /// </summary>
@@ -25,20 +23,13 @@ public class LaunchState : BaseState
     {
         Log.Info("进入 - 游戏状态(LaunchState)");
 
-        /* 启动画面 */
-        // Ctrl.resourceManager.LoadScene("Assets/Scene/SplashScene.unity", new LoadSceneCallbacks(OnSplashLoadCompleted));
+        Ctrl.uiManager.OnOpenGroup(enUIFormType.UIFormLoading);
 
-        m_isSplashPlayComplete = false;
-        m_isBaseSystemPrepareComplete = false;
+        Ctrl.eventRouter.BroadCastEvent<float, string>(UILoadingModule.MS_UPDATE_PROGRESSVALUE, 0, "加载中...");
 
-        Ctrl.uiManager.OnOpenUIGroup(enUIFormType.UIFormLoading);
-        Ctrl.eventRouter.BroadCastEvent<float, string>(LoadingModule.MS_UPDATE_PROGRESSVALUE, 0, "加载中...");
-
-        // 播放启动画面
-
-        MonoSingleton<GameFramework>.GetInstance().StartPrepareBaseSystem(new GameFramework.DelegateOnBaseSystemPrepareComplete(OnPrepareBaseSystemComplete));
-
-        Ctrl.timerManager.AddTimer(1000, 1, new Action(OnSplashPlayComplete), null);
+        Ctrl.eventRouter.AddEventHandler(EventID.MS_TABLE_LOADFINISH, MS_TableLoadFinish);
+        Ctrl.eventRouter.BroadCastEvent<float, string>(UILoadingModule.MS_UPDATE_PROGRESSVALUE, 10, "加载中...");
+        MonoSingleton<GameFramework>.instance().StartCoroutine(Singleton<DatabinTableManager>.Instance.LoadDatabinTable());
     }
 
     public override void OnStateLeave()
@@ -49,38 +40,22 @@ public class LaunchState : BaseState
     }
 
     /// <summary>
-    /// 启动画面播放完成回调
+    /// 进入下一个状态
     /// </summary>
 
-    private void OnSplashPlayComplete()
+    private void ToNextState()
     {
-        Ctrl.eventRouter.BroadCastEvent<float, string>(LoadingModule.MS_UPDATE_PROGRESSVALUE, 100, "加载中...");
-        m_isSplashPlayComplete = true;
-
-        CheckContionToNextState();
+        Ctrl.gameStateCtrl.GotoState("LoginState");
     }
 
     /// <summary>
-    /// 准备基础系统完成回调
+    /// 表格资源加载完成
     /// </summary>
 
-    private void OnPrepareBaseSystemComplete()
+    private void MS_TableLoadFinish()
     {
-        Ctrl.eventRouter.BroadCastEvent<float, string>(LoadingModule.MS_UPDATE_PROGRESSVALUE, 100, "加载中...");
-        m_isBaseSystemPrepareComplete = true;
-
-        CheckContionToNextState();
-    }
-
-    /// <summary>
-    /// 检查进入下一个状态
-    /// </summary>
-
-    private void CheckContionToNextState()
-    {
-        if (m_isSplashPlayComplete && m_isBaseSystemPrepareComplete)
-        {
-            Ctrl.gameStateCtrl.GotoState("LoginState");
-        }
+        Ctrl.eventRouter.RemoveEventHandler(EventID.MS_TABLE_LOADFINISH, MS_TableLoadFinish);
+        Ctrl.eventRouter.BroadCastEvent<float, string>(UILoadingModule.MS_UPDATE_PROGRESSVALUE, 100, "加载中...");
+        ToNextState();
     }
 }

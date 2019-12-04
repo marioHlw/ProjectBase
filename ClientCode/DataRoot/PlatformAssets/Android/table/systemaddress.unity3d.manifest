@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 2641192285
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c12d2c109ca0223169e8f0a1bad16d7a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/Databin/TableRes/systemaddress.bytes
+Dependencies: []

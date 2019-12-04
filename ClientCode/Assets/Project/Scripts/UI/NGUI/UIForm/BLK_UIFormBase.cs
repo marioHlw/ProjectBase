@@ -24,8 +24,6 @@ namespace zb.NGUILibrary
 
         public enUIFormType enFormType;                     // 窗口类型
         public bool openCaches = false;                     // 打开后缓存
-        public UIAnimationEntryBase animationEntry;         // 入场动画
-        public UIAnimationExitBase animationExit;           // 退场动画
 
         private Action<BLK_UIFormBase> m_playAnimationEnterCallback = null;
         private Action<BLK_UIFormBase> m_playAnimationExitCallback = null;
@@ -51,15 +49,6 @@ namespace zb.NGUILibrary
 
         public virtual void OnOpen()
         {
-            if (animationEntry != null)
-            {
-                animationEntry.OnInit();
-            }
-            if (animationExit != null)
-            {
-                animationExit.OnInit();
-            }
-
             UpdateChildPanelDepth();
 
             m_initialized = true;
@@ -72,15 +61,6 @@ namespace zb.NGUILibrary
         public virtual void OnClose()
         {
             m_initialized = false;
-
-            if (animationEntry != null)
-            {
-                animationEntry.OnStop();
-            }
-            if (animationExit != null)
-            {
-                animationExit.OnStop();
-            }
         }
 
         /// <summary>
@@ -115,14 +95,7 @@ namespace zb.NGUILibrary
 
         public virtual void OnHide()
         {
-            if (animationEntry != null)
-            {
-                animationEntry.OnStop();
-            }
-            if (animationExit != null)
-            {
-                animationExit.OnStop();
-            }
+
         }
 
         /// <summary>
@@ -190,15 +163,7 @@ namespace zb.NGUILibrary
         {
             m_playAnimationEnterCallback = action;
 
-            if (animationEntry != null)
-            {
-                animationEntry.SetFinishCallback(OnOpenAnimationPlayFinish);
-                animationEntry.OnPlay();
-            }
-            else
-            {
-                OnOpenAnimationPlayFinish();
-            }
+            OnOpenAnimationPlayFinish();
         }
 
         /// <summary>
@@ -209,15 +174,7 @@ namespace zb.NGUILibrary
         {
             m_playAnimationExitCallback = action;
 
-            if (animationExit != null)
-            {
-                animationExit.SetFinishCallback(OnCloseAnimationPlayFinish);
-                animationExit.OnPlay();
-            }
-            else
-            {
-                OnCloseAnimationPlayFinish();
-            }
+            OnCloseAnimationPlayFinish();
         }
 
         /// <summary>

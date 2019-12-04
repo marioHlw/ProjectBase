@@ -21,19 +21,19 @@ namespace UI.Common
 
         private class RedTipTypeTree
         {
-            static Dictionary<UIRedTipType, RedTipTypeTree> treeMap = new Dictionary<UIRedTipType, RedTipTypeTree>();
-            static List<UIRedTipType> withIds = new List<UIRedTipType>();
+            static Dictionary<enRedTipType, RedTipTypeTree> treeMap = new Dictionary<enRedTipType, RedTipTypeTree>();
+            static List<enRedTipType> withIds = new List<enRedTipType>();
 
-            private UIRedTipType parentType;
+            private enRedTipType parentType;
 
-            private RedTipTypeTree(UIRedTipType parentType)
+            private RedTipTypeTree(enRedTipType parentType)
             {
                 this.parentType = parentType;
             }
 
-            public static void SetParent(UIRedTipType tipType, UIRedTipType partentTipType, bool withId = false)
+            public static void SetParent(enRedTipType tipType, enRedTipType partentTipType, bool withId = false)
             {
-                if (tipType == UIRedTipType.None)
+                if (tipType == enRedTipType.None)
                 {
                     return;
                 }
@@ -58,7 +58,7 @@ namespace UI.Common
                 }
             }
 
-            public static UIRedTipType GetParent(UIRedTipType tipType)
+            public static enRedTipType GetParent(enRedTipType tipType)
             {
                 if (treeMap.ContainsKey(tipType))
                 {
@@ -66,15 +66,15 @@ namespace UI.Common
                 }
                 else
                 {
-                    return UIRedTipType.None;
+                    return enRedTipType.None;
                 }
             }
 
-            public static List<UIRedTipType> GetChilds(UIRedTipType parentType)
+            public static List<enRedTipType> GetChilds(enRedTipType parentType)
             {
-                List<UIRedTipType> _childs = new List<UIRedTipType>();
+                List<enRedTipType> _childs = new List<enRedTipType>();
 
-                foreach (KeyValuePair<UIRedTipType, RedTipTypeTree> item in treeMap)
+                foreach (KeyValuePair<enRedTipType, RedTipTypeTree> item in treeMap)
                 {
                     if (item.Value.parentType == parentType)
                     {
@@ -89,14 +89,14 @@ namespace UI.Common
             /// 通知父节点是否绑定ID
             /// </summary>
 
-            public static bool IsWithId(UIRedTipType tipType)
+            public static bool IsWithId(enRedTipType tipType)
             {
                 return withIds.Contains(tipType);
             }
         }
 
-        private Dictionary<UIRedTipType, List<UIRedTipComponent>> m_redTipComponentMap = new Dictionary<UIRedTipType, List<UIRedTipComponent>>();               // 红点类型对应的所有UI组件
-        private Dictionary<UIRedTipType, List<int>> m_redTipDataMap = new Dictionary<UIRedTipType, List<int>>();                                                // 红点类型对应所有UI组件的唯一ID
+        private Dictionary<enRedTipType, List<UIRedTipComponent>> m_redTipComponentMap = new Dictionary<enRedTipType, List<UIRedTipComponent>>();               // 红点类型对应的所有UI组件
+        private Dictionary<enRedTipType, List<int>> m_redTipDataMap = new Dictionary<enRedTipType, List<int>>();                                                // 红点类型对应所有UI组件的唯一ID
 
         /// <summary>
         /// 初始化 - 游戏启动时调用
@@ -175,7 +175,7 @@ namespace UI.Common
         /// soleID:唯一ID，当一个红点状态由多个子红点状态控制时，如果子类红点中存在这个ID的红点组件，那么这个红点显示。反之这个红点不显示(其他的子红点不做考虑)。
         /// </summary>
 
-        public void OnNotice(UIRedTipType tipType, bool active, int soleID = 0)
+        public void OnNotice(enRedTipType tipType, bool active, int soleID = 0)
         {
             if (soleID < 0)
             {
@@ -184,7 +184,7 @@ namespace UI.Common
 
             if (!active)
             {
-                List<UIRedTipType> _childs = RedTipTypeTree.GetChilds(tipType);
+                List<enRedTipType> _childs = RedTipTypeTree.GetChilds(tipType);
 
                 if (_childs != null)
                 {
@@ -245,7 +245,7 @@ namespace UI.Common
             }
 
             // 通知父节点
-            if (RedTipTypeTree.GetParent(tipType) != UIRedTipType.None)
+            if (RedTipTypeTree.GetParent(tipType) != enRedTipType.None)
             {
                 OnNotice(RedTipTypeTree.GetParent(tipType), false, RedTipTypeTree.IsWithId(tipType) ? soleID : 0);
             }
@@ -255,7 +255,7 @@ namespace UI.Common
         /// 判断 - 是否激活
         /// </summary>
 
-        public bool IsActive(UIRedTipType tipType, int soleID)
+        public bool IsActive(enRedTipType tipType, int soleID)
         {
             return m_redTipDataMap.ContainsKey(tipType) && m_redTipDataMap[tipType].Contains(soleID);
         }
@@ -264,7 +264,7 @@ namespace UI.Common
         /// 判断 - 是否激活
         /// </summary>
 
-        public bool IsActive(UIRedTipType tipType)
+        public bool IsActive(enRedTipType tipType)
         {
             return m_redTipDataMap.ContainsKey(tipType) && m_redTipDataMap[tipType].Count > 0;
         }

@@ -12,7 +12,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 [GameState]
 public class LoginState : BaseState
 {
@@ -21,11 +20,6 @@ public class LoginState : BaseState
         base.OnStateEnter();
 
         Log.Info("进入 - 游戏状态(LoginState)");
-
-        //MonoSingleton<UI_MovieFullScreen>.GetInstance().OnInit(5000, true, 3000);
-        //MonoSingleton<UI_MovieFullScreen>.GetInstance().OnPlay("hxh.mp4");
-
-        Ctrl.uiManager.OnOpenUIGroup(enUIFormType.UIFormLogin);
     }
 
     public override void OnStateLeave()

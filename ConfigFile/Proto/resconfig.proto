@@ -1,0 +1,23 @@
+/**
+* @file:	resconfig.proto
+* @author: 
+* @brief:  	AssetBundle配置信息
+*/
+
+package NetProto;
+
+message ResConfigInfo
+{
+    required string version = 			1;		// 版本号
+	repeated ResInfo resInfos = 		2;		// 资源信息
+	optional bool directoryBuild =		3;		// true:目录打包   false:单资源打包
+}
+
+message ResInfo
+{
+	required string name = 				1;		// AssetBundle资源名称，含路径
+	repeated string assets = 			2;		// 包含资源路径，从Assets目录开始，一般情况只有一个，因为是单资源打包
+	repeated string dependencies = 		3;		// 依赖资源路径，相对路径
+	optional uint64 size = 				4;		// 资源大小
+	optional string md5 = 				5;		// md5值
+}

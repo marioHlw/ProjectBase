@@ -11,5 +11,6 @@ using System;
 
 public static class EventID 
 {
-    
+    // 事件 - 表格资源加载完成
+    public static string MS_TABLE_LOADFINISH = "MS_TABLE_LOADFINISH";
 }

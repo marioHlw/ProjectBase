@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2540954745
+CRC: 2484678470
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b3bb0f7475f76d5640ac18e43b811bda
+    Hash: efcdcea623adec4896e3f3d91b1c651f
   TypeTreeHash:
     serializedVersion: 2
-    Hash: ab8f72dc9e0b0fead577f2fe68cdef32
+    Hash: f043297add8fe1dcd919d71b50ca561e
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -24,5 +24,5 @@ ClassTypes:
 - Class: 115
   Script: {instanceID: 0}
 Assets:
-- Assets/Project/UI/Atlas/Loading/Loading_Atlas.prefab
+- Assets/Project/UI/Loading/Atlas/Loading_Atlas.prefab
 Dependencies: []
